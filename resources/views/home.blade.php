@@ -100,14 +100,14 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="text-center">
-                        <img src="{{ asset('/resource/assets/atelier.jpg') }}" alt="atelier" class="img-fluid rounded">
+                        <img src="{{ asset('storage/course.jpg') }}" alt="atelier" class="img-fluid rounded">
                     </div>
                 </div>
             </div>
         </div>
 
         <footer class="text-center">
-            <p>L'Atelier des Gourmets ©2023 - <a href="">Mentions Légales</a> - <a href="">Contact</a></p>
+            <p>L'Atelier des Gourmets ©2023 - <a href="" class="link-secondary">Mentions Légales</a> - <a href="" class="link-secondary">Contact</a></p>
         </footer>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" 
