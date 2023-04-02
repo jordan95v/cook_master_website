@@ -17,3 +17,7 @@ use Symfony\Component\Routing\Route as RoutingRoute;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/home', function () {
+    return view('home');
+});
