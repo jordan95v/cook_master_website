@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
@@ -47,16 +49,32 @@ class UserController extends Controller
 
 
     // Show the form for editing the specified resource.
-    public function edit(User $user)
+    public function edit()
     {
-        //
+        return view('users.edit', ["user" => Auth::user()]);
     }
 
 
     // Update the specified resource in storage.
     public function update(Request $request, User $user)
     {
-        //
+        if (auth()->user()->id != $user->id) {
+            return redirect("/")->with("error", "You are not allowed to do this");
+        }
+        $form = $request->validate([
+            "name" => "required|unique:users,name,$user->id",
+            "email" => "required|unique:users,email,$user->id",
+        ]);
+
+
+        if ($request["password"] != null) {
+            $request->validate([
+                "password" => "confirmed|min:6"
+            ]);
+            $form["password"] = bcrypt($request["password"]);
+        }
+        $user->update($form);
+        return back()->with("success", "You succefully edited your profile");
     }
 
 
