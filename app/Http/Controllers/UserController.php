@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -69,5 +70,32 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function showLogin(Request $request)
+    {
+        return view("users.login");
+    }
+
+    public function login(Request $request)
+    {
+        $form = $request->validate([
+            "email" => "required|email",
+            "password" => "required"
+        ]);
+
+        if (Auth::attempt($form)) {
+            $request->session()->regenerate();
+            return redirect("/")->with("success", "Vous vous êtes correctement connecté.");
+        }
+        return back()->with("error", "Les informations de connection ne sont pas correctes.")->onlyInput("email");
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/')->with("success", "Vous vous êtes déconnecté.");
     }
 }

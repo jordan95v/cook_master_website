@@ -18,7 +18,10 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::view('/users/login', 'users.login');
+// User login and logout
+Route::get('/users/login', [UserController::class, "showLogin"])->middleware("guest")->name("login");
+Route::post('/users/login', [UserController::class, "login"])->middleware("guest");
+Route::get("/users/logout", [UserController::class, "logout"])->middleware("auth");
 
 // User register
 Route::get('/users/register', [UserController::class, "create"])->middleware("guest");

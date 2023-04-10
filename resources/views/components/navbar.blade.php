@@ -13,8 +13,12 @@
                     <li><a href="">📚 Leçon</a></li>
                     <li><a href="">💸 Boutique</a></li>
                     <div class="divider"></div>
-                    <li><a href="/users/login">📤 Se connecter</a></li>
-                    <li><a href="/users/register">📥 S'inscrire</a></li>
+                    @auth
+                        <li><a href="/users/logout">Se déconnecter</a></li>
+                    @else
+                        <li><a href="/users/login">📤 Se connecter</a></li>
+                        <li><a href="/users/register">📥 S'inscrire</a></li>
+                    @endauth
                 </ul>
             </div>
         </div>
