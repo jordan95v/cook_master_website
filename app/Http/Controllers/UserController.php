@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -32,7 +33,8 @@ class UserController extends Controller
         ]);
 
         $form["password"] = bcrypt($form["password"]);
-        User::create($form);
+        $user = User::create($form);
+        event(new Registered($user));
         return redirect("/")->with("success", "Vous avez crée votre compte, connectez vous !");
     }
 

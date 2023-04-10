@@ -25,3 +25,7 @@ Route::get("/logout", [AuthController::class, "logout"])->middleware("auth");
 // User register
 Route::get('/register', [UserController::class, "create"])->middleware("guest");
 Route::post('/users', [UserController::class, "store"]);
+
+// Verify email adress
+Route::get('/email/verify', [AuthController::class, "notice"])->middleware('auth')->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', [AuthController::class, "verify"])->middleware(['auth', 'signed'])->name('verification.verify');

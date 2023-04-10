@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class AuthController extends Controller
 {
@@ -37,5 +38,18 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/')->with("success", "Vous vous êtes déconnecté.");
+    }
+
+
+    public function notice()
+    {
+        return redirect("/")->with("error", "Vérifier votre email d'abord.");
+    }
+
+
+    public function verify(EmailVerificationRequest $request)
+    {
+        $request->fulfill();
+        return redirect("/")->with("success", "Vous avez bien vérifié votre mail.");
     }
 }
