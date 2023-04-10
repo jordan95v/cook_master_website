@@ -7,7 +7,7 @@
 @section('content')
     {{-- Login card --}}
     <div class="flex justify-center my-10">
-        <div class="card shadow-lg md:w-2/4 w-96">
+        <div class="card shadow-lg md:w-1/4 w-96">
             <form method="post" action="/users/store" class="card-body">
                 <p class="font-bold text-2xl text-center pb-4">Connexion</p>
 

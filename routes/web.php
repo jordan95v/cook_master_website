@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use Symfony\Component\Routing\Route as RoutingRoute;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +18,8 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::view('/users/register', 'users.register');
 Route::view('/users/login', 'users.login');
+
+// User register
+Route::get('/users/register', [UserController::class, "create"])->middleware("guest");
+Route::post('/users', [UserController::class, "store"]);

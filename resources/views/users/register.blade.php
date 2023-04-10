@@ -1,21 +1,22 @@
 @extends('main_layout')
 
 @section('title')
-    Crée un compte
+    Créer un compte
 @endsection
 
 @section('content')
     {{-- Register card --}}
     <div class="flex justify-center my-10">
-        <div class="card shadow-lg md:w-2/4 w-96">
+        <div class="card shadow-lg md:w-1/4 w-96">
             <form method="post" action="/users" class="card-body">
+                @csrf
                 <p class="font-bold text-2xl text-center pb-4">Créer un compte</p>
 
                 <x-input name="email" type="email" hint="Email" error="1" />
                 <x-input name="name" type="text" hint="Nom d'utilisateur" error="1" />
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
                     <x-input name="password" type="password" hint="Mot de passe" error="0" />
-                    <x-input name="password_confirm" type="password" hint="Confirmer le mot de passe" error="0" />
+                    <x-input name="password_confirmation" type="password" hint="Confirmer le mot de passe" error="0" />
                 </div>
                 @error('password')
                     <p class="text-red-600 text-sm">{{ $message }}</p>
