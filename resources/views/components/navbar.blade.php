@@ -8,16 +8,17 @@
                 </label>
                 <ul tabindex="0"
                     class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><a href="/">🏡 Accueil</a></li>
-                    <li><a href="">🏫 Cours</a></li>
-                    <li><a href="">📚 Leçon</a></li>
-                    <li><a href="">💸 Boutique</a></li>
+                    <li><a href="/"><i class="fa-solid fa-house"></i>Accueil</a></li>
+                    <li><a href=""><i class="fa-solid fa-school"></i>Cours</a></li>
+                    <li><a href=""><i class="fa-solid fa-book"></i>Leçon</a></li>
+                    <li><a href=""><i class="fa-solid fa-store"></i>Boutique</a></li>
                     <div class="divider"></div>
                     @auth
-                        <li><a href="/logout">Se déconnecter</a></li>
+                        <li><a href="/users/edit"><i class="fa-solid fa-gear"></i>Modifier mon profil</a></li>
+                        <li><a href="/logout"><i class="fa-solid fa-arrow-right-to-bracket"></i>Se déconnecter</a></li>
                     @else
-                        <li><a href="/login">📤 Se connecter</a></li>
-                        <li><a href="/register">📥 S'inscrire</a></li>
+                        <li><a href="/login"><i class="fa-solid fa-arrow-up-from-bracket"></i>Se connecter</a></li>
+                        <li><a href="/register"><i class="fa-solid fa-database"></i>S'inscrire</a></li>
                     @endauth
                 </ul>
             </div>

@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="flex justify-center my-10">
-        <div class="card shadow-xl">
+        <div class="card shadow-xl md:w-1/3 w-96">
             <form action="/users/{{ $user->id }}" method="post" class="card-body">
                 @csrf
                 @method('put')
@@ -16,14 +16,13 @@
                 <x-input name="email" type="email" hint="Enter your email" error="1" :target="$user" />
                 <div class="grid md:grid-cols-2 grid-cols-1 gap-2">
                     <x-input name="password" type="password" hint="Enter your password" error="0" />
-                    <x-input name="password_confirmation" type="password" hint="Confirm your password"
-                        error="0" />
+                    <x-input name="password_confirmation" type="password" hint="Confirm your password" error="0" />
                 </div>
                 @error('password')
                     <p class="text-red-600 ms-2">{{ $message }}</p>
                 @enderror
 
-                <button class="btn mt-4 bg-purple-700 hover:bg-purple-900">Update my account</button>
+                <button class="btn btn-primary mt-4">Update my account</button>
                 <!-- Open delete modal -->
                 <label for="delete-modal" class="btn btn-error"><i class="fa-solid fa-trash me-2"></i>Delete account</label>
                 <div class="divider"></div>

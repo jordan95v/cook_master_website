@@ -7,7 +7,7 @@
 @section('content')
     {{-- Register card --}}
     <div class="flex justify-center my-10">
-        <div class="card shadow-lg md:w-1/4 w-96">
+        <div class="card shadow-lg md:w-1/3 w-96">
             <form method="post" action="/users" class="card-body">
                 @csrf
                 <p class="font-bold text-2xl text-center pb-4">Créer un compte</p>
@@ -30,7 +30,7 @@
                 </p>
                 <button class="btn btn-primary mt-4">S'inscrire</button>
                 <div class="divider"></div>
-                <p class="text-center">Déjà un compte ? <a href="/users/login" class="link hover:text-primary">Connexion</a>
+                <p class="text-center">Déjà un compte ? <a href="/login" class="link hover:text-primary">Connexion</a>
                 </p>
             </form>
         </div>
