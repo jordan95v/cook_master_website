@@ -58,8 +58,8 @@ class UserController extends Controller
     // Update the specified resource in storage.
     public function update(Request $request, User $user)
     {
-        if (auth()->user()->id != $user->id) {
-            return redirect("/")->with("error", "You are not allowed to do this");
+        if (Auth::user() != $user) {
+            return redirect("/")->with("error", "You are not allowed to do this.");
         }
         $form = $request->validate([
             "name" => "required|unique:users,name,$user->id",
@@ -74,13 +74,17 @@ class UserController extends Controller
             $form["password"] = bcrypt($request["password"]);
         }
         $user->update($form);
-        return back()->with("success", "You succefully edited your profile");
+        return back()->with("success", "You successfully edited your profile");
     }
 
 
     // Remove the specified resource from storage.
-    public function destroy(User $user)
+    public function destroy(Request $request, User $user)
     {
-        //
+        if (Auth::user() != $user) {
+            return redirect("/")->with("error", "Comment ça mon reuf ?");
+        }
+        $user->delete();
+        return redirect("/")->with("success", "Vous avez supprimé votre compte.");
     }
 }
