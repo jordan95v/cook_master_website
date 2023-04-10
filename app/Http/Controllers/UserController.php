@@ -79,7 +79,7 @@ class UserController extends Controller
 
 
     // Remove the specified resource from storage.
-    public function destroy(Request $request, User $user)
+    public function destroy(User $user)
     {
         if (Auth::user() != $user) {
             return redirect("/")->with("error", "Comment ça mon reuf ?");
