@@ -37,7 +37,7 @@ class UserController extends Controller
         $form["password"] = bcrypt($form["password"]);
         $user = User::create($form);
         event(new Registered($user));
-        return redirect("/")->with("success", "Vous avez crée votre compte, connectez vous !");
+        return redirect("/")->with("success", "Vous avez crée votre compte, vérifier votre email pour continuer !");
     }
 
 

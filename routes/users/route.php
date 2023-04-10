@@ -14,7 +14,7 @@ Route::get('/register', [UserController::class, "create"])->middleware("guest");
 Route::post('/users', [UserController::class, "store"]);
 
 //User Modification
-Route::get('/users/edit', [UserController::class, "edit"])->middleware("auth");
+Route::get('/users/edit', [UserController::class, "edit"])->middleware(["auth", "verified"]);
 Route::put('/users/{user}', [UserController::class, "update"])->middleware("auth");
 Route::delete('/users/{user}', [UserController::class, "destroy"])->middleware("auth");
 
