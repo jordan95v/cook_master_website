@@ -7,7 +7,6 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
 class UserController extends Controller
 {
 
@@ -17,13 +16,11 @@ class UserController extends Controller
         //
     }
 
-
     // Show the form for creating a new resource.
     public function create()
     {
         return view("users.register");
     }
-
 
     // Store a newly created resource in storage.
     public function store(Request $request)
@@ -31,15 +28,14 @@ class UserController extends Controller
         $form = $request->validate([
             "name" => "required|min:6|unique:users,name",
             "email" => "required|email|unique:users,email",
-            "password" => "required|min:6|confirmed"
+            "password" => "required|min:6|confirmed",
         ]);
 
         $form["password"] = bcrypt($form["password"]);
         $user = User::create($form);
         event(new Registered($user));
-        return redirect("/")->with("success", "Vous avez crée votre compte, vérifier votre email pour continuer !");
+        return redirect("/")->with("success", "Vous avez créé votre compte, vérifier votre email pour accéder à toutes les fonctionnalités !");
     }
-
 
     // Display the specified resource.
     public function show(User $user)
@@ -47,13 +43,11 @@ class UserController extends Controller
         //
     }
 
-
     // Show the form for editing the specified resource.
     public function edit()
     {
         return view('users.edit', ["user" => Auth::user()]);
     }
-
 
     // Update the specified resource in storage.
     public function update(Request $request, User $user)
@@ -66,17 +60,15 @@ class UserController extends Controller
             "email" => "required|unique:users,email,$user->id",
         ]);
 
-
         if ($request["password"] != null) {
             $request->validate([
-                "password" => "confirmed|min:6"
+                "password" => "confirmed|min:6",
             ]);
             $form["password"] = bcrypt($request["password"]);
         }
         $user->update($form);
         return back()->with("success", "You successfully edited your profile");
     }
-
 
     // Remove the specified resource from storage.
     public function destroy(User $user)

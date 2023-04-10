@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class AuthController extends Controller
 {
@@ -14,13 +14,12 @@ class AuthController extends Controller
         return view("users.login");
     }
 
-
     // Log the user.
     public function login(Request $request)
     {
         $form = $request->validate([
             "email" => "required|email",
-            "password" => "required"
+            "password" => "required",
         ]);
 
         if (Auth::attempt($form)) {
@@ -29,7 +28,6 @@ class AuthController extends Controller
         }
         return back()->with("error", "Les informations de connection ne sont pas correctes.")->onlyInput("email");
     }
-
 
     // Logout the user.
     public function logout(Request $request)
@@ -40,16 +38,22 @@ class AuthController extends Controller
         return redirect('/')->with("success", "Vous vous êtes déconnecté.");
     }
 
-
+    // Notice the the user to verify his email.
     public function notice()
     {
         return redirect("/")->with("error", "Vérifier votre email d'abord.");
     }
 
-
+    // Verify the email.
     public function verify(EmailVerificationRequest $request)
     {
         $request->fulfill();
         return redirect("/")->with("success", "Vous avez bien vérifié votre mail.");
+    }
+
+    public function resendEmail(Request $request)
+    {
+        $request->user()->sendEmailVerificationNotification();
+        return back()->with("success", "Le mail de vérification à été renvoyé.");
     }
 }

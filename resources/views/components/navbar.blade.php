@@ -14,7 +14,14 @@
                     <li><a href=""><i class="fa-solid fa-store"></i>Boutique</a></li>
                     <div class="divider"></div>
                     @auth
-                        <li><a href="/users/edit"><i class="fa-solid fa-gear"></i>Modifier mon profil</a></li>
+                        @if (!auth()->user()->email_verified_at)
+                            <li>
+                                <a href="/email/resend"><i class="fa-solid fa-share">
+                                    </i>Renvoyer le mail de vérification</a>
+                            </li>
+                        @else
+                            <li><a href="/users/edit"><i class="fa-solid fa-gear"></i>Modifier mon profil</a></li>
+                        @endif
                         <li><a href="/logout"><i class="fa-solid fa-arrow-right-to-bracket"></i>Se déconnecter</a></li>
                     @else
                         <li><a href="/login"><i class="fa-solid fa-arrow-up-from-bracket"></i>Se connecter</a></li>
