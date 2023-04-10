@@ -14,10 +14,10 @@
                     <li><a href="">💸 Boutique</a></li>
                     <div class="divider"></div>
                     @auth
-                        <li><a href="/users/logout">Se déconnecter</a></li>
+                        <li><a href="/logout">Se déconnecter</a></li>
                     @else
-                        <li><a href="/users/login">📤 Se connecter</a></li>
-                        <li><a href="/users/register">📥 S'inscrire</a></li>
+                        <li><a href="/login">📤 Se connecter</a></li>
+                        <li><a href="/register">📥 S'inscrire</a></li>
                     @endauth
                 </ul>
             </div>
