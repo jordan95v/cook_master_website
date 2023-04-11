@@ -57,9 +57,13 @@ class UserController extends Controller
     }
 
     // Remove the specified resource from storage.
-    public function destroy()
+    public function destroy(User $user)
     {
-        User::find(Auth::id())->delete();
-        return redirect("/")->with("success", "Vous avez supprimé votre compte.");
+        $this->authorize("delete", $user);
+        $user->delete();
+        $value = (Auth::id() != $user->id)
+        ? "Vous avez bien supprimé le compte de $user->name."
+        : "Vous avez supprimé votre compte.";
+        return redirect("/")->with("success", $value);
     }
 }

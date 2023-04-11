@@ -23,7 +23,7 @@ Route::prefix("users")->group(
                 //User modification
                 Route::get('/edit', "edit")->middleware(["auth", "verified"])->name("edit-user");
                 Route::put('/', "update")->middleware("auth")->name("update-user");
-                Route::delete('/', "destroy")->middleware("auth")->name("destroy-user");
+                Route::delete('/{user}', "destroy")->middleware("auth")->name("destroy-user");
             }
         );
 

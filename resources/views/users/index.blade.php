@@ -37,12 +37,15 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $value }}</td>
-                        <td class="w-24">
-                            <label for="ban-modal-{{ $user->id }}" class="btn btn-secondary"><i
-                                    class="fa-solid fa-trash me-2"></i>Ban account</label>
+                        <td class="md:w-1/5">
+                            <!-- Open ban modal -->
+                            <label for="ban-modal-{{ $user->id }}" class="btn btn-warning">
+                                <i class="fa-solid fa-ban me-2"></i>Ban
+                            </label>
                             <!-- Open delete modal -->
-                            <label for="delete-modal-{{ $user->id }}" class="btn btn-error"><i
-                                    class="fa-solid fa-trash me-2"></i>Delete account</label>
+                            <label for="delete-modal-{{ $user->id }}" class="btn btn-error">
+                                <i class="fa-solid fa-trash me-2"></i>Delete
+                            </label>
                         </td>
 
                         <!-- Ban modal -->
@@ -56,8 +59,9 @@
                                     <h3 class="font-bold text-lg mb-4">Are you sure you wanna ban this account ?</h3>
 
                                     <div class="flex justify-center">
-                                        <button class="btn btn-secondary w-3/5"><i class="fa-solid fa-trash me-2"></i>Ban
-                                            account</button>
+                                        <button class="btn btn-warning w-3/5">
+                                            <i class="fa-solid fa-trash me-2"></i>Ban
+                                        </button>
                                     </div>
                                 </form>
                             </div>
