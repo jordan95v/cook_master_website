@@ -12,7 +12,7 @@
                 @method('put')
                 <h2 class="card-title flex justify-center text-2xl pb-2">Edit your account !</h2>
 
-                <x-input name="name" type="text" hint="Chnage your username" error="1" :target="$user" />
+                <x-input name="name" type="text" hint="Change your username" error="1" :target="$user" />
                 <x-input name="email" type="email" hint="Enter your email" error="1" :target="$user" />
                 <div class="grid md:grid-cols-2 grid-cols-1 gap-2">
                     <x-input name="password" type="password" hint="Enter your password" error="0" />

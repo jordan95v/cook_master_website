@@ -13,6 +13,9 @@ Route::prefix("users")->group(
     function () {
         Route::controller(UserController::class)->group(
             function () {
+                // List all users
+                Route::get("/list", "index")->middleware(["auth", "admin"]);
+
                 // User registration
                 Route::get('/register', "create")->middleware("guest")->name("register");
                 Route::post('/', "store")->name("store-user");

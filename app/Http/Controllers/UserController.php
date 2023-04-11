@@ -15,7 +15,7 @@ class UserController extends Controller
     // Display a listing of the resource.
     public function index()
     {
-        //
+        return view("users.index", ["users" => User::where("id", "!=", Auth::id())->get()]);
     }
 
     // Show the form for creating a new resource.

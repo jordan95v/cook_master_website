@@ -23,6 +23,11 @@
                             <li>
                                 <a href="{{ route('edit-user') }}"><i class="fa-solid fa-gear"></i>Modifier mon profil</a>
                             </li>
+                            @if (auth()->user()->role != 0)
+                            <li>
+                                <a href="/users/list"><i class="fa-solid fa-user"></i>Liste des utilisateurs</a>
+                            </li>
+                            @endif
                         @endif
                         <li>
                             <a href="{{ route('logout') }}"><i class="fa-solid fa-arrow-right-to-bracket">
