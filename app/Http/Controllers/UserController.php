@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -23,14 +25,9 @@ class UserController extends Controller
     }
 
     // Store a newly created resource in storage.
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
-        $form = $request->validate([
-            "name" => "required|min:6|unique:users,name",
-            "email" => "required|email|unique:users,email",
-            "password" => "required|min:6|confirmed",
-        ]);
-
+        $form = $request->validated();
         $form["password"] = bcrypt($form["password"]);
         $user = User::create($form);
         event(new Registered($user));
@@ -50,33 +47,20 @@ class UserController extends Controller
     }
 
     // Update the specified resource in storage.
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request)
     {
-        if (Auth::user() != $user) {
-            return redirect("/")->with("error", "You are not allowed to do this.");
+        $form = $request->validated();
+        if ($form["password"] ?? false) {
+            $form["password"] = bcrypt($form["password"]);
         }
-        $form = $request->validate([
-            "name" => "required|unique:users,name,$user->id",
-            "email" => "required|unique:users,email,$user->id",
-        ]);
-
-        if ($request["password"] != null) {
-            $request->validate([
-                "password" => "confirmed|min:6",
-            ]);
-            $form["password"] = bcrypt($request["password"]);
-        }
-        $user->update($form);
+        User::find(Auth::id())->update($form);
         return back()->with("success", "You successfully edited your profile");
     }
 
     // Remove the specified resource from storage.
-    public function destroy(User $user)
+    public function destroy()
     {
-        if (Auth::user() != $user) {
-            return redirect("/")->with("error", "Comment ça mon reuf ?");
-        }
-        $user->delete();
+        User::find(Auth::id())->delete();
         return redirect("/")->with("success", "Vous avez supprimé votre compte.");
     }
 }

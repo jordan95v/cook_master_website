@@ -7,7 +7,7 @@
 @section('content')
     <div class="flex justify-center my-10">
         <div class="card shadow-xl md:w-1/3 w-96">
-            <form action="/users/{{ $user->id }}" method="post" class="card-body">
+            <form action="{{ route('update-user') }}" method="post" class="card-body">
                 @csrf
                 @method('put')
                 <h2 class="card-title flex justify-center text-2xl pb-2">Edit your account !</h2>

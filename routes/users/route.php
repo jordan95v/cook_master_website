@@ -6,28 +6,37 @@ use App\Http\Controllers\UserController;
 
 Route::controller(UserController::class)->group(
     function () {
-        // User register
-        Route::get('/register', "create")->middleware("guest");
-        Route::post('/users', "store");
-
-        //User Modification
-        Route::get('/users/edit', "edit")->middleware(["auth", "verified"]);
-        Route::put('/users/{user}', "update")->middleware("auth");
-        Route::delete('/users/{user}', "destroy")->middleware("auth");
     }
 );
 
-Route::controller(AuthController::class)->group(
+Route::prefix("users")->group(
     function () {
-        // User login and logout
-        Route::get('/login', "showLogin")->middleware("guest")->name("login");
-        Route::post('/login', "login")->middleware("guest");
-        Route::get("/logout", "logout")->middleware("auth");
+        Route::controller(UserController::class)->group(
+            function () {
+                // User registration
+                Route::get('/register', "create")->middleware("guest")->name("register");
+                Route::post('/', "store")->name("store-user");
+
+                //User modification
+                Route::get('/edit', "edit")->middleware(["auth", "verified"])->name("edit-user");
+                Route::put('/', "update")->middleware("auth")->name("update-user");
+                Route::delete('/', "destroy")->middleware("auth")->name("destroy-user");
+            }
+        );
+
+        Route::controller(AuthController::class)->group(
+            function () {
+                // User login and logout
+                Route::get('/login', "showLogin")->middleware("guest")->name("show-login");
+                Route::post('/login', "login")->middleware("guest")->name("login");;
+                Route::get("/logout", "logout")->middleware("auth")->name("logout");
 
 
-        // Verify email adress
-        Route::get('/email/verify', "notice")->middleware('auth')->name('verification.notice');
-        Route::get('/email/verify/{id}/{hash}', "verify")->middleware(['auth', 'signed'])->name('verification.verify');
-        Route::get("/email/resend", "resendEmail")->middleware(["auth", "throttle:6,1"])->name("verification.send");
+                // Verify email adress
+                Route::get('/email/verify', "notice")->middleware('auth')->name('verification.notice');
+                Route::get('/email/verify/{id}/{hash}', "verify")->middleware(['auth', 'signed'])->name('verification.verify');
+                Route::get("/email/resend", "resendEmail")->middleware(["auth", "throttle:6,1"])->name("verification.send");
+            }
+        );
     }
 );
