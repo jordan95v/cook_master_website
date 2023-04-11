@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'ouss95v',
             'email' => 'ouss@gmail.com',
             'role' => 2,
-            'password' => bcrypt('Test1234')
+            'password' => bcrypt('Test1234'),
         ]);
 
         // Admin
@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'jordan95v',
             'email' => 'jordan@gmail.com',
             'role' => 1,
-            'password' => bcrypt('Test1234')
+            'password' => bcrypt('Test1234'),
         ]);
 
         // Basic user
@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'quentin95v',
             'email' => 'quentin@gmail.com',
             'role' => 0,
-            'password' => bcrypt('Test1234')
+            'password' => bcrypt('Test1234'),
         ]);
     }
 }

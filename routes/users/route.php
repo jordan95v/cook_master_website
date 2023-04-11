@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 Route::controller(UserController::class)->group(
     function () {
@@ -33,7 +33,6 @@ Route::prefix("users")->group(
                 Route::get('/login', "showLogin")->middleware("guest")->name("show-login");
                 Route::post('/login', "login")->middleware("guest")->name("login");;
                 Route::get("/logout", "logout")->middleware("auth")->name("logout");
-
 
                 // Verify email adress
                 Route::get('/email/verify', "notice")->middleware('auth')->name('verification.notice');
