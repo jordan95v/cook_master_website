@@ -61,10 +61,10 @@ class UserController extends Controller
     {
         $this->authorize("delete", $user);
         $user->delete();
-        $value = (Auth::id() != $user->id)
-            ? "Vous avez bien supprimé le compte de $user->name."
-            : "Vous avez supprimé votre compte.";
-        return redirect("/")->with("success", $value);
+        if (Auth::id() != $user->id) {
+            return back()->with("success", "Vous avez bien supprimé le compte de $user->name.");
+        }
+        return redirect("/")->with("success", "Vous avez bien supprimé votre compte.");
     }
 
     public function ban(User $user)
@@ -72,5 +72,12 @@ class UserController extends Controller
         $this->authorize("ban", $user);
         $user->update(["is_banned" => 1]);
         return back()->with("success", "Vous avez banni $user->name.");
+    }
+
+    public function unban(User $user)
+    {
+        $this->authorize("ban", $user);
+        $user->update(["is_banned" => 0]);
+        return back()->with("success", "Vous avez débanni $user->name.");
     }
 }

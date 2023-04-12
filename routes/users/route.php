@@ -21,8 +21,9 @@ Route::prefix("users")->group(
                 Route::put('/', "update")->middleware("auth")->name("update-user");
                 Route::delete('/{user}', "destroy")->middleware("auth")->name("destroy-user");
 
-                // Ban user
+                // Ban / Unban user
                 Route::post("/{user}/ban", "ban")->middleware(["auth", "admin"])->name("user.ban");
+                Route::post("/{user}/unban", "unban")->middleware(["auth", "admin"])->name("user.unban");
             }
         );
 
