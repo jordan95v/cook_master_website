@@ -7,7 +7,7 @@
 @section('content')
     <div class="flex justify-center my-10">
         <div class="card shadow-xl md:w-1/3 w-96">
-            <form action="{{ route('update-user') }}" method="post" class="card-body">
+            <form action="{{ route('user.update') }}" method="post" class="card-body">
                 @csrf
                 @method('put')
                 <h2 class="card-title flex justify-center text-2xl pb-2">Edit your account !</h2>
@@ -35,7 +35,7 @@
     <input type="checkbox" id="delete-modal" class="modal-toggle" />
     <div class="modal modal-bottom sm:modal-middle">
         <div class="modal-box">
-            <form action="/users/{{ $user->id }}" method="post">
+            <form action="{{ route('user.destroy', ['user' => $user]) }}" method="post">
                 @csrf
                 @method('DELETE')
                 <label for="delete-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>

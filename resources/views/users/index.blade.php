@@ -110,15 +110,13 @@
                                     </div>
                                 </div>
                             @endif
-
                         </td>
-
 
                         <!-- Delete modal -->
                         <input type="checkbox" id="delete-modal-{{ $user->id }}" class="modal-toggle" />
                         <div class="modal modal-bottom sm:modal-middle">
                             <div class="modal-box">
-                                <form action="/users/{{ $user->id }}" method="post">
+                                <form action="{{ route('user.destroy', ['user' => $user]) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <label for="delete-modal-{{ $user->id }}"

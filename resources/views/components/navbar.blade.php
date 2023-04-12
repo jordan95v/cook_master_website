@@ -21,7 +21,7 @@
                             </li>
                         @else
                             <li>
-                                <a href="{{ route('edit-user') }}"><i class="fa-solid fa-gear"></i>Modifier mon profil</a>
+                                <a href="{{ route('user.edit') }}"><i class="fa-solid fa-gear"></i>Modifier mon profil</a>
                             </li>
                             @if (auth()->user()->role != 0)
                                 <li>

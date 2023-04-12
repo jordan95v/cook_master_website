@@ -14,12 +14,12 @@ Route::prefix("users")->group(
 
                 // User registration
                 Route::get('/register', "create")->middleware("guest")->name("register");
-                Route::post('/', "store")->name("store-user");
+                Route::post('/', "store")->name("user.store");
 
                 // User modification
-                Route::get('/edit', "edit")->middleware(["auth", "verified"])->name("edit-user");
-                Route::put('/', "update")->middleware("auth")->name("update-user");
-                Route::delete('/{user}', "destroy")->middleware("auth")->name("destroy-user");
+                Route::get('/edit', "edit")->middleware(["auth", "verified"])->name("user.edit");
+                Route::put('/', "update")->middleware("auth")->name("user.update");
+                Route::delete('/{user}', "destroy")->middleware("auth")->name("user.destroy");
 
                 // Ban / Unban user
                 Route::post("/{user}/ban", "ban")->middleware(["auth", "admin"])->name("user.ban");
