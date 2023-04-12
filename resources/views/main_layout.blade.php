@@ -9,6 +9,7 @@
     <title>@yield('title')</title>
     <script src="https://kit.fontawesome.com/51d79ea4d7.js" crossorigin="anonymous"></script>
     @vite('resources/css/app.css')
+    @yield('extra_tags')
 </head>
 
 <body>

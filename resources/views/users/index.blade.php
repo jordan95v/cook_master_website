@@ -4,9 +4,16 @@
     Liste des utilisateurs
 @endsection
 
+@section('extra_tags')
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+@endsection
+
 @section('content')
-    <div class="overflow-x-auto">
-        <table class="table table-zebra w-full">
+    <div class="p-5 overflow-x-auto">
+        <table class="table table-zebra py-4" id="user-table">
             <!-- head -->
             <thead>
                 <tr>
@@ -90,4 +97,12 @@
             </tbody>
         </table>
     </div>
+
+    <script>
+        $(document).ready(
+            function() {
+                $('#user-table').DataTable();
+            }
+        );
+    </script>
 @endsection
