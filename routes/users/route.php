@@ -16,10 +16,13 @@ Route::prefix("users")->group(
                 Route::get('/register', "create")->middleware("guest")->name("register");
                 Route::post('/', "store")->name("store-user");
 
-                //User modification
+                // User modification
                 Route::get('/edit', "edit")->middleware(["auth", "verified"])->name("edit-user");
                 Route::put('/', "update")->middleware("auth")->name("update-user");
                 Route::delete('/{user}', "destroy")->middleware("auth")->name("destroy-user");
+
+                // Ban user
+                Route::post("/{user}/ban", "ban")->middleware(["auth", "admin"])->name("user.ban");
             }
         );
 

@@ -59,7 +59,7 @@
                         <input type="checkbox" id="ban-modal-{{ $user->id }}" class="modal-toggle" />
                         <div class="modal modal-bottom sm:modal-middle">
                             <div class="modal-box">
-                                <form action="/users/{{ $user->id }}/ban" method="post">
+                                <form action="{{ route('user.ban', ['user' => $user]) }}" method="post">
                                     @csrf
                                     <label for="ban-modal-{{ $user->id }}"
                                         class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>

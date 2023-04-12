@@ -68,4 +68,15 @@ class UserPolicy
     {
         //
     }
+
+    // User can ban the model.
+    public function ban(User $user, User $model): bool
+    {
+        if ($user->role == 2 && $model->role != 2) {
+            return true;
+        } elseif ($user->role == 1 && $model->role == 0) {
+            return true;
+        }
+        return false;
+    }
 }
