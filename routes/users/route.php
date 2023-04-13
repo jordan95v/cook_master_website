@@ -4,13 +4,21 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::prefix("users")->group(
     function () {
+        // List route using UserController
         Route::controller(UserController::class)->group(
             function () {
-                // List all users
-                Route::get("/list", "index")->middleware(["auth", "admin"]);
+                Route::group(["middleware" => ["auth", "admin"]],
+                    function () {
+                        // List all users
+                        Route::get("/list", "index");
+
+                        // Ban / Unban user
+                        Route::post("/{user}/ban", "ban")->name("user.ban");
+                        Route::post("/{user}/unban", "unban")->name("user.unban");
+                    }
+                );
 
                 // User registration
                 Route::get('/register', "create")->middleware("guest")->name("register");
@@ -21,12 +29,10 @@ Route::prefix("users")->group(
                 Route::put('/', "update")->middleware("auth")->name("user.update");
                 Route::delete('/{user}', "destroy")->middleware("auth")->name("user.destroy");
 
-                // Ban / Unban user
-                Route::post("/{user}/ban", "ban")->middleware(["auth", "admin"])->name("user.ban");
-                Route::post("/{user}/unban", "unban")->middleware(["auth", "admin"])->name("user.unban");
             }
         );
 
+        // List route using AuthController
         Route::controller(AuthController::class)->group(
             function () {
                 // User login and logout
