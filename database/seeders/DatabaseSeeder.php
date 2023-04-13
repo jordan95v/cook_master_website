@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Event;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +15,28 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         \App\Models\User::factory(10)->create();
+        Event::factory(6)->create();
+
+        // Event::create([
+        //     'id' => 1,
+        //     'title' => 'Patisserie Française',
+        //     'Author' => 'Quentin',
+        //     'location' => 'Nation, Paris',
+        //     'description' => 'Lorem Ipsum blablablablablablbalblablandniknkdennjn knznd jdneznd nceznjc',
+        //     // 'created_at' => 2023 - 04 - 03,
+        //     // 'updated_at' => 2023 - 04 - 03,
+        // ]);
+
+        // Event::create([
+        //     'id' => 2,
+        //     'title' => 'Plats Cuisinés',
+        //     'Author' => 'Quentin',
+        //     'location' => 'Diderot, Paris',
+        //     'description' => 'Lorem Ipsum blablablablablablbalblablandniknkdennjn knznd jdneznd nceznjc',
+        //     // 'created_at' => 2023 - 04 - 03,
+        //     // 'updated_at' => 2023 - 04 - 03,
+        // ]);
+
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Event;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,3 +16,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::view("/", "home");
 require "users/route.php";
+
+Route::get('/events', function () {
+    return view('events', [
+        'heading' => 'Latest Events',
+        'events' => Event::all()
+    ]);
+});
+
+Route::get('/events/{id}', function ($id) {
+    return view('event', [
+        'event' => Event::find($id)
+    ]);
+});
