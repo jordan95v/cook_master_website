@@ -25,7 +25,9 @@
                             </li>
                             @if (auth()->user()->role != 0)
                                 <li>
-                                    <a href="/users/list"><i class="fa-solid fa-user"></i>Liste des utilisateurs</a>
+                                    <a href="{{ route('user.index') }}">
+                                        <i class="fa-solid fa-user"></i>Liste des utilisateurs
+                                    </a>
                                 </li>
                             @endif
                         @endif

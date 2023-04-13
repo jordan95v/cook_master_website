@@ -12,7 +12,7 @@ Route::prefix("users")->group(
                 Route::group(["middleware" => ["auth", "admin"]],
                     function () {
                         // List all users
-                        Route::get("/list", "index");
+                        Route::get("/list", "index")->name("user.index");
 
                         // Ban / Unban user
                         Route::post("/{user}/ban", "ban")->name("user.ban");
