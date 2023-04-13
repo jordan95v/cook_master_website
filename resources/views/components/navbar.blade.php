@@ -1,5 +1,5 @@
 <div class="p-5">
-    <div class="grid grid-cols-1 md:grid-cols-3 items-center">
+    <div class="grid grid-cols-1 md:grid-cols-3">
         {{-- Dropdown --}}
         <div class="md:text-start">
             <div class="dropdown">
@@ -25,8 +25,8 @@
                             </li>
                             @if (auth()->user()->role != 0)
                                 <li>
-                                    <a href="{{ route('user.index') }}">
-                                        <i class="fa-solid fa-user"></i>Liste des utilisateurs
+                                    <a href="{{ route('admin.dashboard') }}">
+                                        <i class="fa-solid fa-shield"></i>Admin dashboard
                                     </a>
                                 </li>
                             @endif
@@ -53,13 +53,13 @@
         {{-- Logo --}}
         <div class="flex justify-center">
             <a href="/">
-                <img src="{{ asset('/images/logo.png') }}" alt="atelier" class="h-32 rounded">
+                <img src="{{ asset('/images/logo.png') }}" alt="atelier" class="h-24 rounded">
             </a>
         </div>
 
         {{-- Search form --}}
         <div class="md:text-end text-center">
-            <form action="/" method="post">
+            <form action="/" method="get">
                 <input type="text" name="search" class="input border-2 input-bordered hover:input-primary max-w-sm"
                     placeholder="Rechercher ...">
                 <button class="btn btn-ghost btn-circle">

@@ -1,4 +1,4 @@
-@extends('main_layout')
+@extends('admin-layout')
 
 @section('title')
     Liste des utilisateurs

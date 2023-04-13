@@ -1,4 +1,4 @@
-@extends('main_layout')
+@extends('main-layout')
 
 @section('title')
     Créer un compte
