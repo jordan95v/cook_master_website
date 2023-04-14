@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::view("/", "home");
 Route::view("/admin", "admin-layout")->middleware(["auth", "admin"])->name("admin.dashboard");
 
+// Users Route
 Route::prefix("users")->group(
     function () {
         // List route using UserController
@@ -52,6 +53,7 @@ Route::prefix("users")->group(
     }
 );
 
+// Admin route
 Route::group(
     ["prefix" => "admin", "middleware" => ["auth", "admin"]],
     function () {
