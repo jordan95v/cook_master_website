@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBrandRequest;
 use App\Models\Brand;
+use function PHPUnit\Framework\fileExists;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -69,6 +70,11 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        $this->authorize("delete", $brand);
+        if (fileExists("storage/" . $brand->image)) {
+            unlink("storage/" . $brand->image);
+        }
+        $brand->delete();
+        return back()->with("success", "Vous avez correctement supprimé la marque $brand->name.");
     }
 }

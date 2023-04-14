@@ -44,7 +44,7 @@ class BrandPolicy
      */
     public function delete(User $user, Brand $brand): bool
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
