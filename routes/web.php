@@ -71,4 +71,4 @@ Route::group(
     }
 );
 
-Route::resource("brand", BrandController::class);
+Route::resource("brand", BrandController::class)->middleware("auth");

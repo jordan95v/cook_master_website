@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBrandRequest;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 
@@ -20,15 +21,22 @@ class BrandController extends Controller
      */
     public function create()
     {
+        $this->authorize("create", Brand::class);
         return view("brand.create");
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreBrandRequest $request)
     {
-        //
+        $form = $request->validated();
+        $form["slug"] = strtolower(str_replace(" ", ",", $form["name"]));
+        if ($request->hasFile("image")) {
+            $form["image"] = $request->file("image")->store("brand_logo", "public");
+        }
+        Brand::create($form);
+        return back()->with("success", "Marque correctement créé.");
     }
 
     /**

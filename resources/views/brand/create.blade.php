@@ -7,7 +7,8 @@
 @section('content')
     <div class="flex justify-center my-10">
         <div class="card lg:w-1/3 w-96 shadow-xl">
-            <form action="{{ route('brand.store') }}" method="post" class="card-body">
+            <form action="{{ route('brand.store') }}" method="post" enctype="multipart/form-data" class="card-body">
+                @csrf
                 <h2 class="card-title justify-center flex text-2xl pb-2">Ajouter une marque</h2>
                 {{-- Name --}}
                 <x-input name="name" type="text" hint="Nom de la marque" error="1" />
@@ -28,10 +29,8 @@
                 <x-form-error name="website" />
                 <x-form-error name="contact_email" />
 
-
-
                 {{-- Description --}}
-                <textarea class="textarea textarea-bordered" rows=4 placeholder="Description"></textarea>
+                <textarea class="textarea textarea-bordered" rows=4 name="description" placeholder="Description"></textarea>
                 <x-form-error name="description" />
 
                 <div class="card-actions justify-center">
