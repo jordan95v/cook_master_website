@@ -20,8 +20,11 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+            @endforeach
     </div>
+    <button class="btn btn-circle fixed bottom-0 right-0 m-3 w-28 h-28">
+        <a href={{ route('event.create') }}><i class="fa-solid fa-plus text-4xl"></i></a>
+    </button>
 @endsection
 
 

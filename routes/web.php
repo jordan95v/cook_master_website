@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use App\Models\Event;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::view("/", "home");
 require "users/route.php";
 
+//All Events
 Route::get('/events', function () {
     return view('events', [
         'heading' => 'Latest Events',
@@ -24,8 +26,16 @@ Route::get('/events', function () {
     ]);
 });
 
+//Single Event
 Route::get('/events/{id}', function ($id) {
     return view('event', [
         'event' => Event::find($id)
     ]);
 });
+
+//Show Create Form
+// Route::get('/events/create', function () {
+//     return view('createEvent')
+// });
+
+Route::resource('event', EventController::class);
