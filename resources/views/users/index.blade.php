@@ -45,7 +45,7 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $value }}</td>
-                        <td>{{ $user->is_banned ? 'Oui' : 'Non' }}</td>
+                        <td>{{ $user->is_banned ? '✔️' : '❌' }}</td>
                         <td class="w-1/6">
                             <div class="dropdown dropdown-left dropdown-end">
                                 <label tabindex="0" class="btn m-1"><i class="fa-solid fa-gear me-2"></i> Manage</label>
