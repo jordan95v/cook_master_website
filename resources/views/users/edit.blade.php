@@ -5,30 +5,29 @@
 @endsection
 
 @section('content')
-    <div class="flex justify-center my-10">
-        <div class="card shadow-xl md:w-1/3 w-96">
-            <form action="{{ route('user.update') }}" method="post" class="card-body">
-                @csrf
-                @method('put')
-                <h2 class="card-title flex justify-center text-2xl pb-2">Edit your account !</h2>
+    <x-card>
+        <form action="{{ route('user.update') }}" method="post" class="card-body">
+            @csrf
+            @method('put')
+            <h2 class="card-title flex justify-center text-2xl pb-2">Edit your account !</h2>
 
-                <x-input name="name" type="text" hint="Change your username" error="1" :target="$user" />
-                <x-input name="email" type="email" hint="Enter your email" error="1" :target="$user" />
-                <div class="grid md:grid-cols-2 grid-cols-1 gap-2">
-                    <x-input name="password" type="password" hint="Enter your password" error="0" />
-                    <x-input name="password_confirmation" type="password" hint="Confirm your password" error="0" />
-                </div>
-                <x-form-error name="password" />
+            <x-input name="name" type="text" hint="Change your username" error="1" :target="$user" />
+            <x-input name="email" type="email" hint="Enter your email" error="1" :target="$user" />
+            <div class="grid md:grid-cols-2 grid-cols-1 gap-2">
+                <x-input name="password" type="password" hint="Enter your password" error="0" />
+                <x-input name="password_confirmation" type="password" hint="Confirm your password" error="0" />
+            </div>
+            <x-form-error name="password" />
 
-                <button class="btn btn-primary mt-4">Update my account</button>
+            <button class="btn btn-primary mt-4">Update my account</button>
 
-                <!-- Open delete modal -->
-                <label for="delete-modal" class="btn btn-error"><i class="fa-solid fa-trash me-2"></i>Delete account</label>
-                <div class="divider"></div>
-                <p class="text-center">Forgot your password ? <a href="" class="link">Click here</a></p>
-            </form>
-        </div>
-    </div>
+            <!-- Open delete modal -->
+            <label for="delete-modal" class="btn btn-error"><i class="fa-solid fa-trash me-2"></i>Delete account</label>
+            <div class="divider"></div>
+            <p class="text-center">Forgot your password ? <a href="" class="link">Click here</a></p>
+        </form>
+    </x-card>
+
 
     <!-- Delete modal -->
     <input type="checkbox" id="delete-modal" class="modal-toggle" />

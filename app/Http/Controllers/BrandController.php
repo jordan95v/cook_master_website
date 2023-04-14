@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBrandRequest;
+use App\Http\Requests\UpdateBrandRequest;
 use App\Models\Brand;
 use function PHPUnit\Framework\fileExists;
-use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
@@ -54,15 +54,23 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        //
+        $this->authorize("viewAny", $brand);
+        return view("brand.edit", ["brand" => $brand]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Brand $brand)
+    public function update(UpdateBrandRequest $request, Brand $brand)
     {
-        //
+        $this->authorize("update", $brand);
+        $form = $request->validated();
+        if ($request->hasFile("image")) {
+            unlink("storage/" . $brand->image);
+            $form["image"] = $request->file("image")->store("brand_logo", "public");
+        }
+        $brand->update($form);
+        return back()->with("success", "Marque correctement modifié.");
     }
 
     /**
