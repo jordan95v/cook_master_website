@@ -18,9 +18,8 @@
                     <x-input name="password" type="password" hint="Mot de passe" error="0" />
                     <x-input name="password_confirmation" type="password" hint="Confirmer le mot de passe" error="0" />
                 </div>
-                @error('password')
-                    <p class="text-red-600 text-sm">{{ $message }}</p>
-                @enderror
+                <x-form-error name="password" />
+
 
                 {{-- CGU --}}
                 <p class="text-xs mb-2">En continuant, je comprends et j'accepte l'
@@ -28,6 +27,7 @@
                     <a class="link hover:text-primary" href="#">Conditions d'utilisation</a> de l'Atelier des Gourmets
                     pour la création d'un compte.
                 </p>
+
                 <button class="btn btn-primary mt-4">S'inscrire</button>
                 <div class="divider"></div>
                 <p class="text-center">

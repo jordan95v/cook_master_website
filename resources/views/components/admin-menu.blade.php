@@ -8,7 +8,9 @@
     <a><i class="fa-brands fa-shopify"></i>Magasin<i class="fa-solid fa-chevron-{{ $direction }}"></i></a>
     <ul class="p-2 z-10 bg-white border-2 hover:border-primary">
         <li><a>Ajouter un produit</a></li>
+        <li><a href="{{ route('brand.create') }}">Ajouter une marque</a></li>
         <li><a>Liste des produits</a></li>
+        <li><a>Liste des marques</a></li>
     </ul>
 </li>
 

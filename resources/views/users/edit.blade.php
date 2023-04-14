@@ -18,11 +18,10 @@
                     <x-input name="password" type="password" hint="Enter your password" error="0" />
                     <x-input name="password_confirmation" type="password" hint="Confirm your password" error="0" />
                 </div>
-                @error('password')
-                    <p class="text-red-600 ms-2">{{ $message }}</p>
-                @enderror
+                <x-form-error name="password" />
 
                 <button class="btn btn-primary mt-4">Update my account</button>
+
                 <!-- Open delete modal -->
                 <label for="delete-modal" class="btn btn-error"><i class="fa-solid fa-trash me-2"></i>Delete account</label>
                 <div class="divider"></div>
