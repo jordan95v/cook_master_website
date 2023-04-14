@@ -18,7 +18,8 @@
                     <label class="label">
                         <span class="label-text-alt">Logo de la marque</span>
                     </label>
-                    <input type="file" name="image" class="file-input file-input-bordered w-full" />
+                    <input type="file" name="image" class="file-input file-input-bordered w-full mb-2" />
+                    <x-form-error name="image" />
                 </div>
 
                 {{-- Website and contact email --}}

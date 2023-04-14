@@ -1,6 +1,5 @@
 @props(['direction'])
 
-
 <li><a href="{{ route('user.index') }}"><i class="fa-solid fa-user"></i>Liste des utilisateurs</a></li>
 
 {{-- Shop --}}
@@ -10,7 +9,7 @@
         <li><a>Ajouter un produit</a></li>
         <li><a href="{{ route('brand.create') }}">Ajouter une marque</a></li>
         <li><a>Liste des produits</a></li>
-        <li><a>Liste des marques</a></li>
+        <li><a href="{{ route('brand.index') }}">Liste des marques</a></li>
     </ul>
 </li>
 

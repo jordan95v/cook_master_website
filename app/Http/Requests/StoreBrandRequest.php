@@ -23,6 +23,7 @@ class StoreBrandRequest extends FormRequest
     {
         return [
             "name" => "required|unique:brands,name",
+            "image" => "required",
             "description" => "required",
             "website" => "required|url",
             "contact_email" => "required|email|unique:brands,contact_email",
