@@ -28,7 +28,15 @@
                 @endphp
                 <tr class="hover">
                     <th>{{ $user->id }}</th>
-                    <td>{{ $user->name }}</td>
+                    <td class="flex items-center">
+                        <div class="avatar">
+                            <div class="rounded-full w-12 h-12 me-2">
+                                <img
+                                    src="{{ $user->image ?? false ? asset('storage/' . $user->image) : asset('images/user.png') }}" />
+                            </div>
+                        </div>
+                        {{ $user->name }}
+                    </td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $value }}</td>
                     <td>{{ $user->is_banned ? '✔️' : '❌' }}</td>

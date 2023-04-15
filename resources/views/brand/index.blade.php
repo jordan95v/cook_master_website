@@ -15,17 +15,28 @@
             @foreach ($brands as $brand)
                 <tr class="hover">
                     <th>{{ $brand->id }}</th>
-                    <td>
+                    <td class="font-bold">
                         <a href="{{ route('brand.show', ['brand' => $brand->id]) }}" class="link hover:link-primary">
                             {{ $brand->name }}
                         </a>
                     </td>
                     <td>
-                        <img src="{{ $brand->image ? asset('storage/' . $brand->image) : '' }}" alt="No image"
-                            class="rounded w-28">
+                        @if ($brand->image)
+                            <a href="{{ 'storage/' . $brand->image }}" class="">
+                                {{ $brand->image }}<i class="fa-solid fa-arrow-up-right-from-square ms-2"></i>
+                            </a>
+                        @endif
                     </td>
-                    <td>{{ $brand->website }}</td>
-                    <td>{{ $brand->contact_email }}</td>
+                    <td>
+                        <a href="{{ $brand->website }}" class="link hover:link-primary">
+                            <i class="fa-solid fa-globe me-2"></i>{{ $brand->website }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="mailto:{{ $brand->contact_email }}">
+                            <i class="fa-solid fa-envelopes-bulk me-2"></i>{{ $brand->contact_email }}
+                        </a>
+                    </td>
                     <td class="w-1/6">
                         <div class="dropdown dropdown-bottom dropdown-end">
                             <label tabindex="0" class="btn btn-circle btn-ghost">

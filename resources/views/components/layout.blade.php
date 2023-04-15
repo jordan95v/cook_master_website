@@ -39,11 +39,27 @@
     {{-- Datatables script --}}
     @isset($datatables)
         <script>
-            $(document).ready(
-                function() {
-                    $('#listing-table').DataTable();
-                }
-            );
+            function changeBtn() {
+                const $paginateButtons = $(".paginate_button");
+                $paginateButtons.addClass("btn hover:btn-primary").on("click", changeBtn);
+                $paginateButtons.removeClass("paginate_button");
+                $("#listing-table_paginate span").remove();
+                $("#listing-table_paginate").addClass("btn-group");
+            }
+
+            $(function() {
+                $('#listing-table').DataTable({
+                    lengthChange: false,
+                    language: {
+                        search: ""
+                    },
+                });
+                const $filterInput = $("#listing-table_filter input");
+                $filterInput.addClass("input input-bordered border-2 hover:input-primary").attr("placeholder",
+                    "Search ...");
+                $("#listing-table_filter").removeClass("dataTables_filter").addClass("flex justify-center");
+                changeBtn();
+            });
         </script>
     @endisset
 </body>

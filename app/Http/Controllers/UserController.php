@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use function PHPUnit\Framework\fileExists;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 
@@ -64,6 +65,9 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $this->authorize("delete", $user);
+        if (fileExists("storage/" . $user->image)) {
+            unlink("storage/" . $user->image);
+        }
         $user->delete();
         if (Auth::id() != $user->id) {
             return back()->with("success", "Vous avez bien supprimé le compte de $user->name.");

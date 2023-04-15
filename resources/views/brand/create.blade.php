@@ -11,7 +11,8 @@
                 <label class="label">
                     <span class="label-text-alt">Logo de la marque</span>
                 </label>
-                <input type="file" name="image" class="file-input file-input-bordered w-full mb-2" />
+                <input type="file" name="image"
+                    class="file-input file-input-bordered border-2 w-full mb-2 @error('image') border-error @enderror" />
                 <x-form-error name="image" />
             </div>
 
@@ -19,12 +20,13 @@
             <div class="grid lg:grid-cols-2 grid-cols-1 gap-2">
                 <x-input name="website" type="text" hint="Website" error="0" />
                 <x-input name="contact_email" type="email" hint="Contact email" error="0" />
+                <x-form-error name="website" />
+                <x-form-error name="contact_email" />
             </div>
-            <x-form-error name="website" />
-            <x-form-error name="contact_email" />
 
             {{-- Description --}}
-            <textarea class="textarea textarea-bordered" rows=4 name="description" placeholder="Description"></textarea>
+            <textarea class="textarea textarea-bordered border-2 @error('description') border-error @enderror" rows=4
+                name="description" placeholder="Description"></textarea>
             <x-form-error name="description" />
 
             <div class="card-actions justify-center">
