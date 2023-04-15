@@ -12,7 +12,5 @@
     class="input input-bordered border-2 @error($name) border-error @enderror hover:input-primary w-full">
 
 @if ($error == '1')
-    @error($name)
-        <p class="text-red-600 text-sm">{{ $message }}</p>
-    @enderror
+    <x-utils.form-error :name="$name" />
 @endif

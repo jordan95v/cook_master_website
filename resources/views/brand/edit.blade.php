@@ -1,4 +1,4 @@
-<x-layout title="Modifier {{ $brand->name }}">
+<x-layout title="Modifier {{ $brand->name }}" admin=1>
 
     <x-utils.card>
         <form action="{{ route('brand.update', ['brand' => $brand->id]) }}" method="post" enctype="multipart/form-data"
