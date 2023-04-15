@@ -19,13 +19,16 @@
     </div>
 
     <div class="navbar-end">
-        <button class="btn btn-ghost btn-circle">
+        <button class="btn btn-ghost btn-circle me-2">
             <i class="fa-solid fa-cart-shopping text-xl"></i>
         </button>
         <div class="dropdown dropdown-end">
             <label tabindex="0" class="btn btn-ghost btn-circle avatar @auth online @endauth">
                 @auth
-                    <img src="{{ auth()->user()->image ?? false ? 'haha' : asset('images/user.png') }}" />
+                    <div class="w-24 rounded-full ring ring-primary">
+                        <img
+                            src="{{ auth()->user()->image ?? false ? asset('storage/' . auth()->user()->image) : asset('images/user.png') }}" />
+                    </div>
                 @else
                     <i class="fa-solid fa-user text-xl"></i>
                 @endauth

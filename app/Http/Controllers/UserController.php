@@ -53,6 +53,9 @@ class UserController extends Controller
         if ($form["password"] ?? false) {
             $form["password"] = bcrypt($form["password"]);
         }
+        if ($request->hasFile("image")) {
+            $form["image"] = $request->file("image")->store("user_avatar", "public");
+        }
         User::find(Auth::id())->update($form);
         return back()->with("success", "You successfully edited your profile");
     }
