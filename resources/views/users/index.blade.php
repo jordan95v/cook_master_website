@@ -1,5 +1,5 @@
 <x-layout admin=1 title="Liste des utilisateurs" datatables=1>
-    <x-admin-listing>
+    <x-admin.listing>
         <!-- head -->
         <thead>
             <tr>
@@ -127,5 +127,5 @@
                 </tr>
             @endforeach
         </tbody>
-    </x-admin-listing>
+    </x-admin.listing>>
 </x-layout>

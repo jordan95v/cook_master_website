@@ -24,14 +24,14 @@
 <body>
     {{-- Navbar management --}}
     @isset($admin)
-        <x-admin-navbar />
+        <x-admin.navbar />
     @else
         <x-navbar />
     @endisset
 
     {{-- Content of the page --}}
     <div class="md:p-0 p-5">
-        <x-alerts />
+        <x-utils.alerts />
         {{ $slot }}
         <x-footer />
     </div>

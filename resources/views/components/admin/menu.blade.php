@@ -1,5 +1,8 @@
 @props(['direction'])
 
+<li><a href="/"><i class="fa-solid fa-house"></i>Accueil</a></li>
+
+
 <li><a href="{{ route('user.index') }}"><i class="fa-solid fa-user"></i>Liste des utilisateurs</a></li>
 
 {{-- Shop --}}

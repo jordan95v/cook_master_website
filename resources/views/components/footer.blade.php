@@ -1,4 +1,4 @@
-<div class="flex justify-center mt-14">
+<div class="justify-center hidden md:flex">
     <div class="absolute bottom-2">
         <footer>
             <p>L'Atelier des Gourmets ©2023 -

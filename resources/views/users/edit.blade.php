@@ -1,13 +1,13 @@
 <x-layout title="Modifier mon profil">
 
-    <x-card>
+    <x-utils.card>
         <form action="{{ route('user.update') }}" method="post" class="card-body" enctype="multipart/form-data">
             @csrf
             @method('put')
             <h2 class="card-title flex justify-center text-2xl pb-2">Edit your account !</h2>
 
-            <x-input name="name" type="text" hint="Change your username" error="1" :target="$user" />
-            <x-input name="email" type="email" hint="Enter your email" error="1" :target="$user" />
+            <x-utils.input name="name" type="text" hint="Change your username" error="1" :target="$user" />
+            <x-utils.input name="email" type="email" hint="Enter your email" error="1" :target="$user" />
 
             <div class="flex items-center">
                 <div class="form-control w-full me-5">
@@ -25,10 +25,11 @@
             </div>
 
             <div class="grid md:grid-cols-2 grid-cols-1 gap-2">
-                <x-input name="password" type="password" hint="Enter your password" error="0" />
-                <x-input name="password_confirmation" type="password" hint="Confirm your password" error="0" />
+                <x-utils.input name="password" type="password" hint="Enter your password" error="0" />
+                <x-utils.input name="password_confirmation" type="password" hint="Confirm your password"
+                    error="0" />
             </div>
-            <x-form-error name="password" />
+            <x-utils.form-error name="password" />
 
             <button class="btn btn-primary mt-4">Update my account</button>
 
@@ -37,7 +38,7 @@
             <div class="divider"></div>
             <p class="text-center">Forgot your password ? <a href="" class="link">Click here</a></p>
         </form>
-    </x-card>
+    </x-utils.card>
 
 
     <!-- Delete modal -->

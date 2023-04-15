@@ -1,17 +1,18 @@
 <x-layout title="Créer un compte">
     {{-- Register card --}}
-    <x-card>
+    <x-utils.card>
         <form method="post" action="{{ route('user.store') }}" class="card-body">
             @csrf
             <p class="font-bold text-2xl text-center pb-4">Créer un compte</p>
 
-            <x-input name="email" type="email" hint="Email" error="1" />
-            <x-input name="name" type="text" hint="Nom d'utilisateur" error="1" />
+            <x-utils.input name="email" type="email" hint="Email" error="1" />
+            <x-utils.input name="name" type="text" hint="Nom d'utilisateur" error="1" />
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                <x-input name="password" type="password" hint="Mot de passe" error="0" />
-                <x-input name="password_confirmation" type="password" hint="Confirmer le mot de passe" error="0" />
+                <x-utils.input name="password" type="password" hint="Mot de passe" error="0" />
+                <x-utils.input name="password_confirmation" type="password" hint="Confirmer le mot de passe"
+                    error="0" />
             </div>
-            <x-form-error name="password" />
+            <x-utils.form-error name="password" />
 
 
             {{-- CGU --}}
@@ -27,5 +28,5 @@
                 Déjà un compte ? <a href="{{ route('login') }}" class="link hover:text-primary">Connexion</a>
             </p>
         </form>
-    </x-card>
+    </x-utils.card>
 </x-layout>
