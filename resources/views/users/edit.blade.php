@@ -1,10 +1,5 @@
-@extends('main-layout')
+<x-layout title="Modifier mon profil">
 
-@section('title')
-    Modifier mon profil
-@endsection
-
-@section('content')
     <x-card>
         <form action="{{ route('user.update') }}" method="post" class="card-body">
             @csrf
@@ -45,4 +40,4 @@
             </form>
         </div>
     </div>
-@endsection
+</x-layout>

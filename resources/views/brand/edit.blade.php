@@ -1,10 +1,5 @@
-@extends('admin-layout')
+<x-layout title="Modifier {{ $brand->name }}">
 
-@section('title')
-    Modifier {{ $brand->name }}
-@endsection
-
-@section('content')
     <x-card>
         <form action="{{ route('brand.update', ['brand' => $brand->id]) }}" method="post" enctype="multipart/form-data"
             class="card-body">
@@ -44,4 +39,4 @@
             </div>
         </form>
     </x-card>
-@endsection
+</x-layout>

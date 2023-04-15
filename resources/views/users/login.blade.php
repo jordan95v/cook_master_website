@@ -1,10 +1,4 @@
-@extends('main-layout')
-
-@section('title')
-    Se connecter
-@endsection
-
-@section('content')
+<x-layout title="Se connecter">
     {{-- Login card --}}
     <x-card>
         <form method="post" action="{{ route('login') }}" class="card-body">
@@ -23,4 +17,4 @@
             </p>
         </form>
     </x-card>
-@endsection
+</x-layout>

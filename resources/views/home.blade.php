@@ -1,4 +1,2 @@
-@extends('main-layout')
-
-@section('content')
-@endsection
+<x-layout title="Home">
+</x-layout>

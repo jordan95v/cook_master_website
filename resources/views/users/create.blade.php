@@ -1,10 +1,4 @@
-@extends('main-layout')
-
-@section('title')
-    Créer un compte
-@endsection
-
-@section('content')
+<x-layout title="Créer un compte">
     {{-- Register card --}}
     <x-card>
         <form method="post" action="{{ route('user.store') }}" class="card-body">
@@ -34,4 +28,4 @@
             </p>
         </form>
     </x-card>
-@endsection
+</x-layout>

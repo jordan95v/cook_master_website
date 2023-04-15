@@ -1,17 +1,4 @@
-@extends('admin-layout')
-
-@section('title')
-    Liste des utilisateurs
-@endsection
-
-@section('extra_tags')
-    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
-@endsection
-
-@section('content')
+<x-layout admin=1 title="Liste des utilisateurs" datatables=1>
     <x-admin-listing>
         <!-- head -->
         <thead>
@@ -46,8 +33,8 @@
                     <td>{{ $value }}</td>
                     <td>{{ $user->is_banned ? '✔️' : '❌' }}</td>
                     <td class="w-1/6">
-                        <div class="dropdown dropdown-left dropdown-end">
-                            <label tabindex="0" class="btn m-1"><i class="fa-solid fa-gear me-2"></i> Manage</label>
+                        <div class="dropdown dropdown-bottom dropdown-end">
+                            <label tabindex="0" class="btn btn-circle btn-ghost"><i class="fa-solid fa-gear"></i></label>
                             <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                                 @if (!$user->is_banned)
                                     <!-- Open ban modal -->
@@ -133,13 +120,4 @@
             @endforeach
         </tbody>
     </x-admin-listing>
-
-
-    <script>
-        $(document).ready(
-            function() {
-                $('#listing-table').DataTable();
-            }
-        );
-    </script>
-@endsection
+</x-layout>

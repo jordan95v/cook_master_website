@@ -1,10 +1,4 @@
-@extends('admin-layout')
-
-@section('title')
-    Ajouter une marque
-@endsection
-
-@section('content')
+<x-layout title="Ajouter une marque" admin=1>
     <x-card>
         <form action="{{ route('brand.store') }}" method="post" enctype="multipart/form-data" class="card-body">
             @csrf
@@ -38,4 +32,4 @@
             </div>
         </form>
     </x-card>
-@endsection
+</x-layout>
