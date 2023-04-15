@@ -28,7 +28,11 @@
             @foreach ($brands as $brand)
                 <tr class="hover">
                     <th>{{ $brand->id }}</th>
-                    <td>{{ $brand->name }}</td>
+                    <td>
+                        <a href="{{ route('brand.show', ['brand' => $brand->id]) }}" class="link hover:link-primary">
+                            {{ $brand->name }}
+                        </a>
+                    </td>
                     <td>
                         <img src="{{ $brand->image ? asset('storage/' . $brand->image) : '' }}" alt="No image"
                             class="rounded w-28">

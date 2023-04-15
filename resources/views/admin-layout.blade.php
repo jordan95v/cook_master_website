@@ -18,16 +18,8 @@
     {{-- Content of the page --}}
     <div class="md:p-0 p-5">
         <x-alerts />
-
         @yield('content')
-
-        {{-- Website footer --}}
-        <footer class="text-center py-5">
-            <p>L'Atelier des Gourmets ©2023 -
-                <a href="" class="link hover:text-primary text-gray-600">Mentions Légales</a> -
-                <a href="" class="link hover:text-primary text-gray-600">Contact</a>
-            </p>
-        </footer>
+        <x-footer />
     </div>
 </body>
 
