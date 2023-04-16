@@ -33,8 +33,9 @@
     <div class="md:p-0 p-5">
         <x-utils.alerts />
         {{ $slot }}
-        <x-footer />
     </div>
+
+    <x-footer />
 
     {{-- Datatables script --}}
     @isset($datatables)
@@ -44,7 +45,7 @@
                 $paginateButtons.addClass("btn hover:btn-primary").on("click", changeBtn);
                 $paginateButtons.removeClass("paginate_button");
                 $("#listing-table_paginate span").remove();
-                $("#listing-table_paginate").addClass("btn-group");
+                $("#listing-table_paginate").addClass("btn-group flex justify-center");
             }
 
             $(function() {

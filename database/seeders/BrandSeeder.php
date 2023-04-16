@@ -14,19 +14,11 @@ class BrandSeeder extends Seeder
     {
         Brand::factory()->create(
             [
-                "name" => "Tefal",
-                "slug" => "tefal",
+                "name" => "Bosch",
+                "slug" => "bosch",
+                "image" => "brand_logo/47ssFVhGWqZGFEsrV1VqmALuxY7AwugJfBWC1OY6.jpg",
                 "website" => "https://www.tefal.fr/",
-                "contact_email" => "tefal@email.com",
-            ]
-        );
-
-        Brand::factory()->create(
-            [
-                "name" => "Kenwood",
-                "slug" => "kenwood",
-                "website" => "https://www.kenwood.fr/",
-                "contact_email" => "kenwood@email.com",
+                "contact_email" => "bosch@email.com",
             ]
         );
     }

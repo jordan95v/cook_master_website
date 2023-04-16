@@ -77,5 +77,5 @@
                 </tr>
             @endforeach
         </tbody>
-    </x-admin.listing>>
+    </x-admin.listing>
 </x-layout>
