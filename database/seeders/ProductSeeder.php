@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
@@ -12,6 +12,12 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Product::factory()->create([
+            "name" => "Fouet électrique",
+            "price" => "15.99",
+            "brand_id" => 1,
+            "image" => "product_image/fouet.jpg",
+            "description" => fake()->paragraph(5),
+        ]);
     }
 }
