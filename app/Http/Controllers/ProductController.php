@@ -14,7 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize("viewAny", Product::class);
+        return view("product.index", ["products" => Product::all()]);
     }
 
     /**

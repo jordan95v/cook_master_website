@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{ $title }}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+
     <script src="https://kit.fontawesome.com/51d79ea4d7.js" crossorigin="anonymous"></script>
     @vite('resources/css/app.css')
 

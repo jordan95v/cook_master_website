@@ -11,7 +11,7 @@
     <ul class="p-2 z-10 bg-white border-2 hover:border-primary">
         <li><a href="{{ route('product.create') }}">Ajouter un produit</a></li>
         <li><a href="{{ route('brand.create') }}">Ajouter une marque</a></li>
-        <li><a>Liste des produits</a></li>
+        <li><a href="{{ route('product.index') }}">Liste des produits</a></li>
         <li><a href="{{ route('brand.index') }}">Liste des marques</a></li>
     </ul>
 </li>
