@@ -8,9 +8,9 @@
         <div class="flex justify-center">
             <div class="grid grid-cols-3 gap-3">
                 @foreach ($events as $event)
-                    <div class="card card-compact w-96 bg-base-100 shadow-xl ">
+                    <div class="card  w-96 bg-base-100 shadow-xl mx-5">
                         <a href="/events/{{$event['id']}}">
-                            <figure><img src="https://picsum.photos/500/300" alt="Shoes" /></figure>
+                            <figure><img src="https://picsum.photos/500/300" alt="Shoes" class="rounded-md" /></figure>
                             <div class="card-body">
                                 <h2 class="card-title">{{$event['title']}}</h2>
                                 <p>{{$event['description']}}</p>

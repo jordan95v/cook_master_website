@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="flex justify-center my-10">
-    <div class="card shadow-lg ">
+    <div class="card shadow-lg">
         <div class="card-body">
             <p class="font-bold text-2xl text-center pb-4">Créer un Evenement</p>
             {{-- <form action="{{ route('store-event') }}"method="POST"> --}}
