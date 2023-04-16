@@ -16,14 +16,6 @@ class BrandPolicy
     }
 
     /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Brand $brand): bool
-    {
-        //
-    }
-
-    /**
      * Determine whether the user can create models.
      */
     public function create(User $user): bool
@@ -45,21 +37,5 @@ class BrandPolicy
     public function delete(User $user, Brand $brand): bool
     {
         return $user->isAdmin();
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Brand $brand): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Brand $brand): bool
-    {
-        //
     }
 }

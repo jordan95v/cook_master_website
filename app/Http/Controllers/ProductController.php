@@ -52,7 +52,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $this->authorize("update", $product);
+        return view("product.edit", ["product" => $product, "brands" => Brand::all()]);
     }
 
     /**
@@ -60,7 +61,13 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $form = $request->validated();
+        if ($request->hasFile("image")) {
+            unlink("storage/" . $product->image);
+            $form["image"] = $request->file("image")->store("brand_logo", "public");
+        }
+        $product->update($form);
+        return back()->with("success", "Produit correcté modifié");
     }
 
     /**
@@ -68,6 +75,11 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $this->authorize("delete", $product);
+        if (file_exists("storage/" . $product->image)) {
+            unlink("storage/" . $product->image);
+        }
+        $product->delete();
+        return back()->with("success", "Vous avez correctement supprimé le produit $product->name.");
     }
 }

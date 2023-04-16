@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
 use App\Models\Brand;
-use function PHPUnit\Framework\fileExists;
 
 class BrandController extends Controller
 {
@@ -32,6 +31,7 @@ class BrandController extends Controller
      */
     public function store(StoreBrandRequest $request)
     {
+        $this->authorize("create", Brand::class);
         $form = $request->validated();
         $form["slug"] = strtolower(str_replace(" ", ",", $form["name"]));
         if ($request->hasFile("image")) {
@@ -54,7 +54,7 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        $this->authorize("viewAny", $brand);
+        $this->authorize("update", $brand);
         return view("brand.edit", ["brand" => $brand]);
     }
 
@@ -79,7 +79,7 @@ class BrandController extends Controller
     public function destroy(Brand $brand)
     {
         $this->authorize("delete", $brand);
-        if (fileExists("storage/" . $brand->image)) {
+        if (file_exists("storage/" . $brand->image)) {
             unlink("storage/" . $brand->image);
         }
         $brand->delete();
