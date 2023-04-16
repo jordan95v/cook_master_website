@@ -5,21 +5,6 @@
 @endsection
 
 @section('content')
-    {{-- <div class="flex flex-row">
-        <div class="basis-1/4"></div>
-            <div class="basis-1/2">
-                <div class="card lg:card-side bg-base-100 shadow-xl mb-5">
-                    <figure><img src="{{ asset('/images/pancake.jpg') }}" alt="Album"/></figure>
-                    <div class="card-body">
-                        <h2 class="card-title">{{$event['title']}}</h2>
-                        <p>{{$event['description']}}</p>
-                        <p>Auteur : {{$event['Author']}}</p>
-                        <p>Lieu : {{$event['location']}}</p>
-                    </div>
-                </div>
-            </div>
-        <div class="basis-1/4"></div>
-    </div> --}}
 <section class="container mx-auto py-8">
     <div class="flex flex-col md:flex-row">
         <div class="md:w-1/2">
@@ -47,20 +32,34 @@
     </div>
 </section>
 
-<section class="bg-gray-100 py-8">
-    <h3 class="text-4xl font-bold mb-6 text-center">Autre Evenements</h3>
-        <div class="grid grid-cols-3 gap-3 ml-5 justify-center">
-            @foreach ($events as $event)
-            <div class="card w-96 bg-base-100 shadow-xl image-full">
-                <figure><img src="https://picsum.photos/500/300"/></figure>
-                <div class="card-body">
-                    <h2 class="card-title">{{$event['title']}}</h2>
-                    <div class="card-actions absolute bottom-0 right-0 mr-2 mb-2">
-                        <a href="/events/{{$event['id']}}" class="btn btn-primary">Découvrir</a>
-                    </div>
+<section class="bg-gray-100 ">
+
+    <div class="container px-4 flex-grow w-full py-4 sm:py-16 mx-auto px-0">
+        <div class="mx-auto w-full md:w-4/5 px-4">
+            <div class="container my-8">
+                <div class="flex justify-between items-center mb-4">
+                <h2 class="text-3xl font-medium">
+                    Autres Evenements
+                    <a href="/events/" class=""><span class="text-salmon font-medium text-lg ml-2 hover:underline">Tout voir</span></a>
+                </h2>
+                </div>
+                <div id="scrollContainer" class="flex flex-no-wrap overflow-x-scroll scrolling-touch items-start mb-8">
+                    @foreach ($events as $event)
+                        <div class="flex-none w-2/3 md:w-1/3 mr-8 md:pb-4 " >
+                            <div class="card w-96 bg-base-100 shadow-xl image-full">
+                                <figure><img src="https://picsum.photos/500/300"/></figure>
+                                <div class="card-body">
+                                    <h2 class="card-title">{{$event['title']}}</h2>
+                                    <div class="card-actions absolute bottom-0 right-0 mr-2 mb-2">
+                                        <a href="/events/{{$event['id']}}" class="btn btn-primary">Découvrir</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
-            @endforeach
         </div>
+    </div>
 </section>
 @endsection
