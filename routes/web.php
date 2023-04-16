@@ -29,7 +29,8 @@ Route::get('/events', function () {
 //Single Event
 Route::get('/events/{id}', function ($id) {
     return view('event', [
-        'event' => Event::find($id)
+        'event' => Event::find($id),
+        'events' => Event::all()
     ]);
 });
 
