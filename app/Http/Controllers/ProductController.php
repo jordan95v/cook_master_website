@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Brand;
 use App\Models\Product;
 
 class ProductController extends Controller
@@ -21,7 +22,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize("create", Product::class);
+        return view("product.create", ["brands" => Brand::all()]);
     }
 
     /**
@@ -29,7 +31,11 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        $this->authorize("create", Product::class);
+        $form = $request->validated();
+        $form["image"] = $request->file("image")->store("product_image", "public");
+        Product::create($form);
+        return back()->with("success", "Produit correctement créé.");
     }
 
     /**

@@ -17,7 +17,7 @@
             </div>
 
             {{-- Website and contact email --}}
-            <div class="grid lg:grid-cols-2 grid-cols-1 gap-2">
+            <div class="grid lg:grid-cols-2 grid-cols-1 gap-2 pb-2">
                 <x-utils.input name="website" type="text" hint="Website" error="0" />
                 <x-utils.input name="contact_email" type="email" hint="Contact email" error="0" />
                 <x-utils.form-error name="website" />

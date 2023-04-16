@@ -11,7 +11,7 @@ class StoreBrandRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return ($this->user()->isAdmin()) ? true : false;
+        return $this->user()->isAdmin();
     }
 
     /**
