@@ -27,15 +27,16 @@
 
                 <div class="form-control">
                     <label class="input-group">
-                        <x-utils.input name="price" type="text" hint="9.99 (le prix quoi bouffon)" error=1 />
+                        <x-utils.input name="price" type="text" hint="9.99 (le prix quoi bouffon)" error=0 />
                         <span>€</span>
                     </label>
                 </div>
+                <x-utils.form-error name="price" />
             </div>
 
             {{-- Description --}}
             <textarea class="textarea textarea-bordered border-2 @error('description') border-error @enderror" rows=4
-                name="description" placeholder="Description"></textarea>
+                name="description" placeholder="Description">{{ old('description') }}</textarea>
             <x-utils.form-error name="description" />
 
             <div class="card-actions justify-center">

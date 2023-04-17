@@ -14,7 +14,12 @@
         </div>
     </x-utils.card>
 
-    <div class="text-center">
+    <div class="text-center p-5">
         <h2 class="text-2xl font-bold">Les articles de la marque</h2>
+        <div class="pt-10 grid lg:grid-cols-5 md:grid-cols-4 grid-cols-1 gap-20 lg:px-10 lg:mt-10">
+            @foreach ($brand->products as $product)
+                <x-utils.shop-card :product="$product" />
+            @endforeach
+        </div>
     </div>
 </x-layout>
