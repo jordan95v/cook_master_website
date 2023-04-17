@@ -32,12 +32,14 @@
     @endisset
 
     {{-- Content of the page --}}
-    <div class="md:p-0 p-5">
+    <div class="md:p-0 p-5 flex flex-col h-screen">
         <x-utils.alerts />
-        {{ $slot }}
+        <div class="mb-auto">
+            {{ $slot }}
+        </div>
+        <x-footer />
     </div>
 
-    <x-footer />
 
     {{-- Datatables script --}}
     @isset($datatables)

@@ -10,7 +10,7 @@
             <x-utils.input name="name" type="text" hint="Nom de la marque" :target="$brand" error="1" />
 
             {{-- Image --}}
-            <div class="form-control w-full">
+            <div class="form-control w-full pb-2">
                 <label class="label">
                     <span class="label-text-alt">Logo de la marque</span>
                 </label>
@@ -19,7 +19,7 @@
                 <label class="label">
                     <span class="label-text-alt">Logo actuelle</span>
                 </label>
-                <img src="{{ asset('storage/' . $brand->image) }}" alt="" class="w-28">
+                <img src="{{ asset('storage/' . $brand->image) }}" alt="" class="w-full">
             </div>
 
             {{-- Website and contact email --}}

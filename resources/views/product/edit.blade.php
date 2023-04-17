@@ -9,7 +9,7 @@
             <x-utils.input name="name" type="text" hint="Nom du produit" error=1 :target="$product" />
 
             {{-- Image --}}
-            <div class="form-control w-full">
+            <div class="form-control w-full pb-2">
                 <label class="label">
                     <span class="label-text-alt">Image du produit</span>
                 </label>
@@ -19,7 +19,7 @@
                 <label class="label">
                     <span class="label-text-alt">Image actuelle</span>
                 </label>
-                <img src="{{ asset('storage/' . $product->image) }}" alt="" class="w-28">
+                <img src="{{ asset('storage/' . $product->image) }}" alt="" class="w-full">
             </div>
 
             {{-- Brand and Price --}}
