@@ -40,3 +40,6 @@ Route::get('/events/{id}', function ($id) {
 // });
 
 Route::resource('event', EventController::class);
+
+//Store Data Events
+Route::post('/events', [EventController::class, 'store']);

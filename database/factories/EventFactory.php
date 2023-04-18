@@ -18,9 +18,11 @@ class EventFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence(),
-            'Author' => $this->faker->name(),
+            'Organizer' => $this->faker->name(),
             'location' => $this->faker->city(),
             'description' => $this->faker->paragraph(5),
+            'start_time' => $this->faker->time(),
+            'end_time' => $this->faker->time(),
         ];
     }
 }

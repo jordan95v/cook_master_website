@@ -28,7 +28,20 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $formFields = $request->validate([
+            'title' => 'required',
+            'organizer' => 'required',
+            'image' => 'required',
+            'description' => 'required',
+            'location' => 'required',
+            'date' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required'
+        ]);
+
+        Event::create($formFields);
+
+        return redirect("/")->with("success", "Vous avez crée votre événement !");
     }
 
     /**
