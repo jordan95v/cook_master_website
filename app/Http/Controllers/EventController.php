@@ -31,13 +31,16 @@ class EventController extends Controller
         $formFields = $request->validate([
             'title' => 'required',
             'organizer' => 'required',
-            'image' => 'required',
             'description' => 'required',
             'location' => 'required',
             'date' => 'required',
             'start_time' => 'required',
             'end_time' => 'required'
         ]);
+
+        if ($request->hasFile('image')) {
+            $formFields['image'] = $request->file('image')->store('images', 'public');
+        }
 
         Event::create($formFields);
 

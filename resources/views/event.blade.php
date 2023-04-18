@@ -8,7 +8,7 @@
 <section class="container mx-auto py-8">
     <div class="flex flex-col md:flex-row">
         <div class="md:w-1/2">
-        <img src="https://picsum.photos/500/300" alt="Photo de l'événement" class="w-full h-full object-cover object-center rounded-md">
+        <img src="{{$event->image ? asset('storage/'.$event->image) : 'https://picsum.photos/500/300'}}" alt="Photo de l'événement" class="w-full h-full object-cover object-center rounded-md">
         </div>
         <div class="md:w-1/2 md:ml-8 mt-8 md:mt-0">
             <h2 class="text-3xl font-bold mb-2">Événement à ne pas manquer</h2>
@@ -32,6 +32,8 @@
     </div>
 </section>
 
+
+{{-- Slide Bar Netflix --}}
 <section class="bg-gray-100 ">
 
     <div class="container px-4 flex-grow w-full py-4 sm:py-16 mx-auto px-0">
