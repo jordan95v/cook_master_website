@@ -60,7 +60,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        return view('event.edit', ['event' => $event]);
     }
 
     /**
@@ -68,7 +68,24 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
+
+        $formFields = $request->validate([
+            'title' => 'required',
+            'organizer' => 'required',
+            'description' => 'required',
+            'location' => 'required',
+            'date' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required'
+        ]);
+
+        if ($request->hasFile('image')) {
+            $formFields['image'] = $request->file('image')->store('images', 'public');
+        }
+
+        $event->update($formFields);
+
+        return back()->with("success", "Vous avez mis à jour votre événement !");
     }
 
     /**

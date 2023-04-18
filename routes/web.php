@@ -43,3 +43,9 @@ Route::resource('event', EventController::class);
 
 //Store Data Events
 Route::post('/events', [EventController::class, 'store']);
+
+//Show Edit Form
+Route::get('/events/{event}/edit', [EventController::class, 'edit']);
+
+//Update Event
+Route::put('/events/{event}', [EventController::class, 'index']);

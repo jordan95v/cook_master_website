@@ -10,7 +10,7 @@
                 @foreach ($events as $event)
                     <div class="card  w-96 bg-base-100 shadow-xl mx-5">
                         <a href="/events/{{$event['id']}}">
-                            <figure><img src="https://picsum.photos/500/300" alt="Shoes" class="rounded-md" /></figure>
+                            <figure><img src="{{$event->image ? asset('storage/'.$event->image) : 'https://picsum.photos/500/300'}}" alt="Photo de l'événement" class="w-full h-full object-cover object-center rounded-md"></figure>
                             <div class="card-body">
                                 <h2 class="card-title">{{$event['title']}}</h2>
                                 <p>{{$event['description']}}</p>
