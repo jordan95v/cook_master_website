@@ -8,7 +8,7 @@
                 <li><a href="/"><i class="fa-solid fa-house"></i>Accueil</a></li>
                 <li><a href=""><i class="fa-solid fa-school"></i>Cours</a></li>
                 <li><a href=""><i class="fa-solid fa-calendar-days"></i>Evenements</a></li>
-                <li><a href=""><i class="fa-solid fa-store"></i>Boutique</a></li>
+                <li><a href="{{ route('store') }}"><i class="fa-solid fa-store"></i>Boutique</a></li>
             </ul>
         </div>
     </div>
