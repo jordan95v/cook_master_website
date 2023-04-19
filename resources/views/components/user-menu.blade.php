@@ -1,6 +1,38 @@
-<button class="btn btn-ghost btn-circle me-2">
-    <i class="fa-solid fa-cart-shopping text-xl"></i>
-</button>
+{{-- Shopping cart --}}
+<div class="dropdown dropdown-bottom dropdown-end">
+    <label tabindex="0" class="btn btn-ghost btn-circle me-2">
+        <i class="fa-solid fa-cart-shopping text-xl"></i>
+    </label>
+    <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-96">
+        <h2 class="text-center font-bold text-xl mb-4">Mes articles</h2>
+        {{-- Insert content here --}}
+        @foreach (Auth::user()->orders as $item)
+            <div class="flex mb-4 rounded-xl border-2 hover:border-primary p-2">
+                <img src="{{ asset('storage/' . $item->product->image) }}" alt="" class="w-1/4 rounded">
+                <div class="flex-col ms-2 w-2/4">
+                    <p class="hover:link font-bold">{{ $item->product->name }}</p>
+                    <p class="text-start italic">€{{ $item->product->price }}</p>
+                    <p class="mt-5">Quantité: {{ $item->quantity }}</p>
+                </div>
+                <div class="w-1/4 text-end">
+                    {{-- Add more quantity --}}
+                    <form action="{{ route('order.create', ['product' => $item->product->id]) }}" method="post">
+                        @csrf
+                        <button class="btn btn-circle btn-primary btn-sm"><i class="fa-solid fa-plus"></i></button>
+                    </form>
+
+                    {{-- Delete the order --}}
+                    <form action="{{ route('order.destroy', ['order' => $item->id]) }}" method="post" class="mt-4">
+                        @csrf
+                        <button class="btn btn-circle btn-error btn-sm"><i class="fa-solid fa-trash"></i></button>
+                    </form>
+                </div>
+            </div>
+        @endforeach
+    </ul>
+</div>
+
+{{-- User menu --}}
 <div class="dropdown dropdown-end">
     <label tabindex="0" class="btn btn-ghost btn-circle avatar @auth online @endauth">
         @auth
