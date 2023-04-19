@@ -7,7 +7,7 @@
     <ul class="p-2 z-10 bg-white border-2 hover:border-primary">
         <li><a href=""><i class="fa-solid fa-school"></i>Cours</a></li>
         <li><a href=""><i class="fa-solid fa-calendar-days"></i>Evenements</a></li>
-        <li><a href=""><i class="fa-solid fa-store"></i>Boutique</a></li>
+        <li><a href="/store"><i class="fa-solid fa-store"></i>Boutique</a></li>
     </ul>
 </li>
 

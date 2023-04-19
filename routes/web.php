@@ -34,7 +34,6 @@ Route::prefix("users")->group(
                 Route::get('/edit', "edit")->middleware(["auth", "verified"])->name("user.edit");
                 Route::put('/', "update")->middleware("auth")->name("user.update");
                 Route::delete('/{user}', "destroy")->middleware("auth")->name("user.destroy");
-
             }
         );
 
@@ -59,7 +58,8 @@ Route::prefix("users")->group(
 Route::group(
     ["prefix" => "admin", "middleware" => ["auth", "admin"]],
     function () {
-        Route::group(["prefix" => "users", "controller" => UserController::class],
+        Route::group(
+            ["prefix" => "users", "controller" => UserController::class],
             function () {
                 // List all users
                 Route::get("/list", "index")->name("user.index");
@@ -72,5 +72,9 @@ Route::group(
     }
 );
 
+// Brand
 Route::resource("brand", BrandController::class)->middleware("auth");
+
+// Product
 Route::resource("product", ProductController::class)->middleware("auth");
+Route::get("/store", [ProductController::class, "storeIndex"])->name("store");

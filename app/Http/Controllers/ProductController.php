@@ -6,6 +6,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Brand;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -16,6 +17,30 @@ class ProductController extends Controller
     {
         $this->authorize("viewAny", Product::class);
         return view("product.index", ["products" => Product::all()]);
+    }
+
+    public function storeIndex(Request $request)
+    {
+        $products = Product::all();
+        if ($request->get("brand")) {
+            $products = $products->where("brand_id", "=", $request->brand);
+        }
+        if ($request->get("filter")) {
+            switch ($request->filter) {
+                case 'up':
+                    $products = $products->sortBy("price");
+                    break;
+
+                case 'down':
+                    $products = $products->sortByDesc("price");
+                    break;
+
+                case 'new':
+                    $products = $products->sortByDesc("id");
+                    break;
+            }
+        }
+        return view("store", ["products" => $products, "brands" => Brand::all()]);
     }
 
     /**
