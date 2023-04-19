@@ -1,2 +1,2 @@
-<x-layout title="Home" admin=1>
+<x-layout title="Home">
 </x-layout>

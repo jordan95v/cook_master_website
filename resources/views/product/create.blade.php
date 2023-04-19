@@ -1,4 +1,4 @@
-<x-layout title="Ajouter un produit" admin=1>
+<x-layout title="Ajouter un produit">
     <x-utils.card>
         <form action="{{ route('product.store') }}" method="post" class="card-body" enctype="multipart/form-data">
             @csrf

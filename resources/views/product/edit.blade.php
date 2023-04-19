@@ -1,4 +1,4 @@
-<x-layout title="Modifier {{ $product->name }}" admin=1>
+<x-layout title="Modifier {{ $product->name }}">
     <x-utils.card>
         <form action="{{ route('product.update', ['product' => $product->id]) }}" method="post" class="card-body"
             enctype="multipart/form-data">

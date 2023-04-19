@@ -1,9 +1,19 @@
 @props(['direction'])
 
-<li><a href="/"><i class="fa-solid fa-house"></i>Accueil</a></li>
+<li><a href="/"></li>
+{{-- Main --}}
+<li tabindex="0">
+    <a><i class="fa-solid fa-house"></i>Accueil<i class="fa-solid fa-chevron-{{ $direction }}"></i></a>
+    <ul class="p-2 z-10 bg-white border-2 hover:border-primary">
+        <li><a href=""><i class="fa-solid fa-school"></i>Cours</a></li>
+        <li><a href=""><i class="fa-solid fa-calendar-days"></i>Evenements</a></li>
+        <li><a href=""><i class="fa-solid fa-store"></i>Boutique</a></li>
+    </ul>
+</li>
 
 
 <li><a href="{{ route('user.index') }}"><i class="fa-solid fa-user"></i>Liste des utilisateurs</a></li>
+
 
 {{-- Shop --}}
 <li tabindex="0">

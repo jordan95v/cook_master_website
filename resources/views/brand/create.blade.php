@@ -1,4 +1,4 @@
-<x-layout title="Ajouter une marque" admin=1>
+<x-layout title="Ajouter une marque">
     <x-utils.card>
         <form action="{{ route('brand.store') }}" method="post" enctype="multipart/form-data" class="card-body">
             @csrf

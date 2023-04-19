@@ -1,4 +1,4 @@
-<x-layout admin=1 title="Liste des marques" datatables=1>
+<x-layout title="Liste des marques" datatables=1>
     <x-admin.listing>
         <!-- head -->
         <thead>

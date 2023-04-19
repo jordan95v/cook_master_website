@@ -25,11 +25,15 @@
 
 <body>
     {{-- Navbar management --}}
-    @isset($admin)
-        <x-admin.navbar />
+    @auth
+        @if (auth()->user()->isAdmin())
+            <x-admin.navbar />
+        @else
+            <x-navbar />
+        @endif
     @else
         <x-navbar />
-    @endisset
+    @endauth
 
     {{-- Content of the page --}}
     <div class="md:p-0 p-5 flex flex-col h-screen">

@@ -44,7 +44,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view("product.show", ["product" => $product]);
+        $seeblings = Product::where("brand_id", "=", $product->brand->id)->where("id", "!=", $product->id)->get();
+        return view("product.show", ["product" => $product, "seeblings" => $seeblings]);
     }
 
     /**
