@@ -35,12 +35,9 @@
                     <input type="date" name="date" class="input input-bordered my-3" value="{{$event->date}}">
                     <input type="time" name="start_time" class="input input-bordered my-3" value="{{$event->start_time}}">
                     <input type="time" name="end_time" class="input input-bordered my-3" value="{{$event->end_time}}">
-                
-                </div>
-                <div class="form-control mt-6">
                     <button type="submit" class="btn btn-primary w-full">Mettre à jour l'événement</button>
                 </div>
-            {{-- </form> --}}
+            </form>
         </div>
     </div>
 </div>

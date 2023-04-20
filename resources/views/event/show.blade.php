@@ -29,6 +29,11 @@
             </ul>
             <a href="#" class="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded-md inline-block font-medium text-lg transition-colors duration-300">Inscrivez-vous maintenant</a>
             <a href="/events/{{$event->id}}/edit" class="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded-md inline-block font-medium text-lg ">Modifier l'événement</a>
+            <form method="POST" action="/events/{{$event->id}}">
+                @csrf
+                @method('DELETE')
+                <button class="text-red-500"><i class="fa-solid fa-trash"></i>Delete</button>
+            </form>
         </div>
         
     </div>

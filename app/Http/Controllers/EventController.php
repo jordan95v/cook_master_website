@@ -12,7 +12,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        return view('event.index', ['events' => Event::all()]);
     }
 
     /**
@@ -52,7 +52,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        return view('event.show', ['event' => $event, 'events' => Event::all()]);
     }
 
     /**
@@ -93,6 +93,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $event->delete();
+        return redirect("/")->with("success", "Vous avez supprimé votre événement !");
     }
 }
