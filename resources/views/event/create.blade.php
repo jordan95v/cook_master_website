@@ -13,7 +13,7 @@
                 @csrf
                 <div class="form-control">
                     <x-input type="text" name="title" hint="Saisissez le titre de votre événement"  class="input input-bordered my-3" error="1"/>
-                    <x-input type="text" name="organizer" hint="Saisissez le nom de l'organisateur" class="input input-bordered my-3" error="1"/> 
+                    <x-input type="text" name="user_id" hint="Saisissez l'id' de l'organisateur" class="input input-bordered my-3" error="1"/> 
                     <div class="uploader mt-2 my-3">
                         <input type="file" name="image" class="uploader-input">
                         <span class="uploader-placeholder">Déposez votre image ou cliquez ici pour sélectionner un fichier</span>
@@ -29,7 +29,15 @@
                         <p class="text-red-600 text-sm">{{$message}}</p>
                     @enderror
                     
-                    <x-input type="text" name="location" hint="Saisissez le lieu de votre événement" class="input input-bordered my-3" error="1"/>
+                    <label>Choisir une salle : </label>
+                    <select id="room_id" name="room_id">
+
+                    @foreach ($rooms as $room)
+                    <option value={{$room->id}}>{{$room->name}}</option>
+                    @endforeach                 
+                        
+                    </select>
+
                     <x-input type="date" name="date" hint="date" class="input input-bordered my-3" error="1"/>
                     <x-input type="time" name="start_time" hint="heure de début" class="input input-bordered my-3" error="1"/>
                     <x-input type="time" name="end_time" hint="heure de fin" class="input input-bordered my-3" error="1"/>

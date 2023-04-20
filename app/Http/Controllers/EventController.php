@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -20,7 +21,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view("event.create");
+        return view("event.create", ['events' => Event::all(), 'rooms' => Room::all()]);
     }
 
     /**
@@ -30,9 +31,9 @@ class EventController extends Controller
     {
         $formFields = $request->validate([
             'title' => 'required',
-            'organizer' => 'required',
+            'user_id' => 'required',
             'description' => 'required',
-            'location' => 'required',
+            'room_id' => 'required',
             'date' => 'required',
             'start_time' => 'required',
             'end_time' => 'required'
@@ -60,7 +61,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        return view('event.edit', ['event' => $event]);
+        return view('event.edit', ['event' => $event, 'events' => Event::all(), 'rooms' => Room::all()]);
     }
 
     /**
@@ -69,11 +70,12 @@ class EventController extends Controller
     public function update(Request $request, Event $event)
     {
 
+        //dd($request);
         $formFields = $request->validate([
             'title' => 'required',
-            'organizer' => 'required',
+            'user_id' => 'required',
             'description' => 'required',
-            'location' => 'required',
+            'room_id' => 'required',
             'date' => 'required',
             'start_time' => 'required',
             'end_time' => 'required'

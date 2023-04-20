@@ -31,6 +31,26 @@ class DatabaseSeeder extends Seeder
             'user_id' => 10,
         ]);
 
+        Event::create([
+            'id' => 2,
+            'title' => 'Patisserie Française',
+            'description' => 'Lorem Ipsum blablablablablablbalblablandniknkdennjn knznd jdneznd nceznjc',
+            'created_at' => 2023 - 04 - 03,
+            'updated_at' => 2023 - 04 - 03,
+            'room_id' => 4,
+            'user_id' => 3,
+        ]);
+
+        Event::create([
+            'id' => 3,
+            'title' => 'Patisserie Française',
+            'description' => 'Lorem Ipsum blablablablablablbalblablandniknkdennjn knznd jdneznd nceznjc',
+            'created_at' => 2023 - 04 - 03,
+            'updated_at' => 2023 - 04 - 03,
+            'room_id' => 2,
+            'user_id' => 11,
+        ]);
+
         // Event::create([
         //     'id' => 2,
         //     'title' => 'Plats Cuisinés',

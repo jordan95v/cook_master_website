@@ -14,7 +14,7 @@
                 @method('PUT')
                 <div class="form-control">
                     <input type="text" name="title"   class="input input-bordered my-3" value="{{$event->title}}">
-                    <input type="text" name="organizer" class="input input-bordered my-3" value="{{$event->Organizer}}"> 
+                    <input type="text" name="user_id" class="input input-bordered my-3" value="{{$event->user_id}}"> 
                     <div class="uploader mt-2 my-3">
                         <input type="file" name="image" class="uploader-input">
                         <img src="{{$event->image ? asset('storage/'.$event->image) : 'https://picsum.photos/500/300'}}" alt="Photo de l'événement" class="w-full h-full object-cover object-center rounded-md">
@@ -31,7 +31,16 @@
                         <p class="text-red-600 text-sm">{{$message}}</p>
                     @enderror
                     
-                    <input type="text" name="location" class="input input-bordered my-3" value="{{$event->location}}">
+                    <label>Choisir une salle : </label>
+                    <select id="room_id" name="room_id">
+
+                        <option value={{$event->room->id}}>{{$event->room->name}}</option>
+                        @foreach ($rooms as $room)
+                        <option value={{$room->id}}>{{$room->name}}</option>
+                        @endforeach                  
+                        
+                    </select>
+
                     <input type="date" name="date" class="input input-bordered my-3" value="{{$event->date}}">
                     <input type="time" name="start_time" class="input input-bordered my-3" value="{{$event->start_time}}">
                     <input type="time" name="end_time" class="input input-bordered my-3" value="{{$event->end_time}}">

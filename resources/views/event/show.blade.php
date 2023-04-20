@@ -24,7 +24,7 @@
                 </li>
                 <li class="flex items-center text-lg font-medium text-gray-700">
                     <i class="w-4 h-4 mr-2 text-purple-500 fa-sharp fa-solid fa-location-dot"></i>
-                    Lieu : {{$event->location}}
+                    Lieu : {{$event->room->address}}
                 </li>
             </ul>
             <a href="#" class="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded-md inline-block font-medium text-lg transition-colors duration-300">Inscrivez-vous maintenant</a>
