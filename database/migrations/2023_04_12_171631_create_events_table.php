@@ -11,13 +11,26 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('Author');
-            $table->string('location');
             $table->longText('description');
             $table->timestamps();
+            $table->unsignedBigInteger('room_id');
+            $table->foreign('room_id')
+                ->references('id')
+                ->on('rooms')
+                ->onDelete('restrict')
+                ->onUpdate('restrict')
+                ->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('restrict')
+                ->onUpdate('restrict')
+                ->nullable();
         });
     }
 

@@ -16,18 +16,20 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         \App\Models\User::factory(10)->create();
-        Event::factory(6)->create();
-        // Room::factory(4)->create();
+        Room::factory(4)->create();
+        // Event::factory(6)->create();
 
-        // Event::create([
-        //     'id' => 1,
-        //     'title' => 'Patisserie Française',
-        //     'Author' => 'Quentin',
-        //     'location' => 'Nation, Paris',
-        //     'description' => 'Lorem Ipsum blablablablablablbalblablandniknkdennjn knznd jdneznd nceznjc',
-        //     // 'created_at' => 2023 - 04 - 03,
-        //     // 'updated_at' => 2023 - 04 - 03,
-        // ]);
+
+
+        Event::create([
+            'id' => 1,
+            'title' => 'Patisserie Française',
+            'description' => 'Lorem Ipsum blablablablablablbalblablandniknkdennjn knznd jdneznd nceznjc',
+            'created_at' => 2023 - 04 - 03,
+            'updated_at' => 2023 - 04 - 03,
+            'room_id' => 1,
+            'user_id' => 10,
+        ]);
 
         // Event::create([
         //     'id' => 2,
