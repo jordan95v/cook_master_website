@@ -34,9 +34,8 @@
                     <label>Choisir une salle : </label>
                     <select id="room_id" name="room_id">
 
-                        <option value={{$event->room->id}}>{{$event->room->name}}</option>
                         @foreach ($rooms as $room)
-                        <option value={{$room->id}}>{{$room->name}}</option>
+                        <option value="{{$room->id}}" @if ($event->room_id == $room->id) selected @endif>{{$room->name}}</option>
                         @endforeach                  
                         
                     </select>

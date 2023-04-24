@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\EventController;
+use App\Models\Equipment;
 use App\Models\Event;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +23,4 @@ require "users/route.php";
 
 
 Route::resource('events', EventController::class);
+Route::resource('equipment', EquipmentController::class);
