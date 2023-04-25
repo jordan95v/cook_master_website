@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Equiped;
 use App\Models\Event;
 use App\Models\Room;
 use Illuminate\Database\Seeder;
@@ -18,7 +19,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(10)->create();
         Room::factory(4)->create();
         // Event::factory(6)->create();
-
 
 
         Event::create([

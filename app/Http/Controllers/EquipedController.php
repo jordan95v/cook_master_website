@@ -21,27 +21,24 @@ class EquipedController extends Controller
      */
     public function create()
     {
-        //
+        return view("equiped.create");
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(Equipment $equipment)
-    // {
-    //     $equipment = Equiped::where("user_id", "=", Auth::id())->where("product_id", "=", $$equipment->id)->first();
-    //     if ($equipment) {
-    //         $equipment->quantity += 1;
-    //         $equipment->update();
-    //     } else {
-    //         Order::create([
-    //             "user_id" => Auth::id(),
-    //             "product_id" => $product->id,
-    //             "quantity" => 1,
-    //         ]);
-    //     }
-    //     return back()->with("success", "Article ajouté au panier");
-    // }
+    public function store(Request $request)
+    {
+        $formFields = $request->validate([
+            'room_id' => 'required',
+            'equipment_id' => 'required',
+        ]);
+
+
+        Equiped::create($formFields);
+
+        return redirect("/")->with("success", "Vous avez votre équipement dans votre salle !");
+    }
 
     /**
      * Display the specified resource.

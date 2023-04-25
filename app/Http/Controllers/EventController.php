@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Equiped;
 use App\Models\Event;
 use App\Models\Room;
 use Illuminate\Http\Request;
@@ -53,7 +54,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        return view('event.show', ['event' => $event, 'events' => Event::all()]);
+        return view('event.show', ['event' => $event, 'events' => Event::all(), 'equiped' => Equiped::all()]);
     }
 
     /**

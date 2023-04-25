@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EquipedController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\EventController;
 use App\Models\Equipment;
@@ -24,3 +25,4 @@ require "users/route.php";
 
 Route::resource('events', EventController::class);
 Route::resource('equipment', EquipmentController::class);
+Route::resource('equiped', EquipedController::class);

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Equiped;
 use App\Models\Equipment;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class EquipmentController extends Controller
