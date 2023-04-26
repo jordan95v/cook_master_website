@@ -6,7 +6,6 @@
         </label>
         <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-96">
             <h2 class="text-center font-bold text-xl mb-4">Mes articles</h2>
-            {{-- Insert content here --}}
             @if (Auth::user()->orders ?? false)
                 @forelse (Auth::user()->orders as $item)
                     <div class="flex mb-4 rounded-xl border-2 hover:border-primary p-2">
@@ -38,7 +37,7 @@
                     <p class="text-center p-5">Vous n'avez pas d'articles dans votre panier</p>
                 @endforelse
                 @if (count(Auth::user()->orders) != 0)
-                    <button class="btn btn-primary w-full">Payer</button>
+                    <a class="btn btn-primary w-full" href="{{ route('order.show') }}">Payer</a>
                 @endif
             @endif
         </ul>

@@ -40,9 +40,22 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Order $order)
+    public function show()
     {
-        //
+        return view("basket");
+    }
+
+    public function pay(Request $request)
+    {
+        $price = 0;
+
+        foreach (Auth::user()->orders as $key => $value) {
+            $price += $value->product->price;
+        }
+        $price *= 100;
+
+        Auth::user()->charge($price, $request->get("payment-method-id"));
+        return back()->with("success", "Vous avez payer :)");
     }
 
     /**
