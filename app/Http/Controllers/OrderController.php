@@ -24,10 +24,9 @@ class OrderController extends Controller
      */
     public function store(Product $product)
     {
-        $order = Order::where("user_id", "=", Auth::id())->where("product_id", "=", $product->id)->first();
+        $order = Order::where("user_id", Auth::id())->where("product_id", $product->id)->first();
         if ($order) {
-            $order->quantity += 1;
-            $order->update();
+            $order->update(["quantity" => $order->quantity + 1]);
         } else {
             Order::create([
                 "user_id" => Auth::id(),

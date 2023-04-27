@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Product::class);
-            $table->integer("quantity");
+            $table->integer("quantity")->default(1);
             $table->timestamps();
         });
     }
