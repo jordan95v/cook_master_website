@@ -6,10 +6,8 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-use LaravelDaily\Invoices\Invoice;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
-use LaravelDaily\Invoices\Classes\Party;
+use LaravelDaily\Invoices\Invoice;
 
 class OrderController extends Controller
 {
@@ -20,7 +18,6 @@ class OrderController extends Controller
     {
         //
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -52,40 +49,33 @@ class OrderController extends Controller
     public function pay(Request $request)
     {
         // Invoice configuration
-        $invoice_id = uniqid("SHOP-");
-        $customer = new Party(
-            [
-                "name" => Auth::user()->name,
-                "custom_fields" => [
-                    "email" => Auth::user()->email,
-                ],
-            ]
-        );
+        $invoice_id = uniqid(Auth::user()->id . "-invoice-");
+        $shipping_price = 3;
+        $items = [];
 
+        // Invoice creation
+        foreach (Auth::user()->orders as $value) {
+            $items[] = (new InvoiceItem())
+                ->title($value->product->name)
+                ->pricePerUnit($value->product->price)
+                ->quantity($value->quantity);
+        }
         $invoice = Invoice::make()
-            ->buyer($customer)
+            ->buyer(Auth::user()->customer)
             ->series($invoice_id)
-            ->taxRate(20)
-            ->shipping(1.99)
+            ->shipping($shipping_price)
             ->status(__('invoices::invoice.paid'))
             ->filename($invoice_id)
-            ->logo("images/logo2.png");
-
-        // Price calculation
-        foreach (Auth::user()->orders as $key => $value) {
-            $invoice->addItem(
-                (new InvoiceItem())
-                    ->title($value->product->name)
-                    ->pricePerUnit($value->product->price)
-                    ->quantity($value->quantity)
-            );
-        }
+            ->logo("images/logo2.png")
+            ->addItems($items)
+            ->save("public/invoices");
         $invoice->stream();
 
         // Payment and save the invoice
-        Auth::user()->charge($invoice->total_amount * 100, $request->get("payment-method-id"));
-        $invoice->save("public");
-        return back()->with("success", "Vous avez payer :)");
+        $price = $shipping_price + $invoice->total_amount * 100;
+        Auth::user()->charge($price, $request->get("payment-method-id"));
+        Auth::user()->orders->delete();
+        return redirect("store")->with("success", "Vous avez payer :)");
     }
 
     /**
