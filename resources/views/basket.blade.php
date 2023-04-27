@@ -10,10 +10,10 @@
                 <p class="text-center p-5">Vous n'avez pas d'articles dans votre panier</p>
             @endforelse
 
-            <x-shop.basket-total />
 
             {{-- Payment form --}}
             @if (count(Auth::user()->orders))
+                <x-shop.basket-total />
                 <form action="{{ route('order.pay') }}" method="post" id="payment-form">
                     @csrf
                     <input id="card-holder-name" type="hidden">

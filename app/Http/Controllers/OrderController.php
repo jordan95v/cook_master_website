@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderInvoice;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
@@ -59,34 +61,42 @@ class OrderController extends Controller
 
     public function pay(Request $request)
     {
+        $user = User::find(Auth::id()); // I have an error otherwise.
+
         // Invoice configuration
-        $invoice_id = uniqid(Auth::user()->id . "-invoice-");
+        $invoice_id = uniqid($user->id . "-invoice-");
         $shipping_price = 3;
         $items = [];
 
         // Invoice creation
-        foreach (Auth::user()->orders as $value) {
+        foreach ($user->orders as $value) {
             $items[] = (new InvoiceItem())
                 ->title($value->product->name)
                 ->pricePerUnit($value->product->price)
                 ->quantity($value->quantity);
         }
         $invoice = Invoice::make()
-            ->buyer(Auth::user()->customer)
+            ->buyer($user->customer())
             ->series($invoice_id)
             ->shipping($shipping_price)
             ->status(__('invoices::invoice.paid'))
-            ->filename($invoice_id)
+            ->filename("invoices/$invoice_id")
             ->logo("images/logo2.png")
             ->addItems($items)
-            ->save("public/invoices");
+            ->save("public");
         $invoice->stream();
 
         // Payment and save the invoice
         $price = $shipping_price + $invoice->total_amount * 100;
-        Auth::user()->charge($price, $request->get("payment-method-id"));
-        Auth::user()->orders->delete();
-        return redirect("store")->with("success", "Vous avez payer :)");
+        $user->charge($price, $request->get("payment-method-id"));
+        foreach ($user->orders as $value) {
+            $value->delete();
+        }
+        OrderInvoice::create([
+            "user_id" => Auth::id(),
+            "path" => $invoice->url(),
+        ]);
+        return redirect("store")->with("success", "Paiement effectué. Facture disponible dans votre espace personnel.");
     }
 
     /**

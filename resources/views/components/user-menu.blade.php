@@ -44,6 +44,11 @@
                 <li>
                     <a href="{{ route('user.edit') }}"><i class="fa-solid fa-gear"></i>Modifier mon profil</a>
                 </li>
+                <li>
+                    <a href="{{ route('user.edit') }}">
+                        <i class="fa-sharp fa-solid fa-file-invoice-dollar"></i>Mes factures
+                    </a>
+                </li>
                 @if (auth()->user()->role != 0)
                     <li>
                         <a href="{{ route('admin.dashboard') }}">
