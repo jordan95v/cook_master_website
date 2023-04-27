@@ -8,35 +8,12 @@
             <h2 class="text-center font-bold text-xl mb-4">Mes articles</h2>
             @if (Auth::user()->orders ?? false)
                 @forelse (Auth::user()->orders as $item)
-                    <div class="flex mb-4 rounded-xl border-2 hover:border-primary p-2">
-                        <img src="{{ asset('storage/' . $item->product->image) }}" alt="" class="w-1/4 rounded">
-                        <div class="flex-col ms-2 w-2/4">
-                            <a class="hover:link font-bold"
-                                href="{{ route('product.show', ['product' => $item->product->id]) }}">
-                                {{ $item->product->name }}
-                            </a>
-                            <p class="text-start italic">€{{ $item->product->price }}</p>
-                            <p class="mt-5">Quantité: {{ $item->quantity }}</p>
-                        </div>
-                        <div class="w-1/4 text-end">
-                            {{-- Add more quantity --}}
-                            <form action="{{ route('order.create', ['product' => $item->product->id]) }}" method="post">
-                                @csrf
-                                <button class="btn btn-circle btn-primary btn-sm"><i class="fa-solid fa-plus"></i></button>
-                            </form>
-
-                            {{-- Delete the order --}}
-                            <form action="{{ route('order.destroy', ['order' => $item->id]) }}" method="post"
-                                class="mt-4">
-                                @csrf
-                                <button class="btn btn-circle btn-error btn-sm"><i class="fa-solid fa-trash"></i></button>
-                            </form>
-                        </div>
-                    </div>
+                    <x-shop.basket-card :item="$item" />
                 @empty
                     <p class="text-center p-5">Vous n'avez pas d'articles dans votre panier</p>
                 @endforelse
                 @if (count(Auth::user()->orders) != 0)
+                    <x-shop.basket-total />
                     <a class="btn btn-primary w-full" href="{{ route('order.show') }}">Payer</a>
                 @endif
             @endif
