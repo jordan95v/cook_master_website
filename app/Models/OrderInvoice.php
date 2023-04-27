@@ -9,5 +9,10 @@ class OrderInvoice extends Model
 {
     protected $guarded = [];
 
+    public function url()
+    {
+        return asset("storage/invoices/" . $this->serial . ".pdf");
+    }
+
     use HasFactory;
 }

@@ -88,4 +88,9 @@ class UserController extends Controller
         $user->update(["is_banned" => 0]);
         return back()->with("success", "Vous avez débanni $user->name.");
     }
+
+    public function invoices()
+    {
+        return view("users.invoices", ["invoices" => Auth::user()->invoices]);
+    }
 }

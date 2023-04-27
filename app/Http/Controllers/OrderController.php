@@ -84,7 +84,7 @@ class OrderController extends Controller
             ->logo("images/logo2.png")
             ->addItems($items)
             ->save("public");
-        $invoice->stream();
+        $invoice->stream(); // In order to compute the price etc ...
 
         // Payment and save the invoice
         $price = $shipping_price + $invoice->total_amount * 100;
@@ -94,7 +94,8 @@ class OrderController extends Controller
         }
         OrderInvoice::create([
             "user_id" => Auth::id(),
-            "path" => $invoice->url(),
+            "price" => $invoice->total_amount,
+            "serial" => $invoice_id,
         ]);
         return redirect("store")->with("success", "Paiement effectué. Facture disponible dans votre espace personnel.");
     }

@@ -35,6 +35,9 @@ Route::prefix("users")->group(
                 Route::get('/edit', "edit")->middleware(["auth", "verified"])->name("user.edit");
                 Route::put('/', "update")->middleware("auth")->name("user.update");
                 Route::delete('/{user}', "destroy")->middleware("auth")->name("user.destroy");
+
+                // User invoices
+                Route::get("/invoices", "invoices")->middleware("auth")->name("user.invoices");
             }
         );
 

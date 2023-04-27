@@ -45,7 +45,7 @@
                     <a href="{{ route('user.edit') }}"><i class="fa-solid fa-gear"></i>Modifier mon profil</a>
                 </li>
                 <li>
-                    <a href="{{ route('user.edit') }}">
+                    <a href="{{ route('user.invoices') }}">
                         <i class="fa-sharp fa-solid fa-file-invoice-dollar"></i>Mes factures
                     </a>
                 </li>

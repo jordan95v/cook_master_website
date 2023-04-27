@@ -15,7 +15,8 @@ return new class extends Migration
         Schema::create('order_invoices', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
-            $table->string('path');
+            $table->float("price");
+            $table->string("serial");
             $table->timestamps();
         });
     }
