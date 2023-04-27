@@ -10,7 +10,7 @@
                     <a href="{{ route('brand.show', ['brand' => $product->brand->id]) }}"
                         class="link">{{ $product->brand->name }}</a>
                 </p>
-                <form action="{{ route('order.create', ['product' => $product->id]) }}" method="post">
+                <form action="{{ route('order.store', ['product' => $product->id]) }}" method="post">
                     @csrf
                     <button class="btn btn-ghost btn-xs"><i class="fa-solid fa-bag-shopping me-2"></i>Acheter</button>
                 </form>

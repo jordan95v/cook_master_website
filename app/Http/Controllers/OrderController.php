@@ -22,19 +22,31 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Product $product)
+    public function store(Request $request, Product $product)
     {
-        $order = Order::where("user_id", Auth::id())->where("product_id", $product->id)->first();
-        if ($order) {
-            $order->update(["quantity" => $order->quantity + 1]);
+        if ($order = Order::where("user_id", Auth::id())->where("product_id", $product->id)->first()) {
+            $this->update($request, $order);
         } else {
             Order::create([
                 "user_id" => Auth::id(),
                 "product_id" => $product->id,
-                "quantity" => 1,
             ]);
         }
-        return back()->with("success", "Article ajouté au panier");
+        $action = ($request->get("remove")) ? "retiré" : "ajouté";
+        return back()->with("success", "Article $action au panier");
+    }
+
+    public function update(Request $request, Order $order)
+    {
+        if ($request->get("remove")) {
+            if ($order->quantity > 1) {
+                $order->update(["quantity" => $order->quantity - 1]);
+            } else {
+                $this->destroy($order);
+            }
+        } else {
+            $order->update(["quantity" => $order->quantity + 1]);
+        }
     }
 
     /**

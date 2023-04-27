@@ -78,7 +78,7 @@ Route::resource("brand", BrandController::class)->middleware("auth");
 
 // Product
 Route::resource("product", ProductController::class)->middleware("auth");
-Route::post("product/{product}/order", [OrderController::class, 'store'])->middleware("auth")->name("order.create");
+Route::post("product/{product}/order", [OrderController::class, 'store'])->middleware("auth")->name("order.store");
 Route::post("order/{order}/delete", [OrderController::class, 'destroy'])->middleware("auth")->name("order.destroy");
 Route::get("/store", [ProductController::class, "storeIndex"])->name("store");
 Route::get("/basket", [OrderController::class, "show"])->name("order.show");

@@ -9,7 +9,7 @@
         {{-- Product content --}}
         <div class="pt-3 flex items-center justify-between">
             <p class="hover:link font-bold">{{ $product->name }}</p>
-            <form action="{{ route('order.create', ['product' => $product->id]) }}" method="post">
+            <form action="{{ route('order.store', ['product' => $product->id]) }}" method="post">
                 @csrf
                 <button class="btn btn-ghost btn-xs"><i class="fa-solid fa-bag-shopping me-2"></i>Acheter</button>
             </form>
