@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Equiped;
+use App\Models\Equipment;
 use App\Models\Event;
 use App\Models\Room;
 use Illuminate\Database\Seeder;
@@ -17,7 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         \App\Models\User::factory(10)->create();
-        Room::factory(4)->create();
+        // Room::factory(4)->create();
         // Event::factory(6)->create();
 
 
@@ -49,6 +50,34 @@ class DatabaseSeeder extends Seeder
             'updated_at' => 2023 - 04 - 03,
             'room_id' => 2,
             'user_id' => 11,
+        ]);
+
+        Equipment::create([
+            'id' => 1,
+            'title' => 'Four',
+            'brand' => 'Bosch',
+            'description' => 'Lorem Ipsum blablablablablablbalblablandniknkdennjn knznd jdneznd nceznjc',
+        ]);
+
+        Equipment::create([
+            'id' => 2,
+            'title' => 'Four',
+            'brand' => 'Bosch',
+            'description' => 'Lorem Ipsum blablablablablablbalblablandniknkdennjn knznd jdneznd nceznjc',
+        ]);
+
+        Room::create([
+            'id' => 1,
+            'name' => 'Salle 1',
+            'address' => 'Diderot, Paris',
+            'image' => 'https://images.unsplash.com/photo-1611095772769-5b7b3e9b0b0b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGF0aXNzZXJ8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
+        ]);
+
+        Room::create([
+            'id' => 2,
+            'name' => 'Salle 2',
+            'address' => 'Diderot, Paris',
+            'image' => 'https://images.unsplash.com/photo-1611095772769-5b7b3e9b0b0b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGF0aXNzZXJ8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
         ]);
 
         // Event::create([

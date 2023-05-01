@@ -27,7 +27,13 @@
                     Lieu : {{$event->room->address}}
                 </li>
             </ul>
-            <a href="#" class="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded-md inline-block font-medium text-lg transition-colors duration-300">Inscrivez-vous maintenant</a>
+            <!-- Button to subscribe to the event -->
+            @if(Auth::check())
+                <form action="{{ route('event.subscribe', $event->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded-md inline-block font-medium text-lg transition-colors duration-300">Inscrivez-vous maintenant</button>
+                </form>
+            @endif
             <a href="/events/{{$event->id}}/edit" class="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded-md inline-block font-medium text-lg ">Modifier l'événement</a>
             <form method="POST" action="/events/{{$event->id}}">
                 @csrf

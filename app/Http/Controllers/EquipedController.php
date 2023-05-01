@@ -21,7 +21,7 @@ class EquipedController extends Controller
      */
     public function create()
     {
-        return view("equiped.create");
+        return view("equiped.create", ['equipment' => Equipment::all()]);
     }
 
     /**
@@ -70,5 +70,22 @@ class EquipedController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function select(Request $request)
+    {
+        $selectedEquipment = $request->input('equipment');
+        $roomId = 7; // Remplacez 1 par l'ID de la room concernée.
+
+        // Boucle pour ajouter chaque équipement sélectionné à la table equiped
+        foreach ($selectedEquipment as $equipmentId) {
+            Equiped::create([
+                'room_id' => $roomId,
+                'equipment_id' => $equipmentId
+            ]);
+        }
+
+        // Redirection vers la page de la room avec un message de succès
+        return redirect('/')->with('success', 'La sélection d\'équipements a été enregistrée avec succès.');
     }
 }

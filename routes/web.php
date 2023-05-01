@@ -3,6 +3,8 @@
 use App\Http\Controllers\EquipedController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\RoomController;
+use App\Models\Equiped;
 use App\Models\Equipment;
 use App\Models\Event;
 use Illuminate\Support\Facades\Route;
@@ -26,3 +28,6 @@ require "users/route.php";
 Route::resource('events', EventController::class);
 Route::resource('equipment', EquipmentController::class);
 Route::resource('equiped', EquipedController::class);
+Route::post('/equiped/select', [EquipedController::class, 'select'])->name('equiped.select');
+Route::post('/events/{event}/subscribe', [EventController::class, 'subscribe'])->name('event.subscribe');
+Route::resource('room', RoomController::class);

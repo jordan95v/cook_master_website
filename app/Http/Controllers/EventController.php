@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Equiped;
 use App\Models\Event;
+use App\Models\Participed;
 use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -98,5 +100,18 @@ class EventController extends Controller
     {
         $event->delete();
         return redirect("/")->with("success", "Vous avez supprimé votre événement !");
+    }
+
+    public function subscribe(Event $event)
+    {
+        // Ajoute une entrée dans la table participed liant l'utilisateur à l'événement
+        $userId = Auth::id();
+        Participed::create([
+            'user_id' => $userId,
+            'event_id' => $event->id
+        ]);
+
+        // Redirige vers la page de l'événement avec un message de confirmation
+        return redirect()->route('event.show', $event->id)->with('success', 'Vous vous êtes inscrit à l\'événement.');
     }
 }
