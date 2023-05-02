@@ -40,7 +40,7 @@ class ProductController extends Controller
                     break;
             }
         }
-        return view("store", ["products" => $products, "brands" => Brand::all()]);
+        return view("store", ["products" => $products, "brands" => Brand::all(), "requestBrand" => $request->get("brand"), "filter" => $request->get("filter")]);
     }
 
     /**

@@ -1,3 +1,14 @@
+@php
+    // Do a dictionnary containing filter and their value in the url
+    $sorts = [
+        'new' => 'Nouveauté',
+        'popularity' => 'Popularité',
+        'up' => 'Prix croissant',
+        'down' => 'Prix décroissant',
+    ];
+@endphp
+
+
 <x-layout title="Magasin">
     <div class="p-5 mb-5">
         <img src="{{ asset('images/food-banner.jpg') }}" alt="" class="rounded-xl max-h-56 object-cover w-full">
@@ -7,17 +18,19 @@
             <select class="select select-bordered w-full max-w-xs" name="brand">
                 <option disabled selected>Selectionner une marque</option>
                 @foreach ($brands as $brand)
-                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                    <option value="{{ $brand->id }}" @if ($requestBrand == $brand->id) selected @endif>
+                        {{ $brand->name }}
+                    </option>
                 @endforeach
             </select>
             <select class="select select-bordered w-full max-w-xs" name="filter">
                 <option disabled selected>Trier par </option>
-                <option value="new">Nouveauté</option>
-                <option value="popularity">Popularité</option>
-                <option value="up">Prix croissant</option>
-                <option value="down">Prix décroissant</option>
+                @foreach ($sorts as $key => $sort)
+                    <option value="{{ $key }}" @if ($filter == $key) selected @endif>
+                        {{ $sort }}</option>
+                @endforeach
             </select>
-            <button type="submit" class="btn btn-ghost hover:btn-primary">Filtrer</button>
+            <button type="submit" class="btn btn-neutral hover:btn-primary">Filtrer</button>
         </div>
     </form>
     <div class="text-center p-5">
