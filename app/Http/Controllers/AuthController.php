@@ -51,6 +51,7 @@ class AuthController extends Controller
         return redirect("/")->with("success", "Vous avez bien vérifié votre mail.");
     }
 
+    // Resend the email.
     public function resendEmail(Request $request)
     {
         $request->user()->sendEmailVerificationNotification();

@@ -1,15 +1,17 @@
 @props(['item'])
 
 <div class="flex mb-4 rounded-xl border-2 hover:border-primary p-2">
-    <img src="{{ asset('storage/' . $item->product->image) }}" alt="" class="w-1/4 h-1/4 my-auto rounded">
-    <div class="flex-col lg:ms-10 ms-2 w-2/4">
+    <div class="w-1/4 my-auto">
+        <img src="{{ asset('storage/' . $item->product->image) }}" alt="" class="w-full my-auto rounded">
+    </div>
+    <div class="flex-col ms-2 w-2/4">
         <a class="hover:link font-bold" href="{{ route('product.show', ['product' => $item->product->id]) }}">
             {{ $item->product->name }}
         </a>
         <p class="text-start italic">€{{ $item->product->price }}</p>
         <p class="mt-5">Quantité: {{ $item->quantity }}</p>
     </div>
-    <div class="w-1/4 text-end flex flex-col">
+    <div class="w-1/4 text-end flex flex-col justify-evenly">
         {{-- Add more quantity --}}
         <form action="{{ route('order.store', ['product' => $item->product->id]) }}" method="post" class="mb-1">
             @csrf
