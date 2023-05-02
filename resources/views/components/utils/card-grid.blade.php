@@ -1,5 +1,5 @@
-<div class="flex justify-center lg:my-10 p-4">
-    <div class="card shadow-xl border-2 lg:me-5">
+<div class="flex justify-center lg:my-5 p-4">
+    <div class="card shadow-xl border-2 w-96 lg:w-full">
         {{ $slot }}
     </div>
 </div>
