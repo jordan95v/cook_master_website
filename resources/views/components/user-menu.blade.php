@@ -5,7 +5,7 @@
             <i class="fa-solid fa-cart-shopping text-xl"></i>
         </label>
         <ul tabindex="0"
-            class="menu menu-compact dropdown-content mt-3 p-2 border-2 shadow rounded-box w-96 hover:border-primary">
+            class="menu menu-compact dropdown-content mt-3 p-2 border-2 shadow bg-base-100 rounded-box w-96 hover:border-primary">
             <h2 class="text-center font-bold text-xl mb-4">Mes articles</h2>
             @if (Auth::user()->orders ?? false)
                 @forelse (Auth::user()->orders as $item)
@@ -35,7 +35,7 @@
         @endauth
     </label>
     <ul tabindex="0"
-        class="menu menu-compact dropdown-content mt-3 p-2 border-2 shadow rounded-box w-52 hover:border-primary">
+        class="menu menu-compact dropdown-content mt-3 p-2 border-2 shadow bg-base-100 rounded-box w-52 hover:border-primary">
         @auth
             @if (!auth()->user()->email_verified_at)
                 <li>

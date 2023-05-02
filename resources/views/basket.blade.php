@@ -22,8 +22,18 @@
                         <input id="card-holder-name" type="hidden">
                         <input type="hidden" name="payment-method-id" id="payment-method">
 
+                        <div class="grid grild-cols-1 lg:grid-cols-2 my-2 gap-2">
+                            <x-utils.input type="text" name="address" hint="Adresse" error=0 />
+                            <x-utils.input type="text" name="zipcode" hint="Code postal" error=0 />
+                        </div>
+                        <x-utils.form-error name="address" />
+                        <x-utils.form-error name="zipcode" />
+
+                        <x-utils.input type="text" name="city" hint="City" error=1 />
+
+
                         <!-- Stripe Elements Placeholder -->
-                        <div id="card-element" class="border-2 rounded-lg p-4 hover:border-primary"></div>
+                        <div id="card-element" class="border-2 mt-4 rounded-lg p-4 hover:border-primary"></div>
 
                         <div class="text-center">
                             <button id="card-button" class="btn btn-primary mt-4">
@@ -67,9 +77,8 @@
                 alert("Erreur de paiement")
             } else {
                 document.querySelector("#payment-method").value = paymentMethod.id
+                document.querySelector("#payment-form").submit();
             }
-
-            document.querySelector("#payment-form").submit();
         });
     </script>
 </x-layout>

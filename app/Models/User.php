@@ -62,12 +62,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(OrderInvoice::class);
     }
 
-    public function customer(): Party
+    public function customer(array $fields): Party
     {
         return new Party([
             'name' => $this->name,
             'custom_fields' => [
                 'email' => $this->email,
+                'location' => $fields['address'] . ', ' . $fields['zipcode'] . ' ' . $fields['city'],
             ],
         ]);
     }

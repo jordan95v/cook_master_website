@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PayRequest;
 use App\Models\Order;
 use App\Models\OrderInvoice;
 use App\Models\Product;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Invoice;
+use Stripe\Exception\CardException;
 
 class OrderController extends Controller
 {
@@ -59,7 +61,7 @@ class OrderController extends Controller
         return view("basket");
     }
 
-    private function makeInvoice(User $user, int $shippingPrice): Invoice
+    private function makeInvoice(User $user, int $shippingPrice, PayRequest $request): Invoice
     {
         // Invoice creation
         $invoice_id = uniqid($user->id . "-invoice-");
@@ -71,7 +73,7 @@ class OrderController extends Controller
                 ->quantity($value->quantity);
         }
         $invoice = Invoice::make()
-            ->buyer($user->customer())
+            ->buyer($user->customer($request->all()))
             ->series($invoice_id)
             ->shipping($shippingPrice)
             ->status(__('invoices::invoice.paid'))
@@ -79,21 +81,28 @@ class OrderController extends Controller
             ->logo("images/logo2.png")
             ->addItems($items)
             ->save("public");
+
         $invoice->stream(); // In order to compute the price etc ...
         return $invoice;
     }
 
-    public function pay(Request $request)
+    public function pay(PayRequest $request)
     {
+        $request->validated();
         $user = User::find(Auth::id()); // I have an error otherwise.
 
         // Invoice configuration
         $shippingPrice = 3;
-        $invoice = $this->makeInvoice($user, $shippingPrice);
+        $invoice = $this->makeInvoice($user, $shippingPrice, $request);
 
         // Payment
         $price = $shippingPrice + $invoice->total_amount * 100;
-        $user->charge($price, $request->get("payment-method-id"));
+        try {
+            $user->charge($price, $request->get("payment-method-id"));
+        } catch (CardException $th) {
+            return back()->with("error", "Une erreur est survenue lors du paiement. Veuillez réessayer.");
+        }
+
 
         // Order deletion
         foreach ($user->orders as $value) {
