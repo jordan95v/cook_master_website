@@ -59,16 +59,11 @@ class OrderController extends Controller
         return view("basket");
     }
 
-    public function pay(Request $request)
+    private function makeInvoice(User $user, int $shippingPrice): Invoice
     {
-        $user = User::find(Auth::id()); // I have an error otherwise.
-
-        // Invoice configuration
-        $invoice_id = uniqid($user->id . "-invoice-");
-        $shipping_price = 3;
-        $items = [];
-
         // Invoice creation
+        $invoice_id = uniqid($user->id . "-invoice-");
+        $items = [];
         foreach ($user->orders as $value) {
             $items[] = (new InvoiceItem())
                 ->title($value->product->name)
@@ -78,24 +73,38 @@ class OrderController extends Controller
         $invoice = Invoice::make()
             ->buyer($user->customer())
             ->series($invoice_id)
-            ->shipping($shipping_price)
+            ->shipping($shippingPrice)
             ->status(__('invoices::invoice.paid'))
             ->filename("invoices/$invoice_id")
             ->logo("images/logo2.png")
             ->addItems($items)
             ->save("public");
         $invoice->stream(); // In order to compute the price etc ...
+        return $invoice;
+    }
 
-        // Payment and save the invoice
-        $price = $shipping_price + $invoice->total_amount * 100;
+    public function pay(Request $request)
+    {
+        $user = User::find(Auth::id()); // I have an error otherwise.
+
+        // Invoice configuration
+        $shippingPrice = 3;
+        $invoice = $this->makeInvoice($user, $shippingPrice);
+
+        // Payment
+        $price = $shippingPrice + $invoice->total_amount * 100;
         $user->charge($price, $request->get("payment-method-id"));
+
+        // Order deletion
         foreach ($user->orders as $value) {
             $value->delete();
         }
+
+        // Invoice creation
         OrderInvoice::create([
             "user_id" => Auth::id(),
             "price" => $invoice->total_amount,
-            "serial" => $invoice_id,
+            "serial" => $invoice->series,
         ]);
         return redirect("store")->with("success", "Paiement effectué. Facture disponible dans votre espace personnel.");
     }
@@ -105,7 +114,12 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        $order->delete();
-        return back()->with("success", "Article retiré du panier.");
+        foreach (Auth::user()->orders as $value) {
+            if ($value->product_id == $order->product_id) {
+                $value->delete();
+            }
+            return back()->with("success", "Article retiré du panier.");
+        }
+        return back()->with("error", "Une erreur est survenue.");
     }
 }

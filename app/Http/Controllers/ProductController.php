@@ -89,7 +89,9 @@ class ProductController extends Controller
     {
         $form = $request->validated();
         if ($request->hasFile("image")) {
-            unlink("storage/" . $product->image);
+            if (file_exists("storage/" . $product->image)) {
+                unlink("storage/" . $product->image);
+            }
             $form["image"] = $request->file("image")->store("brand_logo", "public");
         }
         $product->update($form);
