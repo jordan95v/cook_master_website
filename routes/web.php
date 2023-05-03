@@ -5,6 +5,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -90,3 +91,6 @@ Route::post("order/{order}/delete", [OrderController::class, 'destroy'])->middle
 Route::get("/store", [ProductController::class, "storeIndex"])->name("store");
 Route::get("/basket", [OrderController::class, "show"])->name("order.show");
 Route::post("/payment", [OrderController::class, "pay"])->name("order.pay");
+
+// Subscription
+Route::get("/subscription", [SubscriptionController::class, "create"])->name("subscription.create");

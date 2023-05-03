@@ -51,6 +51,11 @@
                         <i class="fa-sharp fa-solid fa-file-invoice-dollar"></i>Mes factures
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('subscription.create') }}">
+                        <i class="fa-sharp fa-solid fa-bolt-lightning"></i>S'abonner
+                    </a>
+                </li>
                 @if (auth()->user()->role != 0)
                     <li>
                         <a href="{{ route('admin.dashboard') }}">

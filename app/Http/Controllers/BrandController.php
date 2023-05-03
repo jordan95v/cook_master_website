@@ -66,7 +66,9 @@ class BrandController extends Controller
         $this->authorize("update", $brand);
         $form = $request->validated();
         if ($request->hasFile("image")) {
-            unlink("storage/" . $brand->image);
+            if (file_exists("storage/" . $brand->image)) {
+                unlink("storage/" . $brand->image);
+            }
             $form["image"] = $request->file("image")->store("brand_logo", "public");
         }
         $brand->update($form);
