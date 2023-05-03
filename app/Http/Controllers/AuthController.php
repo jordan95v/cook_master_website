@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +24,8 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($form)) {
+            // Refresh Cashier user.
+            User::find(Auth::id())->createOrGetStripeCustomer();
             $request->session()->regenerate();
             return redirect("/")->with("success", "Vous vous êtes correctement connecté.");
         }

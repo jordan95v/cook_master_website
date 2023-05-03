@@ -1,4 +1,6 @@
 <!-- Stripe Elements Placeholder -->
+<input id="card-holder-name" type="hidden">
+<input type="hidden" name="payment-method-id" id="payment-method">
 <div id="card-element" class="border-2 mt-4 rounded-lg p-4 hover:border-primary"></div>
 
 <div class="text-center">

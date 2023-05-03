@@ -4,6 +4,7 @@
             <p class="font-bold text-2xl text-center">Abonnez vous !</p>
             <small class="text-center text-gray-400">Et profitez ainsi de nombreux avantages ...</small>
 
+            {{-- Subscription table --}}
             <div class="overflow-x-auto mt-10">
                 <table class="table w-full text-center">
                     <!-- head -->
@@ -129,13 +130,52 @@
                         {{-- TODO: Now really do the subscription (add form) --}}
                         <tr>
                             <td></td>
-                            <td><a href="" class="btn btn-primary">Rétrograder</a></td>
-                            <td><a href="" class="btn btn-primary">Selectionner Starter</a></td>
-                            <td><a href="" class="btn btn-primary">Selectionner Pro</a></td>
+                            <td></td>
+                            <td>
+                                <!-- The button to starter modal -->
+                                <label for="starter"
+                                    class="btn btn-primary @if (Auth::user()->subscribed('starter')) btn-disabled @endif">S'abonner</label>
+
+                                @if (!Auth::user()->subscribed('starter'))
+                                    <!-- Put this part before </body> tag -->
+                                    <input type="checkbox" id="starter" class="modal-toggle" />
+                                    <div class="modal">
+                                        <div class="modal-box relative">
+                                            <label for="starter"
+                                                class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                                            <h3 class="text-lg font-bold">Abonnez vous à la formule Starter</h3>
+                                            <form id="payment-form" action="{{ route('subscription.store') }}"
+                                                method="post">
+                                                @csrf
+                                                <input type="hidden" name="plan" value="starter">
+                                                <x-shop.stripe />
+                                            </form>
+                                        </div>
+                                    </div>
+                                @endif
+                            </td>
+                            <td>
+                                <!-- The button to pro modal -->
+                                <label for="pro"
+                                    class="btn btn-primary @if (Auth::user()->subscribed('pro')) btn-disabled @endif">S'abonner</label>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </x-utils.card>
+
+
+
+    <!-- Put this part before </body> tag -->
+    <input type="checkbox" id="pro" class="modal-toggle" />
+    <div class="modal">
+        <div class="modal-box relative">
+            <label for="pro" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+            <h3 class="text-lg font-bold">Congratulations random Internet user!</h3>
+            <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for
+                free!</p>qdqdqd
+        </div>
+    </div>
 </x-layout>

@@ -94,3 +94,4 @@ Route::post("/payment", [OrderController::class, "pay"])->name("order.pay");
 
 // Subscription
 Route::get("/subscription", [SubscriptionController::class, "create"])->name("subscription.create");
+Route::post("subscription", [SubscriptionController::class, "store"])->name("subscription.store");

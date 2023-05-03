@@ -19,9 +19,6 @@
                     <x-shop.basket-total />
                     <form action="{{ route('order.pay') }}" method="post" id="payment-form">
                         @csrf
-                        <input id="card-holder-name" type="hidden">
-                        <input type="hidden" name="payment-method-id" id="payment-method">
-
                         <div class="grid grild-cols-1 lg:grid-cols-2 my-2 gap-2">
                             <x-utils.input type="text" name="address" hint="Adresse" error=0 />
                             <x-utils.input type="text" name="zipcode" hint="Code postal" error=0 />
