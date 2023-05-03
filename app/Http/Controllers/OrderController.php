@@ -58,7 +58,7 @@ class OrderController extends Controller
      */
     public function show()
     {
-        return view("basket");
+        return view("shop.basket");
     }
 
     private function makeInvoice(User $user, int $shippingPrice, PayRequest $request): Invoice
