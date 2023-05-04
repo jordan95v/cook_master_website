@@ -58,6 +58,19 @@
                         name="description" placeholder="Description">{{ $event->description }}</textarea>
                     <x-utils.form-error name="description" />
 
+                    {{-- Date --}}
+                    <x-utils.input type="date" name="date" hint="Saisissez la date de l'événement" error=1
+                        :target="$event" />
+                    {{-- Start Time --}}
+                    <x-utils.input type="time" name="start_time" hint="Saisissez l'heure de début de l'événement" error=1
+                        :target="$event" />
+                    {{-- End Time --}}
+                    <x-utils.input type="time" name="end_time" hint="Saisissez l'heure de fin de l'événement" error=1
+                        :target="$event" />
+
+
+                    {{-- Submit --}}
+
                     <div class="card-actions justify-center">
                         <button class="btn btn-primary w-full">Modifier l'événement</button>
                     </div>

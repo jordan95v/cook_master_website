@@ -57,24 +57,37 @@ class EquipmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Equipment $equipment)
     {
-        //
+        return view('equipment.edit', ['equipment' => $equipment, 'equipments' => Equipment::all()]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Equipment $equipment)
     {
-        //
+        $formFields = $request->validate([
+            'title' => 'required',
+            'brand' => 'required',
+            'description' => 'required',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $formFields['image'] = $request->file('image')->store('images', 'public');
+        }
+
+        $equipment->update($formFields);
+
+        return redirect("/equipment")->with("success", "Vous avez modifié l'équipement !");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Equipment $equipment)
     {
-        //
+        $equipment->delete();
+        return redirect("/equipment")->with("success", "Vous avez supprimé l'équipement !");
     }
 }

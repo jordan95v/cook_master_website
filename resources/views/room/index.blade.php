@@ -10,11 +10,11 @@
             @foreach ($rooms as $room)
                 <div class="card  w-96 bg-base-100 shadow-xl mx-5">
                     <a href="/room/{{ $room['id'] }}">
-                        <figure><img
+                        <figure class="h-64 w-full"><img
                                 src="{{ $room->image ? asset('storage/' . $room->image) : 'https://picsum.photos/500/300' }}"
                                 alt="Photo de l'événement" class="w-full h-full object-cover object-center rounded-md">
                         </figure>
-                        <div class="card-body">
+                        <div class="card-body h-50">
                             <h2 class="card-title">{{ $room['name'] }}</h2>
                             <p>{{ $room['address'] }}</p>
                         </div>

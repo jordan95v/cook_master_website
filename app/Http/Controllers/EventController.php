@@ -90,7 +90,7 @@ class EventController extends Controller
 
         $event->update($formFields);
 
-        return back()->with("success", "Vous avez mis à jour votre événement !");
+        return redirect("/events")->with("success", "Vous avez mis à jour votre événement !");
     }
 
     /**
@@ -99,7 +99,7 @@ class EventController extends Controller
     public function destroy(Event $event)
     {
         $event->delete();
-        return redirect("/")->with("success", "Vous avez supprimé votre événement !");
+        return redirect("/events")->with("success", "Vous avez supprimé votre événement !");
     }
 
     public function subscribe(Event $event)

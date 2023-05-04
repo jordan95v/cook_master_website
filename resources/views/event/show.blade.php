@@ -55,7 +55,7 @@
         </div>
     </section>
     {{-- Slide Bar Netflix --}}
-    <section class="bg-gray-100 ">
+    {{-- <section class="bg-gray-100 ">
 
         <div class="container px-4 flex-grow w-full py-4 sm:py-16 mx-auto px-0">
             <div class="mx-auto w-full md:w-4/5 px-4">
@@ -87,7 +87,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     {{-- Slide Bar Netflix --}}
     <section class="bg-gray-100 ">

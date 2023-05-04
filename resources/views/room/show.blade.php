@@ -33,6 +33,8 @@
                         <h2 class="text-3xl font-medium">
                             Equipements
                         </h2>
+                        <a href="/equiped/edit" class="text-gray-500 px-3"><i class="fa-solid fa-edit"></i>Modifier les
+                            Equipements</a>
                     </div>
                     <div id="scrollContainer" class="flex flex-no-wrap overflow-x-scroll scrolling-touch items-start mb-8">
                         @foreach ($equiped as $item)
