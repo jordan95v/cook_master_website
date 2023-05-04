@@ -1,6 +1,6 @@
 <x-layout title="Panier - Paiement">
     <div class="grid grid-cols-1 md:grid-cols-2">
-        <img src="{{ asset('images/stripe.png') }}" alt="">
+        <img src="{{ asset('images/stripe.png') }}" class="my-auto" alt="">
         {{-- I don't use the card component here --}}
         <x-utils.card-grid>
             <div class="card-body">
@@ -28,7 +28,7 @@
                         <x-utils.form-error name="zipcode" />
 
                         <x-utils.input type="text" name="city" hint="City" error=1 />
-                        <x-shop.stripe />
+                        <x-shop.stripe id=1 />
                     </form>
                 @endif
             </div>

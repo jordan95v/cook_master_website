@@ -58,14 +58,12 @@ Route::prefix("users")->group(
         );
 
         // List route using SubscriptionController
-        Route::controller(SubscriptionController::class)->group(
-            function () {
-                Route::get("/subscription", "showSubscription")->middleware("auth")->name("subscription.show");
-                Route::post("/subscription", "subscribe")->middleware("auth")->name("subscription.subscribe");
-                Route::post("/subscription/cancel", "cancel")->middleware("auth")->name("subscription.cancel");
-                // Route::post("/subscription/resume", "resume")->middleware("auth")->name("subscription.resume");
-            }
-        );
+        Route::group(["controller" => SubscriptionController::class, "middleware" => ["auth"]], function () {
+            Route::get("/subscription/{plan?}", "showSubscription")->whereIn("plan", ["starter", "pro"])->name("subscription.show");
+            Route::post("/subscription", "subscribe")->name("subscription.subscribe");
+            Route::post("/subscription/cancel", "cancel")->name("subscription.cancel");
+            // Route::post("/subscription/resume", "resume")->name("subscription.resume");
+        });
     }
 );
 
