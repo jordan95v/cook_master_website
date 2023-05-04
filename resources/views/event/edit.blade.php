@@ -1,52 +1,68 @@
 @extends('main_layout')
 
 @section('title')
-    Modifier un évenement
+    Modifier {{ $event->title }}
 @endsection
 
 @section('content')
-<div class="flex justify-center my-10">
-    <div class="card shadow-lg">
-        <div class="card-body">
-            <p class="font-bold text-2xl text-center pb-4">Modifier l'événement</p>
-            <form action="/events/{{$event->id}}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="form-control">
-                    <input type="text" name="title"   class="input input-bordered my-3" value="{{$event->title}}">
-                    <input type="text" name="user_id" class="input input-bordered my-3" value="{{$event->user_id}}"> 
-                    <div class="uploader mt-2 my-3">
-                        <input type="file" name="image" class="uploader-input">
-                        <img src="{{$event->image ? asset('storage/'.$event->image) : 'https://picsum.photos/500/300'}}" alt="Photo de l'événement" class="w-full h-full object-cover object-center rounded-md">
+    <div class="grid grid-cols-1 md:grid-cols-3">
+        <div class="my-auto mx-auto">
+            <img src="{{ asset('images/edit.png') }}" alt="">
+        </div>
+        <div class="col-span-2">
+            <x-utils.card-grid>
+                <form action="/events/{{ $event->id }}" method="POST" enctype="multipart/form-data" class="card-body">
+                    @csrf
+                    @method('put')
+                    <h2 class="card-title text-2xl flex justify-center pb-2">Modifier un événement</h2>
+                    {{-- Name --}}
+                    <x-utils.input type="text" name="title" hint="Saisissez le titre de votre événement" error=1
+                        :target="$event" />
 
+                    {{-- Image --}}
+                    <div class="form-control w-full pb-2">
+                        <label class="label">
+                            <span class="label-text-alt">Image de l'événement</span>
+                        </label>
+                        <input type="file" name="image"
+                            class="file-input file-input-bordered border-2 w-full mb-2 @error('image') border-error @enderror" />
+                        <x-utils.form-error name="image" />
+                        <label class="label">
+                            <span class="label-text-alt">Image actuelle</span>
+                        </label>
+                        <img src="{{ asset('storage/' . $event->image) }}" alt="" class="w-50 h-50">
                     </div>
-                    
-                    @error('image')
-                        <p class="text-red-600 text-sm">{{$message}}</p>
-                    @enderror
 
-                    <textarea name="description" class="textarea textarea-bordered h-32 my-3" >{{$event->description}}</textarea>
-                    
-                    @error('description')
-                        <p class="text-red-600 text-sm">{{$message}}</p>
-                    @enderror
-                    
-                    <label>Choisir une salle : </label>
-                    <select id="room_id" name="room_id">
+                    {{-- Room & id organizator --}}
+                    <div class="grid lg:grid-cols-2 grid-cols-1 gap-2 pb-2">
+                        <select class="select select-bordered w-full max-w-xs" name="room_id">
+                            <option disabled selected>Choisissez la salle</option>
+                            @foreach ($rooms as $room)
+                                <option value="{{ $room->id }}" @if ($room->id == $event->room_id) selected @endif>
+                                    {{ $room->name }}
+                                </option>
+                            @endforeach
+                        </select>
 
-                        @foreach ($rooms as $room)
-                        <option value="{{$room->id}}" @if ($event->room_id == $room->id) selected @endif>{{$room->name}}</option>
-                        @endforeach                  
-                        
-                    </select>
+                        <div class="form-control">
+                            <label class="input-group">
+                                <x-utils.input type="text" name="user_id" hint="Saisissez l'id' de l'organisateur"
+                                    error=0 :target="$event" />
+                            </label>
+                        </div>
+                        <x-utils.form-error name="user_id" />
+                    </div>
 
-                    <input type="date" name="date" class="input input-bordered my-3" value="{{$event->date}}">
-                    <input type="time" name="start_time" class="input input-bordered my-3" value="{{$event->start_time}}">
-                    <input type="time" name="end_time" class="input input-bordered my-3" value="{{$event->end_time}}">
-                    <button type="submit" class="btn btn-primary w-full">Mettre à jour l'événement</button>
-                </div>
-            </form>
+                    {{-- Description --}}
+                    <textarea class="textarea textarea-bordered border-2 @error('description') border-error @enderror" rows=4
+                        name="description" placeholder="Description">{{ $event->description }}</textarea>
+                    <x-utils.form-error name="description" />
+
+                    <div class="card-actions justify-center">
+                        <button class="btn btn-primary w-full">Modifier l'événement</button>
+                    </div>
+                </form>
+            </x-utils.card-grid>
         </div>
     </div>
-</div>
 @endsection

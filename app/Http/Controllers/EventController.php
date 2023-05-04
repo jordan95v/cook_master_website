@@ -112,6 +112,6 @@ class EventController extends Controller
         ]);
 
         // Redirige vers la page de l'événement avec un message de confirmation
-        return redirect()->route('event.show', $event->id)->with('success', 'Vous vous êtes inscrit à l\'événement.');
+        return redirect()->route('events.show', $event->id)->with('success', 'Vous vous êtes inscrit à l\'événement.');
     }
 }
