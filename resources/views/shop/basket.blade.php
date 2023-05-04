@@ -17,6 +17,7 @@
                 {{-- Payment form --}}
                 @if (count(Auth::user()->orders))
                     <x-shop.basket-total />
+                    <h2 class="card-title justify-center flex text-2xl pb-4">Paiement</h2>
                     <form action="{{ route('order.pay') }}" method="post" id="payment-form">
                         @csrf
                         <div class="grid grild-cols-1 lg:grid-cols-2 my-2 gap-2">

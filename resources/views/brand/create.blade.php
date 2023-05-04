@@ -1,5 +1,5 @@
 <x-layout title="Ajouter une marque">
-    <div class="grid grid-cols-1 md:grid-cols-3">
+    <div class="grid grid-cols-1 lg:grid-cols-3">
         <div class="col-span-2">
             <x-utils.card-grid>
                 <form action="{{ route('brand.store') }}" method="post" enctype="multipart/form-data" class="card-body">
@@ -41,5 +41,4 @@
             <img src="{{ asset('images/add_brand.png') }}" alt="">
         </div>
     </div>
-
 </x-layout>

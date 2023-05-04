@@ -25,7 +25,6 @@ class AuthController extends Controller
 
         if (Auth::attempt($form)) {
             // Refresh Cashier user.
-            User::find(Auth::id())->createOrGetStripeCustomer();
             $request->session()->regenerate();
             return redirect("/")->with("success", "Vous vous êtes correctement connecté.");
         }

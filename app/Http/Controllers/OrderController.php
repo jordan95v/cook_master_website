@@ -103,7 +103,6 @@ class OrderController extends Controller
             return back()->with("error", "Une erreur est survenue lors du paiement. Veuillez réessayer.");
         }
 
-
         // Order deletion
         foreach ($user->orders as $value) {
             $value->delete();

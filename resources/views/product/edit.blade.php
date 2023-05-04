@@ -48,7 +48,7 @@
             <x-utils.form-error name="description" />
 
             <div class="card-actions justify-center">
-                <button class="btn btn-primary w-full">Ajouter le produit</button>
+                <button class="btn btn-primary w-full">Modifier le produit</button>
             </div>
         </form>
     </x-utils.card>

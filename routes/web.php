@@ -4,8 +4,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,6 +56,16 @@ Route::prefix("users")->group(
                 Route::get("/email/resend", "resendEmail")->middleware(["auth", "throttle:6,1"])->name("verification.send");
             }
         );
+
+        // List route using SubscriptionController
+        Route::controller(SubscriptionController::class)->group(
+            function () {
+                Route::get("/subscription", "showSubscription")->middleware("auth")->name("subscription.show");
+                Route::post("/subscription", "subscribe")->middleware("auth")->name("subscription.subscribe");
+                Route::post("/subscription/cancel", "cancel")->middleware("auth")->name("subscription.cancel");
+                // Route::post("/subscription/resume", "resume")->middleware("auth")->name("subscription.resume");
+            }
+        );
     }
 );
 
@@ -91,7 +101,3 @@ Route::post("order/{order}/delete", [OrderController::class, 'destroy'])->middle
 Route::get("/store", [ProductController::class, "storeIndex"])->name("store");
 Route::get("/basket", [OrderController::class, "show"])->name("order.show");
 Route::post("/payment", [OrderController::class, "pay"])->name("order.pay");
-
-// Subscription
-Route::get("/subscription", [SubscriptionController::class, "create"])->name("subscription.create");
-Route::post("subscription", [SubscriptionController::class, "store"])->name("subscription.store");

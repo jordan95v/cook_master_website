@@ -52,7 +52,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('subscription.create') }}">
+                    <a href="{{ route('subscription.show') }}">
                         <i class="fa-sharp fa-solid fa-bolt-lightning"></i>S'abonner
                     </a>
                 </li>

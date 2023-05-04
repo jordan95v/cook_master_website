@@ -144,7 +144,7 @@
                                             <label for="starter"
                                                 class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                                             <h3 class="text-lg font-bold">Abonnez vous à la formule Starter</h3>
-                                            <form id="payment-form" action="{{ route('subscription.store') }}"
+                                            <form id="payment-form" action="{{ route('subscription.subscribe') }}"
                                                 method="post">
                                                 @csrf
                                                 <input type="hidden" name="plan" value="starter">
