@@ -75,7 +75,7 @@ class EquipedController extends Controller
     public function select(Request $request)
     {
         $selectedEquipment = $request->input('equipment');
-        $roomId = 7; // Remplacez 1 par l'ID de la room concernée.
+        $roomId = $request->get("room_id"); // Remplacez 1 par l'ID de la room concernée.
 
         // Boucle pour ajouter chaque équipement sélectionné à la table equiped
         foreach ($selectedEquipment as $equipmentId) {

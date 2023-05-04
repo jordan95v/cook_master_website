@@ -29,10 +29,18 @@
             </ul>
             <!-- Button to subscribe to the event -->
             @if(Auth::check())
-                <form action="{{ route('event.subscribe', $event->id) }}" method="POST">
-                    @csrf
-                    <button type="submit" class="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded-md inline-block font-medium text-lg transition-colors duration-300">Inscrivez-vous maintenant</button>
-                </form>
+             {{-- Check if the user is already subscribed to the event --}}
+                {{-- @if($event->users->contains(Auth::user()))
+                    <form action="{{ route('event.unsubscribe', ['event' => $event->id]) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded-md inline-block font-medium text-lg transition-colors duration-300">Se désinscrire</button>
+                    </form>
+                @else --}}
+                    <form action="{{ route('event.subscribe', ['event' => $event->id]) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded-md inline-block font-medium text-lg transition-colors duration-300">Inscrivez-vous maintenant</button>
+                    </form>
+                {{-- @endif --}}
             @endif
             <a href="/events/{{$event->id}}/edit" class="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded-md inline-block font-medium text-lg ">Modifier l'événement</a>
             <form method="POST" action="/events/{{$event->id}}">

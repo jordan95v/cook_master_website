@@ -40,9 +40,9 @@ class RoomController extends Controller
         }
 
 
-        Room::create($formFields);
+        $room = Room::create($formFields);
 
-        return redirect("/equiped/create")->with("success", "Vous avez créer une salle !");
+        return redirect()->route("equiped.create")->with("success", "Vous avez créer une salle !")->with("room_id", $room->id);
     }
 
     /**
@@ -56,24 +56,37 @@ class RoomController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Room $room)
     {
-        //
+        return view('room.edit', ['room' => $room, 'rooms' => Room::all(), 'equiped' => Equiped::all()]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Room $room)
     {
-        //
+        $formFields = $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $formFields['image'] = $request->file('image')->store('images', 'public');
+        }
+
+        $room->update($formFields);
+
+        return redirect("/room")->with("success", "Vous avez modifié une salle !");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Room $room)
     {
-        //
+        $room->delete();
+
+        return redirect("/room")->with("success", "Vous avez supprimé une salle !");
     }
 }

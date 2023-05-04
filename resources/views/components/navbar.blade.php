@@ -10,6 +10,8 @@
                     class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                     <li><a href="/"><i class="fa-solid fa-house"></i>Accueil</a></li>
                     <li><a href="/events"><i class="fa-solid fa-school"></i>Evenements</a></li>
+                    <li><a href="/room"><i class="fa-solid fa-door-open"></i>Salles</a></li>
+                    <li><a href="/equipment"><i class="fa-solid fa-tools"></i>Equipements</a></li>
                     <li><a href=""><i class="fa-solid fa-book"></i>Leçon</a></li>
                     <li><a href=""><i class="fa-solid fa-store"></i>Boutique</a></li>
                     <div class="divider"></div>

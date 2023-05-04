@@ -5,39 +5,38 @@
 @endsection
 
 @section('content')
+    <div class="grid grid-cols-1 md:grid-cols-3">
+        <div class="my-auto mx-auto">
+            <img src="{{ asset('images/room_create.png') }}" alt="">
+        </div>
+        <div class="col-span-2">
+            <x-utils.card-grid>
+                <form action="/room"method="POST" enctype="multipart/form-data" class="card-body">
+                    @csrf
+                    <h2 class="card-title text-2xl flex justify-center pb-2">Ajouter une salle</h2>
 
+                    {{-- Name --}}
+                    <x-utils.input type="text" name="name" hint="Saisissez le nom de la salle" error=1 />
 
-<div class="flex justify-center my-10">
-    <div class="card shadow-lg">
-        <div class="card-body">
-            <p class="font-bold text-2xl text-center pb-4">Créer une salle</p>
-            <form action="/room"method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="form-control">
-                    <x-input type="text" name="name" hint="Saisissez le nom de la salle"  class="input input-bordered my-3" error="1"/>
-                    <x-input type="text" name="address" hint="Saisissez l'addresse de la salle'"  class="input input-bordered my-3" error="1"/>
-                </div>
-                <div class="uploader mt-2 my-3">
-                    <input type="file" name="image" class="uploader-input">
-                    <span class="uploader-placeholder">Déposez votre image ou cliquez ici pour sélectionner un fichier</span>
-                </div>
-                
-                @error('image')
-                    <p class="text-red-600 text-sm">{{$message}}</p>
-                @enderror
-                <div class="form-control mt-6">
-                    <button type="submit" class="btn btn-primary w-full">suivant</button>
-                </div>
-            </form>
+                    {{-- Address --}}
+                    <x-utils.input type="text" name="address" hint="Saisissez l'addresse de la salle" error="1" />
+
+                    {{-- Image --}}
+                    <div class="form-control w-full">
+                        <label class="label">
+                            <span class="label-text-alt">Image de la salle</span>
+                        </label>
+                        <input type="file" name="image"
+                            class="file-input file-input-bordered border-2 w-full mb-2 @error('image') border-error @enderror" />
+                        <x-utils.form-error name="image" />
+                    </div>
+
+                    {{-- Submit --}}
+                    <div class="card-actions justify-center">
+                        <button class="btn btn-primary w-full">suivant</button>
+                    </div>
+                </form>
+            </x-utils.card-grid>
         </div>
     </div>
-</div>
 @endsection
-
-
-
-
-
-
-
-

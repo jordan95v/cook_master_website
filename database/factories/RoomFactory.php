@@ -19,6 +19,7 @@ class RoomFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'address' => $this->faker->address(),
+
         ];
     }
 }

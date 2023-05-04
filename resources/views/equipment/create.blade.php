@@ -1,40 +1,46 @@
 @extends('main_layout')
 
 @section('title')
-    Créer un Equipement
+    Ajouter un équipement
 @endsection
 
 @section('content')
-<div class="flex justify-center my-10">
-    <div class="card shadow-lg">
-        <div class="card-body">
-            <p class="font-bold text-2xl text-center pb-4">Créer un Equipement</p>
-            <form action="/equipment"method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="form-control">
-                    <x-input type="text" name="title" hint="Saisissez le nom de l'équipement"  class="input input-bordered my-3" error="1"/>
-                    <x-input type="text" name="brand" hint="Saisissez la marque de l'équipement"  class="input input-bordered my-3" error="1"/>
-                    <div class="uploader mt-2 my-3">
-                        <input type="file" name="image" class="uploader-input">
-                        <span class="uploader-placeholder">Déposez votre image ou cliquez ici pour sélectionner un fichier</span>
-                    </div>
-                    
-                    @error('image')
-                        <p class="text-red-600 text-sm">{{$message}}</p>
-                    @enderror
+    <div class="grid grid-cols-1 md:grid-cols-3">
+        <div class="my-auto mx-auto">
+            <img src="{{ asset('images/equipment_create.png') }}" alt="">
+        </div>
+        <div class="col-span-2">
+            <x-utils.card-grid>
+                <form action="/equipment"method="POST" enctype="multipart/form-data" class="card-body">
+                    @csrf
+                    <h2 class="card-title text-2xl flex justify-center pb-2">Ajouter un équipement</h2>
+                    {{-- Title --}}
+                    <x-utils.input type="text" name="title" hint="Saisissez le nom de l'équipement" error=1 />
+                    {{-- Brand --}}
+                    <x-utils.input type="text" name="brand" hint="Saisissez la marque de l'équipement"
+                        error="1" />
 
-                    <textarea name="description" placeholder="Saisissez une description pour votre événement" class="textarea textarea-bordered h-32 my-3"></textarea>
-                    
-                    @error('description')
-                        <p class="text-red-600 text-sm">{{$message}}</p>
-                    @enderror
-                
-                </div>
-                <div class="form-control mt-6">
-                    <button type="submit" class="btn btn-primary w-full">Créer l'équipement</button>
-                </div>
-            </form>
+                    {{-- Image --}}
+                    <div class="form-control w-full">
+                        <label class="label">
+                            <span class="label-text-alt">Image de l'événement</span>
+                        </label>
+                        <input type="file" name="image"
+                            class="file-input file-input-bordered border-2 w-full mb-2 @error('image') border-error @enderror" />
+                        <x-utils.form-error name="image" />
+                    </div>
+
+                    {{-- Description --}}
+                    <textarea class="textarea textarea-bordered border-2 @error('description') border-error @enderror" rows=4
+                        name="description" placeholder="Description"></textarea>
+                    <x-utils.form-error name="description" />
+
+                    {{-- Submit --}}
+                    <div class="card-actions justify-center">
+                        <button class="btn btn-primary w-full">Ajouter l'équipement</button>
+                    </div>
+                </form>
+            </x-utils.card-grid>
         </div>
     </div>
-</div>
 @endsection
