@@ -133,13 +133,14 @@
                             <td></td>
                             <td>
                                 <a href="{{ route('subscription.show', ['plan' => 'starter']) }}"
-                                    class="btn btn-primary @if (Auth::user()->subscribed('starter'))  @endif">
+                                    class="btn btn-primary"
+                                    @if (Auth::user()->subscribed('starter') || Auth::user()->subscribed('starter_annual')) disabled="disabled" @endif>
                                     S'abonner à Starter
                                 </a>
                             </td>
                             <td>
-                                <a href="{{ route('subscription.show', ['plan' => 'pro']) }}"
-                                    class="btn btn-primary @if (Auth::user()->subscribed('pro'))  @endif">
+                                <a href="{{ route('subscription.show', ['plan' => 'pro']) }}" class="btn btn-primary"
+                                    @if (Auth::user()->subscribed('pro') || Auth::user()->subscribed('pro_annual')) disabled="disabled" @endif>
                                     S'abonner à Pro
                                 </a>
                             </td>

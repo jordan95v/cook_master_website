@@ -1,9 +1,9 @@
 @props(['product'])
 
-<div class="w-full flex flex-col">
+<div class="flex flex-col">
     <a href="{{ route('product.show', ['product' => $product->id]) }}">
         {{-- Product image --}}
-        <img src="{{ asset('storage/' . $product->image) }}" class="transform transition hover:scale-110 rounded-lg"
+        <img src="{{ asset('storage/' . $product->image) }}" class="h-60 transform transition hover:scale-110 rounded-lg"
             alt="" />
 
         {{-- Product content --}}
