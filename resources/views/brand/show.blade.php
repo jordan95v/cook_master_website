@@ -11,7 +11,7 @@
                     <i class="fa-solid fa-envelopes-bulk text-xl me-2"></i>Contact {{ $brand->name }}
                 </a>
             </div>
-            <p class="mt-4">{{ $brand->description }}</p>
+            <p class="mt-4 text-lg" style="white-space: pre-wrap;">{{ $brand->description }}</p>
         </div>
     </x-utils.card>
 

@@ -24,7 +24,7 @@
                 <input type="radio" disabled name="rating-2" class="mask mask-star-2 bg-orange-400" />
             </div>
             <p class="text-start italic text-lg">€{{ $product->price }}</p>
-            <p class="pt-5">{{ $product->description }}</p>
+            <p class="pt-5 text-lg" style="white-space: pre-wrap;">{{ $product->description }}</p>
         </div>
     </div>
 
