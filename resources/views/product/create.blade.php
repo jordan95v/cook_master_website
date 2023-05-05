@@ -1,9 +1,9 @@
 <x-layout title="Ajouter un produit">
-    <div class="grid grid-cols-1 md:grid-cols-3">
+    <div class="grid grid-cols-1 md:grid-cols-2">
         <div class="my-auto mx-auto">
             <img src="{{ asset('images/add_product.png') }}" alt="">
         </div>
-        <div class="col-span-2">
+        <div class="my-auto">
             <x-utils.card-grid>
                 <form action="{{ route('product.store') }}" method="post" class="card-body" enctype="multipart/form-data">
                     @csrf

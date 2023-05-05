@@ -3,8 +3,8 @@
 <div class="flex flex-col">
     <a href="{{ route('product.show', ['product' => $product->id]) }}">
         {{-- Product image --}}
-        <img src="{{ asset('storage/' . $product->image) }}" class="h-60 transform transition hover:scale-110 rounded-lg"
-            alt="" />
+        <img src="{{ asset('storage/' . $product->image) }}"
+            class="h-72 w-full object-cover transform transition hover:scale-110 rounded-lg" alt="" />
 
         {{-- Product content --}}
         <div class="pt-3 flex items-center justify-between">

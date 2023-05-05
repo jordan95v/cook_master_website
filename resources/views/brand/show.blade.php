@@ -1,8 +1,9 @@
 <x-layout title="{{ $brand->name }}">
     <x-utils.card>
-        <figure><img src="{{ asset('storage/' . $brand->image) }}"></figure>
         <div class="card-body">
             <div class="text-center">
+                <h2 class="card-title font-bold flex justify-center text-3xl mb-4">{{ $brand->name }}</h2>
+                <figure><img src="{{ asset('storage/' . $brand->image) }}" class="mb-4"></figure>
                 <a href="{{ $brand->website }}" class="btn btn-ghost">
                     <i class="fa-solid fa-globe text-xl me-2"></i>{{ $brand->website }}
                 </a>
