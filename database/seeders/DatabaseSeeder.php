@@ -29,6 +29,9 @@ class DatabaseSeeder extends Seeder
             'description' => 'Apprenez à préparer des plats français classiques lors de cet atelier de cuisine guidé par un chef expert en cuisine française.',
             'created_at' => '2023-05-01 10:00:00',
             'updated_at' => '2023-05-01 10:00:00',
+            'date' => '15/05/2023',
+            'start_time' => '10:00',
+            'end_time' => '12:00',
             'room_id' => 1,
             'user_id' => 1,
             'image' => 'images/event_image/atelier.jpg'
@@ -40,6 +43,9 @@ class DatabaseSeeder extends Seeder
             'description' => 'Savourez un dîner gastronomique inoubliable préparé par notre chef étoilé dans notre restaurant élégant et raffiné.',
             'created_at' => '2023-05-10 19:00:00',
             'updated_at' => '2023-05-10 19:00:00',
+            'date' => '10/05/2023',
+            'start_time' => '14:00',
+            'end_time' => '16:00',
             'room_id' => 2,
             'user_id' => 2,
             'image' => 'images/event_image/cuisine_gastro.jpeg'
@@ -51,6 +57,9 @@ class DatabaseSeeder extends Seeder
             'description' => 'Initiez vos enfants à l\'art de la pâtisserie lors de ce cours ludique et éducatif animé par notre pâtissier professionnel.',
             'created_at' => '2023-06-05 14:00:00',
             'updated_at' => '2023-06-05 14:00:00',
+            'date' => '22/06/2023',
+            'start_time' => '11:00',
+            'end_time' => '13:00',
             'room_id' => 3,
             'user_id' => 3,
             'image' => 'images/event_image/patisserie.jpeg'

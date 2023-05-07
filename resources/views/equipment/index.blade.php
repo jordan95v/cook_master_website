@@ -7,9 +7,9 @@
 @section('content')
     <h1 class="text-center">Tous les équipements</h1>
     <div class="flex justify-center">
-        <div class="grid grid-cols-3 gap-3">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-3">
             @foreach ($equipments as $equipment)
-                <div class="card  w-96 bg-base-100 shadow-xl mx-5">
+                <div class="card w-full bg-base-100 shadow-xl">
                     <a href="/equipment/{{ $equipment['id'] }}">
                         <figure class="h-70 w-full"><img
                                 src="{{ $equipment->image ? asset('storage/' . $equipment->image) : 'https://picsum.photos/500/300' }}"

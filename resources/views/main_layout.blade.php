@@ -9,6 +9,9 @@
     <title>@yield('title')</title>
     <script src="https://kit.fontawesome.com/51d79ea4d7.js" crossorigin="anonymous"></script>
     @vite('resources/css/app.css')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+
 </head>
 
 <body>

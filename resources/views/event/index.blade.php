@@ -6,9 +6,9 @@
 
 @section('content')
     <div class="flex justify-center">
-        <div class="grid grid-cols-3 gap-3">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-3">
             @foreach ($events as $event)
-                <div class="card  w-96 bg-base-100 shadow-xl mx-5">
+                <div class="card w-full bg-base-100 shadow-xl">
                     <a href="/events/{{ $event['id'] }}">
                         <figure class="h-64 w-full"><img
                                 src="{{ $event->image ? asset('storage/' . $event->image) : 'https://picsum.photos/500/300' }}"
@@ -18,10 +18,16 @@
                             <h2 class="card-title">{{ $event['title'] }}</h2>
                             <p>{{ $event['description'] }}</p>
                             <div class="card-actions justify-end">
+
+                                {{-- DATE --}}
                                 <i class="w-4 h-4 mr-1 ml-2 text-purple-500 fa-solid fa-calendar-days"></i>
-                                10 mai 2023
+                                {{ $event['date'] }}
+
+                                {{-- TIME --}}
                                 <i class="w-4 h-4 mr-1 ml-2 text-purple-500 fa-regular fa-clock"></i>
-                                14h-18h
+                                {{ $event['start_time'] }} - {{ $event['end_time'] }}
+
+                                {{-- PLACE --}}
                                 <div>
                                     <i class="w-4 h-4 mr-1 ml-2 text-purple-500 fa-sharp fa-solid fa-location-dot"></i>
                                     Lieu : {{ $event->room->address }}

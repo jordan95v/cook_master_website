@@ -6,9 +6,9 @@
 
 @section('content')
     <div class="flex justify-center">
-        <div class="grid grid-cols-3 gap-3">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-3">
             @foreach ($rooms as $room)
-                <div class="card  w-96 bg-base-100 shadow-xl mx-5">
+                <div class="card w-full bg-base-100 shadow-xl">
                     <a href="/room/{{ $room['id'] }}">
                         <figure class="h-64 w-full"><img
                                 src="{{ $room->image ? asset('storage/' . $room->image) : 'https://picsum.photos/500/300' }}"

@@ -39,8 +39,8 @@
                         {{-- Organizer --}}
                         <div class="form-control">
                             <label class="input-group">
-                                <x-utils.input type="text" name="user_id" hint="{{ auth()->user()->name }}"
-                                    value="{{ auth()->user()->id }}" error="1" readonly />
+                                <input class="input input-bordered border-2" type="text" name="user_id"
+                                    placeholder="{{ auth()->user()->name }}" value="{{ auth()->user()->id }}" readonly />
                             </label>
                         </div>
                         <x-utils.form-error name="user_id" />
@@ -52,21 +52,60 @@
                     <x-utils.form-error name="description" />
 
                     {{-- Date --}}
-                    <x-utils.input type="date" name="date" hint="date" class="input input-bordered my-3"
-                        error="1" />
-                    {{-- Start time --}}
-                    <x-utils.input type="time" name="start_time" hint="heure de début" class="input input-bordered my-3"
-                        error="1" />
-                    {{-- End time --}}
-                    <x-utils.input type="time" name="end_time" hint="heure de fin" class="input input-bordered my-3"
-                        error="1" />
+                    <x-utils.input type="date" name="date" hint="date" error="1" />
+
+                    {{-- Range time --}}
+                    <div class="grid lg:grid-cols-2 grid-cols-1 gap-2 pb-2">
+                        {{-- Start time --}}
+                        <select class="select select-bordered w-full max-w-xs" name="start_time" id="start-time">
+                            <option disabled selected>Choisissez l'heure de début</option>
+                            <?php
+                            for ($i = 0; $i <= 23; $i++) {
+                                $hour = str_pad($i, 2, '0', STR_PAD_LEFT);
+                                echo "<option value=\"$hour:00\">$hour:00</option>";
+                            }
+                            ?>
+                        </select>
+
+                        {{-- End time --}}
+                        <select class="select select-bordered w-full max-w-xs" name="end_time" id="end-time">
+                            <option disabled selected>Choisissez l'heure de fin</option>
+                        </select>
+                    </div>
+
 
                     {{-- Submit --}}
                     <div class="card-actions justify-center">
-                        <button class="btn btn-primary w-full">Ajouter l'événement</button>
+                        <button class="btn btn-primary w-full"> Ajouter l 'événement</button>
                     </div>
                 </form>
             </x-utils.card-grid>
         </div>
     </div>
+
+    <script>
+        const startTimeInput = document.querySelector('select[name="start_time"]');
+        const endTimeInput = document.querySelector('select[name="end_time"]');
+
+        startTimeInput.addEventListener('change', () => {
+            const startTime = startTimeInput.value;
+            endTimeInput.innerHTML = '';
+            for (let i = parseInt(startTime) + 1; i <= 23; i++) {
+                const hour = String(i).padStart(2, '0');
+                endTimeInput.innerHTML += `<option value="${hour}:00">${hour}:00</option>`;
+            }
+        });
+
+        const form = document.querySelector('form');
+
+        form.addEventListener('submit', (event) => {
+            const startTime = startTimeInput.value;
+            const endTime = endTimeInput.value;
+
+            if (startTime >= endTime) {
+                event.preventDefault();
+                alert("L'heure de début doit être inférieure à l'heure de fin");
+            }
+        });
+    </script>
 @endsection
