@@ -76,7 +76,13 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isSubscribed(): bool
     {
-        return ($this->subscriptions()->count() > 0) ? true : false;
+        if ($this->subscriptions()->count() > 0) {
+            $sub = $this->subscriptions()->first()->asStripeSubscription();
+            if ($sub->status == 'active') {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function getSubscription()
