@@ -1,4 +1,4 @@
-<x-layout title="Abonnement {{ ucfirst($plan) }}">
+<x-layout title="{{ __('Subscription') }} {{ ucfirst($plan) }}">
     <div class="grid grid-cols-1 md:grid-cols-2">
         @if ($plan == 'starter')
             <div class="my-auto mx-auto">
@@ -14,45 +14,44 @@
 
                     <h2 class="font-bold text-2xl text-center pb-0">
                         <i class="fa-solid fa-bolt-lightning me-2" style="color: #f8e45c;"></i>
-                        Abonnez vous à la formule {{ ucfirst($plan) }} !
+                        {{ __('Subscribe to') }} {{ ucfirst($plan) }} !
                     </h2>
                     <select class="select select-bordered w-full mt-5" name="recurring">
-                        <option disabled selected>Choissisez la récurrence</option>
-                        <option value="month">Mensuel - {{ $subscriptions['month'] }}€ par mois</option>
-                        <option value="year">Annuel - {{ $subscriptions['year'] }}€ par an</option>
+                        <option disabled selected>{{ __('Choose the recurring period') }}</option>
+                        <option value="month">{{ __('Monthly') }} - {{ $subscriptions['month'] }}€ par mois</option>
+                        <option value="year">{{ __('Yearly') }} - {{ $subscriptions['year'] }}€ par an</option>
                     </select>
                     <small class="text-center text-gray-400 mb-10">
-                        Vous pourrez toujours changer une fois l'abonnement fini
+                        {{ __('You can always change when the subscription period ends.') }}
                     </small>
 
-                    <x-shop.advantages text="Aucune pubs" />
-                    <x-shop.advantages text="Commenter / laisser un avis" />
-                    <x-shop.advantages text="Tchat avec un chef" />
-                    <x-shop.advantages text="5% de réduction sur la boutique" />
-                    <x-shop.advantages text="Invitation à des évenements" />
+                    <x-shop.advantages text="No pubs" />
+                    <x-shop.advantages text="Comment / Leave a review" />
+                    <x-shop.advantages text="Tchat with a Chef" />
+                    <x-shop.advantages text="5% off on all products" />
+                    <x-shop.advantages text="Invitations to exclusive events" />
 
                     @if ($plan == 'starter')
-                        <x-shop.advantages text="Accès à 5 leçons par jour 🏃‍♂️" />
-                        <x-shop.advantages text="Livraison gratuite en point relais" />
-                        <x-shop.advantages text="5€ tout les 3 inscrits" />
+                        <x-shop.advantages text="Access to 5 courses per day" />
+                        <x-shop.advantages text="Free shipping in drop-off point" />
+                        <x-shop.advantages text="5€ for every 3 people subscribed with your link" />
                     @elseif ($plan == 'pro')
-                        <x-shop.advantages text="Accès illimité aux leçons 🏍" />
-                        <x-shop.advantages text="Livraison gratuite partout" />
-                        <x-shop.advantages text="5€ pour chaque nouvel inscrit" />
-                        <x-shop.advantages text="3% sur la première commande du nouvel inscrit" />
-                        <x-shop.advantages text="Réduction de 10€ sur le tarif annuel" />
+                        <x-shop.advantages text="Illimited access to courses" />
+                        <x-shop.advantages text="Free shipping everywhere" />
+                        <x-shop.advantages text="5€ for every people subscribed with your link" />
+                        <x-shop.advantages text="3% on new user's first command" />
+                        <x-shop.advantages text="10% on yearly plan" />
                     @endif
 
                     <p class="mt-4 text-gray-400">
-                        En payant, vous renoncez à votre droit de rétractation. Vous pouvez annuler votre abonnement à
-                        tout moment.
+                        {{ __('By paying, you give up on your right of withdrawal. You can cancel your subscription at any time') }}
                     </p>
 
                     {{-- Payment form --}}
                     <h2 class="font-bold justify-center flex text-2xl py-4">Paiement</h2>
                     <div class="grid grild-cols-1 lg:grid-cols-2 my-2 gap-2">
-                        <x-utils.input type="text" name="address" hint="Adresse" error=0 />
-                        <x-utils.input type="text" name="zipcode" hint="Code postal" error=0 />
+                        <x-utils.input type="text" name="address" hint="Address" error=0 />
+                        <x-utils.input type="text" name="zipcode" hint="Postal code" error=0 />
                     </div>
                     <x-utils.form-error name="address" />
                     <x-utils.form-error name="zipcode" />

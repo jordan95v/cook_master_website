@@ -61,15 +61,25 @@
                 $('#listing-table').DataTable({
                     lengthChange: false,
                     language: {
-                        search: ""
+                        search: "",
+                        @if (app()->getLocale() == 'fr')
+                            url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/fr-FR.json',
+                        @endif
                     },
                 });
-                const $filterInput = $("#listing-table_filter input");
-                $filterInput.addClass("input input-bordered border-2 hover:input-primary mb-4").attr("placeholder",
-                    "Search ...");
-                $("#listing-table_filter").removeClass("dataTables_filter").addClass("flex justify-center");
-                changeBtn();
-                $("#listing-table").removeClass("dataTable no-footer");
+                setTimeout(function() {
+                    const $filterInput = $("#listing-table_filter input");
+                    $filterInput.addClass("input input-bordered border-2 hover:input-primary mb-4").attr(
+                        "placeholder",
+                        @if (app()->getLocale() == 'fr')
+                            "Rechercher ..."
+                        @else
+                            "Search ..."
+                        @endif );
+                    $("#listing-table_filter").removeClass("dataTables_filter").addClass("flex justify-center");
+                    changeBtn();
+                    $("#listing-table").removeClass("dataTable no-footer");
+                }, 50);
             });
         </script>
     @endisset

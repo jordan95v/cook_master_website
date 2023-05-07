@@ -1,10 +1,10 @@
 @php
     // Do a dictionnary containing filter and their value in the url
     $sorts = [
-        'new' => 'Nouveauté',
-        'popularity' => 'Popularité',
-        'up' => 'Prix croissant',
-        'down' => 'Prix décroissant',
+        'new' => __('Newest'),
+        'popularity' => __('Popularity'),
+        'up' => __('Ascending price'),
+        'down' => __('Descending price'),
     ];
 @endphp
 
@@ -16,7 +16,7 @@
     <form action="{{ route('store') }}" method="get" class="flex justify-center">
         <div class="grid md:grid-cols-3 grid-cols-1 gap-4">
             <select class="select select-bordered w-full max-w-xs" name="brand">
-                <option disabled selected>Selectionner une marque</option>
+                <option disabled selected>{{ __('Select a brand') }}</option>
                 @foreach ($brands as $brand)
                     <option value="{{ $brand->id }}" @if ($requestBrand == $brand->id) selected @endif>
                         {{ $brand->name }}
@@ -24,13 +24,13 @@
                 @endforeach
             </select>
             <select class="select select-bordered w-full max-w-xs" name="filter">
-                <option disabled selected>Trier par </option>
+                <option disabled selected>{{ __('Sort by') }} </option>
                 @foreach ($sorts as $key => $sort)
                     <option value="{{ $key }}" @if ($filter == $key) selected @endif>
                         {{ $sort }}</option>
                 @endforeach
             </select>
-            <button type="submit" class="btn btn-neutral hover:btn-primary">Filtrer</button>
+            <button type="submit" class="btn btn-neutral hover:btn-primary">{{ __('Filter') }}</button>
         </div>
     </form>
     <div class="text-center p-5">

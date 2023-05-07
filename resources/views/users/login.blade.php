@@ -8,7 +8,7 @@
                     <p class="font-bold text-2xl text-center pb-4">{{ __('Log in') }}</p>
 
                     <x-utils.input name="email" type="email" hint="Email" error="1" />
-                    <x-utils.input name="password" type="password" hint="{{ __('Password') }}" error="1" />
+                    <x-utils.input name="password" type="password" hint="Password" error="1" />
                     <a href="#" class="text-sm link hover:text-primary">{{ __('Forgot your password ?') }}</a>
 
                     <button class="btn btn-primary mt-4">{{ __('Log in') }}</button>

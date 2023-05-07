@@ -4,8 +4,8 @@
 <div id="card-element" class="border-2 mt-4 rounded-lg p-4 hover:border-primary"></div>
 
 <div class="text-center">
-    <button id="card-button" class="btn btn-primary mt-4">
-        Process Payment
+    <button id="card-button" class="btn btn-primary max-w-xs w-full mt-4">
+        {{ __('Process Payment') }}
     </button>
 
     <script src="https://js.stripe.com/v3/"></script>

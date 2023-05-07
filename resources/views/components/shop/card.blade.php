@@ -11,7 +11,9 @@
             <p class="hover:link font-bold">{{ $product->name }}</p>
             <form action="{{ route('order.store', ['product' => $product->id]) }}" method="post">
                 @csrf
-                <button class="btn btn-ghost btn-xs"><i class="fa-solid fa-bag-shopping me-2"></i>Acheter</button>
+                <button class="btn btn-ghost btn-xs">
+                    <i class="fa-solid fa-bag-shopping me-2"></i>{{ __('Buy') }}
+                </button>
             </form>
         </div>
         <p class="text-start italic">€{{ $product->price }}</p>

@@ -12,9 +12,12 @@
                 </p>
                 <form action="{{ route('order.store', ['product' => $product->id]) }}" method="post">
                     @csrf
-                    <button class="btn btn-ghost btn-xs"><i class="fa-solid fa-bag-shopping me-2"></i>Acheter</button>
+                    <button class="btn btn-ghost btn-xs">
+                        <i class="fa-solid fa-bag-shopping me-2"></i>{{ __('Buy') }}
+                    </button>
                 </form>
             </div>
+
             {{-- Add rating to product + tag for retrieving other product --}}
             <div class="rating">
                 <input type="radio" disabled name="rating-2" class="mask mask-star-2 bg-orange-400" />
@@ -30,7 +33,7 @@
 
     <div class="text-center p-5">
         @if (count($seeblings) > 0)
-            <h2 class="text-2xl font-bold">Les articles de la même marque</h2>
+            <h2 class="text-2xl font-bold">{{ __('Same brand products') }}</h2>
             <div class="pt-10 grid lg:grid-cols-5 md:grid-cols-4 grid-cols-1 gap-20 lg:px-10 lg:mt-10">
                 @foreach ($seeblings as $seebling)
                     <x-shop.card :product="$seebling" />

@@ -6,5 +6,5 @@
     $priceWithShippment = $totalPrice + 3;
 @endphp
 <p class="text-end font-mono mb-2">
-    Total: {{ $priceWithShippment }}€ ({{ $totalPrice }}€ + {{ 3 }}€ livraison)
+    Total: {{ $priceWithShippment }}€ ({{ $totalPrice }}€ + {{ 3 }}€ {{ __('Shippment') }})
 </p>

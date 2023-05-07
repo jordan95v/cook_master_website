@@ -9,7 +9,7 @@
             {{ $item->product->name }}
         </a>
         <p class="text-start italic">€{{ $item->product->price }}</p>
-        <p class="mt-5">Quantité: {{ $item->quantity }}</p>
+        <p class="mt-5">{{ __('Quantity') }}: {{ $item->quantity }}</p>
     </div>
     <div class="w-1/4 text-end flex flex-col justify-evenly">
         {{-- Add more quantity --}}

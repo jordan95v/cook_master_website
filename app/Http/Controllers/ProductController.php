@@ -61,7 +61,7 @@ class ProductController extends Controller
         $form = $request->validated();
         $form["image"] = $request->file("image")->store("product_image", "public");
         Product::create($form);
-        return back()->with("success", "Product succesffuly created.");
+        return back()->with("success", "Product successfully created.");
     }
 
     /**

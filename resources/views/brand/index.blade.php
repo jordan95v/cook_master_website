@@ -4,10 +4,10 @@
         <thead>
             <tr>
                 <th>id</th>
-                <th>Name</th>
+                <th>{{ __('Name') }}</th>
                 <th>Image</th>
-                <th>Website</th>
-                <th>Contact email</th>
+                <th>{{ __('Brand website') }}</th>
+                <th>{{ __('Brand email') }}</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -45,12 +45,12 @@
                             <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                                 <!--Modify -->
                                 <a href="{{ route('brand.edit', ['brand' => $brand->id]) }}" class="btn btn-primary">
-                                    <i class="fa-solid fa-pen me-2"></i>Modify
+                                    <i class="fa-solid fa-pen me-2"></i>{{ __('Modify') }}
                                 </a>
 
                                 <!-- Open delete modal -->
                                 <label for="delete-modal-{{ $brand->id }}" class="btn btn-error mt-2">
-                                    <i class="fa-solid fa-trash me-2"></i>Delete
+                                    <i class="fa-solid fa-trash me-2"></i>{{ __('Delete') }}
                                 </label>
                             </ul>
                         </div>
@@ -65,11 +65,14 @@
                                 @method('DELETE')
                                 <label for="delete-modal-{{ $brand->id }}"
                                     class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                                <h3 class="font-bold text-lg mb-4">Are you sure you wanna delete this brand ?</h3>
+                                <h3 class="font-bold text-lg mb-4">
+                                    {{ __('Are you sure you wanna delete this brand ?') }}</h3>
 
                                 <div class="flex justify-center">
-                                    <button class="btn btn-error w-3/5"><i class="fa-solid fa-trash me-2"></i>Delete
-                                        brand</button>
+                                    <button class="btn btn-error w-3/5">
+                                        <i class="fa-solid fa-trash me-2"></i>
+                                        {{ __('Delete the brand') }}
+                                    </button>
                                 </div>
                             </form>
                         </div>

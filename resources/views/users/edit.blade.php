@@ -17,16 +17,16 @@
                         </div>
                     </div>
 
-                    <x-utils.input name="name" type="text" hint="{{ __('Change your username') }}" error="1"
+                    <x-utils.input name="name" type="text" hint="Change your username" error="1"
                         :target="$user" label="user" />
-                    <x-utils.input name="email" type="email" hint="{{ __('Change your email') }}" error="1"
+                    <x-utils.input name="email" type="email" hint="Change your email" error="1"
                         :target="$user" label="envelopes-bulk" />
 
 
                     <div class="grid md:grid-cols-2 grid-cols-1 gap-2">
-                        <x-utils.input name="password" type="password" hint="{{ __('Password') }}" error="0" />
-                        <x-utils.input name="password_confirmation" type="password"
-                            hint="{{ __('Password confirmation') }}" error="0" />
+                        <x-utils.input name="password" type="password" hint="Password" error="0" />
+                        <x-utils.input name="password_confirmation" type="password" hint="Password confirmation"
+                            error="0" />
                     </div>
                     <x-utils.form-error name="password" />
 

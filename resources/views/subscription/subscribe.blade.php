@@ -1,11 +1,11 @@
-<x-layout title="Abonnement">
+<x-layout title="{{ __('Subscription') }}">
     @if (Auth::user()->isSubscribed())
         <x-utils.card class="w-full lg:w-1/3 mb-5">
             <div class="card-body">
                 @php
                     [$subscription, $plan] = Auth::user()->getSubscription();
                 @endphp
-                <h2 class="card-title text-2xl font-bold mx-auto">Mon abonnement</h2>
+                <h2 class="card-title text-2xl font-bold mx-auto">{{ __('My subscription') }}</h2>
                 <div class="grid grid-cols-1 lg:grid-cols-5 mt-4">
                     {{-- Subscription image --}}
                     <div class="flex flex-col my-auto col">
@@ -15,30 +15,30 @@
 
                     {{-- Subscription infos --}}
                     <div class="w-full ps-4 col-span-4">
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 items-center">
-                            <p>Date d'abonnement:</p>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 items-center font-mono">
+                            <p>{{ __('Subscription date') }}:</p>
                             <span class="font-bold bg-gray-300 w-full rounded-xl p-2">
                                 {{ $subscription->created_at->format('d M Y') }}
                             </span>
 
 
-                            <p class="font-mono">Récurrence:</p>
+                            <p>{{ __('Recurring period') }}:</p>
                             <span class="font-bold bg-gray-300 w-full rounded-xl p-2">
                                 {{ ucfirst($plan->plan->interval) }}
                             </span>
 
-                            <p>Prix de l'abonnement:</p>
+                            <p>{{ __('Subscription price') }}:</p>
                             <span class="font-bold bg-gray-300 w-full rounded-xl p-2">
                                 {{ $plan->plan->amount_decimal / 100 }}€
                             </span>
 
                             @if ($subscription->ends_at)
-                                <p>Date de fin d'abonnement:</p>
+                                <p>{{ __('End of subscription') }}:</p>
                                 <span class="font-bold bg-gray-300 w-full rounded-xl p-2">
                                     {{ $subscription->ends_at->format('d M Y') }}
                                 </span>
                             @else
-                                <p class="font-mono">Prochain paiement:</p>
+                                <p>{{ __('Next paiement') }}:</p>
                                 <span class="font-bold bg-gray-300 w-full rounded-xl p-2">
                                     {{ Auth::user()->getNextBillingDate() }}
                                 </span>
@@ -49,12 +49,14 @@
                             <form action="{{ route('subscription.resume') }}" class="mt-4" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-primary w-full">
-                                    Reprendre l'abonnement
+                                    {{ __('Resume my subscription') }}
                                 </button>
                             </form>
                         @else
                             <!-- The button to open modal -->
-                            <label for="cancel" class="btn btn-error mt-4 w-full">Annuler mon abonnement</label>
+                            <label for="cancel" class="btn btn-error mt-4 w-full">
+                                {{ __('Cancel my subscription') }}
+                            </label>
 
                             <!-- Put this part before </body> tag -->
                             <input type="checkbox" id="cancel" class="modal-toggle" />
@@ -66,12 +68,12 @@
                                         @method('DELETE')
                                         <div class="text-center">
                                             <p class="text-red-500 font-bold">Attention !</p>
-                                            <p>En cliquant sur le bouton ci-dessous, vous allez annuler votre
-                                                abonnement.
+                                            <p>
+                                                {{ __('By clicking below, you are gonna cancel your subscription.') }}
                                             </p>
                                         </div>
                                         <button type="submit" class="btn btn-error max-w-lg w-full mt-4">
-                                            Annuler mon abonnement
+                                            {{ __('Cancel my subscription') }}
                                         </button>
                                     </form>
                                 </div>
@@ -85,8 +87,8 @@
 
     <x-utils.card class="w-full lg:w-2/3">
         <div class="card-body">
-            <h2 class="font-bold text-2xl text-center">Abonnez vous !</h2>
-            <small class="text-center text-gray-400">Et profitez ainsi de nombreux avantages ...</small>
+            <h2 class="font-bold text-2xl text-center">{{ __('Subscribe now !') }}</h2>
+            <small class="text-center text-gray-400">{{ __('And get a lot of advantages :') }}</small>
 
             {{-- Subscription table --}}
             <div class="overflow-x-auto mt-10">
@@ -94,10 +96,10 @@
                     <!-- head -->
                     <thead>
                         <tr>
-                            <td>Avantages</td>
+                            <td>{{ __('Advantages') }}</td>
                             <th>
                                 <img src="{{ asset('images/free.png') }}" alt="" class="mx-auto">
-                                <span class="text-xl">Free</span>
+                                <span class="text-xl">{{ __('Free') }}</span>
                             </th>
                             <th>
                                 <img src="{{ asset('images/starter.png') }}" alt="" class="mx-auto">
@@ -120,7 +122,7 @@
 
                         {{-- Comment --}}
                         <tr>
-                            <td class="font-semibold">Commenter / avis</td>
+                            <td class="font-semibold">{{ __('Comment / Leave a review') }}</td>
                             <td><i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i></td>
                             <td><i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i></td>
                             <td><i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i></td>
@@ -128,15 +130,15 @@
 
                         {{-- Access to course --}}
                         <tr>
-                            <td class="font-semibold">Accès aux leçons</td>
-                            <td>1 / jour 🐢</td>
-                            <td>5 / jour 🏃‍♂️</td>
-                            <td>Pas de limites 🏍</td>
+                            <td class="font-semibold">{{ __('Access to courses') }}</td>
+                            <td>1 / {{ __('day') }} 🐢</td>
+                            <td>5 / {{ __('day') }} 🏃‍♂️</td>
+                            <td>{{ __('No limits') }} 🏍</td>
                         </tr>
 
                         {{-- Tchat with chef --}}
                         <tr>
-                            <td class="font-semibold">Accès à un tchat avec un chef</td>
+                            <td class="font-semibold">{{ __('Tachat with a Chef') }}</td>
                             <td><i class="fa-solid fa-circle-xmark text-2xl me-2" style="color: #ff0d0d;"></i></td>
                             <td><i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i></td>
                             <td><i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i></td>
@@ -144,7 +146,7 @@
 
                         {{-- Coupon --}}
                         <tr>
-                            <td class="font-semibold">5% de réduction sur la boutique</td>
+                            <td class="font-semibold">{{ __('5% off on all products') }}/td>
                             <td><i class="fa-solid fa-circle-xmark text-2xl me-2" style="color: #ff0d0d;"></i></td>
                             <td><i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i></td>
                             <td><i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i></td>
@@ -152,18 +154,18 @@
 
                         {{-- Shipping --}}
                         <tr>
-                            <td class="font-semibold">Livraison gratuite</td>
+                            <td class="font-semibold">{{ __('Free shipping') }}</td>
                             <td><i class="fa-solid fa-circle-xmark text-2xl me-2" style="color: #ff0d0d;"></i></td>
                             <td>
                                 <i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i>
-                                Points relais uniquement
+                                {{ __('Drop-off point only') }}
                             </td>
                             <td><i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i></td>
                         </tr>
 
                         {{-- Kitchen location --}}
                         <tr>
-                            <td class="font-semibold">Location d'espace de cuisine</td>
+                            <td class="font-semibold">{{ __('Rent a kitchen space') }}</td>
                             <td><i class="fa-solid fa-circle-xmark text-2xl me-2" style="color: #ff0d0d;"></i></td>
                             <td><i class="fa-solid fa-circle-xmark text-2xl me-2" style="color: #ff0d0d;"></i></td>
                             <td><i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i></td>
@@ -171,7 +173,7 @@
 
                         {{-- Event --}}
                         <tr>
-                            <td class="font-semibold">Invitation à des événements exclusif</td>
+                            <td class="font-semibold">{{ __('Invitation to exclusive events') }}</td>
                             <td><i class="fa-solid fa-circle-xmark text-2xl me-2" style="color: #ff0d0d;"></i></td>
                             <td><i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i></td>
                             <td><i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i></td>
@@ -179,35 +181,38 @@
 
                         {{-- Cooptation --}}
                         <tr>
-                            <td class="font-semibold">Cooptation nouvel inscrit</td>
+                            <td class="font-semibold">{{ __('Cooptation new subscriber') }}</td>
                             <td><i class="fa-solid fa-circle-xmark text-2xl me-2" style="color: #ff0d0d;"></i></td>
                             <td>
                                 <i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i><br>
-                                5€ tout les 3 nouveaux inscrits <br>(hors formule Free)
+                                {{ __('5€ for every 3 people subscribed with your link') }}
+                                <br>{{ __('(Outside of Free tier)') }}
                             </td>
                             <td>
                                 <i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i><br>
-                                5€ pour chaque inscrit <br>(hors formule Free) +<br>3% de sa première commande
+                                {{ __('5€ for every people subscribed with your link') }}<br>
+                                {{ __('(Outside of Free tier)') }} +<br>{{ __('3% on his first order') }}
                             </td>
                         </tr>
 
                         {{-- Renew --}}
                         <tr>
-                            <td class="font-semibold">Bonus renouvellement</td>
+                            <td class="font-semibold">{{ __('Renew bonus') }}</td>
                             <td><i class="fa-solid fa-circle-xmark text-2xl me-2" style="color: #ff0d0d;"></i></td>
                             <td><i class="fa-solid fa-circle-xmark text-2xl me-2" style="color: #ff0d0d;"></i></td>
                             <td>
                                 <i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i>
-                                10% sur le tarif annuel
+                                {{ __('10% on yearly plan') }}
                             </td>
                         </tr>
 
                         {{-- Price --}}
                         <tr>
-                            <td class="font-semibold">Prix</td>
-                            <td>Gratuit</td>
-                            <td>9,90€ / mois <br> 113€ / an</td>
-                            <td>19€ / mois <br> 220€ / an</td>
+                            <td class="font-semibold">{{ __('Price') }}</td>
+                            <td>{{ __('Free') }}</td>
+                            <td>9,90€ / {{ strtolower(__('Monthly')) }} <br> 113€ / {{ strtolower(__('Yearly')) }}
+                            </td>
+                            <td>19€ / {{ strtolower(__('Monthly')) }} <br> 220€ / {{ strtolower(__('Yearly')) }}</td>
                         </tr>
 
                         {{-- Action --}}
@@ -219,13 +224,13 @@
                                 <a href="{{ route('subscription.show', ['plan' => 'starter']) }}"
                                     class="btn btn-primary"
                                     @if (Auth::user()->subscribed('starter') || Auth::user()->subscribed('starter_annual')) disabled="disabled" @endif>
-                                    S'abonner à Starter
+                                    {{ __('Subscribe to') }} Starter
                                 </a>
                             </td>
                             <td>
                                 <a href="{{ route('subscription.show', ['plan' => 'pro']) }}" class="btn btn-primary"
                                     @if (Auth::user()->subscribed('pro') || Auth::user()->subscribed('pro_annual')) disabled="disabled" @endif>
-                                    S'abonner à Pro
+                                    {{ __('Subscribe to') }} Pro
                                 </a>
                             </td>
                         </tr>
