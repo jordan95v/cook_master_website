@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
-use function PHPUnit\Framework\fileExists;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,6 +55,9 @@ class UserController extends Controller
             $form["password"] = bcrypt($form["password"]);
         }
         if ($request->hasFile("image")) {
+            if (file_exists("storage/" . Auth::user()->image)) {
+                unlink("storage/" . Auth::user()->image);
+            }
             $form["image"] = $request->file("image")->store("user_avatar", "public");
         }
         User::find(Auth::id())->update($form);
@@ -66,12 +68,14 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $this->authorize("delete", $user);
-        if (fileExists("storage/" . $user->image)) {
-            unlink("storage/" . $user->image);
+        if (Auth::user()->image) {
+            if (file_exists("storage/" . Auth::user()->image)) {
+                unlink("storage/" . Auth::user()->image);
+            }
         }
         $user->delete();
         if (Auth::id() != $user->id) {
-            return back()->with("success", "Vous avez bien supprimé le compte de $user->name.");
+            return back()->with("success", "You successfully deleted the user's account.");
         }
         return redirect("/")->with("success", "You successfully deleted your account.");
     }

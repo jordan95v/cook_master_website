@@ -6,16 +6,16 @@
         </label>
         <ul tabindex="0"
             class="menu menu-compact dropdown-content mt-3 p-2 border-2 shadow bg-base-100 rounded-box w-96 hover:border-primary">
-            <h2 class="text-center font-bold text-xl mb-4">Mes articles</h2>
+            <h2 class="text-center font-bold text-xl mb-4">{{ __('My basket.') }}</h2>
             @if (Auth::user()->orders ?? false)
                 @forelse (Auth::user()->orders as $item)
                     <x-shop.basket-card :item="$item" />
                 @empty
-                    <p class="text-center p-5">Vous n'avez pas d'articles dans votre panier</p>
+                    <p class="text-center p-5">{{ __('You have no product in your basket.') }}</p>
                 @endforelse
                 @if (count(Auth::user()->orders) != 0)
                     <x-shop.basket-total />
-                    <a class="btn btn-primary w-full" href="{{ route('order.show') }}">Payer</a>
+                    <a class="btn btn-primary w-full" href="{{ route('order.show') }}">{{ __('Payment') }}</a>
                 @endif
             @endif
         </ul>
@@ -40,24 +40,24 @@
             @if (!Auth::user()->email_verified_at)
                 <li>
                     <a href="{{ route('verification.send') }}"><i class="fa-solid fa-share">
-                        </i>Renvoyer le mail de vérification</a>
+                        </i>{{ __('Resend the verification mail') }}</a>
                 </li>
             @else
                 <li>
-                    <a href="{{ route('user.edit') }}"><i class="fa-solid fa-gear"></i>Modifier mon profil</a>
+                    <a href="{{ route('user.edit') }}"><i class="fa-solid fa-gear"></i>{{ __('Modify my profile') }}</a>
                 </li>
                 <li>
                     <a href="{{ route('user.invoices') }}">
-                        <i class="fa-sharp fa-solid fa-file-invoice-dollar"></i>Mes factures
+                        <i class="fa-sharp fa-solid fa-file-invoice-dollar"></i>{{ __('My invoices') }}
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('subscription.show') }}">
                         <i class="fa-sharp fa-solid fa-bolt-lightning"></i>
                         @if (Auth::user()->isSubscribed())
-                            Gérer mon abonnement
+                            {{ __('Manage my subscription') }}
                         @else
-                            S'abonner
+                            {{ __('Subscribe') }}
                         @endif
 
                     </a>
@@ -71,18 +71,20 @@
                 @endif
             @endif
             <li>
-                <a href="{{ route('logout') }}"><i class="fa-solid fa-arrow-right-to-bracket">
-                    </i>Se déconnecter
+                <a href="{{ route('logout') }}">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>{{ __('Log out') }}
                 </a>
             </li>
         @else
             <li>
-                <a href="{{ route('show-login') }}"><i class="fa-solid fa-arrow-up-from-bracket">
-                    </i>Se connecter
+                <a href="{{ route('show-login') }}">
+                    <i class="fa-solid fa-arrow-up-from-bracket"></i>{{ __('Log in') }}
                 </a>
             </li>
             <li>
-                <a href="{{ route('register') }}"><i class="fa-solid fa-database"></i>S'inscrire</a>
+                <a href="{{ route('register') }}">
+                    <i class="fa-solid fa-database"></i>{{ __('Create an account') }}
+                </a>
             </li>
         @endauth
     </ul>

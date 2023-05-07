@@ -1,10 +1,10 @@
 <x-layout title="Factures">
     <x-utils.card class="2/4">
         <div class="card-body">
-            <h2 class="card-title justify-center flex text-2xl pb-4">Mes factures</h2>
+            <h2 class="card-title justify-center flex text-2xl pb-4">{{ __('My invoices') }}</h2>
 
             @empty(count(Auth::user()->invoices))
-                <p class="text-center p-5">Vous n'avez pas de factures</p>
+                <p class="text-center p-5">{{ __('You have no invoices.') }}</p>
             @else
                 <div class="overflow-x-auto">
                     <table class="table w-full">
@@ -13,7 +13,7 @@
                             <tr>
                                 <th>id</th>
                                 <th>Date</th>
-                                <th>Prix</th>
+                                <th>{{ __('Price') }}</th>
                             </tr>
                         </thead>
                         <tbody>

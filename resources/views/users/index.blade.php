@@ -4,10 +4,10 @@
         <thead>
             <tr>
                 <th>id</th>
-                <th>Name</th>
+                <th>{{ __('Username') }}</th>
                 <th>Email</th>
-                <th>Role</th>
-                <th>Banni</th>
+                <th>{{ __('Role') }}</th>
+                <th>{{ __('Banned') }}</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -16,7 +16,7 @@
                 @php
                     switch ($user->role) {
                         case 0:
-                            $value = 'Guest';
+                            $value = __('Normal user');
                             break;
                         case 1:
                             $value = 'Admin';
@@ -47,17 +47,17 @@
                                 @if (!$user->is_banned)
                                     <!-- Open ban modal -->
                                     <label for="ban-modal-{{ $user->id }}" class="btn btn-warning">
-                                        <i class="fa-solid fa-ban me-2"></i>Ban
+                                        <i class="fa-solid fa-ban me-2"></i>{{ __('Ban') }}
                                     </label>
                                 @else
                                     <!-- Open unban modal -->
                                     <label for="unban-modal-{{ $user->id }}" class="btn btn-primary">
-                                        <i class="fa-solid fa-ban me-2"></i>Unban
+                                        <i class="fa-solid fa-ban me-2"></i>{{ __('Unban') }}
                                     </label>
                                 @endif
                                 <!-- Open delete modal -->
                                 <label for="delete-modal-{{ $user->id }}" class="btn btn-error mt-2">
-                                    <i class="fa-solid fa-trash me-2"></i>Delete
+                                    <i class="fa-solid fa-trash me-2"></i>{{ __('Delete') }}
                                 </label>
                             </ul>
                         </div>
@@ -70,13 +70,13 @@
                                         @csrf
                                         <label for="ban-modal-{{ $user->id }}"
                                             class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                                        <h3 class="font-bold text-lg mb-4">Are you sure you wanna ban this
-                                            account ?
+                                        <h3 class="font-bold text-lg mb-4">
+                                            {{ __('Are you sure you wanna ban this account ?') }}
                                         </h3>
 
                                         <div class="flex justify-center">
                                             <button class="btn btn-warning w-3/5">
-                                                <i class="fa-solid fa-trash me-2"></i>Ban
+                                                <i class="fa-solid fa-trash me-2"></i>{{ __('Ban') }}
                                             </button>
                                         </div>
                                     </form>
@@ -91,13 +91,13 @@
                                         @csrf
                                         <label for="unban-modal-{{ $user->id }}"
                                             class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                                        <h3 class="font-bold text-lg mb-4">Are you sure you wanna unban this
-                                            account ?
+                                        <h3 class="font-bold text-lg mb-4">
+                                            {{ __('Are you sure you wanna ban this account ?') }}
                                         </h3>
 
                                         <div class="flex justify-center">
                                             <button class="btn btn-primary">
-                                                <i class="fa-solid fa-trash me-2"></i>Unban
+                                                <i class="fa-solid fa-trash me-2"></i>{{ __('Unban') }}
                                             </button>
                                         </div>
                                     </form>
@@ -115,11 +115,12 @@
                                 @method('DELETE')
                                 <label for="delete-modal-{{ $user->id }}"
                                     class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                                <h3 class="font-bold text-lg mb-4">Are you sure you wanna delete this account ?</h3>
+                                <h3 class="font-bold text-lg mb-4">
+                                    {{ __('Are you sure you wanna delete this account ?') }}</h3>
 
                                 <div class="flex justify-center">
-                                    <button class="btn btn-error w-3/5"><i class="fa-solid fa-trash me-2"></i>Delete
-                                        account</button>
+                                    <button class="btn btn-error w-3/5">
+                                        <i class="fa-solid fa-trash me-2"></i>{{ __('Delete') }}</button>
                                 </div>
                             </form>
                         </div>
