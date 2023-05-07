@@ -9,7 +9,7 @@ use Laravel\Cashier\Cashier;
 
 class SubscriptionController extends Controller
 {
-    public function showSubscription(Request $request, string $plan = null)
+    public function showSubscription(string $plan = null)
     {
         if ($plan != null) {
             $stripe = Cashier::stripe();
@@ -36,5 +36,25 @@ class SubscriptionController extends Controller
         $subscriptionName = $request->get("plan") . (($request->get("recurring") == "year") ? "_annual" : "");
         $user->newSubscription($subscriptionName, env(strtoupper($subscriptionName) . "_PLAN_ID"))->create($request->get("payment-method-id"));
         return redirect("/")->with("success", "Vous vous êtes abonné.");
+    }
+
+    public function cancel()
+    {
+        $user = User::find(Auth::id());
+        if (!$user->isSubscribed()) {
+            return back()->with("error", "Vous n'êtes pas abonné.");
+        }
+        $user->subscriptions()->first()->cancel();
+        return back()->with("success", "Vous vous êtes désabonné.");
+    }
+
+    public function resume()
+    {
+        $user = User::find(Auth::id());
+        if (!$user->isSubscribed()) {
+            return back()->with("error", "Vous n'êtes pas abonné.");
+        }
+        $user->subscriptions()->first()->resume();
+        return back()->with("success", "Vous vous êtes réabonné.");
     }
 }

@@ -61,7 +61,8 @@ Route::prefix("users")->group(
         Route::group(["controller" => SubscriptionController::class, "middleware" => ["auth"]], function () {
             Route::get("/subscription/{plan?}", "showSubscription")->whereIn("plan", ["starter", "pro"])->name("subscription.show");
             Route::post("/subscription", "subscribe")->name("subscription.subscribe");
-            Route::post("/subscription/cancel", "cancel")->name("subscription.cancel");
+            Route::post("/subscription/resume", "resume")->name("subscription.resume");
+            Route::delete("/subscription/cancel", "cancel")->name("subscription.cancel");
             // Route::post("/subscription/resume", "resume")->name("subscription.resume");
         });
     }
