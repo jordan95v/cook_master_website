@@ -13,7 +13,7 @@
                     <div class="avatar flex justify-center my-4">
                         <div class="w-20 rounded-full ring ring-primary">
                             <img
-                                src="{{ auth()->user()->image ?? false ? asset('storage/' . $user->image) : asset('images/user.png') }}" />
+                                src="{{ Auth::user()->image ?? false ? asset('storage/' . $user->image) : asset('images/user.png') }}" />
                         </div>
                     </div>
 

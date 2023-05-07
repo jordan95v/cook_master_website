@@ -1,5 +1,5 @@
 <x-layout title="Factures">
-    <x-utils.card>
+    <x-utils.card class="2/4">
         <div class="card-body">
             <h2 class="card-title justify-center flex text-2xl pb-4">Mes factures</h2>
 

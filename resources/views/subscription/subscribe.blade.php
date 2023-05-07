@@ -1,5 +1,5 @@
 <x-layout title="Abonnement">
-    <x-utils.card>
+    <x-utils.card class="w-2/3">
         <div class="card-body">
             <p class="font-bold text-2xl text-center">Abonnez vous !</p>
             <small class="text-center text-gray-400">Et profitez ainsi de nombreux avantages ...</small>
@@ -103,7 +103,7 @@
                             </td>
                             <td>
                                 <i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i><br>
-                                5€ pour chaque inscrit <br>(hors formule Free)<br> + 3% de sa première commande
+                                5€ pour chaque inscrit <br>(hors formule Free) +<br>3% de sa première commande
                             </td>
                         </tr>
 

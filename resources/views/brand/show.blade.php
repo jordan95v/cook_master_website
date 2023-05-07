@@ -1,5 +1,5 @@
 <x-layout title="{{ $brand->name }}">
-    <x-utils.card>
+    <x-utils.card class="w-2/5">
         <div class="card-body">
             <div class="text-center">
                 <h2 class="card-title font-bold flex justify-center text-3xl mb-4">{{ $brand->name }}</h2>

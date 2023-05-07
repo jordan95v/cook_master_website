@@ -28,16 +28,16 @@
         @auth
             <div class="w-24 rounded-full ring ring-primary">
                 <img
-                    src="{{ auth()->user()->image ?? false ? asset('storage/' . auth()->user()->image) : asset('images/user.png') }}" />
+                    src="{{ Auth::user()->image ?? false ? asset('storage/' . Auth::user()->image) : asset('images/user.png') }}" />
             </div>
         @else
             <i class="fa-solid fa-user text-xl"></i>
         @endauth
     </label>
     <ul tabindex="0"
-        class="menu menu-compact dropdown-content mt-3 p-2 border-2 shadow bg-base-100 rounded-box w-52 hover:border-primary">
+        class="menu menu-compact dropdown-content mt-3 p-2 border-2 shadow bg-base-100 rounded-box w-56 hover:border-primary">
         @auth
-            @if (!auth()->user()->email_verified_at)
+            @if (!Auth::user()->email_verified_at)
                 <li>
                     <a href="{{ route('verification.send') }}"><i class="fa-solid fa-share">
                         </i>Renvoyer le mail de vérification</a>
@@ -53,10 +53,16 @@
                 </li>
                 <li>
                     <a href="{{ route('subscription.show') }}">
-                        <i class="fa-sharp fa-solid fa-bolt-lightning"></i>S'abonner
+                        <i class="fa-sharp fa-solid fa-bolt-lightning"></i>
+                        @if (Auth::user()->isSubscribed())
+                            Gérer mon abonnement
+                        @else
+                            S'abonner
+                        @endif
+
                     </a>
                 </li>
-                @if (auth()->user()->role != 0)
+                @if (Auth::user()->role != 0)
                     <li>
                         <a href="{{ route('admin.dashboard') }}">
                             <i class="fa-solid fa-shield"></i>Admin dashboard

@@ -72,4 +72,14 @@ class User extends Authenticatable implements MustVerifyEmail
             ],
         ]);
     }
+
+    public function isSubscribed(): bool
+    {
+        foreach (["starter", "pro"] as $plan) {
+            if ($this->subscribed($plan) || $this->subscribed($plan . "_annual")) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

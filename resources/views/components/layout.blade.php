@@ -26,7 +26,7 @@
 <body>
     {{-- Navbar management --}}
     @auth
-        @if (auth()->user()->isAdmin())
+        @if (Auth::user()->isAdmin())
             <x-admin.navbar />
         @else
             <x-navbar />
@@ -53,7 +53,8 @@
                 $paginateButtons.addClass("btn hover:btn-primary").on("click", changeBtn);
                 $paginateButtons.removeClass("paginate_button");
                 $("#listing-table_paginate span").remove();
-                $("#listing-table_paginate").addClass("btn-group flex justify-center");
+                $("#listing-table_paginate").addClass("btn-group flex justify-center mt-4");
+                $("#listing-table_info").addClass("mt-4");
             }
 
             $(function() {
@@ -64,10 +65,11 @@
                     },
                 });
                 const $filterInput = $("#listing-table_filter input");
-                $filterInput.addClass("input input-bordered border-2 hover:input-primary").attr("placeholder",
+                $filterInput.addClass("input input-bordered border-2 hover:input-primary mb-4").attr("placeholder",
                     "Search ...");
                 $("#listing-table_filter").removeClass("dataTables_filter").addClass("flex justify-center");
                 changeBtn();
+                $("#listing-table").removeClass("dataTable no-footer");
             });
         </script>
     @endisset
