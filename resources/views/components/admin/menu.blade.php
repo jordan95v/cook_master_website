@@ -1,6 +1,5 @@
 @props(['direction'])
 
-<li><a href="/"></li>
 {{-- Main --}}
 <li tabindex="0">
     <a><i class="fa-solid fa-house"></i>Accueil<i class="fa-solid fa-chevron-{{ $direction }}"></i></a>

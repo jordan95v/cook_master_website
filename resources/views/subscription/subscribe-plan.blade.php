@@ -43,6 +43,11 @@
                         <x-shop.advantages text="Réduction de 10€ sur le tarif annuel" />
                     @endif
 
+                    <p class="mt-4 text-gray-400">
+                        En payant, vous renoncez à votre droit de rétractation. Vous pouvez annuler votre abonnement à
+                        tout moment.
+                    </p>
+
                     {{-- Payment form --}}
                     <h2 class="font-bold justify-center flex text-2xl py-4">Paiement</h2>
                     <div class="grid grild-cols-1 lg:grid-cols-2 my-2 gap-2">

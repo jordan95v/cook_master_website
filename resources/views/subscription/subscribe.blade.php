@@ -1,7 +1,73 @@
 <x-layout title="Abonnement">
-    <x-utils.card class="w-2/3">
+    @if (Auth::user()->isSubscribed())
+        <x-utils.card class="w-full lg:w-1/3">
+            <div class="card-body">
+                @php
+                    [$subscription, $plan] = Auth::user()->getSubscription();
+                @endphp
+                <h2 class="card-title text-2xl font-bold mx-auto">Mon abonnement</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-5">
+                    {{-- Subscription image --}}
+                    <div class="flex flex-col my-auto col">
+                        <img src="{{ asset('images/' . $subscription->name . '.png') }}"alt="">
+                        <p class="font-bold text-center">{{ strtoupper($subscription->name) }}</p>
+                    </div>
+
+                    {{-- Subscription infos --}}
+                    <div class="w-full ps-4 col-span-4">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 items-center">
+                            <p>Date d'abonnement:</p>
+                            <span class="font-bold bg-gray-300 w-full rounded-xl p-2">
+                                {{ $subscription->created_at->format('d M Y') }}
+                            </span>
+
+
+                            <p class="font-mono">Récurrence:</p>
+                            <span class="font-bold bg-gray-300 w-full rounded-xl p-2">
+                                {{ ucfirst($plan->plan->interval) }}
+                            </span>
+
+                            <p>Prix de l'abonnement:</p>
+                            <span class="font-bold bg-gray-300 w-full rounded-xl p-2">
+                                {{ $plan->plan->amount_decimal / 100 }}€
+                            </span>
+
+                            <p class="font-mono">Prochain paiement:</p>
+                            <span class="font-bold bg-gray-300 w-full rounded-xl p-2">
+                                {{ Auth::user()->getNextBillingDate() }}
+                            </span>
+                        </div>
+
+                        <!-- The button to open modal -->
+                        <label for="cancel" class="btn btn-error mt-4 w-full">Annuler mon abonnement</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Put this part before </body> tag -->
+            <input type="checkbox" id="cancel" class="modal-toggle" />
+            <div class="modal">
+                <div class="modal-box relative bg-red-200">
+                    <label for="cancel" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <form action="" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <div class="text-center">
+                            <p class="text-red-500 font-bold">Attention !</p>
+                            <p>En cliquant sur le bouton ci-dessous, vous allez annuler votre abonnement.</p>
+                        </div>
+                        <button type="submit" class="btn btn-error max-w-lg w-full mt-4">
+                            Annuler mon abonnement
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </x-utils.card>
+    @endif
+
+    <x-utils.card class="w-full lg:w-2/3">
         <div class="card-body">
-            <p class="font-bold text-2xl text-center">Abonnez vous !</p>
+            <h2 class="font-bold text-2xl text-center">Abonnez vous !</h2>
             <small class="text-center text-gray-400">Et profitez ainsi de nombreux avantages ...</small>
 
             {{-- Subscription table --}}

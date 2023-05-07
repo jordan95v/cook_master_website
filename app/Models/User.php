@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -75,11 +76,23 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isSubscribed(): bool
     {
-        foreach (["starter", "pro"] as $plan) {
-            if ($this->subscribed($plan) || $this->subscribed($plan . "_annual")) {
-                return true;
-            }
+        return ($this->subscriptions()->count() > 0) ? true : false;
+    }
+
+    public function getSubscription()
+    {
+        if (!$this->isSubscribed()) {
+            return null;
         }
-        return false;
+        return array($this->subscriptions()->first(), $this->subscriptions()->first()->asStripeSubscription());
+    }
+
+    public function getNextBillingDate(): string
+    {
+        if (!$this->isSubscribed()) {
+            return null;
+        }
+        $sub = $this->subscriptions()->first()->asStripeSubscription();
+        return Carbon::createFromTimeStamp($sub->current_period_end)->format('d M Y');
     }
 }
