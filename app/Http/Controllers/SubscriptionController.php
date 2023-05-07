@@ -27,7 +27,7 @@ class SubscriptionController extends Controller
     {
         $user = User::find(Auth::id());
         if ($user->isSubscribed()) {
-            return back()->with("error", "Attendez la fin de votre abonnement actuel pour vous réabonnez.");
+            return back()->with("error", "Wait the end of your subscription to subscribe again.");
         }
         $request->validate([
             "plan" => "required|in:starter,pro",
@@ -35,20 +35,20 @@ class SubscriptionController extends Controller
         ]);
         $subscriptionName = $request->get("plan") . (($request->get("recurring") == "year") ? "_annual" : "");
         $user->newSubscription($subscriptionName, env(strtoupper($subscriptionName) . "_PLAN_ID"))->create($request->get("payment-method-id"));
-        return redirect("/")->with("success", "Vous vous êtes abonné.");
+        return redirect("/")->with("success", "Congrats, you subscribed.");
     }
 
     public function cancel()
     {
         $user = User::find(Auth::id());
         $user->subscriptions()->first()->cancel();
-        return back()->with("success", "Vous vous êtes désabonné.");
+        return back()->with("success", "You unsubscribed :(.");
     }
 
     public function resume()
     {
         $user = User::find(Auth::id());
         $user->subscriptions()->first()->resume();
-        return back()->with("success", "Vous vous êtes réabonné.");
+        return back()->with("success", "Very good, you are back. You resumed your subscription.");
     }
 }

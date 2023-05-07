@@ -61,7 +61,7 @@ class ProductController extends Controller
         $form = $request->validated();
         $form["image"] = $request->file("image")->store("product_image", "public");
         Product::create($form);
-        return back()->with("success", "Produit correctement créé.");
+        return back()->with("success", "Product succesffuly created.");
     }
 
     /**
@@ -95,7 +95,7 @@ class ProductController extends Controller
             $form["image"] = $request->file("image")->store("brand_logo", "public");
         }
         $product->update($form);
-        return back()->with("success", "Produit correcté modifié");
+        return back()->with("success", "Product successfully updated.");
     }
 
     /**
@@ -108,6 +108,6 @@ class ProductController extends Controller
             unlink("storage/" . $product->image);
         }
         $product->delete();
-        return back()->with("success", "Vous avez correctement supprimé le produit $product->name.");
+        return back()->with("success", "Product successfully deleted.");
     }
 }

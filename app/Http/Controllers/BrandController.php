@@ -38,7 +38,7 @@ class BrandController extends Controller
             $form["image"] = $request->file("image")->store("brand_logo", "public");
         }
         Brand::create($form);
-        return back()->with("success", "Marque correctement créé.");
+        return back()->with("success", "Brand successfully created.");
     }
 
     /**
@@ -72,7 +72,7 @@ class BrandController extends Controller
             $form["image"] = $request->file("image")->store("brand_logo", "public");
         }
         $brand->update($form);
-        return back()->with("success", "Marque correctement modifié.");
+        return back()->with("success", "Brand successfully updated.");
     }
 
     /**
@@ -85,6 +85,6 @@ class BrandController extends Controller
             unlink("storage/" . $brand->image);
         }
         $brand->delete();
-        return back()->with("success", "Vous avez correctement supprimé la marque $brand->name.");
+        return back()->with("success", "Brand successfully deleted.");
     }
 }

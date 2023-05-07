@@ -33,7 +33,7 @@ class UserController extends Controller
         event(new Registered($user));
         $user->createAsStripeCustomer();
         Auth::login($user);
-        return redirect("/")->with("success", "Vous avez créé votre compte, vérifier votre email pour accéder à toutes les fonctionnalités !");
+        return redirect("/")->with("success", "You are now registered. Check your email to verify your account.");
     }
 
     // Display the specified resource.
@@ -59,7 +59,7 @@ class UserController extends Controller
             $form["image"] = $request->file("image")->store("user_avatar", "public");
         }
         User::find(Auth::id())->update($form);
-        return back()->with("success", "You successfully edited your profile");
+        return back()->with("success", "You successfully edited your profile.");
     }
 
     // Remove the specified resource from storage.
@@ -73,21 +73,21 @@ class UserController extends Controller
         if (Auth::id() != $user->id) {
             return back()->with("success", "Vous avez bien supprimé le compte de $user->name.");
         }
-        return redirect("/")->with("success", "Vous avez bien supprimé votre compte.");
+        return redirect("/")->with("success", "You successfully deleted your account.");
     }
 
     public function ban(User $user)
     {
         $this->authorize("ban", $user);
         $user->update(["is_banned" => 1]);
-        return back()->with("success", "Vous avez banni $user->name.");
+        return back()->with("success", "You successfully banned the user.");
     }
 
     public function unban(User $user)
     {
         $this->authorize("ban", $user);
         $user->update(["is_banned" => 0]);
-        return back()->with("success", "Vous avez débanni $user->name.");
+        return back()->with("success", "You successfully unbanned the user.");
     }
 
     public function invoices()

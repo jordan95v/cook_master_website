@@ -36,8 +36,8 @@ class OrderController extends Controller
                 "product_id" => $product->id,
             ]);
         }
-        $action = ($request->get("remove")) ? "retiré" : "ajouté";
-        return back()->with("success", "Article $action au panier");
+        $action = ($request->get("remove")) ? "removed" : "added";
+        return back()->with("success", "Product $action to basket.");
     }
 
     public function update(Request $request, Order $order)
@@ -100,7 +100,7 @@ class OrderController extends Controller
         try {
             $user->charge($price, $request->get("payment-method-id"));
         } catch (CardException $th) {
-            return back()->with("error", "Une erreur est survenue lors du paiement. Veuillez réessayer.");
+            return back()->with("error", "An error occured. Please try again.");
         }
 
         // Order deletion
@@ -114,7 +114,7 @@ class OrderController extends Controller
             "price" => $invoice->total_amount,
             "serial" => $invoice->series,
         ]);
-        return redirect("store")->with("success", "Paiement effectué. Facture disponible dans votre espace personnel.");
+        return redirect("store")->with("success", "Payment successful. Invoice available in your profile.");
     }
 
     /**
@@ -126,8 +126,8 @@ class OrderController extends Controller
             if ($value->product_id == $order->product_id) {
                 $value->delete();
             }
-            return back()->with("success", "Article retiré du panier.");
+            return back()->with("success", "Product removed from basket.");
         }
-        return back()->with("error", "Une erreur est survenue.");
+        return back()->with("error", "An error occured.");
     }
 }
