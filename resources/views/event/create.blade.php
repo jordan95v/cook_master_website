@@ -28,23 +28,23 @@
                     </div>
 
                     {{-- Room  --}}
-                    <div class="grid lg:grid-cols-2 grid-cols-1 gap-2 pb-2">
-                        <select class="select select-bordered w-full max-w-xs" name="room_id">
-                            <option disabled selected>Choisissez la salle</option>
-                            @foreach ($rooms as $room)
-                                <option value="{{ $room->id }}">{{ $room->name }}</option>
+                    <select class="select select-bordered w-full" name="room_id">
+                        <option disabled selected>Choisissez la salle</option>
+                        @foreach ($rooms as $room)
+                            <option value="{{ $room->id }}">{{ $room->name }}</option>
+                        @endforeach
+                    </select>
+
+                    {{-- Organizer --}}
+                    @if (auth()->user()->role == '1' || auth()->user()->role == '2')
+                        <select class="select select-bordered w-full" name="user_id">
+                            <option disabled selected>Choisissez l'organisateur</option>
+                            @foreach ($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
                             @endforeach
                         </select>
-
-                        {{-- Organizer --}}
-                        <div class="form-control">
-                            <label class="input-group">
-                                <input class="input input-bordered border-2" type="text" name="user_id"
-                                    placeholder="{{ auth()->user()->name }}" value="{{ auth()->user()->id }}" readonly />
-                            </label>
-                        </div>
                         <x-utils.form-error name="user_id" />
-                    </div>
+                    @endif
 
                     {{-- Description --}}
                     <textarea class="textarea textarea-bordered border-2 @error('description') border-error @enderror" rows=4

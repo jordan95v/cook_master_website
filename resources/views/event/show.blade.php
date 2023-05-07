@@ -31,6 +31,10 @@
                         <i class="w-4 h-4 mr-2 text-purple-500 fa-solid fa-person"></i>
                         {{ count($participants) }} / {{ $event->capacity }}
                     </li>
+                    <li class="flex items-center text-lg font-medium text-gray-700 mb-2">
+                        <i class="w-4 h-4 mr-2 text-purple-500 fa-sharp fa-solid fa-person"></i>
+                        Organisateur : {{ $event->user->name }}
+                    </li>
 
                 </ul>
                 <!-- Button to subscribe to the event -->

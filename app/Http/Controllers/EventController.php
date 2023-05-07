@@ -6,6 +6,7 @@ use App\Models\Equiped;
 use App\Models\Event;
 use App\Models\Participed;
 use App\Models\Room;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,7 +25,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view("event.create", ['events' => Event::all(), 'rooms' => Room::all()]);
+        return view("event.create", ['events' => Event::all(), 'rooms' => Room::all(), 'users' => User::all()]);
     }
 
     /**
@@ -34,7 +35,6 @@ class EventController extends Controller
     {
         $formFields = $request->validate([
             'title' => 'required',
-            'user_id' => 'required',
             'description' => 'required',
             'room_id' => 'required',
             'capacity' => 'required',
@@ -42,6 +42,13 @@ class EventController extends Controller
             'start_time' => 'required',
             'end_time' => 'required'
         ]);
+
+        // Ajoute l'ID de l'utilisateur connecté
+        if (Auth::user()->role == '0') {
+            $formFields['user_id'] = auth()->id();
+        } else {
+            $formFields['user_id'] = $request->user_id;
+        }
 
         if ($request->hasFile('image')) {
             $formFields['image'] = $request->file('image')->store('images', 'public');
@@ -113,10 +120,7 @@ class EventController extends Controller
         if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'Vous devez être connecté pour vous inscrire à un événement.');
         }
-        // Vérifie si l'événement existe
-        if (!$event) {
-            return redirect()->route('events.index')->with('error', 'Cet événement n\'existe pas.');
-        }
+
         // Vérifie si l'utilisateur est déjà inscrit
         $userId = Auth::id();
         $participed = Participed::where('user_id', $userId)->where('event_id', $event->id)->first();
@@ -124,7 +128,6 @@ class EventController extends Controller
             return redirect()->route('events.show', $event->id)->with('warning', 'Vous êtes déjà inscrit à cet événement.');
         }
         // Ajoute une entrée dans la table participed liant l'utilisateur à l'événement
-        $userId = Auth::id();
         Participed::create([
             'user_id' => $userId,
             'event_id' => $event->id
@@ -140,16 +143,7 @@ class EventController extends Controller
         if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'Vous devez être connecté pour vous désinscrire d\'un événement.');
         }
-        // Vérifie si l'événement existe
-        if (!$event) {
-            return redirect()->route('events.index')->with('error', 'Cet événement n\'existe pas.');
-        }
-        // Vérifie si l'utilisateur est déjà inscrit
-        $userId = Auth::id();
-        $participed = Participed::where('user_id', $userId)->where('event_id', $event->id)->first();
-        if ($participed) {
-            return redirect()->route('events.show', $event->id)->with('warning', 'Vous êtes déjà inscrit à cet événement.');
-        }
+
         // Supprime l'entrée dans la table participed liant l'utilisateur à l'événement
         $userId = Auth::id();
         Participed::where('user_id', $userId)->where('event_id', $event->id)->delete();
