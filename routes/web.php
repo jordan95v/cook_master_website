@@ -30,4 +30,5 @@ Route::resource('equipment', EquipmentController::class);
 Route::resource('equiped', EquipedController::class);
 Route::post('/equiped/select', [EquipedController::class, 'select'])->name('equiped.select');
 Route::post('/events/{event}/subscribe', [EventController::class, 'subscribe'])->name('event.subscribe');
+Route::post('/events/{event}/unsubscribe', [EventController::class, 'unsubscribe'])->name('event.unsubscribe');
 Route::resource('room', RoomController::class);

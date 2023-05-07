@@ -51,6 +51,9 @@
                         name="description" placeholder="Description"></textarea>
                     <x-utils.form-error name="description" />
 
+                    {{-- Capacity --}}
+                    <x-utils.input type="number" name="capacity" hint="Capacité" error="1" />
+
                     {{-- Date --}}
                     <x-utils.input type="date" name="date" hint="date" error="1" />
 

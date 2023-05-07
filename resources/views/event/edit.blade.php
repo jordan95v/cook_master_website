@@ -58,6 +58,11 @@
                         name="description" placeholder="Description">{{ $event->description }}</textarea>
                     <x-utils.form-error name="description" />
 
+                    {{-- Capacity --}}
+                    <x-utils.input type="number" name="capacity" hint="Saisissez la capacité de la salle" error=1
+                        :target="$event" />
+
+
                     {{-- Date --}}
                     <x-utils.input type="date" name="date" hint="Saisissez la date de l'événement" error=1
                         :target="$event" />

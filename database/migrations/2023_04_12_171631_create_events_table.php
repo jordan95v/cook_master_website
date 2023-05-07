@@ -21,6 +21,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignIdFor(Room::class);
             $table->foreignIdFor(User::class);
+            $table->integer('capacity')->default(0);
             $table->string('image')->nullable();
             $table->date('date')->nullable();
             $table->date('start_time')->nullable();
