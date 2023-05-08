@@ -6,7 +6,8 @@ WORKDIR /app
 
 # Install php dependencies
 RUN apt update && apt upgrade -y && apt install git zip -y
-RUN docker-php-ext-install bcmath
+RUN docker-php-ext-install bcmath mysqli pdo pdo_mysql && \
+    chmod +x /app/entrypoint.sh
 
 # Install node and npm packages
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
@@ -22,11 +23,6 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     mv composer.phar /usr/local/bin/composer && \
     composer update
 
-# Setup laravel db and storage
-RUN php artisan key:generate && \
-    php artisan migrate && \
-    php artisan storage:link
-
 # Expose port 8000 and start php server
 EXPOSE 8000
-CMD php artisan serve --host=0.0.0.0
+ENTRYPOINT /app/entrypoint.sh

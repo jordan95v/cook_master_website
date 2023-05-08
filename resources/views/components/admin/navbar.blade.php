@@ -5,11 +5,14 @@
             <label tabindex="0" class="btn btn-ghost lg:hidden">
                 <i class="fa-solid fa-bars-staggered text-2xl"></i>
             </label>
-            <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+            <ul tabindex="0"
+                class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 border-2 hover:border-primary">
                 <x-admin.menu direction="right" />
             </ul>
         </div>
-        <a class="btn btn-ghost normal-case text-xl" href="{{ route('admin.dashboard') }}">Admin dashboard</a>
+        <a class="btn btn-ghost normal-case text-xl hidden lg:flex" href="">
+            Admin dashboard
+        </a>
     </div>
 
     {{-- Navbar items full screen --}}

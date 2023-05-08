@@ -1,11 +1,40 @@
 @auth
+    {{-- Language dropdown --}}
+    <div class="dropdown dropdown-end">
+        <label tabindex="0" class="btn btn-ghost btn-circle me-2">
+            <i class="fa-solid fa-earth-americas text-2xl"></i>
+        </label>
+        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 hover:border-primary">
+            @php
+                $languages = [
+                    'en' => '🇺🇸 English',
+                    'fr' => '🇫🇷 Français',
+                    'es' => '🇪🇸 Español',
+                    'kr' => '🇰🇷 한국어',
+                ];
+                $local = App::getLocale();
+            @endphp
+            @foreach ($languages as $key => $value)
+                <li class="@if ($local == $key) disabled @endif">
+                    <a href="{{ route('lang.update', ['lang' => $key]) }}">{{ $value }}</a>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+
+
     {{-- Shopping cart --}}
     <div class="dropdown dropdown-bottom dropdown-end">
-        <label tabindex="0" class="btn btn-ghost btn-circle me-2">
-            <i class="fa-solid fa-cart-shopping text-xl"></i>
+        <label tabindex="0" class="btn btn-ghost btn-circle me-4">
+            <div class="indicator">
+                <i class="fa-solid fa-cart-shopping text-2xl"></i>
+                <span class="badge badge-sm indicator-item">
+                    {{ Auth::user()->orders->sum('quantity') ?? 0 }}
+                </span>
+            </div>
         </label>
         <ul tabindex="0"
-            class="menu menu-compact dropdown-content mt-3 p-2 border-2 shadow bg-base-100 rounded-box w-96 hover:border-primary">
+            class="menu menu-compact dropdown-content mt-3 p-2 border-2 shadow bg-base-100 rounded-box lg:w-96 w-72 hover:border-primary">
             <h2 class="text-center font-bold text-xl mb-4">{{ __('My basket.') }}</h2>
             @if (Auth::user()->orders ?? false)
                 @forelse (Auth::user()->orders as $item)
@@ -62,13 +91,6 @@
 
                     </a>
                 </li>
-                @if (Auth::user()->role != 0)
-                    <li>
-                        <a href="{{ route('admin.dashboard') }}">
-                            <i class="fa-solid fa-shield"></i>Admin dashboard
-                        </a>
-                    </li>
-                @endif
             @endif
             <li>
                 <a href="{{ route('logout') }}">

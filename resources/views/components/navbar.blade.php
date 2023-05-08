@@ -20,7 +20,7 @@
         </a>
     </div>
 
-    <div class="navbar-end">
+    <div class="navbar-end items-center">
         <x-user-menu />
     </div>
 </div>

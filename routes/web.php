@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +20,15 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
+// No controller route
 Route::view("/", "home");
-Route::view("/admin", "admin-layout")->middleware(["auth", "admin"])->name("admin.dashboard");
+Route::get("/lang/{lang}", function (string $lang) {
+    if (!in_array($lang, ["fr", "en", "es", "kr"])) {
+        abort(404);
+    }
+    Session::put("locale", $lang);
+    return redirect()->back();
+})->name("lang.update");
 
 // Users Route
 Route::prefix("users")->group(
