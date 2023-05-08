@@ -40,7 +40,7 @@ class OrderController extends Controller
         return back()->with("success", "Product $action to basket.");
     }
 
-    public function update(Request $request, Order $order)
+    private function update(Request $request, Order $order)
     {
         if ($request->get("remove")) {
             if ($order->quantity > 1) {

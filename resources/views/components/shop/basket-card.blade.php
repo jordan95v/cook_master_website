@@ -1,35 +1,54 @@
 @props(['item'])
 
-<div class="flex mb-4 rounded-xl border-2 hover:border-primary p-2">
-    <div class="w-1/4 my-auto">
-        <img src="{{ asset('storage/' . $item->product->image) }}" alt="" class="w-full my-auto rounded">
-    </div>
-    <div class="flex-col ms-2 w-2/4">
-        <a class="hover:link font-bold" href="{{ route('product.show', ['product' => $item->product->id]) }}">
-            {{ $item->product->name }}
-        </a>
-        <p class="text-start italic">€{{ $item->product->price }}</p>
-        <p class="mt-5">{{ __('Quantity') }}: {{ $item->quantity }}</p>
-    </div>
-    <div class="w-1/4 text-end flex flex-col justify-evenly">
-        {{-- Add more quantity --}}
-        <form action="{{ route('order.store', ['product' => $item->product->id]) }}" method="post" class="mb-1">
-            @csrf
-            <input type="hidden" name="add" value=1>
-            <button class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i></button>
-        </form>
+<div class="grid grid-cols-3 mb-4 rounded-xl border-2">
 
-        {{-- Remove quantity --}}
-        <form action="{{ route('order.store', ['product' => $item->product->id]) }}" method="post" class="mb-1">
-            @csrf
-            <input type="hidden" name="remove" value=1>
-            <button class="btn btn-warning btn-sm"><i class="fa-solid fa-minus"></i></button>
-        </form>
+    <div class="hidden lg:flex">
+        <img src="{{ asset('storage/' . $item->product->image) }}" alt="" class="object-cover rounded-xl">
+    </div>
 
-        {{-- Delete the order --}}
-        <form action="{{ route('order.destroy', ['order' => $item->id]) }}" method="post">
-            @csrf
-            <button class="btn btn-error btn-sm"><i class="fa-solid fa-trash"></i></button>
-        </form>
+    <div class="flex flex-col ms-4 col-span-3 lg:col-span-2">
+        <div class="mb-auto">
+            {{-- Image and name --}}
+            <img src="{{ asset('storage/' . $item->product->image) }}" alt=""
+                class="object-cover lg:hidden w-full rounded-xl">
+            <a class="hover:link font-bold text-xl"
+                href="{{ route('product.show', ['product' => $item->product->id]) }}">
+                {{ $item->product->name }}
+            </a>
+
+            {{-- Price and quantity --}}
+            <div class="my-4">
+                <p class="text-start italic">
+                    <span class="font-bold">{{ __('Quantity') }}:</span> {{ $item->quantity }}
+                </p>
+
+                <p class="text-start italic">
+                    <span class="font-bold">Prix à l'unité:</span> €{{ $item->product->price }}
+                </p>
+            </div>
+
+        </div>
+
+        <div class="flex pb-3 pe-4">
+            {{-- Add more quantity --}}
+            <form action="{{ route('order.store', ['product' => $item->product->id]) }}" method="post" class="w-full">
+                @csrf
+                <input type="hidden" name="add" value=1>
+                <button class="btn-square rounded-s btn-primary w-full"><i class="fa-solid fa-plus"></i></button>
+            </form>
+
+            {{-- Remove quantity --}}
+            <form action="{{ route('order.store', ['product' => $item->product->id]) }}" method="post" class="w-full">
+                @csrf
+                <input type="hidden" name="remove" value=1>
+                <button class="btn-square btn-warning w-full"><i class="fa-solid fa-minus"></i></button>
+            </form>
+
+            {{-- Delete the order --}}
+            <form action="{{ route('order.destroy', ['order' => $item->id]) }}" method="post" class="w-full">
+                @csrf
+                <button class="btn-square rounded-e btn-error w-full"><i class="fa-solid fa-trash"></i></button>
+            </form>
+        </div>
     </div>
 </div>

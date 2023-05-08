@@ -3,7 +3,7 @@
         <div class="flex-col shadow-lg p-5 border-2 hover:border-primary rounded-xl lg:w-1/3 w-full">
             <a href="{{ asset('storage/' . $product->image) }}" class="flex justify-center">
                 <img src="{{ asset('storage/' . $product->image) }}"
-                    class="transform transition hover:scale-105 rounded-lg w-96 h-96" alt="" />
+                    class="transform transition hover:scale-105 rounded-lg w-96 h-96 object-cover" alt="" />
             </a>
             <div class="pt-3 flex items-center justify-between text-xl pb-1">
                 <p class="font-bold">{{ $product->name }} -
@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <div class="text-center p-5">
+    <div class="text-center p-5 mt-10">
         @if (count($seeblings) > 0)
             <h2 class="text-2xl font-bold">{{ __('Same brand products') }}</h2>
             <div class="pt-10 grid lg:grid-cols-5 md:grid-cols-4 grid-cols-1 gap-20 lg:px-10 lg:mt-10">
