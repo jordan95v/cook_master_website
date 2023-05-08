@@ -43,7 +43,7 @@ class EquipmentController extends Controller
 
         Equipment::create($formFields);
 
-        return redirect("/")->with("success", "Vous avez crée votre équipement !");
+        return redirect("/")->with("success", "You have created an equipment");
     }
 
     /**
@@ -79,7 +79,7 @@ class EquipmentController extends Controller
 
         $equipment->update($formFields);
 
-        return redirect("/equipment")->with("success", "Vous avez modifié l'équipement !");
+        return redirect("/equipment")->with("success", "You have edited an equipment");
     }
 
     /**
@@ -88,6 +88,6 @@ class EquipmentController extends Controller
     public function destroy(Equipment $equipment)
     {
         $equipment->delete();
-        return redirect("/equipment")->with("success", "Vous avez supprimé l'équipement !");
+        return redirect("/equipment")->with("success", "You have deleted an equipment");
     }
 }

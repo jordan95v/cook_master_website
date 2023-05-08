@@ -1,7 +1,7 @@
 @extends('main_layout')
 
 @section('title')
-    Salles
+    {{ __('Rooms') }}
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
                     <a href="/room/{{ $room['id'] }}">
                         <figure class="h-64"><img
                                 src="{{ $room->image ? asset('storage/' . $room->image) : 'https://picsum.photos/500/300' }}"
-                                alt="Photo de l'événement" class="w-full h-full object-cover object-center rounded-md">
+                                alt="{{ __('Image') }}" class="w-full h-full object-cover object-center rounded-md">
                         </figure>
                         <div class="p-4 card-body h-50 flex flex-col">
                             <h2 class="card-title">{{ $room['name'] }}</h2>

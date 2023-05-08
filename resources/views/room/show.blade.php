@@ -1,7 +1,7 @@
 @extends('main_layout')
 
 @section('title')
-    Votre salle
+    {{ __('Room') }} : {{ $room->name }}
 @endsection
 
 @section('content')
@@ -18,9 +18,10 @@
             <form method="POST" action="/room/{{ $room->id }}">
                 @csrf
                 @method('DELETE')
-                <button class="text-red-500"><i class="fa-solid fa-trash"></i>Delete</button>
+                <button class="text-red-500"><i class="fa-solid fa-trash"></i>{{ __('Delete') }}</button>
             </form>
-            <a href="/room/{{ $room->id }}/edit" class="text-gray-500 px-3"><i class="fa-solid fa-edit"></i>Edit</a>
+            <a href="/room/{{ $room->id }}/edit" class="text-gray-500 px-3"><i
+                    class="fa-solid fa-edit"></i>{{ __('Edit') }}</a>
         </div>
     </section>
 
@@ -31,10 +32,10 @@
                 <div class="container my-8">
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="text-3xl font-medium">
-                            Equipements
+                            {{ __('Equipments') }}
                         </h2>
-                        <a href="/equiped/edit" class="text-gray-500 px-3"><i class="fa-solid fa-edit"></i>Modifier les
-                            Equipements</a>
+                        <a href="/equiped/edit" class="text-gray-500 px-3"><i
+                                class="fa-solid fa-edit"></i>{{ __('Edit equipments') }}</a>
                     </div>
                     <div id="scrollContainer" class="flex flex-no-wrap overflow-x-scroll scrolling-touch items-start mb-8">
                         @foreach ($equiped as $item)
@@ -48,7 +49,7 @@
                                         <div class="card-body">
                                             <h2 class="card-title">{{ $item->equipment->title }}</h2>
                                             <p>{{ $item->equipment->description }}</p>
-                                            <p>Marque: {{ $item->equipment->brand }}</p>
+                                            <p>{{ __('Brand') }} : {{ $item->equipment->brand }}</p>
                                         </div>
                                     </div>
                                 </div>

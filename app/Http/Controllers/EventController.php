@@ -56,7 +56,7 @@ class EventController extends Controller
 
         Event::create($formFields);
 
-        return redirect("/")->with("success", "Vous avez crée votre événement !");
+        return redirect("/")->with("success", "You have created an event");
     }
 
     /**
@@ -102,7 +102,7 @@ class EventController extends Controller
 
         $event->update($formFields);
 
-        return redirect("/events")->with("success", "Vous avez mis à jour votre événement !");
+        return redirect("/events")->with("success", "You have edited an event");
     }
 
     /**
@@ -111,21 +111,21 @@ class EventController extends Controller
     public function destroy(Event $event)
     {
         $event->delete();
-        return redirect("/events")->with("success", "Vous avez supprimé votre événement !");
+        return redirect("/events")->with("success", "You have deleted an event");
     }
 
     public function subscribe(Event $event)
     {
         // Vérifie si l'utilisateur est connecté
         if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'Vous devez être connecté pour vous inscrire à un événement.');
+            return redirect()->route('login')->with('error', 'You have to be connected to subscribe to an event');
         }
 
         // Vérifie si l'utilisateur est déjà inscrit
         $userId = Auth::id();
         $participed = Participed::where('user_id', $userId)->where('event_id', $event->id)->first();
         if ($participed) {
-            return redirect()->route('events.show', $event->id)->with('warning', 'Vous êtes déjà inscrit à cet événement.');
+            return redirect()->route('events.show', $event->id)->with('warning', 'You are already subscribed to this event');
         }
         // Ajoute une entrée dans la table participed liant l'utilisateur à l'événement
         Participed::create([
@@ -134,14 +134,14 @@ class EventController extends Controller
         ]);
 
         // Redirige vers la page de l'événement avec un message de confirmation
-        return redirect()->route('events.show', $event->id)->with('success', 'Vous vous êtes inscrit à l\'événement.');
+        return redirect()->route('events.show', $event->id)->with('success', 'You have subscribed to the event');
     }
 
     public function unsubscribe(Event $event)
     {
         // Vérifie si l'utilisateur est connecté
         if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'Vous devez être connecté pour vous désinscrire d\'un événement.');
+            return redirect()->route('login')->with('error', 'You have to be connected to unsubscribe to an event');
         }
 
         // Supprime l'entrée dans la table participed liant l'utilisateur à l'événement
@@ -149,6 +149,6 @@ class EventController extends Controller
         Participed::where('user_id', $userId)->where('event_id', $event->id)->delete();
 
         // Redirige vers la page de l'événement avec un message de confirmation
-        return redirect()->route('events.show', $event->id)->with('success', 'Vous vous êtes désinscrit de l\'événement.');
+        return redirect()->route('events.show', $event->id)->with('success', 'You have unsubscribed to the event');
     }
 }

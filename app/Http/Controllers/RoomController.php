@@ -42,7 +42,7 @@ class RoomController extends Controller
 
         $room = Room::create($formFields);
 
-        return redirect()->route("equiped.create")->with("success", "Vous avez créer une salle !")->with("room_id", $room->id);
+        return redirect()->route("equiped.create")->with("success", "You have created a room")->with("room_id", $room->id);
     }
 
     /**
@@ -77,7 +77,7 @@ class RoomController extends Controller
 
         $room->update($formFields);
 
-        return redirect("/room")->with("success", "Vous avez modifié une salle !");
+        return redirect("/room")->with("success", "You have edited a room");
     }
 
     /**
@@ -87,6 +87,6 @@ class RoomController extends Controller
     {
         $room->delete();
 
-        return redirect("/room")->with("success", "Vous avez supprimé une salle !");
+        return redirect("/room")->with("success", "You have deleted a room");
     }
 }

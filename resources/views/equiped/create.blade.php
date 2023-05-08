@@ -8,7 +8,7 @@
     <div class="flex justify-center my-10">
         <div class="card shadow-lg">
             <div class="card-body">
-                <p class="font-bold text-2xl text-center pb-4">Relier un Equipement</p>
+                <p class="font-bold text-2xl text-center pb-4">{{ __('connect an equipment') }}</p>
                 <form method="POST" action="{{ route('equiped.select') }}">
                     @csrf
                     <input type="hidden" name="room_id" value="{{ session('room_id') }}">
@@ -23,12 +23,12 @@
                                     <div class="card-body">
                                         <h2 class="card-title">{{ $item['title'] }}</h2>
                                         <p>{{ $item['description'] }}</p>
-                                        <p>Marque: {{ $item->brand }}</p>
+                                        <p>{{ __('Brand') }}: {{ $item->brand }}</p>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" name="equipment[]"
                                                 value="{{ $item->id }}" id="{{ $item->id }}">
                                             <label class="form-check-label" for="{{ $item->id }}">
-                                                Sélectionner
+                                                {{ __('Select') }}
                                             </label>
                                         </div>
                                     </div>
@@ -36,7 +36,7 @@
                             @endforeach
                         </div>
                     </div>
-                    <button type="submit" class="my-5 btn btn-primary">Valider la sélection</button>
+                    <button type="submit" class="my-5 btn btn-primary">{{ __('Validate selection') }}</button>
                 </form>
             </div>
         </div>

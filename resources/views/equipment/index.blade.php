@@ -1,11 +1,11 @@
 @extends('main_layout')
 
 @section('title')
-    Equipements
+    {{ __('Equipments') }}
 @endsection
 
 @section('content')
-    <h1 class="text-center">Tous les équipements</h1>
+    <h1 class="text-center">{{ __('All equipments') }}</h1>
     <div class="flex justify-center">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-3">
             @foreach ($equipments as $equipment)
@@ -13,7 +13,7 @@
                     <a href="/equipment/{{ $equipment['id'] }}">
                         <figure class="h-70 w-full"><img
                                 src="{{ $equipment->image ? asset('storage/' . $equipment->image) : 'https://picsum.photos/500/300' }}"
-                                alt="Photo de l'équipement" class="w-full h-full object-cover object-center rounded-md">
+                                alt="{{ __('Image') }}" class="w-full h-full object-cover object-center rounded-md">
                         </figure>
                         <div class="card-body h-50">
                             <h2 class="card-title">{{ $equipment['title'] }}</h2>

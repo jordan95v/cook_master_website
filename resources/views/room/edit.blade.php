@@ -1,7 +1,7 @@
 @extends('main_layout')
 
 @section('title')
-    Modifier {{ $room->name }}
+    {{ __('Edit') }} {{ $room->name }}
 @endsection
 
 @section('content')
@@ -14,29 +14,29 @@
                 <form action="/room/{{ $room->id }}" method="POST" enctype="multipart/form-data" class="card-body">
                     @csrf
                     @method('put')
-                    <h2 class="card-title text-2xl flex justify-center pb-2">Modifier la salle</h2>
+                    <h2 class="card-title text-2xl flex justify-center pb-2">{{ __('Edit the room') }}</h2>
                     {{-- Name --}}
-                    <x-utils.input type="text" name="name" hint="Saisissez le nom de la salle" error=1
+                    <x-utils.input type="text" name="name" hint="{{ __('Enter the name of the room') }}" error=1
                         :target="$room" />
                     {{-- Address --}}
-                    <x-utils.input type="text" name="address" hint="Saisissez l'adresse de la salle" error=1
+                    <x-utils.input type="text" name="address" hint="{{ __('Enter the address of the room') }}" error=1
                         :target="$room" />
                     {{-- Image --}}
                     <div class="form-control w-full pb-2">
                         <label class="label">
-                            <span class="label-text-alt">Image de la salle</span>
+                            <span class="label-text-alt">{{ __('Image') }}</span>
                         </label>
                         <input type="file" name="image"
                             class="file-input file-input-bordered border-2 w-full mb-2 @error('image') border-error @enderror" />
                         <x-utils.form-error name="image" />
                         <label class="label">
-                            <span class="label-text-alt">Image actuelle</span>
+                            <span class="label-text-alt">{{ __('Current Image') }}</span>
                         </label>
                         <img src="{{ asset('storage/' . $room->image) }}" alt="" class="w-50 h-50">
                     </div>
                     {{-- Submit --}}
                     <div class="justify-center card-actions">
-                        <button type="submit" class="btn btn-primary">Modifier</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Edit') }}</button>
                     </div>
                 </form>
             </x-utils.card-grid>

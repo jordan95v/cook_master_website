@@ -1,7 +1,7 @@
 @extends('main_layout')
 
 @section('title')
-    Evenements
+    {{ __('Events') }}
 @endsection
 
 @section('content')
@@ -36,7 +36,7 @@
                                 {{-- location --}}
                                 <div class="flex items-center text-gray-500 text-sm mb-2">
                                     <i class="w-4 h-4 mr-2 fa-sharp fa-solid fa-location-dot"></i>
-                                    Lieu : {{ $event->room->address }}
+                                    {{ __('Place') }} : {{ $event->room->address }}
                                 </div>
                             </div>
                         </div>

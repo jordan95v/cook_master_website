@@ -1,7 +1,7 @@
 @extends('main_layout')
 
 @section('title')
-    Créer un Evenement
+    {{ __('Add an event') }}
 @endsection
 
 @section('content')
@@ -13,14 +13,14 @@
             <x-utils.card-grid>
                 <form action="/events"method="POST" enctype="multipart/form-data" class="card-body">
                     @csrf
-                    <h2 class="card-title text-2xl flex justify-center pb-2">Ajouter un événement</h2>
+                    <h2 class="card-title text-2xl flex justify-center pb-2">{{ _('Add an event') }}</h2>
                     {{-- Title --}}
-                    <x-utils.input type="text" name="title" hint="Saisissez le titre de votre événement" error=1 />
+                    <x-utils.input type="text" name="title" hint="{{ __('Enter the name of the event') }}" error=1 />
 
                     {{-- Image --}}
                     <div class="form-control w-full">
                         <label class="label">
-                            <span class="label-text-alt">Image de l'événement</span>
+                            <span class="label-text-alt">{{ __('Event image') }}</span>
                         </label>
                         <input type="file" name="image"
                             class="file-input file-input-bordered border-2 w-full mb-2 @error('image') border-error @enderror" />
@@ -29,7 +29,7 @@
 
                     {{-- Room  --}}
                     <select class="select select-bordered w-full" name="room_id">
-                        <option disabled selected>Choisissez la salle</option>
+                        <option disabled selected>{{ __('Choose the room') }}</option>
                         @foreach ($rooms as $room)
                             <option value="{{ $room->id }}">{{ $room->name }}</option>
                         @endforeach
@@ -38,7 +38,7 @@
                     {{-- Organizer --}}
                     @if (auth()->user()->role == '1' || auth()->user()->role == '2')
                         <select class="select select-bordered w-full" name="user_id">
-                            <option disabled selected>Choisissez l'organisateur</option>
+                            <option disabled selected>{{ __('Choose the Organizer') }}</option>
                             @foreach ($users as $user)
                                 <option value="{{ $user->id }}">{{ $user->name }}</option>
                             @endforeach
@@ -48,20 +48,20 @@
 
                     {{-- Description --}}
                     <textarea class="textarea textarea-bordered border-2 @error('description') border-error @enderror" rows=4
-                        name="description" placeholder="Description"></textarea>
+                        name="description" placeholder="{{ __('Description') }}"></textarea>
                     <x-utils.form-error name="description" />
 
                     {{-- Capacity --}}
-                    <x-utils.input type="number" name="capacity" hint="Capacité" error="1" />
+                    <x-utils.input type="number" name="capacity" hint="{{ __('Capacity') }}" error="1" />
 
                     {{-- Date --}}
-                    <x-utils.input type="date" name="date" hint="date" error="1" />
+                    <x-utils.input type="date" name="date" hint="{{ __('Date') }}" error="1" />
 
                     {{-- Range time --}}
                     <div class="grid lg:grid-cols-2 grid-cols-1 gap-2 pb-2">
                         {{-- Start time --}}
                         <select class="select select-bordered w-full max-w-xs" name="start_time" id="start-time">
-                            <option disabled selected>Choisissez l'heure de début</option>
+                            <option disabled selected>{{ __('Choose the start time') }}</option>
                             <?php
                             for ($i = 0; $i <= 23; $i++) {
                                 $hour = str_pad($i, 2, '0', STR_PAD_LEFT);
@@ -72,14 +72,14 @@
 
                         {{-- End time --}}
                         <select class="select select-bordered w-full max-w-xs" name="end_time" id="end-time">
-                            <option disabled selected>Choisissez l'heure de fin</option>
+                            <option disabled selected>{{ __('Choose the end time') }}</option>
                         </select>
                     </div>
 
 
                     {{-- Submit --}}
                     <div class="card-actions justify-center">
-                        <button class="btn btn-primary w-full"> Ajouter l 'événement</button>
+                        <button class="btn btn-primary w-full"> {{ __('Add the event') }}</button>
                     </div>
                 </form>
             </x-utils.card-grid>

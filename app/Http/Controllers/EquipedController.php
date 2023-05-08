@@ -37,7 +37,7 @@ class EquipedController extends Controller
 
         Equiped::create($formFields);
 
-        return redirect("/")->with("success", "Vous avez votre équipement dans votre salle !");
+        return redirect("/")->with("success", "You have connect an equipment to this room");
     }
 
     /**
@@ -86,6 +86,6 @@ class EquipedController extends Controller
         }
 
         // Redirection vers la page de la room avec un message de succès
-        return redirect('/')->with('success', 'La sélection d\'équipements a été enregistrée avec succès.');
+        return redirect('/')->with('success', 'The selection of equipment has been successfully registered');
     }
 }
