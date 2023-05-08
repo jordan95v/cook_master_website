@@ -18,7 +18,7 @@ return new class extends Migration
             $table->float("price");
             $table->foreignIdFor(Brand::class, "brand_id")->constrained("brands")->onDelete("cascade");
             $table->string("image");
-            $table->string("description");
+            $table->longText("description", 255);
             $table->timestamps();
         });
     }

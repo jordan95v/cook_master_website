@@ -22,7 +22,7 @@
                     {{-- CGU --}}
                     <p class="text-xs mb-2">{{ __("By continuing, i aknowledge that i've read and agree to the") }}
                         <a class="link hover:text-primary" href="#">{{ __('Privacy Policy') }}</a>
-                        {{ __('of the') }}
+                        {{ __('and the') }}
                         <a class="link hover:text-primary" href="#">{{ __('Privacy Notice') }}</a>
                         {{ __("of Gourmet's Workshop when creating an account") }}
                     </p>
