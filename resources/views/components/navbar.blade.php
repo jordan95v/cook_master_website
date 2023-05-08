@@ -5,10 +5,10 @@
                 <i class="fa-solid fa-bars-staggered text-xl"></i>
             </label>
             <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                <li><a href="/"><i class="fa-solid fa-house"></i>Accueil</a></li>
-                <li><a href=""><i class="fa-solid fa-school"></i>Cours</a></li>
-                <li><a href=""><i class="fa-solid fa-calendar-days"></i>Evenements</a></li>
-                <li><a href="{{ route('store') }}"><i class="fa-solid fa-store"></i>Boutique</a></li>
+                <li><a href="/"><i class="fa-solid fa-house"></i>{{ __('Home') }}</a></li>
+                <li><a href=""><i class="fa-solid fa-school"></i>{{ __('Courses') }}</a></li>
+                <li><a href=""><i class="fa-solid fa-calendar-days"></i>{{ __('Events') }}</a></li>
+                <li><a href="{{ route('store') }}"><i class="fa-solid fa-store"></i>{{ __('Store') }}</a></li>
             </ul>
         </div>
     </div>

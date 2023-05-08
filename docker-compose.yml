@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    networks:
+      - cook_master
+
+  laravel:
+    build: .
+    container_name: laravel
+    ports:
+      - 8000:8000
+    depends_on:
+      - caddy
+    networks:
+      - cook_master
+
+networks:
+  cook_master:
