@@ -36,8 +36,8 @@ class OrderController extends Controller
                 "product_id" => $product->id,
             ]);
         }
-        $action = ($request->get("remove")) ? "removed" : "added";
-        return back()->with("success", "Product $action to basket.");
+        $action = ($request->get("remove")) ? "removed from" : "added to";
+        return back()->with("success", "Product $action basket.");
     }
 
     private function update(Request $request, Order $order)
@@ -125,8 +125,8 @@ class OrderController extends Controller
         foreach (Auth::user()->orders as $value) {
             if ($value->product_id == $order->product_id) {
                 $value->delete();
+                return back()->with("success", "Product removed from basket.");
             }
-            return back()->with("success", "Product removed from basket.");
         }
         return back()->with("error", "An error occured.");
     }

@@ -5,10 +5,10 @@
             <tr>
                 <th>id</th>
                 <th>{{ __('Username') }}</th>
-                <th>Email</th>
+                <th>{{ __('Email') }}</th>
                 <th>{{ __('Role') }}</th>
                 <th>{{ __('Banned') }}</th>
-                <th>Action</th>
+                <th>{{ __('Actions') }}</th>
             </tr>
         </thead>
         <tbody>

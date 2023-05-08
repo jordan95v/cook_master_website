@@ -35,7 +35,7 @@
         </label>
         <ul tabindex="0"
             class="menu menu-compact dropdown-content mt-3 p-2 border-2 shadow bg-base-100 rounded-box lg:w-96 w-72 hover:border-primary">
-            <h2 class="text-center font-bold text-xl mb-4">{{ __('My basket.') }}</h2>
+            <h2 class="text-center font-bold text-xl mb-4">{{ __('My basket') }}</h2>
             @if (Auth::user()->orders ?? false)
                 @forelse (Auth::user()->orders as $item)
                     <x-shop.basket-card :item="$item" />

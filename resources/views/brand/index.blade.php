@@ -5,10 +5,10 @@
             <tr>
                 <th>id</th>
                 <th>{{ __('Name') }}</th>
-                <th>Image</th>
+                <th>{{ __('Image') }}</th>
                 <th>{{ __('Brand website') }}</th>
                 <th>{{ __('Brand email') }}</th>
-                <th>Action</th>
+                <th>{{ __('Actions') }}</th>
             </tr>
         </thead>
         <tbody>

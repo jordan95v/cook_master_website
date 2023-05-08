@@ -64,6 +64,10 @@
                         search: "",
                         @if (app()->getLocale() == 'fr')
                             url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/fr-FR.json',
+                        @elseif (app()->getLocale() == 'es')
+                            url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json',
+                        @elseif (app()->getLocale() == 'kr')
+                            url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/ko.json',
                         @endif
                     },
                 });

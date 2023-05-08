@@ -23,7 +23,7 @@
                 </p>
 
                 <p class="text-start italic">
-                    <span class="font-bold">Prix à l'unité:</span> €{{ $item->product->price }}
+                    <span class="font-bold">{{ __('Unit price') }}:</span> €{{ $item->product->price }}
                 </p>
             </div>
 
