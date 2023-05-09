@@ -33,7 +33,7 @@
                         <img src="{{ asset('storage/' . $event->image) }}" alt="" class="w-50 h-50">
                     </div>
 
-                    {{-- Room & id organizator --}}
+                    {{-- Room --}}
                     <div class="grid lg:grid-cols-2 grid-cols-1 gap-2 pb-2">
                         <select class="select select-bordered w-full max-w-xs" name="room_id">
                             <option disabled selected>{{ __('Choose the room') }}</option>
@@ -43,14 +43,17 @@
                                 </option>
                             @endforeach
                         </select>
-
-                        <div class="form-control">
-                            <label class="input-group">
-                                <x-utils.input type="text" name="user_id" hint="" error=0 :target="$event" />
-                            </label>
-                        </div>
-                        <x-utils.form-error name="user_id" />
                     </div>
+                    {{-- Organizer --}}
+                    @if (auth()->user()->role == '1' || auth()->user()->role == '2')
+                        <select class="select select-bordered w-full" name="user_id">
+                            <option disabled selected>{{ $event->user->name }}</option>
+                            @foreach ($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            @endforeach
+                        </select>
+                        <x-utils.form-error name="user_id" />
+                    @endif
 
                     {{-- Description --}}
                     <textarea class="textarea textarea-bordered border-2 @error('description') border-error @enderror" rows=4

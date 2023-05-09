@@ -66,8 +66,9 @@ class EventController extends Controller
     {
         //Création d'un tableau contenant les id des participants à l'événement
         $participants = $event->participants()->pluck('users.id')->toArray();
+        $participant = $event->participants()->get();
         //La Méthode compact permet de créer un tableau associatif avec les clés et les valeurs passées en paramètre
-        return view('event.show', compact('event', 'participants'), ['event' => $event, 'events' => Event::all(), 'equiped' => Equiped::all()]);
+        return view('event.show', compact('event', 'participants'), ['event' => $event, 'events' => Event::all(), 'equiped' => Equiped::all(), 'participant' => $participant]);
     }
 
     /**
@@ -75,7 +76,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        return view('event.edit', ['event' => $event, 'events' => Event::all(), 'rooms' => Room::all()]);
+        return view('event.edit', ['event' => $event, 'events' => Event::all(), 'rooms' => Room::all(), 'users' => User::all()]);
     }
 
     /**
@@ -87,7 +88,6 @@ class EventController extends Controller
         //dd($request);
         $formFields = $request->validate([
             'title' => 'required',
-            'user_id' => 'required',
             'description' => 'required',
             'room_id' => 'required',
             'capacity' => 'required',
@@ -95,6 +95,13 @@ class EventController extends Controller
             'start_time' => 'required',
             'end_time' => 'required'
         ]);
+
+        // Ajoute l'ID de l'utilisateur connecté
+        if (Auth::user()->role == '0') {
+            $formFields['user_id'] = auth()->id();
+        } else {
+            $formFields['user_id'] = $request->user_id;
+        }
 
         if ($request->hasFile('image')) {
             $formFields['image'] = $request->file('image')->store('images', 'public');

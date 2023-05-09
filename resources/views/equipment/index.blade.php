@@ -11,9 +11,9 @@
             @foreach ($equipments as $equipment)
                 <div class="card w-full bg-base-100 shadow-xl">
                     <a href="/equipment/{{ $equipment['id'] }}">
-                        <figure class="h-70 w-full"><img
+                        <figure class="h-64 w-full"><img
                                 src="{{ $equipment->image ? asset('storage/' . $equipment->image) : 'https://picsum.photos/500/300' }}"
-                                alt="{{ __('Image') }}" class="w-full h-full object-cover object-center rounded-md">
+                                alt="{{ __('Image') }}" class="w-full h-full object-cover object-center rounded-md ">
                         </figure>
                         <div class="card-body h-50">
                             <h2 class="card-title">{{ $equipment['title'] }}</h2>
