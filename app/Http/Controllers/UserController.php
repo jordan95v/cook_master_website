@@ -96,6 +96,6 @@ class UserController extends Controller
 
     public function invoices()
     {
-        return view("users.invoices", ["invoices" => Auth::user()->invoices]);
+        return view("users.invoices", ["invoices" => Auth::user()->orderInvoices]);
     }
 }
