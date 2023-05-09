@@ -5,8 +5,9 @@ ADD . /app
 WORKDIR /app
 
 # Install php dependencies
-RUN apt update && apt upgrade -y && apt install git zip -y
-RUN docker-php-ext-install bcmath mysqli pdo pdo_mysql && \
+RUN apt update && apt upgrade -y && apt install git zip libfreetype6-dev libjpeg62-turbo-dev libpng-dev netcat -y
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-install bcmath mysqli pdo pdo_mysql gd && \
     chmod +x /app/entrypoint.sh
 
 # Install node and npm packages
