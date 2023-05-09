@@ -5,7 +5,7 @@ ADD . /app
 WORKDIR /app
 
 # Install php dependencies
-RUN apt update && apt upgrade -y && apt install git zip libfreetype6-dev libjpeg62-turbo-dev libpng-dev netcat -y
+RUN apt update && apt upgrade -y && apt install git zip libfreetype6-dev libjpeg62-turbo-dev libpng-dev netcat mariadb-client -y
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install bcmath mysqli pdo pdo_mysql gd && \
     chmod +x /app/entrypoint.sh

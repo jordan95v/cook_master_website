@@ -1,28 +1,30 @@
 version: '3'
 
 services:
-  # laravel:
-  #   build: .
-  #   container_name: laravel
-  #   ports:
-  #     - 8000:8000
-  #   depends_on:
-  #     - mysql
-  #   networks:
-  #     - cook_master
+  laravel:
+    build: .
+    container_name: laravel
+    ports:
+      - 8000:8000
+    depends_on:
+      - mysql
+    environment:
+      - DB_HOST=mysql
+    networks:
+      - cook_master
 
-  # caddy:
-  #   image: caddy:latest
-  #   container_name: caddy
-  #   ports:
-  #     - 80:80
-  #     - 443:443
-  #   volumes:
-  #     - ./Caddyfile:/etc/caddy/Caddyfile
-  #   depends_on:
-  #     - mysql
-  #   networks:
-  #     - cook_master
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    depends_on:
+      - mysql
+    networks:
+      - cook_master
 
   mysql:
     image: mysql:latest
