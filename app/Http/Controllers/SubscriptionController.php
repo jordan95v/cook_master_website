@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Cashier\Cashier;
+use Stripe\Exception\CardException;
 
 class SubscriptionController extends Controller
 {
@@ -34,7 +35,11 @@ class SubscriptionController extends Controller
             "payment-method-id" => "required",
         ]);
         $subscriptionName = $request->get("plan") . (($request->get("recurring") == "year") ? "_annual" : "");
-        $user->newSubscription($subscriptionName, env(strtoupper($subscriptionName) . "_PLAN_ID"))->create($request->get("payment-method-id"));
+        try {
+            $user->newSubscription($subscriptionName, env(strtoupper($subscriptionName) . "_PLAN_ID"))->create($request->get("payment-method-id"));
+        } catch (CardException $th) {
+            return back()->with("error", $th->getMessage());
+        }
         return redirect("/")->with("success", "Congrats, you subscribed.");
     }
 

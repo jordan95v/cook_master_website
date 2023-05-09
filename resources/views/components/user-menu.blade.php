@@ -45,7 +45,7 @@
                 </div>
                 @if (count(Auth::user()->orders) != 0)
                     <x-shop.basket-total />
-                    <a class="btn btn-primary w-full" href="{{ route('order.show') }}">{{ __('Payment') }}</a>
+                    <a class="mt-7 btn btn-primary w-full" href="{{ route('order.show') }}">{{ __('Payment') }}</a>
                 @endif
             @endif
         </ul>

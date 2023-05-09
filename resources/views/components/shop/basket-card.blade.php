@@ -1,24 +1,24 @@
 @props(['item'])
 
 <div class="grid grid-cols-3 mb-4 rounded-xl bg-gray-200 border-2">
-    <div class="hidden lg:flex">
+    <div class="hidden lg:flex h-28">
         <img src="{{ asset('storage/' . $item->product->image) }}" alt="" class="object-cover lg:rounded-s-xl">
     </div>
 
-    <div class="flex flex-col lg:ms-4 lg:py-2 col-span-3 lg:col-span-2">
+    <div class="flex flex-col col-span-3 lg:col-span-2 lg:ms-4 lg:h-28">
         <div class="mb-auto">
             {{-- Image and name --}}
             <img src="{{ asset('storage/' . $item->product->image) }}" alt=""
                 class="object-cover lg:hidden w-full rounded-t-xl">
 
-            <div class="p-2 lg:p-0">
-                <a class="hover:link font-bold text-lg"
+            <div class="lg:p-0">
+                <a class="hover:link font-bold text-lg lg:text-sm"
                     href="{{ route('product.show', ['product' => $item->product->id]) }}">
                     {{ $item->product->name }}
                 </a>
 
                 {{-- Price and quantity --}}
-                <div class="my-4">
+                <div class="my-4 lg:my-0 lg:text-sm">
                     <p class="text-start italic">
                         <span class="font-bold">{{ __('Quantity') }}:</span> {{ $item->quantity }}
                     </p>
@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="flex lg:pb-2 lg:pe-4">
+        <div class="flex lg:pb-1 lg:pe-4">
             {{-- Add more quantity --}}
             <form action="{{ route('order.store', ['product' => $item->product->id]) }}" method="post" class="w-full">
                 @csrf

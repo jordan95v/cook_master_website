@@ -70,6 +70,7 @@ class OrderController extends Controller
             $items[] = (new InvoiceItem())
                 ->title($value->product->name)
                 ->pricePerUnit($value->product->price)
+                ->discountByPercent(($user->isSubscribed()) ? 5 : 0)
                 ->quantity($value->quantity);
         }
         $invoice = Invoice::make()
@@ -100,7 +101,7 @@ class OrderController extends Controller
         try {
             $user->charge($price, $request->get("payment-method-id"));
         } catch (CardException $th) {
-            return back()->with("error", "An error occured. Please try again.");
+            return back()->with("error", $th->getMessage());
         }
 
         // Order deletion

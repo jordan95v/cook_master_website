@@ -138,7 +138,7 @@
 
                         {{-- Tchat with chef --}}
                         <tr>
-                            <td class="font-semibold">{{ __('Tachat with a Chef') }}</td>
+                            <td class="font-semibold">{{ __('Tchat with a Chef') }}</td>
                             <td><i class="fa-solid fa-circle-xmark text-2xl me-2" style="color: #ff0d0d;"></i></td>
                             <td><i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i></td>
                             <td><i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i></td>
@@ -186,12 +186,12 @@
                             <td>
                                 <i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i><br>
                                 {{ __('5€ for every 3 people subscribed with your link') }}
-                                <br>{{ __('(Outside of Free tier)') }}
+                                <br>{{ __('(outside of Free tier)') }}
                             </td>
                             <td>
                                 <i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i><br>
                                 {{ __('5€ for every people subscribed with your link') }}<br>
-                                {{ __('(Outside of Free tier)') }} +<br>{{ __('3% on his first order') }}
+                                {{ __('(outside of Free tier)') }} +<br>{{ __('3% on his first order') }}
                             </td>
                         </tr>
 
