@@ -4,7 +4,7 @@
         {{-- I don't use the card component here --}}
         <x-utils.card-grid>
             <div class="card-body">
-                <h2 class="card-title justify-center flex text-2xl pb-4">{{ __('Command overview') }}</h2>
+                <h2 class="card-title justify-center flex text-2xl pb-7">{{ __('Command overview') }}</h2>
 
                 {{-- Shop product card --}}
                 @forelse (Auth::user()->orders as $item)
