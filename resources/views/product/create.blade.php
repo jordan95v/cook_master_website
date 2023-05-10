@@ -40,7 +40,7 @@
                     </div>
 
                     {{-- Description --}}
-                    <textarea class="textarea textarea-bordered border-2 @error('description') border-error @enderror" rows=4
+                    <textarea id="editor" class="textarea textarea-bordered border-2 @error('description') border-error @enderror" rows=4
                         name="description" placeholder="{{ __('Product description') }}">{{ old('description') }}</textarea>
                     <x-utils.form-error name="description" />
 
@@ -51,4 +51,5 @@
             </x-utils.card-grid>
         </div>
     </div>
+    <x-utils.editor />
 </x-layout>

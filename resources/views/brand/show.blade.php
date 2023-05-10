@@ -2,21 +2,22 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 justify-center align-center gap-10 p-5 lg:p-12">
         {{-- Brand image hidden on large --}}
         <div class="flex justify-center w-full lg:hidden">
-            <img src="{{ asset('storage/' . $brand->image) }}" class="object-cover" />
+            <img src="{{ asset('storage/' . $brand->image) }}" class="object-cover rounded-xl" />
         </div>
 
-        <div class="lg:py-20">
+        <div class="lg:py-10">
             {{-- Brand info --}}
-            <p class="font-bold font-mono text-2xl lg:text-5xl">{{ $brand->name }}</p>
-            <p class="text-lg pt-5" style="white-space: pre-wrap;">{{ $brand->description }}</p>
+            <p class="font-bold font-mono text-5xl">{{ $brand->name }}</p>
+            <div class="py-5 text-gray-600">{!! Str::limit($brand->description, $limit = 800) !!}</div>
+            <a href="#full-description" class="link hover:link-primary">{{ __('Show more') }}</a>
 
             {{-- Buttons --}}
-            <div class="mt-10 space-y-2 lg:space-x-2">
+            <div class="mt-10 lg:flex justify-center gap-6 space-y-2 lg:space-y-0">
                 <a href="{{ $brand->website }}" class="btn btn-primary w-full lg:w-72">
                     <i class="fa-solid fa-globe text-xl me-2"></i>{{ $brand->website }}
                 </a>
                 <a href="mailto:{{ $brand->name }}" class="btn btn-neutral w-full lg:w-72">
-                    <i class="fa-solid fa-envelopes-bulk text-xl me-2"></i>Contact {{ $brand->name }}
+                    <i class="fa-solid fa-envelopes-bulk text-xl me-2"></i>Contact {{ $brand->contact_email }}
                 </a>
             </div>
         </div>
@@ -28,12 +29,10 @@
     </div>
 
     {{-- Brand's products --}}
-    <div class="text-center p-5">
-        <h2 class="text-2xl font-bold">{{ __('Brand\'s product') }}</h2>
-        <div class="pt-10 grid lg:grid-cols-5 md:grid-cols-4 grid-cols-1 gap-20 lg:px-7 lg:mt-10">
-            @foreach ($brand->products as $product)
-                <x-shop.card :product="$product" />
-            @endforeach
-        </div>
-    </div>
+    @if (count($brand->products))
+        <x-shop.grid :products="$brand->products" name="Brand's products" />
+    @endif
+
+    {{-- Brand's full description --}}
+    <x-shop.description :content="$brand->description" title="Brand description" />
 </x-layout>

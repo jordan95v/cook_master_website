@@ -34,7 +34,7 @@
                     <x-utils.form-error name="contact_email" />
 
                     {{-- Description --}}
-                    <textarea class="textarea textarea-bordered" rows=4 name="description" placeholder="Brand description">{{ $brand->description }}</textarea>
+                    <textarea id="editor" class="textarea textarea-bordered" rows=4 name="description" placeholder="Brand description">{{ $brand->description }}</textarea>
                     <x-utils.form-error name="description" />
 
                     <div class="card-actions justify-center">
@@ -47,4 +47,5 @@
             <img src="{{ asset('images/modify.png') }}" alt="">
         </div>
     </div>
+    <x-utils.editor />
 </x-layout>

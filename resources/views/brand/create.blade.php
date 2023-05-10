@@ -27,7 +27,7 @@
                     </div>
 
                     {{-- Description --}}
-                    <textarea class="textarea textarea-bordered border-2 @error('description') border-error @enderror" rows=4
+                    <textarea id="editor" class="textarea textarea-bordered border-2 @error('description') border-error @enderror" rows=4
                         name="description" placeholder="{{ __('Brand description') }}"></textarea>
                     <x-utils.form-error name="description" />
 
@@ -41,4 +41,5 @@
             <img src="{{ asset('images/add_brand.png') }}" alt="">
         </div>
     </div>
+    <x-utils.editor />
 </x-layout>

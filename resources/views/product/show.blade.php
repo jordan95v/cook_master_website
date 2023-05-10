@@ -19,7 +19,8 @@
                 <input type="radio" disabled name="rating-2" class="mask mask-star-2 bg-orange-400" />
             </div>
             <p class="italic text-2xl pt-5 text-primary">{{ $product->price }} €</p>
-            <p class="text-lg pt-5" style="white-space: pre-wrap;">{{ $product->description }}</p>
+            <div class="py-5 text-gray-600">{!! Str::limit($product->description, $limit = 800) !!}</div>
+            <a href="#full-description" class="link hover:link-primary">{{ __('Show more') }}</a>
 
             <form action="{{ route('order.store', ['product' => $product->id]) }}" method="post" class="mt-10">
                 @csrf
@@ -30,15 +31,10 @@
         </div>
     </div>
 
-    <div class="text-center p-5">
-        @if (count($seeblings) > 0)
-            <h2 class="text-4xl font-bold">{{ __('Same brand products') }}</h2>
-            <div class="pt-7 grid lg:grid-cols-5 md:grid-cols-4 grid-cols-1 gap-20 lg:px-7 lg:mt-10">
-                @foreach ($seeblings as $seebling)
-                    <x-shop.card :product="$seebling" />
-                @endforeach
-            </div>
+    @if (count($seeblings) > 0)
+        <x-shop.grid :products="$seeblings" name="Same brand products" />
+    @endif
 
-        @endif
-    </div>
+    {{-- Product's full description --}}
+    <x-shop.description :content="$product->description" title="Product description" />
 </x-layout>
