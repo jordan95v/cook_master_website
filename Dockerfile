@@ -22,7 +22,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     php composer-setup.php && \
     php -r "unlink('composer-setup.php');" && \
     mv composer.phar /usr/local/bin/composer && \
-    composer update
+    composer install --optimize-autoloader --no-dev
 
 # Expose port 8000 and start php server
 EXPOSE 8000
