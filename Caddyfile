@@ -1,0 +1,4 @@
+ateliersdesgourmets.localhost {
+	encode gzip zstd
+	reverse_proxy laravel:8000
+}

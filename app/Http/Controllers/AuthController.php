@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,10 +24,11 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($form)) {
+            // Refresh Cashier user.
             $request->session()->regenerate();
-            return redirect("/")->with("success", "Vous vous êtes correctement connecté.");
+            return redirect("/")->with("success", "You are now logged in !");
         }
-        return back()->with("error", "Les informations de connection ne sont pas correctes.")->onlyInput("email");
+        return back()->with("error", "These credentials do not match our records.")->onlyInput("email");
     }
 
     // Logout the user.
@@ -35,25 +37,26 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/')->with("success", "Vous vous êtes déconnecté.");
+        return redirect('/')->with("success", "You logged out.");
     }
 
     // Notice the the user to verify his email.
     public function notice()
     {
-        return redirect("/")->with("error", "Vérifier votre email d'abord.");
+        return redirect("/")->with("error", "Check your email first.");
     }
 
     // Verify the email.
     public function verify(EmailVerificationRequest $request)
     {
         $request->fulfill();
-        return redirect("/")->with("success", "Vous avez bien vérifié votre mail.");
+        return redirect("/")->with("success", "You have verified your email.");
     }
 
+    // Resend the email.
     public function resendEmail(Request $request)
     {
         $request->user()->sendEmailVerificationNotification();
-        return back()->with("success", "Le mail de vérification à été renvoyé.");
+        return back()->with("success", "Check your email for the confirmation link.");
     }
 }

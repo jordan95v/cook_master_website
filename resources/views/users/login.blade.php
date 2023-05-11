@@ -1,28 +1,28 @@
-@extends('main_layout')
+<x-layout title="{{ __('Log in') }}">
+    <div class="grid grid-cols-1 md:grid-cols-2">
+        {{-- Login card --}}
+        <div class="my-auto">
+            <x-utils.card-grid>
+                <form method="post" action="{{ route('login') }}" class="card-body">
+                    @csrf
+                    <p class="font-bold text-2xl text-center pb-4">{{ __('Log in') }}</p>
 
-@section('title')
-    Se connecter
-@endsection
+                    <x-utils.input name="email" type="email" hint="Email" error="1" />
+                    <x-utils.input name="password" type="password" hint="Password" error="1" />
+                    <a href="#" class="text-sm link hover:text-primary">{{ __('Forgot your password ?') }}</a>
 
-@section('content')
-    {{-- Login card --}}
-    <div class="flex justify-center my-10">
-        <div class="card shadow-lg md:w-1/3 w-96">
-            <form method="post" action="{{ route('login') }}" class="card-body">
-                @csrf
-                <p class="font-bold text-2xl text-center pb-4">Connexion</p>
-
-                <x-input name="email" type="email" hint="Email" error="1" />
-                <x-input name="password" type="password" hint="Mot de passe" error="1" />
-                <a href="#" class="text-sm link hover:text-primary">Mot de passe oublié ?</a>
-
-                <button class="btn btn-primary mt-4">Connexion</button>
-                <div class="divider"></div>
-                <p class="text-center">
-                    Pas encore inscrit ?
-                    <a href="{{ route('register') }}" class="link hover:text-primary">Inscription</a>
-                </p>
-            </form>
+                    <button class="btn btn-primary mt-4">{{ __('Log in') }}</button>
+                    <div class="divider"></div>
+                    <p class="text-center">
+                        {{ __('Not sign up yet ?') }}
+                        <a href="{{ route('register') }}" class="link hover:text-primary">{{ __('Create an account') }}
+                        </a>
+                    </p>
+                </form>
+            </x-utils.card-grid>
+        </div>
+        <div class="my-auto mx-auto">
+            <img src="{{ asset('images/login.png') }}" alt="">
         </div>
     </div>
-@endsection
+</x-layout>

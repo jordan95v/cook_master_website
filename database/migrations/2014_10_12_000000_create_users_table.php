@@ -20,6 +20,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->boolean("is_banned")->default(0);
             $table->integer("role")->default(0);
+            $table->string("image")->nullable();
             $table->timestamps();
         });
     }

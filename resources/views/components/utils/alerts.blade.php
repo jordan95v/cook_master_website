@@ -3,7 +3,7 @@
         <div class="alert alert-success shadow-lg max-w-lg">
             <div class="mx-auto">
                 <i class="fa-solid fa-circle-check"></i>
-                {{ session('success') }}
+                {{ __(session('success')) }}
             </div>
         </div>
     </div>
@@ -14,7 +14,7 @@
         <div class="alert alert-error shadow-lg max-w-lg">
             <div class="mx-auto">
                 <i class="fa-solid fa-circle-xmark"></i>
-                {{ session('error') }}
+                {{ __(session('error')) }}
             </div>
         </div>
     </div>
