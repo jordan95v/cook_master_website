@@ -2,8 +2,12 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\EquipedController;
+use App\Http\Controllers\EquipmentController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -104,3 +108,19 @@ Route::post("order/{order}/delete", [OrderController::class, 'destroy'])->middle
 Route::get("/store", [ProductController::class, "storeIndex"])->name("store");
 Route::get("/basket", [OrderController::class, "show"])->name("order.show");
 Route::post("/payment", [OrderController::class, "pay"])->name("order.pay");
+
+// Event
+Route::resource('events', EventController::class);
+Route::post('/events/{event}/subscribe', [EventController::class, 'subscribe'])->name('event.subscribe');
+Route::post('/events/{event}/unsubscribe', [EventController::class, 'unsubscribe'])->name('event.unsubscribe');
+
+// Equipment
+Route::resource('equipment', EquipmentController::class);
+Route::post('/equiped/select', [EquipedController::class, 'select'])->name('equiped.select');
+
+// Room
+Route::resource('room', RoomController::class);
+
+// Equiped room
+Route::resource('equiped', EquipedController::class, ["except" => ["edit"]]);
+Route::get('/equiped/{room}/edit', [EquipedController::class, 'edit'])->name('equiped.edit');

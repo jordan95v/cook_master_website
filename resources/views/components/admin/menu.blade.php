@@ -38,11 +38,32 @@
     <a><i class="fa-solid fa-calendar-days"></i>{{ __('Events') }}<i
             class="fa-solid fa-chevron-{{ $direction }}"></i></a>
     <ul class="p-2 z-10 bg-base-100 border-2 hover:border-primary">
-        <li><a>{{ __('Add an event') }}</a></li>
-        <li><a>{{ __('Events list') }}</a></li>
+        <li><a href="{{ route('events.create') }}">{{ __('Add an event') }}</a></li>
+        <li><a href="{{ route('events.index') }}">{{ __('Events list') }}</a></li>
     </ul>
 </li>
 
+{{-- Room --}}
+<li tabindex="0">
+    <a><i class="fa-solid fa-city"></i>{{ __('Rooms') }}<i class="fa-solid fa-chevron-{{ $direction }}"></i></a>
+    <ul class="p-2 z-10 bg-base-100 border-2 hover:border-primary">
+        <li><a href="{{ route('room.create') }}">{{ __('Add room') }}</a></li>
+        <li><a href="{{ route('room.index') }}">{{ __('Room list') }}</a></li>
+    </ul>
+</li>
+
+{{-- Room --}}
+<li tabindex="0">
+    <a>
+        <i class="fa-solid fa-gear"></i>{{ __('Equipments') }}<i class="fa-solid fa-chevron-{{ $direction }}"></i>
+    </a>
+    <ul class="p-2 z-10 bg-base-100 border-2 hover:border-primary">
+        <li><a href="{{ route('equipment.create') }}">{{ __('Add an equipment') }}</a></li>
+        <li><a href="{{ route('equipment.index') }}">{{ __('Equipment list') }}</a></li>
+    </ul>
+</li>
+
+{{-- Workshops --}}
 <li tabindex="0">
     <a>
         <i class="fa-solid fa-kitchen-set"></i></i>

@@ -101,4 +101,9 @@ class User extends Authenticatable implements MustVerifyEmail
         $sub = $this->subscriptions()->first()->asStripeSubscription();
         return Carbon::createFromTimeStamp($sub->current_period_end)->format('d M Y');
     }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 }
