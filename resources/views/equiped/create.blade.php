@@ -11,7 +11,6 @@
                 <p class="font-bold text-2xl text-center pb-4">{{ __('connect an equipment') }}</p>
                 <form method="POST" action="{{ route('equiped.select') }}">
                     @csrf
-                    <input type="hidden" name="room_id" value="{{ session('room_id') }}">
                     <div class="flex justify-center">
                         <div class="grid grid-cols-3 gap-3">
                             @foreach ($equipment as $item)

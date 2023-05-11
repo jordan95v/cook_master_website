@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Equiped;
 use App\Models\Equipment;
 use App\Models\Room;
+use Illuminate\Contracts\Session\Session as SessionSession;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class EquipedController extends Controller
 {
@@ -31,14 +33,16 @@ class EquipedController extends Controller
     public function store(Request $request)
     {
         $formFields = $request->validate([
-            'room_id' => 'required',
             'equipment_id' => 'required',
         ]);
 
-
-        Equiped::create($formFields);
-
-        return redirect("/")->with("success", "You have connect an equipment to this room");
+        if (Session::has('room_id')) {
+            $formFields["room_id"] = Session::get('room.id');
+            Equiped::create($formFields);
+            Session::remove('room_id');
+            return redirect("/")->with("success", "You have connect an equipment to this room");
+        }
+        return back()->with('error', "Error with the room creation");
     }
 
     /**
@@ -85,17 +89,20 @@ class EquipedController extends Controller
     public function select(Request $request)
     {
         $selectedEquipment = $request->input('equipment');
-        $roomId = $request->get("room_id");
 
-        // Boucle pour ajouter chaque équipement sélectionné à la table equiped
-        foreach ($selectedEquipment as $equipmentId) {
-            Equiped::create([
-                'room_id' => $roomId,
-                'equipment_id' => $equipmentId
-            ]);
+        if (Session::has('room')) {
+            $room_id = Session::get('room');
+            // Boucle pour ajouter chaque équipement sélectionné à la table equiped
+            foreach ($selectedEquipment as $equipmentId) {
+                Equiped::create([
+                    'room_id' => $room_id,
+                    'equipment_id' => $equipmentId
+                ]);
+            }
+
+            // Redirection vers la page de la room avec un message de succès
+            return redirect('/')->with('success', 'The selection of equipment has been successfully registered');
         }
-
-        // Redirection vers la page de la room avec un message de succès
-        return redirect('/')->with('success', 'The selection of equipment has been successfully registered');
+        return back()->with('error', "Error with the room creation");
     }
 }

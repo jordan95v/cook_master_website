@@ -6,6 +6,7 @@ use App\Models\Equiped;
 use App\Models\Equipment;
 use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class RoomController extends Controller
 {
@@ -41,6 +42,8 @@ class RoomController extends Controller
 
 
         $room = Room::create($formFields);
+        Session::put("room", $room->id);
+
 
         return redirect()->route("equiped.create")->with("success", "You have created a room")->with("room_id", $room->id);
     }
