@@ -23,12 +23,9 @@ use Illuminate\Support\Facades\Session;
 // No controller route
 Route::view("/", "home");
 Route::get("/lang/{lang}", function (string $lang) {
-    if (!in_array($lang, ["fr", "en", "es", "kr"])) {
-        abort(404);
-    }
     Session::put("locale", $lang);
     return redirect()->back();
-})->name("lang.update");
+})->whereIn("lang", ["fr", "en", "es", "kr"])->name("lang.update");
 
 // Users Route
 Route::prefix("users")->group(

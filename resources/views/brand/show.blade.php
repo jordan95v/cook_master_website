@@ -1,5 +1,5 @@
 <x-layout title="{{ $brand->name }}">
-    <div class="grid grid-cols-1 lg:grid-cols-2 justify-center align-center gap-10 p-5 lg:p-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 justify-center align-center gap-10 p-5 lg:px-24 lg:p-12">
         {{-- Brand image hidden on large --}}
         <div class="flex justify-center w-full lg:hidden">
             <img src="{{ asset('storage/' . $brand->image) }}" class="object-cover rounded-xl" />

@@ -11,7 +11,7 @@ while ! mysqladmin ping -h "$DB_HOST" --silent; do
 done
 
 # Run migrations, seeders and start server
-php /app/artisan migrate 
+php /app/artisan migrate  --force --seed
 
 php /app/artisan config:clear
 php /app/artisan route:cache

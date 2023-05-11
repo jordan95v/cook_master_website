@@ -1,5 +1,5 @@
 <x-layout title="{{ $product->name }}">
-    <div class="grid grid-cols-1 lg:grid-cols-2 justify-center align-center gap-10 p-5 lg:p-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 justify-center align-center gap-10 p-5 lg:px-24 lg:p-12">
         <div class="flex justify-center w-full">
             <img src="{{ asset('storage/' . $product->image) }}" class="object-cover" />
         </div>
