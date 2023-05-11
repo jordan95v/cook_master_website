@@ -1,14 +1,14 @@
 @extends('main_layout')
 
 @section('title')
-    {{ __('Connect an equipment') }}
+    {{ __('Edit Equipments') }}
 @endsection
 
 @section('content')
     <div class="flex justify-center my-10">
         <div class="card shadow-lg">
             <div class="card-body">
-                <p class="font-bold text-2xl text-center pb-4">{{ __('Connect an equipment') }}</p>
+                <p class="font-bold text-2xl text-center pb-4">{{ __('Edit Equipments') }}</p>
                 <form method="POST" action="{{ route('equiped.select') }}">
                     @csrf
                     <input type="hidden" name="room_id" value="{{ session('room_id') }}">

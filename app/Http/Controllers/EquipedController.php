@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Equiped;
 use App\Models\Equipment;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class EquipedController extends Controller
@@ -51,31 +52,40 @@ class EquipedController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit()
+    public function edit(Equiped $equiped)
     {
-        return view('equiped.edit', ['equipment' => Equipment::all()]);
+        return view('equiped.edit', ['equiped' => $equiped, 'equipment' => Equipment::all()]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    // public function update(Request $request, int $id)
+    // {
+    //     $formFields = $request->validate([
+    //         'room_id' => 'required',
+    //         'equipment_id' => 'required',
+    //     ]);
+
+    //     $equiped = Equiped::findOrFail($id);
+    //     $equiped->update($formFields);
+
+    //     return redirect("/")->with("success", "You have updated the equipment connected to this room");
+    // }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Equiped $equiped)
     {
-        //
+        $equiped->delete();
+        return redirect("/")->with("success", "You have deleted  equipments connected to this room");
     }
 
     public function select(Request $request)
     {
         $selectedEquipment = $request->input('equipment');
-        $roomId = $request->get("room_id"); // Remplacez 1 par l'ID de la room concernée.
+        $roomId = $request->get("room_id");
 
         // Boucle pour ajouter chaque équipement sélectionné à la table equiped
         foreach ($selectedEquipment as $equipmentId) {

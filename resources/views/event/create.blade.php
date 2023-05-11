@@ -28,6 +28,11 @@
                     </div>
 
                     {{-- Room  --}}
+                    <label class="label">
+                        <span class="label-text-alt">{{ __('See all rooms') }}</span>
+                        <i><a href="{{ route('room.index') }}" target="_blank"
+                                class="fa-solid fa-up-right-from-square"></a></i>
+                    </label>
                     <select class="select select-bordered w-full" name="room_id">
                         <option disabled selected>{{ __('Choose the room') }}</option>
                         @foreach ($rooms as $room)

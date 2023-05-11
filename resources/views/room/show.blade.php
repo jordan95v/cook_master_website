@@ -21,6 +21,15 @@
                     width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
+            <div class="flex">
+                <form method="POST" action="/room/{{ $room->id }}">
+                    @csrf
+                    @method('DELETE')
+                    <button class="text-red-500"><i class="fa-solid fa-trash"></i>{{ __('Delete') }}</button>
+                </form>
+                <a href="/room/{{ $room->id }}/edit" class="text-gray-500 px-3"><i
+                        class="fa-solid fa-edit"></i>{{ __('Edit') }}</a>
+            </div>
 
         </div>
     </section>

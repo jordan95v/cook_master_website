@@ -15,9 +15,10 @@
                     @csrf
                     <h2 class="card-title text-2xl flex justify-center pb-2">{{ __('Add an equipment') }}</h2>
                     {{-- Title --}}
-                    <x-utils.input type="text" name="title" hint="Saisissez le nom de l'équipement" error=1 />
+                    <x-utils.input type="text" name="title" hint="{{ __('Enter the name of the equipment') }}"
+                        error=1 />
                     {{-- Brand --}}
-                    <x-utils.input type="text" name="brand" hint="Saisissez la marque de l'équipement"
+                    <x-utils.input type="text" name="brand" hint="{{ __('Enter the brand of the equipment') }}"
                         error="1" />
 
                     {{-- Image --}}
