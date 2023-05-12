@@ -18,12 +18,10 @@
                             <h2 class="card-title">{{ $item->title }}</h2>
                             <p>{{ $item->description }}</p>
                             <p>{{ __('Brand') }}: {{ $item->brand->name }}</p>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="equipment[]"
-                                    value="{{ $item->id }}" id="item-{{ $item->id }}">
-                                <label class="form-check-label" for="item-{{ $item->id }}">
-                                    {{ __('Select') }}
-                                </label>
+                            <div class="flex mt-4">
+                                <input class="checkbox me-2 checkbox-primary" type="checkbox" name="equipment[]"
+                                    value="{{ $item->id }}">
+                                {{ __('Select') }}
                             </div>
                         </div>
                     </x-utils.card>

@@ -36,7 +36,7 @@
     @endauth
 
     {{-- Content of the page --}}
-    <div class="md:p-0 p-5 flex flex-col h-screen">
+    <div class="md:p-0 p-4 flex flex-col h-screen">
         <x-utils.alerts />
         <div class="mb-auto">
             {{ $slot }}

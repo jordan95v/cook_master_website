@@ -1,16 +1,16 @@
 <div class="navbar bg-base-100 p-5">
     <div class="navbar-start">
-        <x-navbar.dropdown />
         {{-- Navbar items streched --}}
         <div class="dropdown">
             <label tabindex="0" class="btn btn-ghost lg:hidden">
                 <i class="fa-solid fa-shield text-2xl"></i>
             </label>
             <ul tabindex="0"
-                class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 border-2 hover:border-primary">
+                class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-44 border-2 hover:border-primary">
                 <x-admin.menu direction="right" />
             </ul>
         </div>
+        <x-navbar.dropdown />
     </div>
 
     {{-- Navbar items full screen --}}

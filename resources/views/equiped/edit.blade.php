@@ -8,16 +8,15 @@
                 @foreach ($room_equipement as $item)
                     <x-utils.card class="w-full">
                         {{-- Equipment image --}}
-                        <img src="{{ asset('storage/' . $item->brand->image) }}"
+                        <img src="{{ asset('storage/' . $item->equipment->brand->image) }}"
                             class="w-full h-full object-cover rounded-t">
 
                         {{-- Equipment info --}}
                         <div class="card-body">
-                            <h2 class="card-title">{{ $item->title }}</h2>
+                            <h2 class="card-title">{{ $item->equipment->title }}</h2>
                             <p>{{ $item->description }}</p>
-                            <p>{{ __('Brand') }} {{ $item->brand->name }}</p>
+                            <p>{{ __('Brand') }} {{ $item->equipment->brand->name }}</p>
 
-                            {{ $item->id }}
                             <form action="{{ route('equiped.destroy', ['equiped' => $item->id]) }}" method="post">
                                 @csrf
                                 @method('DELETE')

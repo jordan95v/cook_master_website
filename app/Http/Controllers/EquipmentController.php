@@ -14,7 +14,7 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        return view('equipment.index', ['equipments' => Equipment::all()]);
+        return view("equipment.index", ["equipments" => Equipment::all()]);
     }
 
     /**
@@ -22,8 +22,8 @@ class EquipmentController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', Equipment::class);
-        return view("equipment.create", ['brands' => Brand::all()]);
+        $this->authorize("create", Equipment::class);
+        return view("equipment.create", ["brands" => Brand::all()]);
     }
 
     /**
@@ -31,10 +31,10 @@ class EquipmentController extends Controller
      */
     public function store(StoreEquipmentRequest $request)
     {
-        $this->authorize('create', Equipment::class);
+        $this->authorize("create", Equipment::class);
         $form = $request->validated();
-        if ($request->hasFile('image')) {
-            $form['image'] = $request->file('image')->store('images', 'public');
+        if ($request->hasFile("image")) {
+            $form["image"] = $request->file("image")->store("images", "public");
         }
         Equipment::create($form);
         return redirect("/")->with("success", "You have created an equipment");
@@ -45,7 +45,8 @@ class EquipmentController extends Controller
      */
     public function edit(Equipment $equipment)
     {
-        return view('equipment.edit', ['equipment' => $equipment, 'brands' => Brand::all()]);
+        $this->authorize("update", $equipment);
+        return view("equipment.edit", ["equipment" => $equipment, "brands" => Brand::all()]);
     }
 
     /**
@@ -53,10 +54,10 @@ class EquipmentController extends Controller
      */
     public function update(UpdateEquipmentRequest $request, Equipment $equipment)
     {
-        $this->authorize('update', $equipment);
+        $this->authorize("update", $equipment);
         $form = $request->validated();
-        if ($request->hasFile('image')) {
-            $form['image'] = $request->file('image')->store('images', 'public');
+        if ($request->hasFile("image")) {
+            $form["image"] = $request->file("image")->store("images", "public");
         }
         $equipment->update($form);
         return redirect("/equipment")->with("success", "You have edited an equipment");
@@ -67,7 +68,7 @@ class EquipmentController extends Controller
      */
     public function destroy(Equipment $equipment)
     {
-        $this->authorize('destroy', $equipment);
+        $this->authorize("delete", $equipment);
         $equipment->delete();
         return redirect("/equipment")->with("success", "You have deleted an equipment");
     }
