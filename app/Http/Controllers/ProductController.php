@@ -87,6 +87,7 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
+        $this->authorize("update", $product);
         $form = $request->validated();
         if ($request->hasFile("image")) {
             if (file_exists("storage/" . $product->image)) {

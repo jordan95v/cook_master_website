@@ -34,6 +34,7 @@ class RoomController extends Controller
      */
     public function store(StoreRoomRequest $request)
     {
+        $this->authorize("create", Room::class);
         $form = $request->validated();
         if ($request->hasFile('image')) {
             $form['image'] = $request->file('image')->store('images', 'public');
@@ -73,6 +74,7 @@ class RoomController extends Controller
      */
     public function update(UpdateRoomRequest $request, Room $room)
     {
+        $this->authorize("update", $room);
         $form = $request->validated();
         if ($request->hasFile('image')) {
             $form['image'] = $request->file('image')->store('images', 'public');
