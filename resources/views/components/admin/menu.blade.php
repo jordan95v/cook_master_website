@@ -1,20 +1,6 @@
 @props(['direction'])
 
-{{-- Main --}}
-<li tabindex="0">
-    <a>
-        <i class="fa-solid fa-house"></i>
-        {{ __('Home') }}
-        <i class="fa-solid fa-chevron-{{ $direction }}"></i>
-    </a>
-    <ul class="p-2 z-10 bg-base-100 border-2 hover:border-primary">
-        <li><a href=""><i class="fa-solid fa-school"></i>{{ __('Courses') }}</a></li>
-        <li><a href=""><i class="fa-solid fa-calendar-days"></i>{{ __('Events') }}</a></li>
-        <li><a href="/store"><i class="fa-solid fa-store"></i>{{ __('Store') }}</a></li>
-    </ul>
-</li>
-
-
+{{-- User list --}}
 <li><a href="{{ route('user.index') }}"><i class="fa-solid fa-user"></i>{{ __('Users list') }}</a></li>
 
 
@@ -43,36 +29,14 @@
     </ul>
 </li>
 
-{{-- Room --}}
+{{-- Room and equipments --}}
 <li tabindex="0">
     <a><i class="fa-solid fa-city"></i>{{ __('Rooms') }}<i class="fa-solid fa-chevron-{{ $direction }}"></i></a>
     <ul class="p-2 z-10 bg-base-100 border-2 hover:border-primary">
         <li><a href="{{ route('room.create') }}">{{ __('Add room') }}</a></li>
-        <li><a href="{{ route('room.index') }}">{{ __('Room list') }}</a></li>
-    </ul>
-</li>
-
-{{-- Room --}}
-<li tabindex="0">
-    <a>
-        <i class="fa-solid fa-gear"></i>{{ __('Equipments') }}<i class="fa-solid fa-chevron-{{ $direction }}"></i>
-    </a>
-    <ul class="p-2 z-10 bg-base-100 border-2 hover:border-primary">
         <li><a href="{{ route('equipment.create') }}">{{ __('Add an equipment') }}</a></li>
+        <li><a href="{{ route('room.index') }}">{{ __('Room list') }}</a></li>
         <li><a href="{{ route('equipment.index') }}">{{ __('Equipment list') }}</a></li>
-    </ul>
-</li>
-
-{{-- Workshops --}}
-<li tabindex="0">
-    <a>
-        <i class="fa-solid fa-kitchen-set"></i></i>
-        {{ __('Workshops') }}
-        <i class="fa-solid fa-chevron-{{ $direction }}"></i>
-    </a>
-    <ul class="p-2 z-10 bg-base-100 border-2 hover:border-primary">
-        <li><a>{{ __('Add a workshop') }}</a></li>
-        <li><a>{{ __('Workshops list') }}</a></li>
     </ul>
 </li>
 
