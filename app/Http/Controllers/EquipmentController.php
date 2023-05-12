@@ -22,6 +22,7 @@ class EquipmentController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Equipment::class);
         return view("equipment.create", ['brands' => Brand::all()]);
     }
 
@@ -30,6 +31,7 @@ class EquipmentController extends Controller
      */
     public function store(StoreEquipmentRequest $request)
     {
+        $this->authorize('create', Equipment::class);
         $form = $request->validated();
         if ($request->hasFile('image')) {
             $form['image'] = $request->file('image')->store('images', 'public');
@@ -51,6 +53,7 @@ class EquipmentController extends Controller
      */
     public function update(UpdateEquipmentRequest $request, Equipment $equipment)
     {
+        $this->authorize('update', $equipment);
         $form = $request->validated();
         if ($request->hasFile('image')) {
             $form['image'] = $request->file('image')->store('images', 'public');
@@ -64,6 +67,7 @@ class EquipmentController extends Controller
      */
     public function destroy(Equipment $equipment)
     {
+        $this->authorize('destroy', $equipment);
         $equipment->delete();
         return redirect("/equipment")->with("success", "You have deleted an equipment");
     }
