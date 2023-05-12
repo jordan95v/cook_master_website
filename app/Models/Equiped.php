@@ -9,11 +9,7 @@ class Equiped extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'room_id',
-        'equipment_id',
-    ];
-
+    protected $guarded = [];
 
     public function room()
     {

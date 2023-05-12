@@ -34,7 +34,7 @@
         </div>
     </form>
     <div class="text-center p-5">
-        <div class="pt-5 grid lg:grid-cols-5 md:grid-cols-4 grid-cols-1 gap-20 lg:px-10 lg:mt-10">
+        <div class="pt-5 grid lg:grid-cols-5 md:grid-cols-4 grid-cols-1 gap-20 lg: lg:mt-10">
             @foreach ($products as $product)
                 <x-shop.card :product="$product" />
             @endforeach

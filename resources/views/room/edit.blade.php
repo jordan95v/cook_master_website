@@ -32,9 +32,7 @@
                     </div>
 
                     {{-- Submit --}}
-                    <div class="justify-center card-actions">
-                        <button type="submit" class="btn btn-primary">{{ __('Edit') }}</button>
-                    </div>
+                    <button type="submit" class="btn btn-primary">{{ __('Edit') }}</button>
                 </form>
             </x-utils.card-grid>
         </div>

@@ -53,6 +53,7 @@ class EquipedController extends Controller
         foreach (Equiped::where('room_id', $room->id)->get() as $item) {
             $room_equipement[] = $item->equipment;
         }
+        Session::put('room', $room->id);
         return view('equiped.edit', [
             'room_equipement' => $room_equipement,
             'available' => Equipment::where('is_available', true)->get(),
@@ -67,7 +68,7 @@ class EquipedController extends Controller
     {
         $equiped->equipment->update(['is_available' => true]);
         $equiped->delete();
-        return back()->with("success", "You have deleted  equipments connected to this room");
+        return back()->with("success", "You have deleted equipments connected to this room");
     }
 
     public function select(Request $request)

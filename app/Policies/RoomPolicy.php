@@ -15,6 +15,11 @@ class RoomPolicy
         return $user->isAdmin();
     }
 
+    public function update(User $user, Room $room): bool
+    {
+        return $user->isAdmin() || $user->is($room->user);
+    }
+
     /**
      * Determine whether the user can update the model.
      */

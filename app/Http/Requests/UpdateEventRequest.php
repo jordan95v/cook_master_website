@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
 
-class UpdateRoomRequest extends FormRequest
+class UpdateEventRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,13 @@ class UpdateRoomRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'name' => 'required',
-            'address' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'room_id' => 'required',
+            'capacity' => 'required',
+            'date' => 'required|date_format:Y-m-d',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i',
         ];
         if ($this->hasFile("image")) {
             $rules["image"] = ["required",

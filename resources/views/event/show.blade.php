@@ -1,5 +1,5 @@
 <x-layout title="{{ __('Event') }}">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:px-10 py-10 lg:px-24">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 sm: py-10 lg:px-24">
         <img src="{{ asset('storage/' . $event->image) }}" class="w-full object-cover object-center rounded-md">
         <div class="mx-auto my-auto text-center">
             <h2 class="text-4xl font-bold my-4">{{ $event->title }}</h2>
@@ -42,7 +42,7 @@
     </div>
 
     {{-- Information about the event --}}
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 bg-gray-200 px-10 lg:px-24 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 bg-gray-200  lg:px-24 py-10">
         <div>
             <h3 class="text-4xl font-bold pb-10">{{ __('Informations about the event') }}</h3>
             {!! $event->description !!}

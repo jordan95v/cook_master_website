@@ -52,10 +52,11 @@ class RoomController extends Controller
      */
     public function show(Room $room)
     {
+        $equipments = [];
         foreach (Equiped::where('room_id', $room->id)->get() as $item) {
-            $equipement[] = $item->equipment;
+            $equipments[] = $item->equipment;
         }
-        return view('room.show', ['room' => $room, "equipments" => $equipement]);
+        return view('room.show', ['room' => $room, "equipments" => $equipments]);
     }
 
     /**

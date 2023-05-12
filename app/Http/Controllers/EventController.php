@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEventRequest;
+use App\Http\Requests\UpdateEventRequest;
 use App\Models\Equiped;
 use App\Models\Event;
 use App\Models\Participed;
 use App\Models\Room;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
@@ -31,31 +32,17 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreEventRequest $request)
     {
         $user = User::find(Auth::id());
-        $formFields = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'room_id' => 'required',
-            'capacity' => 'required',
-            'date' => 'required|date_format:Y-m-d',
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i',
-        ]);
+        $form = $request->validated();
 
-        // Ajoute l'ID de l'utilisateur connecté
-        if ($user->isAdmin()) {
-            $formFields['user_id'] = auth()->id();
-        } else {
-            $formFields['user_id'] = $request->user_id;
-        }
-
+        $form["user_id"] = ($user->isAdmin()) ? $request->user_id : Auth::id();
         if ($request->hasFile('image')) {
-            $formFields['image'] = $request->file('image')->store('images', 'public');
+            $form['image'] = $request->file('image')->store('images', 'public');
         }
 
-        Event::create($formFields);
+        Event::create($form);
         return redirect("/")->with("success", "You have created an event");
     }
 
@@ -80,32 +67,17 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event $event)
+    public function update(UpdateEventRequest $request, Event $event)
     {
         $user = User::find(Auth::id());
-        $formFields = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'room_id' => 'required',
-            'capacity' => 'required',
-            'date' => 'required|date_format:Y-m-d',
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i',
-        ]);
+        $form = $request->validated();
 
-        // Choose the user id
-        if ($user->isAdmin()) {
-            $formFields['user_id'] = auth()->id();
-        } else {
-            $formFields['user_id'] = $request->user_id;
-        }
-
+        $form["user_id"] = ($user->isAdmin()) ? $request->user_id : Auth::id();
         if ($request->hasFile('image')) {
-            $formFields['image'] = $request->file('image')->store('images', 'public');
+            $form['image'] = $request->file('image')->store('images', 'public');
         }
 
-        $event->update($formFields);
-
+        $event->update($form);
         return back()->with("success", "You have edited an event");
     }
 
@@ -120,39 +92,25 @@ class EventController extends Controller
 
     public function subscribe(Event $event)
     {
-        // Vérifie si l'utilisateur est connecté
-        if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'You have to be connected to subscribe to an event');
-        }
-
         // Vérifie si l'utilisateur est déjà inscrit
         $userId = Auth::id();
-        $participed = Participed::where('user_id', $userId)->where('event_id', $event->id)->first();
-        if ($participed) {
+        if (Participed::where('user_id', $userId)->where('event_id', $event->id)->first()) {
             return redirect()->route('events.show', $event->id)->with('warning', 'You are already subscribed to this event');
         }
+
         // Ajoute une entrée dans la table participed liant l'utilisateur à l'événement
         Participed::create([
             'user_id' => $userId,
             'event_id' => $event->id,
         ]);
 
-        // Redirige vers la page de l'événement avec un message de confirmation
         return redirect()->route('events.show', $event->id)->with('success', 'You have subscribed to the event');
     }
 
     public function unsubscribe(Event $event)
     {
-        // Vérifie si l'utilisateur est connecté
-        if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'You have to be connected to unsubscribe to an event');
-        }
-
         // Supprime l'entrée dans la table participed liant l'utilisateur à l'événement
-        $userId = Auth::id();
-        Participed::where('user_id', $userId)->where('event_id', $event->id)->delete();
-
-        // Redirige vers la page de l'événement avec un message de confirmation
+        Participed::where('user_id', Auth::id())->where('event_id', $event->id)->delete();
         return redirect()->route('events.show', $event->id)->with('success', 'You have unsubscribed to the event');
     }
 }

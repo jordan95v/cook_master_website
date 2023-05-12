@@ -41,7 +41,9 @@
         <div class="mb-auto">
             {{ $slot }}
         </div>
-        <x-footer />
+        <div class="pb-10">
+            <x-footer />
+        </div>
     </div>
 
 

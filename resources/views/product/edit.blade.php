@@ -24,7 +24,7 @@
                         <label class="label">
                             <span class="label-text-alt">{{ __('Actual image') }}</span>
                         </label>
-                        <img src="{{ asset('storage/' . $product->image) }}" alt="" class="w-56">
+                        <img src="{{ asset('storage/' . $product->image) }}">
                     </div>
 
                     {{-- Brand and Price --}}

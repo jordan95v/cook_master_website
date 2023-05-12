@@ -20,7 +20,7 @@
                         <label class="label">
                             <span class="label-text-alt">{{ __('Actual image') }}</span>
                         </label>
-                        <img src="{{ asset('storage/' . $brand->image) }}" alt="" class="w-56">
+                        <img src="{{ asset('storage/' . $brand->image) }}">
                     </div>
 
                     {{-- Website and contact email --}}

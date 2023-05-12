@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'ouss95v',
             'email' => 'ouss@gmail.com',
             'role' => 2,
+            "email_verified_at" => "2021-03-25 00:00:00",
             'password' => bcrypt('Test1234'),
         ]);
 
@@ -29,6 +30,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'jordan95v',
             'email' => 'jordan@gmail.com',
             'role' => 1,
+            "email_verified_at" => "2021-03-25 00:00:00",
             'password' => bcrypt('Test1234'),
         ]);
 
@@ -37,6 +39,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'quentin95v',
             'email' => 'quentin@gmail.com',
             'role' => 0,
+            "email_verified_at" => "2021-03-25 00:00:00",
             'password' => bcrypt('Test1234'),
         ]);
 

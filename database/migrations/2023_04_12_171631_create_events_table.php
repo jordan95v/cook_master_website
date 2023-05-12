@@ -18,14 +18,14 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->longText('description');
-            $table->timestamps();
-            $table->foreignIdFor(Room::class);
-            $table->foreignIdFor(User::class);
             $table->integer('capacity')->default(0);
             $table->string('image')->nullable();
             $table->date('date')->nullable();
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();
+            $table->foreignIdFor(Room::class);
+            $table->foreignIdFor(User::class);
+            $table->timestamps();
         });
     }
 

@@ -34,27 +34,29 @@
         </div>
     </div>
 
-    {{-- Slide Bar Netflix --}}
-    <div class="bg-gray-100 py-10 pb-10 mb-10 lg:px-24">
-        <div class="lg:flex justify-between items-center ms-10 lg:ms-0 lg:pb-6">
-            <h2 class="text-3xl font-bold">
-                {{ __('Equipments') }}
-            </h2>
-            <a href="{{ route('equiped.edit', ['room' => $room->id]) }}" class="text-gray-500">
-                <i class="fa-solid fa-edit me-2"></i>{{ __('Edit equipments') }}
-            </a>
-        </div>
+    @if (count($equipments) > 0)
+        <div class="bg-gray-100 py-10 pb-10 mb-10 lg:px-24">
+            <div class="lg:flex justify-between items-center ms-10 lg:ms-0 lg:pb-6">
+                <h2 class="text-3xl font-bold">
+                    {{ __('Equipments') }}
+                </h2>
+                <a href="{{ route('equiped.edit', ['room' => $room->id]) }}" class="text-gray-500">
+                    <i class="fa-solid fa-edit me-2"></i>{{ __('Edit equipments') }}
+                </a>
+            </div>
 
-        <div class="grid grid-cols-1 lg:p-0 p-5 lg:grid-cols-5 gap-6">
-            @foreach ($equipments as $item)
-                <x-utils.card class="image-full h-96">
-                    <img src="{{ asset('storage/' . $item->brand->image) }}" class="h-full object-cover rounded-xl">
-                    <div class="card-body">
-                        <h2 class="card-title">{{ $item->title }}</h2>
-                        <p>{{ __('Brand') }} : {{ $item->brand->name }}</p>
-                    </div>
-                </x-utils.card>
-            @endforeach
+            <div class="grid grid-cols-1 lg:p-0 p-5 lg:grid-cols-5 gap-6">
+                @foreach ($equipments as $item)
+                    <x-utils.card class="image-full h-96">
+                        <img src="{{ asset('storage/' . $item->brand->image) }}"
+                            class="h-full object-cover rounded-xl">
+                        <div class="card-body">
+                            <h2 class="card-title">{{ $item->title }}</h2>
+                            <p>{{ __('Brand') }} : {{ $item->brand->name }}</p>
+                        </div>
+                    </x-utils.card>
+                @endforeach
+            </div>
         </div>
-    </div>
+    @endif
 </x-layout>
