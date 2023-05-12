@@ -24,17 +24,17 @@ class UpdateEventRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'title' => 'required',
-            'description' => 'required',
-            'room_id' => 'required',
-            'capacity' => 'required',
-            'date' => 'required|date_format:Y-m-d',
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i',
+            "title" => "required",
+            "description" => "required",
+            "room_id" => "required",
+            "capacity" => "required",
+            "date" => "required|date_format:Y-m-d",
+            "start_time" => "required|date_format:H:i",
+            "end_time" => "required|date_format:H:i",
         ];
         if ($this->hasFile("image")) {
             $rules["image"] = ["required",
-                File::image()->min(1)->max(12 * 1024)->dimensions(Rule::dimensions()->minWidth(1280)->minHeight(720)),
+                File::image()->dimensions(Rule::dimensions()->minWidth(1280)->minHeight(720)),
             ];
         }
         return $rules;

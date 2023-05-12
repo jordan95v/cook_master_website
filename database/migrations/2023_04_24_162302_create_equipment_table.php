@@ -15,7 +15,6 @@ return new class extends Migration
         Schema::create('equipment', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description');
             $table->string('image')->nullable();
             $table->foreignIdFor(Brand::class, "brand_id")->constrained("brands")->onDelete('cascade');
             $table->boolean('is_available')->default(true);

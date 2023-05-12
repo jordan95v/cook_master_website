@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEquipmentRequest;
+use App\Http\Requests\UpdateEquipmentRequest;
 use App\Models\Brand;
 use App\Models\Equipment;
-use Illuminate\Http\Request;
 
 class EquipmentController extends Controller
 {
@@ -27,17 +28,13 @@ class EquipmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreEquipmentRequest $request)
     {
-        $formFields = $request->validate([
-            'title' => 'required',
-            'brand_id' => 'required',
-            'description' => 'required',
-        ]);
+        $form = $request->validated();
         if ($request->hasFile('image')) {
-            $formFields['image'] = $request->file('image')->store('images', 'public');
+            $form['image'] = $request->file('image')->store('images', 'public');
         }
-        Equipment::create($formFields);
+        Equipment::create($form);
         return redirect("/")->with("success", "You have created an equipment");
     }
 
@@ -52,20 +49,13 @@ class EquipmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Equipment $equipment)
+    public function update(UpdateEquipmentRequest $request, Equipment $equipment)
     {
-        $formFields = $request->validate([
-            'title' => 'required',
-            'brand' => 'required',
-            'description' => 'required',
-        ]);
-
+        $form = $request->validated();
         if ($request->hasFile('image')) {
-            $formFields['image'] = $request->file('image')->store('images', 'public');
+            $form['image'] = $request->file('image')->store('images', 'public');
         }
-
-        $equipment->update($formFields);
-
+        $equipment->update($form);
         return redirect("/equipment")->with("success", "You have edited an equipment");
     }
 

@@ -26,7 +26,7 @@ class StoreProductRequest extends FormRequest
         return [
             "name" => "required|min:6",
             "image" => ["required",
-                File::image()->min(1)->max(12 * 1024)->dimensions(Rule::dimensions()->minWidth(1280)->minHeight(720)),
+                File::image()->dimensions(Rule::dimensions()->minWidth(1280)->minHeight(720)),
             ],
             "brand_id" => "required",
             "price" => "required",

@@ -32,7 +32,7 @@ class UpdateBrandRequest extends FormRequest
         ];
         if ($this->hasFile("image")) {
             $rules["image"] = ["required",
-                File::image()->min(1)->max(12 * 1024)->dimensions(Rule::dimensions()->minWidth(1280)->minHeight(720)),
+                File::image()->dimensions(Rule::dimensions()->minWidth(1280)->minHeight(720)),
             ];
         }
         return $rules;

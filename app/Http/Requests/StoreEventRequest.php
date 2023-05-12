@@ -24,16 +24,16 @@ class StoreEventRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required',
-            'description' => 'required',
+            "title" => "required",
+            "description" => "required",
             "image" => ["required",
-                File::image()->min(1)->max(12 * 1024)->dimensions(Rule::dimensions()->minWidth(1280)->minHeight(720)),
+                File::image()->dimensions(Rule::dimensions()->minWidth(1280)->minHeight(720)),
             ],
-            'room_id' => 'required',
-            'capacity' => 'required',
-            'date' => 'required|date_format:Y-m-d',
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i',
+            "room_id" => "required",
+            "capacity" => "required",
+            "date" => "required|date_format:Y-m-d",
+            "start_time" => "required|date_format:H:i",
+            "end_time" => "required|date_format:H:i",
         ];
     }
 }

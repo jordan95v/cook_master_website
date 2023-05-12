@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
 
-class UpdateRoomRequest extends FormRequest
+class StoreEquipmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,15 +23,12 @@ class UpdateRoomRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [
-            "name" => "required",
-            "address" => "required",
-        ];
-        if ($this->hasFile("image")) {
-            $rules["image"] = ["required",
+        return [
+            "title" => "required",
+            "brand_id" => "required",
+            "image" => ["required",
                 File::image()->dimensions(Rule::dimensions()->minWidth(1280)->minHeight(720)),
-            ];
-        }
-        return $rules;
+            ],
+        ];
     }
 }
