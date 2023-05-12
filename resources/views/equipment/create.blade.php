@@ -32,11 +32,6 @@
                         <x-utils.form-error name="image" />
                     </div>
 
-                    {{-- Description --}}
-                    <textarea class="textarea textarea-bordered border-2 @error('description') border-error @enderror" rows=4
-                        name="description" placeholder="{{ __('Description') }}"></textarea>
-                    <x-utils.form-error name="description" />
-
                     {{-- Submit --}}
                     <div class="card-actions justify-center">
                         <button class="btn btn-primary w-full">{{ __('Add equipment') }}</button>

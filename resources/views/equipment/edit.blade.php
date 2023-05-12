@@ -26,8 +26,8 @@
                         <label class="label">
                             <span class="label-text-alt">{{ __('Current image') }}</span>
                         </label>
+                        <img src="{{ asset('storage/' . $equipment->image) }}">
                     </div>
-                    <img src="{{ asset('storage/' . $equipment->image) }}" alt="" class="w-56">
 
                     {{-- Brand --}}
                     <select class="select select-bordered w-full" name="brand_id">
@@ -38,12 +38,6 @@
                             </option>
                         @endforeach
                     </select>
-
-
-                    {{-- Description --}}
-                    <textarea class="textarea textarea-bordered border-2 @error('description') border-error @enderror" rows=4
-                        name="description" placeholder="{{ __('Description') }}">{{ $equipment->description }}</textarea>
-                    <x-utils.form-error name="description" />
 
                     {{-- Submit --}}
                     <div class="justify-center card-actions">
