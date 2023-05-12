@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
 
 class UpdateProductRequest extends FormRequest
 {
@@ -21,11 +23,17 @@ class UpdateProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             "name" => "required|min:6",
             "brand_id" => "required",
             "price" => "required",
             "description" => "required",
         ];
+        if ($this->hasFile("image")) {
+            $rules["image"] = ["required",
+                File::image()->min(1)->max(12 * 1024)->dimensions(Rule::dimensions()->minWidth(1280)->minHeight(720)),
+            ];
+        }
+        return $rules;
     }
 }

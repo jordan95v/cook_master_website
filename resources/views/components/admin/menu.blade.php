@@ -3,7 +3,6 @@
 {{-- User list --}}
 <li><a href="{{ route('user.index') }}"><i class="fa-solid fa-user"></i>{{ __('Users list') }}</a></li>
 
-
 {{-- Shop --}}
 <li tabindex="0">
     <a>
