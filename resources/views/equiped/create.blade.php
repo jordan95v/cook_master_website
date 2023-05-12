@@ -10,14 +10,14 @@
                 @foreach ($equipment as $item)
                     <x-utils.card class="w-full h-96">
                         {{-- Equipment image --}}
-                        <img src="{{ asset('storage/' . $item->image) }}"
+                        <img src="{{ asset('storage/' . $item->brand->image) }}"
                             class="w-full h-full object-cover object-center rounded-t">
 
                         {{-- Equipment info --}}
                         <div class="card-body">
                             <h2 class="card-title">{{ $item->title }}</h2>
                             <p>{{ $item->description }}</p>
-                            <p>{{ __('Brand') }}: {{ $item->brand }}</p>
+                            <p>{{ __('Brand') }}: {{ $item->brand->name }}</p>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="equipment[]"
                                     value="{{ $item->id }}" id="item-{{ $item->id }}">

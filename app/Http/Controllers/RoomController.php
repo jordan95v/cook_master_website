@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRoomRequest;
+use App\Http\Requests\UpdateRoomRequest;
 use App\Models\Equiped;
 use App\Models\Equipment;
 use App\Models\Room;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -31,21 +32,14 @@ class RoomController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRoomRequest $request)
     {
-        $this->authorize("create", Room::class);
-        $formFields = $request->validate([
-            'name' => 'required',
-            'address' => 'required',
-        ]);
-
+        $form = $request->validated();
         if ($request->hasFile('image')) {
-            $formFields['image'] = $request->file('image')->store('images', 'public');
+            $form['image'] = $request->file('image')->store('images', 'public');
         }
-        $formFields['user_id'] = Auth::user()->id;
-
-        $room = Room::create($formFields);
-
+        $form['user_id'] = Auth::user()->id;
+        $room = Room::create($form);
         if (count(Equipment::where("is_available", true)->get()) > 0) {
             Session::put("room", $room->id);
             return redirect()->route("equiped.create")->with("success", "You have created a room");
@@ -76,20 +70,13 @@ class RoomController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Room $room)
+    public function update(UpdateRoomRequest $request, Room $room)
     {
-        $this->authorize("update", $room);
-        $formFields = $request->validate([
-            'name' => 'required',
-            'address' => 'required',
-        ]);
-
+        $form = $request->validated();
         if ($request->hasFile('image')) {
-            $formFields['image'] = $request->file('image')->store('images', 'public');
+            $form['image'] = $request->file('image')->store('images', 'public');
         }
-
-        $room->update($formFields);
-
+        $room->update($form);
         return redirect("/room")->with("success", "You have edited a room");
     }
 
@@ -98,7 +85,7 @@ class RoomController extends Controller
      */
     public function destroy(Room $room)
     {
-        $this->authorize("update", $room);
+        $this->authorize("delete", $room);
         $room->delete();
         return redirect("/room")->with("success", "You have deleted a room");
     }

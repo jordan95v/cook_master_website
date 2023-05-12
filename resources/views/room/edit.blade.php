@@ -30,7 +30,7 @@
                         </label>
                         <img src="{{ asset('storage/' . $room->image) }}" alt="" class="w-50 h-50">
                     </div>
-                    Image
+
                     {{-- Submit --}}
                     <div class="justify-center card-actions">
                         <button type="submit" class="btn btn-primary">{{ __('Edit') }}</button>

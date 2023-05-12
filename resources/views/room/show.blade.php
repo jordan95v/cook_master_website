@@ -48,10 +48,10 @@
         <div class="grid grid-cols-1 lg:p-0 lg:grid-cols-5 gap-6">
             @foreach ($equipments as $item)
                 <x-utils.card class="image-full h-96">
-                    <img src="{{ asset('storage/' . $item->image) }}" class="w-full h-full object-cover rounded-md">
+                    <img src="{{ asset('storage/' . $item->brand->image) }}" class="h-full object-cover rounded-xl">
                     <div class="card-body">
                         <h2 class="card-title">{{ $item->title }}</h2>
-                        <p>{{ __('Brand') }} : {{ $item->brand }}</p>
+                        <p>{{ __('Brand') }} : {{ $item->brand->name }}</p>
                     </div>
                 </x-utils.card>
             @endforeach

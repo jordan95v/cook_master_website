@@ -8,18 +8,17 @@ use App\Models\User;
 class RoomPolicy
 {
     /**
-     * Determine whether the user can create models.
+     * Determine whether the user can update the model.
      */
     public function create(User $user): bool
     {
-        # TODO: Implement the prestation user.
         return $user->isAdmin();
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Room $room): bool
+    public function delete(User $user, Room $room): bool
     {
         return $user->isAdmin() || $user->is($room->user);
     }
