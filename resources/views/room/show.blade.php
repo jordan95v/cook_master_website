@@ -4,7 +4,7 @@
         {{-- Room image --}}
         <div class="my-auto">
             <img src="{{ asset('storage/' . $room->image) }}" alt="Photo de la salle"
-                class="w-full h-96 object-cover object-center rounded-md">
+                class="w-full object-cover object-center rounded-md">
         </div>
         <div class="pt-5">
             {{-- Room info --}}
@@ -14,7 +14,7 @@
             {{-- Google Maps --}}
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.4753698334275!2d2.3870841771139757!3d48.849144971330794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6727347e25d67%3A0xc73e22c1131584f7!2s242%20Rue%20du%20Faubourg%20Saint-Antoine%2C%2075012%20Paris!5e0!3m2!1sfr!2sfr!4v1683577263610!5m2!1sfr!2sfr"
-                class="w-full py-10" style="border:0;" allowfullscreen="" loading="lazy"
+                class="w-full lg:h-2/3 py-10" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade">
             </iframe>
 
@@ -45,7 +45,7 @@
             </a>
         </div>
 
-        <div class="grid grid-cols-1 lg:p-0 lg:grid-cols-5 gap-6">
+        <div class="grid grid-cols-1 lg:p-0 p-5 lg:grid-cols-5 gap-6">
             @foreach ($equipments as $item)
                 <x-utils.card class="image-full h-96">
                     <img src="{{ asset('storage/' . $item->brand->image) }}" class="h-full object-cover rounded-xl">

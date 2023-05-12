@@ -1,8 +1,9 @@
 <x-layout title="{{ __('Event') }}">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:px-10 py-10 lg:px-24">
-        <img src="{{ asset('storage/' . $event->image) }}" class="w-full h-96 object-cover object-center rounded-md">
+        <img src="{{ asset('storage/' . $event->image) }}" class="w-full object-cover object-center rounded-md">
         <div class="mx-auto my-auto text-center">
             <h2 class="text-4xl font-bold my-4">{{ $event->title }}</h2>
+
             {{-- Button to subscribe to the event --}}
             @if (Auth::check())
                 {{-- Check if the user is already subscribed to the event --}}
@@ -88,9 +89,11 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 p-5 lg:px-24 pb-10">
         <div>
             <h3 class="text-3xl lg:text-5xl font-bold my-3">{{ $event->room->name }}</h3>
-            <p class="text-lg font-medium my-3">{{ $event->room->address }}</p>
+            <p class="text-lg font-medium my-3">
+                <i class="fa-solid fa-location-dot me-2"></i>{{ $event->room->address }}
+            </p>
             <img src="{{ asset('storage/' . $event->room->image) }}" alt="Photo de la salle"
-                class="w-full h-96 object-cover object-center rounded-md">
+                class="w-full object-cover object-center rounded-md">
         </div>
         <div>
             <iframe
