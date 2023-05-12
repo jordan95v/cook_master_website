@@ -12,13 +12,15 @@
                     {{-- Name --}}
                     <x-utils.input type="text" name="name" hint="{{ __('Enter the name of the room') }}" error=1
                         :target="$room" />
+
                     {{-- Address --}}
                     <x-utils.input type="text" name="address" hint="{{ __('Enter the address of the room') }}"
                         error=1 :target="$room" />
+
                     {{-- Image --}}
                     <div class="form-control w-full pb-2">
                         <label class="label">
-                            <span class="label-text-alt">{{ __('Image') }}</span>
+                            <span class="label-text-alt">{{ __('Image') }} (1280x720)</span>
                         </label>
                         <input type="file" name="image"
                             class="file-input file-input-bordered border-2 w-full mb-2 @error('image') border-error @enderror" />
@@ -28,6 +30,7 @@
                         </label>
                         <img src="{{ asset('storage/' . $room->image) }}" alt="" class="w-50 h-50">
                     </div>
+
                     {{-- Submit --}}
                     <div class="justify-center card-actions">
                         <button type="submit" class="btn btn-primary">{{ __('Edit') }}</button>

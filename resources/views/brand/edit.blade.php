@@ -13,7 +13,7 @@
                     {{-- Image --}}
                     <div class="form-control w-full pb-2">
                         <label class="label">
-                            <span class="label-text-alt">{{ __('Brand image') }}</span>
+                            <span class="label-text-alt">{{ __('Brand image') }} (1280x720)</span>
                         </label>
                         <input type="file" name="image" class="file-input file-input-bordered w-full mb-2" />
                         <x-utils.form-error name="image" />

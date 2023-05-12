@@ -16,7 +16,7 @@
                     {{-- Image --}}
                     <div class="form-control w-full">
                         <label class="label">
-                            <span class="label-text-alt">{{ __('Event image') }}</span>
+                            <span class="label-text-alt">{{ __('Event image') }} (1280x720)</span>
                         </label>
                         <input type="file" name="image"
                             class="file-input file-input-bordered border-2 w-full @error('image') border-error @enderror" />

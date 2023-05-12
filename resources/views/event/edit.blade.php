@@ -24,7 +24,7 @@
                             class="file-input file-input-bordered border-2 w-full @error('image') border-error @enderror" />
                         <x-utils.form-error name="image" />
                         <label class="label">
-                            <span class="label-text-alt">{{ __('Current Image') }}</span>
+                            <span class="label-text-alt">{{ __('Current Image') }} (1280x720)</span>
                         </label>
                         <img src="{{ asset('storage/' . $event->image) }}" alt="" class="w-50 h-50">
                     </div>
