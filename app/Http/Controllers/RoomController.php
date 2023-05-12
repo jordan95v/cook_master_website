@@ -24,6 +24,7 @@ class RoomController extends Controller
      */
     public function create()
     {
+        $this->authorize("create", Room::class);
         return view("room.create");
     }
 
