@@ -25,6 +25,7 @@ return new class extends Migration
             $table->time('end_time')->nullable();
             $table->foreignIdFor(Room::class);
             $table->foreignIdFor(User::class);
+            $table->foreignIdFor(User::class, 'created_by');
             $table->timestamps();
         });
     }

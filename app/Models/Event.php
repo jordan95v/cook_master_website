@@ -22,6 +22,11 @@ class Event extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function created_by_user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
     //méthode pour récupérer les utilisateurs d'un événement
     public function participants()
     {

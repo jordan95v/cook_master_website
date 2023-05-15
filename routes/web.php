@@ -84,13 +84,15 @@ Route::group(
             ["prefix" => "users", "controller" => UserController::class],
             function () {
                 // List all users
-                Route::get("/list", "index")->name("user.index");
+                Route::get("/", "index")->name("user.index");
 
                 // Ban / Unban user
                 Route::post("/{user}/ban", "ban")->name("user.ban");
                 Route::post("/{user}/unban", "unban")->name("user.unban");
             }
         );
+
+        Route::get("/events", [EventController::class, "admin_index"])->name("events.admin_index");
     }
 );
 

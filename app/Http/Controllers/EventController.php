@@ -13,7 +13,12 @@ use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
-    /**
+    public function admin_index()
+    {
+        return view('event.admin-index', ['events' => Event::all()]);
+    }
+
+    /** 
      * Display a listing of the resource.
      */
     public function index()
@@ -42,7 +47,7 @@ class EventController extends Controller
         if ($request->hasFile('image')) {
             $form['image'] = $request->file('image')->store('images', 'public');
         }
-
+        $form["created_by"] = $user->id;
         Event::create($form);
         return redirect("/")->with("success", "You have created an event");
     }
@@ -62,7 +67,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        $this->authorize("update", Event::class);
+        $this->authorize("update", $event);
         return view('event.edit', ['event' => $event, 'events' => Event::all(), 'rooms' => Room::all(), 'users' => User::all()]);
     }
 
@@ -71,7 +76,7 @@ class EventController extends Controller
      */
     public function update(UpdateEventRequest $request, Event $event)
     {
-        $this->authorize("update", Event::class);
+        $this->authorize("update", $event);
         $user = User::find(Auth::id());
         $form = $request->validated();
         $form["user_id"] = ($user->isAdmin()) ? $request->user_id : $user->id;
@@ -88,7 +93,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        $this->authorize("delete", Event::class);
+        $this->authorize("delete", $event);
         $event->delete();
         return redirect("/events")->with("success", "You have deleted an event");
     }
