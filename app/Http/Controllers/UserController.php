@@ -55,7 +55,7 @@ class UserController extends Controller
             $form["password"] = bcrypt($form["password"]);
         }
         if ($request->hasFile("image")) {
-            if (file_exists("storage/" . Auth::user()->image)) {
+            if (Auth::user()->image && file_exists("storage/" . Auth::user()->image)) {
                 unlink("storage/" . Auth::user()->image);
             }
             $form["image"] = $request->file("image")->store("user_avatar", "public");
