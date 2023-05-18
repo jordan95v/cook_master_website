@@ -17,6 +17,7 @@ class RoomController extends Controller
      */
     public function index()
     {
+        $this->authorize("viewAny", Room::class);
         return view("room.index", ["rooms" => Room::all()]);
     }
 

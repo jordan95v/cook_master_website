@@ -1,26 +1,76 @@
-<x-layout title="{{ __('Rooms') }}">
-    <h1 class="text-5xl text-center my-10">{{ __('List of available rooms') }}</h1>
+<x-layout title="Liste des produits" datatables=1>
+    <x-admin.listing>
+        <!-- head -->
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>{{ __('Name') }}</th>
+                <th>{{ __('Image') }}</th>
+                <th>{{ __('Address') }}</th>
+                <th>{{ __('Created by') }}</th>
+                <th>{{ __('Actions') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($rooms as $room)
+                <tr class="hover">
+                    <th>{{ $room->id }}</th>
+                    <td class="font-bold">
+                        <a href="{{ route('room.show', ['room' => $room->id]) }}" class="link hover:link-primary">
+                            {{ $room->name }}
+                        </a>
+                    </td>
+                    <td>
+                        @if ($room->image)
+                            <a href="{{ 'storage/' . $room->image }}" class="">
+                                {{ $room->image }}<i class="fa-solid fa-arrow-up-right-from-square ms-2"></i>
+                            </a>
+                        @endif
+                    </td>
+                    <td>{{ $room->address }}</td>
+                    <x-admin.user-avatar :target="$room->user" />
+                    <td class="w-1/6">
+                        <div class="dropdown dropdown-bottom dropdown-end">
+                            <label tabindex="0" class="btn btn-circle btn-ghost">
+                                <i class="fa-solid fa-gear"></i>
+                            </label>
+                            <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                                <!--Modify -->
+                                <a href="{{ route('room.edit', ['room' => $room->id]) }}" class="btn btn-primary">
+                                    <i class="fa-solid fa-pen me-2"></i>{{ __('Modify') }}
+                                </a>
 
-    {{-- Rooms list card --}}
-    <div class="grid grid-cols-1 p-10 lg:px-24 lg:grid-cols-3 gap-6">
-        @foreach ($rooms as $room)
-            <x-utils.card class="w-full">
-                <div class="card-body p-0">
-                    <a href="{{ route('room.show', ['room' => $room->id]) }}">
-                        {{-- Room image --}}
-                        <img src="{{ asset('storage/' . $room->image) }}" alt="{{ __('Image') }}"
-                            class="w-full h-96 object-cover rounded-t">
-
-                        {{-- Room info --}}
-                        <div class="p-4">
-                            <h2 class="card-title text-2xl font-bold mb-6 hover:link">{{ $room->name }}</h2>
-                            <p class="text-gray-400">
-                                <i class="fa-solid fa-location-dot me-2"></i>{{ $room->address }}
-                            </p>
+                                <!-- Open delete modal -->
+                                <label for="delete-modal-{{ $room->id }}" class="btn btn-error mt-2">
+                                    <i class="fa-solid fa-trash me-2"></i>{{ __('Delete') }}
+                                </label>
+                            </ul>
                         </div>
-                    </a>
-                </div>
-            </x-utils.card>
-        @endforeach
-    </div>
+                    </td>
+
+                    <!-- Delete modal -->
+                    <input type="checkbox" id="delete-modal-{{ $room->id }}" class="modal-toggle" />
+                    <div class="modal modal-bottom sm:modal-middle">
+                        <div class="modal-box">
+                            <form action="{{ route('room.destroy', ['room' => $room]) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <label for="delete-modal-{{ $room->id }}"
+                                    class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                                <h3 class="font-bold text-lg mb-4">
+                                    {{ __('Are you sure you wanna delete this room ?') }}
+                                </h3>
+
+                                <div class="flex justify-center">
+                                    <button class="btn btn-error w-3/5">
+                                        <i class="fa-solid fa-trash me-2"></i>{{ __('Delete the room') }}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </tr>
+            @endforeach
+        </tbody>
+    </x-admin.listing>
 </x-layout>

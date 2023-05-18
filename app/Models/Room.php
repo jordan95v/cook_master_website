@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Room extends Model
 {
@@ -12,8 +11,8 @@ class Room extends Model
 
     protected $guarded = [];
 
-    public function room(): HasMany
+    public function user()
     {
-        return $this->hasMany(Room::class);
+        return $this->belongsTo(User::class, "user_id");
     }
 }

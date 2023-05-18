@@ -7,6 +7,7 @@
                 <th>{{ __('Title') }}</th>
                 <th>{{ __('Image') }}</th>
                 <th>{{ __('Brand') }}</th>
+                <th>{{ __('Created by') }}</th>
                 <th>{{ __('Actions') }}</th>
             </tr>
         </thead>
@@ -33,6 +34,7 @@
                             {{ $equipment->brand->name }}
                         </a>
                     </td>
+                    <x-admin.user-avatar :target="$equipment->user" />
                     <td class="w-1/6">
                         <div class="dropdown dropdown-bottom dropdown-end">
                             <label tabindex="0" class="btn btn-circle btn-ghost">

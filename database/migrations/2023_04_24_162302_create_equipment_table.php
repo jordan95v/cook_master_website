@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Brand;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('image')->nullable();
             $table->foreignIdFor(Brand::class, "brand_id")->constrained("brands")->onDelete('cascade');
+            $table->foreignIdFor(User::class, "user_id");
             $table->boolean('is_available')->default(true);
             $table->timestamps();
         });

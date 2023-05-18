@@ -6,6 +6,7 @@ use App\Http\Requests\StoreEquipmentRequest;
 use App\Http\Requests\UpdateEquipmentRequest;
 use App\Models\Brand;
 use App\Models\Equipment;
+use Illuminate\Support\Facades\Auth;
 
 class EquipmentController extends Controller
 {
@@ -36,6 +37,7 @@ class EquipmentController extends Controller
         if ($request->hasFile("image")) {
             $form["image"] = $request->file("image")->store("images", "public");
         }
+        $form["user_id"] = Auth::id();
         Equipment::create($form);
         return redirect("/")->with("success", "You have created an equipment");
     }
