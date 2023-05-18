@@ -16,4 +16,6 @@ php /app/artisan migrate  --force --seed
 php /app/artisan config:clear
 php /app/artisan route:cache
 php /app/artisan view:cache
+php /app/artisan event:cache
+
 php /app/artisan serve --host=0.0.0.0
