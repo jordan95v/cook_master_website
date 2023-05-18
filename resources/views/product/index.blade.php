@@ -8,6 +8,7 @@
                 <th>{{ __('Image') }}</th>
                 <th>{{ __('Brand') }}</th>
                 <th>{{ __('Price') }}</th>
+                <th>{{ __('Created by') }}</th>
                 <th>{{ __('Actions') }}</th>
             </tr>
         </thead>
@@ -37,6 +38,7 @@
                     <td>
                         {{ $product->price }}€
                     </td>
+                    <x-admin.user-avatar :target="$product->user" />
                     <td class="w-1/6">
                         <div class="dropdown dropdown-bottom dropdown-end">
                             <label tabindex="0" class="btn btn-circle btn-ghost">

@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -60,6 +61,7 @@ class ProductController extends Controller
         $this->authorize("create", Product::class);
         $form = $request->validated();
         $form["image"] = $request->file("image")->store("product_image", "public");
+        $form["user_id"] = Auth::id();
         Product::create($form);
         return back()->with("success", "Product successfully created.");
     }
