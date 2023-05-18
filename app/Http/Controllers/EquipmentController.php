@@ -15,6 +15,7 @@ class EquipmentController extends Controller
      */
     public function index()
     {
+        $this->authorize("viewAny", Equipment::class);
         return view("equipment.index", ["equipments" => Equipment::all()]);
     }
 

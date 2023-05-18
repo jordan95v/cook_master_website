@@ -15,10 +15,11 @@ class EventController extends Controller
 {
     public function admin_index()
     {
+        $this->authorize("viewAny", Event::class);
         return view('event.admin-index', ['events' => Event::all()]);
     }
 
-    /** 
+    /**
      * Display a listing of the resource.
      */
     public function index()

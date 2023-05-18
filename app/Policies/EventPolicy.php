@@ -7,6 +7,11 @@ use App\Models\User;
 
 class EventPolicy
 {
+    public function viewAny(User $user): bool
+    {
+        return $user->isAdmin();
+    }
+
     /**
      * Determine whether the user can create models.
      */
@@ -20,7 +25,7 @@ class EventPolicy
      */
     public function update(User $user, Event $event): bool
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $user->is($event->user);
     }
 
     /**
@@ -28,6 +33,6 @@ class EventPolicy
      */
     public function delete(User $user, Event $event): bool
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $user->is($event->user);
     }
 }

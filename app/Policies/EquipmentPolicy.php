@@ -7,6 +7,11 @@ use App\Models\User;
 
 class EquipmentPolicy
 {
+    public function viewAny(User $user): bool
+    {
+        return $user->isAdmin();
+    }
+
     /**
      * Determine whether the user can create models.
      */
@@ -20,7 +25,7 @@ class EquipmentPolicy
      */
     public function update(User $user, Equipment $equipment): bool
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $user->is($equipment->user);
     }
 
     /**
@@ -28,6 +33,6 @@ class EquipmentPolicy
      */
     public function delete(User $user, Equipment $equipment): bool
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $user->is($equipment->user);
     }
 }
