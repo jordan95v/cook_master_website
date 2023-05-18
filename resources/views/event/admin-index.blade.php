@@ -8,10 +8,7 @@
                 <th>{{ __('Image') }}</th>
                 <th>{{ __('Capacity') }}</th>
                 <th>{{ __('Date') }}</th>
-                <th>{{ __('Start time') }}</th>
-                <th>{{ __('End time') }}</th>
                 <th>{{ __('Room') }}</th>
-                <th>{{ __('Organizer') }}</th>
                 <th>{{ __('Created by') }}</th>
                 <th>{{ __('Actions') }}</th>
             </tr>
@@ -34,15 +31,12 @@
                     </td>
                     <td>{{ $event->capacity }}</td>
                     <td>{{ $event->date }}</td>
-                    <td>{{ $event->start_time }}</td>
-                    <td>{{ $event->end_time }}</td>
                     <td>
                         <a href="{{ route('room.show', ['room' => $event->room->id]) }}" class="link font-bold">
                             {{ $event->room->name }}
                         </a>
                     </td>
-                    <td>{{ $event->user->name }}</td>
-                    <td>{{ $event->created_by_user->name }}</td>
+                    <x-admin.user-avatar :target="$event->created_by_user" />
                     <td class="w-1/6">
                         <div class="dropdown dropdown-bottom dropdown-end">
                             <label tabindex="0" class="btn btn-circle btn-ghost">
