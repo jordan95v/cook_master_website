@@ -35,6 +35,9 @@ This project use the following stack:
 
 List of all websites functionnalities:
 
-- User can register and login
-- Admin can add, edit and delete events, rooms, product, courses and equipments
-- Admin can also manage users, banning them, promoting them to admin, prestation or deleting them
+- User can register and login, modify their profile,
+- Admin can add, edit and delete events, rooms, product, courses and equipments,
+- Admin can also manage users, banning them, promoting them to admin, prestation or deleting them,
+- Users can subscribe to differents plans,
+- Users can purchase some items from the store, and an invoice will be generated,
+- Users can register to an event, and have information on the location, ...
