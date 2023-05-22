@@ -267,5 +267,10 @@
     "You successfully promoted the user.": "Ha promovido al usuario con éxito.",
     "You successfully demoted the user.": "Ha degradado al usuario con éxito.",
     "Are you sure you wanna promote this account ?": "¿Estás seguro/a de que deseas promover esta cuenta?",
-    "Are you sure you wanna demote this account ?": "¿Estás seguro/a de que deseas degradar esta cuenta?"
+    "Are you sure you wanna demote this account ?": "¿Estás seguro/a de que deseas degradar esta cuenta?",
+    "Make provider": "Hacer proveedor",
+    "Remove provider": "Eliminar proveedor",
+    "Provider": "Proveedor",
+    "Are you sure you wanna remove this account from service providers ?": "¿Estás seguro/a de que deseas eliminar esta cuenta de los proveedores de servicios?",
+    "Are you sure you wanna make this account a service provider ?": "¿Estás seguro/a de que deseas hacer de esta cuenta un proveedor de servicios?"
 }

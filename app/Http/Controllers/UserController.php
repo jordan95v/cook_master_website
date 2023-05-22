@@ -80,18 +80,15 @@ class UserController extends Controller
         return redirect("/")->with("success", "You successfully deleted your account.");
     }
 
-    public function ban(User $user)
+    public function manage_ban(User $user)
     {
         $this->authorize("ban", $user);
+        if ($user->is_banned) {
+            $user->update(["is_banned" => 0]);
+            return back()->with("success", "You successfully unbanned the user.");
+        }
         $user->update(["is_banned" => 1]);
         return back()->with("success", "You successfully banned the user.");
-    }
-
-    public function unban(User $user)
-    {
-        $this->authorize("ban", $user);
-        $user->update(["is_banned" => 0]);
-        return back()->with("success", "You successfully unbanned the user.");
     }
 
     public function manage_admin(User $user)

@@ -87,8 +87,7 @@ Route::group(
                 Route::get("/", "index")->name("user.index");
 
                 // Ban / Unban user
-                Route::post("/{user}/ban", "ban")->name("user.ban");
-                Route::post("/{user}/unban", "unban")->name("user.unban");
+                Route::post("/{user}/manage-ban", "manage_ban")->name("user.manage-ban");
 
                 // Promote / Demote user
                 Route::put("/{user}/manage-admin", "manage_admin")->name("user.manage-admin");
