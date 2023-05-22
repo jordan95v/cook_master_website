@@ -94,18 +94,15 @@ class UserController extends Controller
         return back()->with("success", "You successfully unbanned the user.");
     }
 
-    public function promote(User $user)
+    public function manage_admin(User $user)
     {
         $this->authorize("manage", $user);
+        if ($user->role == 1) {
+            $user->update(["role" => 0]);
+            return back()->with("success", "You successfully demoted the user.");
+        }
         $user->update(["role" => 1]);
         return back()->with("success", "You successfully promoted the user.");
-    }
-
-    public function demote(User $user)
-    {
-        $this->authorize("manage", $user);
-        $user->update(["role" => 0]);
-        return back()->with("success", "You successfully demoted the user.");
     }
 
     public function manage_service_provider(User $user)

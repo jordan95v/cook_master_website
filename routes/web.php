@@ -91,8 +91,7 @@ Route::group(
                 Route::post("/{user}/unban", "unban")->name("user.unban");
 
                 // Promote / Demote user
-                Route::put("/{user}/promote", "promote")->name("user.promote");
-                Route::put("/{user}/demote", "demote")->name("user.demote");
+                Route::put("/{user}/manage-admin", "manage_admin")->name("user.manage-admin");
 
                 // Promote service provider
                 Route::put("/{user}/manage-provider", "manage_service_provider")->name("user.manage-service-provider");
