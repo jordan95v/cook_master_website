@@ -108,6 +108,17 @@ class UserController extends Controller
         return back()->with("success", "You successfully demoted the user.");
     }
 
+    public function manage_service_provider(User $user)
+    {
+        $this->authorize("add_service_provider", $user);
+        if ($user->is_service_provider) {
+            $user->update(["is_service_provider" => 0]);
+            return back()->with("success", "You successfully demoted the user.");
+        }
+        $user->update(["is_service_provider" => 1]);
+        return back()->with("success", "You successfully promoted the user.");
+    }
+
     public function invoices()
     {
         return view("users.invoices", ["invoices" => Auth::user()->orderInvoices]);

@@ -45,4 +45,9 @@ class UserPolicy
     {
         return ($user->role == 2 && $model->role != 2);
     }
+
+    public function add_service_provider(User $user, User $model): bool
+    {
+        return ($user->isAdmin() && $model->role != 2);
+    }
 }

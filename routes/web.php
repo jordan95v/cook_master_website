@@ -93,6 +93,9 @@ Route::group(
                 // Promote / Demote user
                 Route::put("/{user}/promote", "promote")->name("user.promote");
                 Route::put("/{user}/demote", "demote")->name("user.demote");
+
+                // Promote service provider
+                Route::put("/{user}/manage-provider", "manage_service_provider")->name("user.manage-service-provider");
             }
         );
 

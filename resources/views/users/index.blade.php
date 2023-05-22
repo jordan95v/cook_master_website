@@ -8,6 +8,7 @@
                 <th>{{ __('Email') }}</th>
                 <th>{{ __('Role') }}</th>
                 <th>{{ __('Banned') }}</th>
+                <th>{{ __('Provider') }}</th>
                 <th>{{ __('Actions') }}</th>
             </tr>
         </thead>
@@ -32,6 +33,7 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ $value }}</td>
                     <td>{{ $user->is_banned ? '✔️' : '❌' }}</td>
+                    <td>{{ $user->is_service_provider ? '✔️' : '❌' }}</td>
                     <td class="w-1/6">
                         <div class="dropdown dropdown-bottom dropdown-end">
                             <label tabindex="0" class="btn btn-circle btn-ghost"><i class="fa-solid fa-gear"></i></label>
@@ -58,6 +60,17 @@
                                     <!-- Open promote modal -->
                                     <label for="promote-modal-{{ $user->id }}" class="btn btn-accent mt-2">
                                         <i class="fa-solid fa-arrow-up-right-dots me-2"></i>{{ __('Promote') }}
+                                    </label>
+                                @endif
+
+                                @if ($user->role != 2)
+                                    <!-- Open service provider modal -->
+                                    <label for="service-modal-{{ $user->id }}" class="btn btn-success mt-2">
+                                        @if ($user->is_service_provider)
+                                            <i class="fa-solid fa-money-bill me-2"></i>{{ __('Remove provider') }}
+                                        @else
+                                            <i class="fa-solid fa-money-bill me-2"></i>{{ __('Make provider') }}
+                                        @endif
                                     </label>
                                 @endif
 
@@ -154,6 +167,39 @@
                                 <div class="flex justify-center">
                                     <button class="btn btn-accent w-3/5">
                                         <i class="fa-solid fa-arrow-up-right-dots me-2"></i>{{ __('Promote') }}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                @endif
+
+                @if ($user->role != 2)
+                    <!-- Service provider modal -->
+                    <input type="checkbox" id="service-modal-{{ $user->id }}" class="modal-toggle" />
+                    <div class="modal modal-bottom sm:modal-middle">
+                        <div class="modal-box">
+                            <form action="{{ route('user.manage-service-provider', ['user' => $user]) }}"
+                                method="post">
+                                @csrf
+                                @method('PUT')
+                                <label for="service-modal-{{ $user->id }}"
+                                    class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                                <h3 class="font-bold text-lg mb-4">
+                                    @if ($user->is_service_provider)
+                                        {{ __('Are you sure you wanna remove this account from service providers ?') }}
+                                    @else
+                                        {{ __('Are you sure you wanna make this account a service provider ?') }}
+                                    @endif
+                                </h3>
+
+                                <div class="flex justify-center">
+                                    <button class="btn btn-success w-3/5">
+                                        @if ($user->is_service_provider)
+                                            <i class="fa-solid fa-money-bill me-2"></i>{{ __('Remove provider') }}
+                                        @else
+                                            <i class="fa-solid fa-money-bill me-2"></i>{{ __('Make provider') }}
+                                        @endif
                                     </button>
                                 </div>
                             </form>
