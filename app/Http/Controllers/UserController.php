@@ -94,6 +94,20 @@ class UserController extends Controller
         return back()->with("success", "You successfully unbanned the user.");
     }
 
+    public function promote(User $user)
+    {
+        $this->authorize("manage", $user);
+        $user->update(["role" => 1]);
+        return back()->with("success", "You successfully promoted the user.");
+    }
+
+    public function demote(User $user)
+    {
+        $this->authorize("manage", $user);
+        $user->update(["role" => 0]);
+        return back()->with("success", "You successfully demoted the user.");
+    }
+
     public function invoices()
     {
         return view("users.invoices", ["invoices" => Auth::user()->orderInvoices]);

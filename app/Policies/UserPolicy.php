@@ -39,4 +39,10 @@ class UserPolicy
         }
         return false;
     }
+
+    // User can promote the model.
+    public function manage(User $user, User $model): bool
+    {
+        return ($user->role == 2 && $model->role != 2);
+    }
 }

@@ -19,10 +19,10 @@
                             $value = __('Normal user');
                             break;
                         case 1:
-                            $value = 'Admin';
+                            $value = __('Admin');
                             break;
                         case 2:
-                            $value = 'Super admin';
+                            $value = __('Super admin');
                             break;
                     }
                 @endphp
@@ -47,77 +47,139 @@
                                         <i class="fa-solid fa-ban me-2"></i>{{ __('Unban') }}
                                     </label>
                                 @endif
+
+                                @if ($user->role == 1)
+                                    <!-- Open demote modal -->
+                                    <label for="demote-modal-{{ $user->id }}" class="btn btn-accent mt-2">
+                                        <i class="fa-solid fa-arrow-up-right-dots me-2 rotate-90"></i>
+                                        {{ __('Demote') }}
+                                    </label>
+                                @elseif ($user->role == 0)
+                                    <!-- Open promote modal -->
+                                    <label for="promote-modal-{{ $user->id }}" class="btn btn-accent mt-2">
+                                        <i class="fa-solid fa-arrow-up-right-dots me-2"></i>{{ __('Promote') }}
+                                    </label>
+                                @endif
+
                                 <!-- Open delete modal -->
                                 <label for="delete-modal-{{ $user->id }}" class="btn btn-error mt-2">
                                     <i class="fa-solid fa-trash me-2"></i>{{ __('Delete') }}
                                 </label>
                             </ul>
                         </div>
-                        @if (!$user->is_banned)
-                            <!-- Ban modal -->
-                            <input type="checkbox" id="ban-modal-{{ $user->id }}" class="modal-toggle" />
-                            <div class="modal modal-bottom sm:modal-middle">
-                                <div class="modal-box">
-                                    <form action="{{ route('user.ban', ['user' => $user]) }}" method="post">
-                                        @csrf
-                                        <label for="ban-modal-{{ $user->id }}"
-                                            class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                                        <h3 class="font-bold text-lg mb-4">
-                                            {{ __('Are you sure you wanna ban this account ?') }}
-                                        </h3>
-
-                                        <div class="flex justify-center">
-                                            <button class="btn btn-warning w-3/5">
-                                                <i class="fa-solid fa-trash me-2"></i>{{ __('Ban') }}
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        @else
-                            <!-- Unban modal -->
-                            <input type="checkbox" id="unban-modal-{{ $user->id }}" class="modal-toggle" />
-                            <div class="modal modal-bottom sm:modal-middle">
-                                <div class="modal-box">
-                                    <form action="{{ route('user.unban', ['user' => $user]) }}" method="post">
-                                        @csrf
-                                        <label for="unban-modal-{{ $user->id }}"
-                                            class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                                        <h3 class="font-bold text-lg mb-4">
-                                            {{ __('Are you sure you wanna ban this account ?') }}
-                                        </h3>
-
-                                        <div class="flex justify-center">
-                                            <button class="btn btn-primary">
-                                                <i class="fa-solid fa-trash me-2"></i>{{ __('Unban') }}
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        @endif
                     </td>
+                </tr>
 
-                    <!-- Delete modal -->
-                    <input type="checkbox" id="delete-modal-{{ $user->id }}" class="modal-toggle" />
+                @if (!$user->is_banned)
+                    <!-- Ban modal -->
+                    <input type="checkbox" id="ban-modal-{{ $user->id }}" class="modal-toggle" />
                     <div class="modal modal-bottom sm:modal-middle">
                         <div class="modal-box">
-                            <form action="{{ route('user.destroy', ['user' => $user]) }}" method="post">
+                            <form action="{{ route('user.ban', ['user' => $user]) }}" method="post">
                                 @csrf
-                                @method('DELETE')
-                                <label for="delete-modal-{{ $user->id }}"
+                                <label for="ban-modal-{{ $user->id }}"
                                     class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                                 <h3 class="font-bold text-lg mb-4">
-                                    {{ __('Are you sure you wanna delete this account ?') }}</h3>
+                                    {{ __('Are you sure you wanna ban this account ?') }}
+                                </h3>
 
                                 <div class="flex justify-center">
-                                    <button class="btn btn-error w-3/5">
-                                        <i class="fa-solid fa-trash me-2"></i>{{ __('Delete') }}</button>
+                                    <button class="btn btn-warning w-3/5">
+                                        <i class="fa-solid fa-trash me-2"></i>{{ __('Ban') }}
+                                    </button>
                                 </div>
                             </form>
                         </div>
                     </div>
-                </tr>
+                @else
+                    <!-- Unban modal -->
+                    <input type="checkbox" id="unban-modal-{{ $user->id }}" class="modal-toggle" />
+                    <div class="modal modal-bottom sm:modal-middle">
+                        <div class="modal-box">
+                            <form action="{{ route('user.unban', ['user' => $user]) }}" method="post">
+                                @csrf
+                                <label for="unban-modal-{{ $user->id }}"
+                                    class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                                <h3 class="font-bold text-lg mb-4">
+                                    {{ __('Are you sure you wanna ban this account ?') }}
+                                </h3>
+
+                                <div class="flex justify-center">
+                                    <button class="btn btn-primary">
+                                        <i class="fa-solid fa-trash me-2"></i>{{ __('Unban') }}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                @endif
+
+                @if ($user->role == 1)
+                    <!-- Demote modal -->
+                    <input type="checkbox" id="demote-modal-{{ $user->id }}" class="modal-toggle" />
+                    <div class="modal modal-bottom sm:modal-middle">
+                        <div class="modal-box">
+                            <form action="{{ route('user.demote', ['user' => $user]) }}" method="post">
+                                @csrf
+                                @method('PUT')
+                                <label for="demote-modal-{{ $user->id }}"
+                                    class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                                <h3 class="font-bold text-lg mb-4">
+                                    {{ __('Are you sure you wanna demote this account ?') }}
+                                </h3>
+
+                                <div class="flex justify-center">
+                                    <button class="btn btn-accent w-3/5">
+                                        <i class="fa-solid fa-arrow-up-right-dots me-2 rotate-90"></i>
+                                        {{ __('Demote') }}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                @elseif ($user->role == 0)
+                    <!-- Promote modal -->
+                    <input type="checkbox" id="promote-modal-{{ $user->id }}" class="modal-toggle" />
+                    <div class="modal modal-bottom sm:modal-middle">
+                        <div class="modal-box">
+                            <form action="{{ route('user.promote', ['user' => $user]) }}" method="post">
+                                @csrf
+                                @method('PUT')
+                                <label for="promote-modal-{{ $user->id }}"
+                                    class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                                <h3 class="font-bold text-lg mb-4">
+                                    {{ __('Are you sure you wanna promote this account ?') }}
+                                </h3>
+
+                                <div class="flex justify-center">
+                                    <button class="btn btn-accent w-3/5">
+                                        <i class="fa-solid fa-arrow-up-right-dots me-2"></i>{{ __('Promote') }}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                @endif
+
+                <!-- Delete modal -->
+                <input type="checkbox" id="delete-modal-{{ $user->id }}" class="modal-toggle" />
+                <div class="modal modal-bottom sm:modal-middle">
+                    <div class="modal-box">
+                        <form action="{{ route('user.destroy', ['user' => $user]) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <label for="delete-modal-{{ $user->id }}"
+                                class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                            <h3 class="font-bold text-lg mb-4">
+                                {{ __('Are you sure you wanna delete this account ?') }}</h3>
+
+                            <div class="flex justify-center">
+                                <button class="btn btn-error w-3/5">
+                                    <i class="fa-solid fa-trash me-2"></i>{{ __('Delete') }}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             @endforeach
         </tbody>
     </x-admin.listing>

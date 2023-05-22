@@ -89,6 +89,10 @@ Route::group(
                 // Ban / Unban user
                 Route::post("/{user}/ban", "ban")->name("user.ban");
                 Route::post("/{user}/unban", "unban")->name("user.unban");
+
+                // Promote / Demote user
+                Route::put("/{user}/promote", "promote")->name("user.promote");
+                Route::put("/{user}/demote", "demote")->name("user.demote");
             }
         );
 

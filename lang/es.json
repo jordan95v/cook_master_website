@@ -261,5 +261,11 @@
     "List of available events": "Lista de eventos disponibles",
     "Title": "Título",
     "Room": "Sala",
-    "Created by": "Creado por"
+    "Created by": "Creado por",
+    "Promote": "Promover",
+    "Demote": "Degradar",
+    "You successfully promoted the user.": "Ha promovido al usuario con éxito.",
+    "You successfully demoted the user.": "Ha degradado al usuario con éxito.",
+    "Are you sure you wanna promote this account ?": "¿Estás seguro/a de que deseas promover esta cuenta?",
+    "Are you sure you wanna demote this account ?": "¿Estás seguro/a de que deseas degradar esta cuenta?"
 }

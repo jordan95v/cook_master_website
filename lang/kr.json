@@ -261,5 +261,11 @@
     "List of available events": "사용 가능한 이벤트 목록",
     "Title": "제목",
     "Room": "방",
-    "Created by": "생성자"
+    "Created by": "생성자",
+    "Promote": "홍보",
+    "Demote": "강등",
+    "You successfully promoted the user.": "사용자를 성공적으로 홍보했습니다.",
+    "You successfully demoted the user.": "사용자를 성공적으로 강등했습니다.",
+    "Are you sure you wanna promote this account ?": "이 계정을 정말 홍보하시겠습니까?",
+    "Are you sure you wanna demote this account ?": "이 계정을 정말 강등하시겠습니까?"
 }
