@@ -35,48 +35,51 @@
                     <td>{{ $user->is_banned ? '✔️' : '❌' }}</td>
                     <td>{{ $user->is_service_provider ? '✔️' : '❌' }}</td>
                     <td class="w-1/6">
-                        <div class="dropdown dropdown-bottom dropdown-end">
-                            <label tabindex="0" class="btn btn-circle btn-ghost"><i class="fa-solid fa-gear"></i></label>
-                            <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                                @if (!$user->is_banned)
-                                    <!-- Open ban modal -->
-                                    <label for="ban-modal-{{ $user->id }}" class="btn btn-warning">
-                                        <i class="fa-solid fa-ban me-2"></i>{{ __('Ban') }}
-                                    </label>
-                                @else
-                                    <!-- Open unban modal -->
-                                    <label for="ban-modal-{{ $user->id }}" class="btn btn-primary">
-                                        <i class="fa-solid fa-ban me-2"></i>{{ __('Unban') }}
-                                    </label>
-                                @endif
+                        @if (Auth::user()->isAdmin() && $user->role != 2)
+                            <div class="dropdown dropdown-bottom dropdown-end">
+                                <label tabindex="0" class="btn btn-circle btn-ghost"><i
+                                        class="fa-solid fa-gear"></i></label>
+                                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-56">
+                                    @if (!$user->is_banned)
+                                        <!-- Open ban modal -->
+                                        <label for="ban-modal-{{ $user->id }}" class="btn btn-warning">
+                                            <i class="fa-solid fa-ban me-2"></i>{{ __('Ban') }}
+                                        </label>
+                                    @else
+                                        <!-- Open unban modal -->
+                                        <label for="ban-modal-{{ $user->id }}" class="btn btn-primary">
+                                            <i class="fa-solid fa-ban me-2"></i>{{ __('Unban') }}
+                                        </label>
+                                    @endif
 
 
-                                @if ($user->role != 2)
-                                    <label for="manage-modal-{{ $user->id }}" class="btn btn-accent mt-2">
-                                        @if ($user->role == 1)
-                                            <i class="fa-solid fa-arrow-up-right-dots me-2 rotate-90"></i>
-                                            {{ __('Demote') }}
-                                        @elseif ($user->role == 0)
-                                            <i class="fa-solid fa-arrow-up-right-dots me-2"></i>{{ __('Promote') }}
-                                        @endif
-                                    </label>
+                                    @if ($user->role != 2)
+                                        <label for="manage-modal-{{ $user->id }}" class="btn btn-accent mt-2">
+                                            @if ($user->role == 1)
+                                                <i class="fa-solid fa-arrow-up-right-dots me-2 rotate-90"></i>
+                                                {{ __('Demote') }}
+                                            @elseif ($user->role == 0)
+                                                <i class="fa-solid fa-arrow-up-right-dots me-2"></i>{{ __('Promote') }}
+                                            @endif
+                                        </label>
 
-                                    <!-- Open service provider modal -->
-                                    <label for="service-modal-{{ $user->id }}" class="btn btn-success mt-2">
-                                        @if ($user->is_service_provider)
-                                            <i class="fa-solid fa-money-bill me-2"></i>{{ __('Remove provider') }}
-                                        @else
-                                            <i class="fa-solid fa-money-bill me-2"></i>{{ __('Make provider') }}
-                                        @endif
-                                    </label>
-                                @endif
+                                        <!-- Open service provider modal -->
+                                        <label for="service-modal-{{ $user->id }}" class="btn btn-success mt-2">
+                                            @if ($user->is_service_provider)
+                                                <i class="fa-solid fa-money-bill me-2"></i>{{ __('Remove provider') }}
+                                            @else
+                                                <i class="fa-solid fa-money-bill me-2"></i>{{ __('Make provider') }}
+                                            @endif
+                                        </label>
+                                    @endif
 
-                                <!-- Open delete modal -->
-                                <label for="delete-modal-{{ $user->id }}" class="btn btn-error mt-2">
-                                    <i class="fa-solid fa-trash me-2"></i>{{ __('Delete') }}
-                                </label>
-                            </ul>
-                        </div>
+                                    <!-- Open delete modal -->
+                                    <label for="delete-modal-{{ $user->id }}" class="btn btn-error mt-2">
+                                        <i class="fa-solid fa-trash me-2"></i>{{ __('Delete') }}
+                                    </label>
+                                </ul>
+                            </div>
+                        @endif
                     </td>
                 </tr>
 
