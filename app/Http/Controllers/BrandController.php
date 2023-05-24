@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
 use App\Models\Brand;
+use Illuminate\Support\Facades\Auth;
 
 class BrandController extends Controller
 {
@@ -37,6 +38,7 @@ class BrandController extends Controller
         if ($request->hasFile("image")) {
             $form["image"] = $request->file("image")->store("brand_logo", "public");
         }
+        $form["user_id"] = Auth::id();
         Brand::create($form);
         return back()->with("success", "Brand successfully created.");
     }

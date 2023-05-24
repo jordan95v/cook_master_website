@@ -20,7 +20,7 @@ class ProductPolicy
      */
     public function create(User $user): bool
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $user->is_service_provider;
     }
 
     /**
@@ -28,7 +28,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product): bool
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $user->is($product->user);
     }
 
     /**
@@ -36,6 +36,6 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product): bool
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $user->is($product->user);
     }
 }

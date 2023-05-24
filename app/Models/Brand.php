@@ -7,19 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Brand extends Model
 {
-    protected $fillable = [
-        "name",
-        "slug",
-        "image",
-        "description",
-        "website",
-        "contact_email",
-    ];
+    protected $guarded = [];
 
     use HasFactory;
 
     public function products()
     {
         return $this->hasMany(Product::class, "brand_id");
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
