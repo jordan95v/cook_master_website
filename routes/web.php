@@ -96,8 +96,6 @@ Route::group(
                 Route::put("/{user}/manage-provider", "manage_service_provider")->name("user.manage-service-provider");
             }
         );
-
-        Route::get("/events", [EventController::class, "admin_index"])->name("events.admin_index");
     }
 );
 
@@ -108,12 +106,13 @@ Route::resource("brand", BrandController::class)->middleware("auth");
 Route::resource("product", ProductController::class)->middleware("auth");
 
 // Order and store
-Route::post("order/{product}", [OrderController::class, 'store'])->middleware("auth")->name("order.store");
-Route::post("order/{order}/delete", [OrderController::class, 'destroy'])->middleware("auth")->name("order.destroy");
+Route::post("/order/{product}", [OrderController::class, 'store'])->middleware("auth")->name("order.store");
+Route::post("/order/{order}/delete", [OrderController::class, 'destroy'])->middleware("auth")->name("order.destroy");
 Route::get("/store", [ProductController::class, "storeIndex"])->name("store");
 Route::get("/basket", [OrderController::class, "show"])->name("order.show");
 
 // Event
+Route::get("/events/all", [EventController::class, "admin_index"])->middleware("auth")->name("events.listing");
 Route::resource('events', EventController::class);
 
 // Room

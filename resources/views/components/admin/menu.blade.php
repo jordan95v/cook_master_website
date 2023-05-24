@@ -24,7 +24,7 @@
             class="fa-solid fa-chevron-{{ $direction }}"></i></a>
     <ul class="p-2 z-10 bg-base-100 border-2 hover:border-primary">
         <li><a href="{{ route('events.create') }}">{{ __('Add an event') }}</a></li>
-        <li><a href="{{ route('events.admin_index') }}">{{ __('Events list') }}</a></li>
+        <li><a href="{{ route('events.listing') }}">{{ __('Events list') }}</a></li>
     </ul>
 </li>
 
