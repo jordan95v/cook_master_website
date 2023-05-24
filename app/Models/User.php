@@ -54,15 +54,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return ($this->role != 0) ? true : false;
     }
 
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
-    }
-
-    public function orderInvoices()
-    {
-        return $this->hasMany(OrderInvoice::class);
-    }
 
     public function customer(array $fields): Party
     {
@@ -101,6 +92,26 @@ class User extends Authenticatable implements MustVerifyEmail
         }
         $sub = $this->subscriptions()->first()->asStripeSubscription();
         return Carbon::createFromTimeStamp($sub->current_period_end)->format('d M Y');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function orderInvoices()
+    {
+        return $this->hasMany(OrderInvoice::class);
+    }
+
+    public function brands()
+    {
+        return $this->hasMany(Brand::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 
     public function events()

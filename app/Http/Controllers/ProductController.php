@@ -6,6 +6,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Brand;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,8 @@ class ProductController extends Controller
     public function index()
     {
         $this->authorize("viewAny", Product::class);
-        return view("product.index", ["products" => Product::all()]);
+        $products = (User::find(Auth::id())->isAdmin() ? Product::all() : Auth::user()->products);
+        return view("product.index", ["products" => $products]);
     }
 
     public function storeIndex(Request $request)

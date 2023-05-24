@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
             'role' => 0,
             "email_verified_at" => "2021-03-25 00:00:00",
             'password' => bcrypt('Test1234'),
+            'is_service_provider' => 1,
         ]);
 
         // $this->call(BrandSeeder::class);

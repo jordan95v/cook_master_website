@@ -8,7 +8,9 @@
                 <th>{{ __('Image') }}</th>
                 <th>{{ __('Brand website') }}</th>
                 <th>{{ __('Brand email') }}</th>
-                <th>{{ __('Created by') }}</th>
+                @if (Auth::user()->isAdmin())
+                    <th>{{ __('Created by') }}</th>
+                @endif
                 <th>{{ __('Actions') }}</th>
             </tr>
         </thead>
@@ -38,7 +40,9 @@
                             <i class="fa-solid fa-envelopes-bulk me-2"></i>{{ $brand->contact_email }}
                         </a>
                     </td>
-                    <x-admin.user-avatar :target="$brand->user" />
+                    @if (Auth::user()->isAdmin())
+                        <x-admin.user-avatar :target="$brand->user" />
+                    @endif
                     <td class="w-1/6">
                         <div class="dropdown dropdown-bottom dropdown-end">
                             <label tabindex="0" class="btn btn-circle btn-ghost">

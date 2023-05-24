@@ -8,7 +8,9 @@
                 <th>{{ __('Image') }}</th>
                 <th>{{ __('Brand') }}</th>
                 <th>{{ __('Price') }}</th>
-                <th>{{ __('Created by') }}</th>
+                @if (Auth::user()->isAdmin())
+                    <th>{{ __('Created by') }}</th>
+                @endif
                 <th>{{ __('Actions') }}</th>
             </tr>
         </thead>
@@ -38,7 +40,9 @@
                     <td>
                         {{ $product->price }}€
                     </td>
-                    <x-admin.user-avatar :target="$product->user" />
+                    @if (Auth::user()->isAdmin())
+                        <x-admin.user-avatar :target="$product->user" />
+                    @endif
                     <td class="w-1/6">
                         <div class="dropdown dropdown-bottom dropdown-end">
                             <label tabindex="0" class="btn btn-circle btn-ghost">

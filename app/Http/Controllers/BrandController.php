@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
 use App\Models\Brand;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class BrandController extends Controller
@@ -15,7 +16,8 @@ class BrandController extends Controller
     public function index()
     {
         $this->authorize("viewAny", Brand::class);
-        return view("brand.index", ["brands" => Brand::all()]);
+        $brands = (User::find(Auth::id())->isAdmin() ? Brand::all() : Auth::user()->brands);
+        return view("brand.index", ["brands" => $brands]);
     }
 
     /**
