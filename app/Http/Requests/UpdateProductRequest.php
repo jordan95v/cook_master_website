@@ -13,7 +13,7 @@ class UpdateProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->isAdmin();
+        return $this->user()->isAdmin()  || $this->user()->is_service_provider;
     }
 
     /**
@@ -30,7 +30,8 @@ class UpdateProductRequest extends FormRequest
             "description" => "required",
         ];
         if ($this->hasFile("image")) {
-            $rules["image"] = ["required",
+            $rules["image"] = [
+                "required",
                 File::image()->dimensions(Rule::dimensions()->minWidth(1280)->minHeight(720)),
             ];
         }

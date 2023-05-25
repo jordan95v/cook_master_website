@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->boolean("is_banned")->default(0);
+            $table->boolean("is_service_provider")->default(0);
             $table->integer("role")->default(0);
             $table->string("image")->nullable();
             $table->timestamps();

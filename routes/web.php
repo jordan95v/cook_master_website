@@ -87,12 +87,15 @@ Route::group(
                 Route::get("/", "index")->name("user.index");
 
                 // Ban / Unban user
-                Route::post("/{user}/ban", "ban")->name("user.ban");
-                Route::post("/{user}/unban", "unban")->name("user.unban");
+                Route::post("/{user}/manage-ban", "manage_ban")->name("user.manage-ban");
+
+                // Promote / Demote user
+                Route::put("/{user}/manage-admin", "manage_admin")->name("user.manage-admin");
+
+                // Promote service provider
+                Route::put("/{user}/manage-provider", "manage_service_provider")->name("user.manage-service-provider");
             }
         );
-
-        Route::get("/events", [EventController::class, "admin_index"])->name("events.admin_index");
     }
 );
 
@@ -102,27 +105,31 @@ Route::resource("brand", BrandController::class)->middleware("auth");
 // Product
 Route::resource("product", ProductController::class)->middleware("auth");
 
-// Order
-Route::post("order/{product}", [OrderController::class, 'store'])->middleware("auth")->name("order.store");
-Route::post("order/{order}/delete", [OrderController::class, 'destroy'])->middleware("auth")->name("order.destroy");
-
-// Store
+// Order and store
+Route::post("/order/{product}", [OrderController::class, 'store'])->middleware("auth")->name("order.store");
+Route::post("/order/{order}/delete", [OrderController::class, 'destroy'])->middleware("auth")->name("order.destroy");
 Route::get("/store", [ProductController::class, "storeIndex"])->name("store");
 Route::get("/basket", [OrderController::class, "show"])->name("order.show");
-Route::post("/payment", [OrderController::class, "pay"])->name("order.pay");
 
 // Event
+Route::get("/events/all", [EventController::class, "admin_index"])->middleware("auth")->name("events.listing");
 Route::resource('events', EventController::class);
-Route::post('/events/{event}/subscribe', [EventController::class, 'subscribe'])->name('event.subscribe');
-Route::post('/events/{event}/unsubscribe', [EventController::class, 'unsubscribe'])->name('event.unsubscribe');
-
-// Equipment
-Route::resource('equipment', EquipmentController::class);
-Route::post('/equiped/select', [EquipedController::class, 'select'])->name('equiped.select');
 
 // Room
 Route::resource('room', RoomController::class);
 
-// Equiped room
-Route::resource('equiped', EquipedController::class, ["except" => ["edit"]]);
-Route::get('/equiped/{room}/edit', [EquipedController::class, 'edit'])->name('equiped.edit');
+// Auth route
+Route::group(["middleware" => ["auth"]], function () {
+    // Equipment and equip room
+    Route::resource('equipment', EquipmentController::class);
+    Route::post('/equiped/select', [EquipedController::class, 'select'])->name('equiped.select');
+    Route::resource('equiped', EquipedController::class, ["except" => ["edit"]]);
+    Route::get('/equiped/{room}/edit', [EquipedController::class, 'edit'])->name('equiped.edit');
+
+    // Order
+    Route::post("/payment", [OrderController::class, "pay"])->name("order.pay");
+
+    // Event subscription
+    Route::post('/events/{event}/subscribe', [EventController::class, 'subscribe'])->name('event.subscribe');
+    Route::post('/events/{event}/unsubscribe', [EventController::class, 'unsubscribe'])->name('event.unsubscribe');
+});

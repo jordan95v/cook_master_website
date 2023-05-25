@@ -12,7 +12,7 @@ class BrandPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $user->is_service_provider;
     }
 
     /**
@@ -20,7 +20,7 @@ class BrandPolicy
      */
     public function create(User $user): bool
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $user->is_service_provider;
     }
 
     /**
@@ -28,7 +28,7 @@ class BrandPolicy
      */
     public function update(User $user, Brand $brand): bool
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $user->is($brand->user);
     }
 
     /**
@@ -36,6 +36,6 @@ class BrandPolicy
      */
     public function delete(User $user, Brand $brand): bool
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $user->is($brand->user);
     }
 }

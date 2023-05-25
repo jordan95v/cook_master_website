@@ -266,5 +266,16 @@
     "Starter": "스타터",
     "Pro": "프로",
     "by month": "월별",
-    "by year": "연도별"
+    "by year": "연도별",
+    "Promote": "홍보",
+    "Demote": "강등",
+    "You successfully promoted the user.": "사용자를 성공적으로 홍보했습니다.",
+    "You successfully demoted the user.": "사용자를 성공적으로 강등했습니다.",
+    "Are you sure you wanna promote this account ?": "이 계정을 정말 홍보하시겠습니까?",
+    "Are you sure you wanna demote this account ?": "이 계정을 정말 강등하시겠습니까?",
+    "Make provider": "제공자로 만들기",
+    "Remove provider": "제공자 제거",
+    "Provider": "제공자",
+    "Are you sure you wanna remove this account from service providers ?": "이 계정을 서비스 제공자에서 제거하시겠습니까?",
+    "Are you sure you wanna make this account a service provider ?": "이 계정을 서비스 제공자로 만드시겠습니까?"
 }

@@ -9,7 +9,8 @@
                 <div class="grid grid-cols-1 lg:grid-cols-5 mt-4">
                     {{-- Subscription image --}}
                     <div class="flex flex-col my-auto col">
-                        <img src="{{ asset('images/' . $subscription->name . '.png') }}"alt="">
+                        <img
+                            src="{{ asset('images/' . str_replace('_annual', '', $subscription->name) . '.png') }}"alt="">
                         <p class="font-bold text-xl text-center">{{ strtoupper($subscription->name) }}</p>
                     </div>
 
@@ -24,7 +25,7 @@
 
                             <p>{{ __('Recurring period') }}:</p>
                             <span class="font-bold bg-gray-300 w-full rounded-xl p-2">
-                                {{ ucfirst($plan->plan->interval) }}
+                                {{ __(ucfirst($plan->plan->interval)) }}
                             </span>
 
                             <p>{{ __('Subscription price') }}:</p>
@@ -146,7 +147,7 @@
 
                         {{-- Coupon --}}
                         <tr>
-                            <td class="font-semibold">{{ __('5% off on all products') }}/td>
+                            <td class="font-semibold">{{ __('5% off on all products') }}</td>
                             <td><i class="fa-solid fa-circle-xmark text-2xl me-2" style="color: #ff0d0d;"></i></td>
                             <td><i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i></td>
                             <td><i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i></td>

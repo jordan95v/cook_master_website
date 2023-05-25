@@ -13,7 +13,7 @@ class StoreBrandRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->isAdmin();
+        return $this->user()->isAdmin() || $this->user()->is_service_provider;
     }
 
     /**
@@ -25,7 +25,8 @@ class StoreBrandRequest extends FormRequest
     {
         return [
             "name" => "required|unique:brands,name",
-            "image" => ["required",
+            "image" => [
+                "required",
                 File::image()->dimensions(Rule::dimensions()->minWidth(1280)->minHeight(720)),
             ],
             "description" => "required",

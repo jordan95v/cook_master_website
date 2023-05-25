@@ -16,7 +16,8 @@ class EventController extends Controller
     public function admin_index()
     {
         $this->authorize("viewAny", Event::class);
-        return view('event.admin-index', ['events' => Event::all()]);
+        $events = (User::find(Auth::id())->isAdmin() ? Event::all() : Auth::user()->events);
+        return view('event.admin-index', ['events' => $events]);
     }
 
     /**

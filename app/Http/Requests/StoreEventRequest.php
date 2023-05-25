@@ -13,7 +13,7 @@ class StoreEventRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->isAdmin();
+        return $this->user()->isAdmin() || $this->user()->is_service_provider;
     }
 
     /**
@@ -26,7 +26,8 @@ class StoreEventRequest extends FormRequest
         return [
             "title" => "required",
             "description" => "required",
-            "image" => ["required",
+            "image" => [
+                "required",
                 File::image()->dimensions(Rule::dimensions()->minWidth(1280)->minHeight(720)),
             ],
             "room_id" => "required",

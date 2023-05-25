@@ -1,6 +1,4 @@
 <x-layout title="{{ __('Events') }}">
-    <h1 class="text-5xl text-center my-10">{{ __('List of available events') }}</h1>
-
     <div class="grid grid-cols-1 p-10 lg:px-24 lg:grid-cols-3 gap-6">
         @foreach ($events as $event)
             <x-utils.card>

@@ -278,5 +278,16 @@
     "Starter": "Starter",
     "Pro": "Pro",
     "by month": "par mois",
-    "by year": "par an"
+    "by year": "par an",
+    "Promote": "Promouvoir",
+    "Demote": "Rétrograder",
+    "You successfully promoted the user.": "Vous avez promu l'utilisateur avec succès.",
+    "You successfully demoted the user.": "Vous avez rétrogradé l'utilisateur avec succès.",
+    "Are you sure you wanna promote this account ?": "Êtes-vous sûr de vouloir promouvoir ce compte ?",
+    "Are you sure you wanna demote this account ?": "Êtes-vous sûr de vouloir rétrograder ce compte ?",
+    "Make provider": "Rendre fournisseur",
+    "Remove provider": "Supprimer fournisseur",
+    "Provider": "Fournisseur",
+    "Are you sure you wanna remove this account from service providers ?": "Êtes-vous sûr de vouloir supprimer ce compte des prestataires ?",
+    "Are you sure you wanna make this account a service provider ?": "Êtes-vous sûr de vouloir rendre ce compte prestataire ?"
 }

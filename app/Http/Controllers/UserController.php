@@ -80,18 +80,37 @@ class UserController extends Controller
         return redirect("/")->with("success", "You successfully deleted your account.");
     }
 
-    public function ban(User $user)
+    public function manage_ban(User $user)
     {
         $this->authorize("ban", $user);
+        if ($user->is_banned) {
+            $user->update(["is_banned" => 0]);
+            return back()->with("success", "You successfully unbanned the user.");
+        }
         $user->update(["is_banned" => 1]);
         return back()->with("success", "You successfully banned the user.");
     }
 
-    public function unban(User $user)
+    public function manage_admin(User $user)
     {
-        $this->authorize("ban", $user);
-        $user->update(["is_banned" => 0]);
-        return back()->with("success", "You successfully unbanned the user.");
+        $this->authorize("manage", $user);
+        if ($user->role == 1) {
+            $user->update(["role" => 0]);
+            return back()->with("success", "You successfully demoted the user.");
+        }
+        $user->update(["role" => 1]);
+        return back()->with("success", "You successfully promoted the user.");
+    }
+
+    public function manage_service_provider(User $user)
+    {
+        $this->authorize("add_service_provider", $user);
+        if ($user->is_service_provider) {
+            $user->update(["is_service_provider" => 0]);
+            return back()->with("success", "You successfully demoted the user.");
+        }
+        $user->update(["is_service_provider" => 1]);
+        return back()->with("success", "You successfully promoted the user.");
     }
 
     public function invoices()
