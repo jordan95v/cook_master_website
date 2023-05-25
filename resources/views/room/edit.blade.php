@@ -14,8 +14,8 @@
                         :target="$room" />
 
                     {{-- Address --}}
-                    <x-utils.input type="text" name="address" hint="{{ __('Enter the address of the room') }}"
-                        error=1 :target="$room" />
+                    <x-utils.input type="text" name="address" hint="{!! __('Enter the address of the room') !!}" error=1
+                        :target="$room" />
 
                     {{-- Image --}}
                     <div class="form-control w-full pb-2">

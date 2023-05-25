@@ -10,8 +10,7 @@
                     <h2 class="card-title text-2xl flex justify-center pb-2">{{ __('Add an event') }}</h2>
 
                     {{-- Title --}}
-                    <x-utils.input type="text" name="title" hint="{{ __('Enter the name of the event') }}"
-                        error=1 />
+                    <x-utils.input type="text" name="title" hint="{!! __('Enter the name of the event') !!}" error=1 />
 
                     {{-- Image --}}
                     <div class="form-control w-full">

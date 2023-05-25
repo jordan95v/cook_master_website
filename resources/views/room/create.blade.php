@@ -14,8 +14,7 @@
                         error=1 />
 
                     {{-- Address --}}
-                    <x-utils.input type="text" name="address" hint="{{ __('Enter the address of the room') }}"
-                        error="1" />
+                    <x-utils.input type="text" name="address" hint="{!! __('Enter the address of the room') !!}" error="1" />
 
                     {{-- Image --}}
                     <div class="form-control w-full">

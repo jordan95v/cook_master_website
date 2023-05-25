@@ -103,18 +103,18 @@
                             </th>
                             <th>
                                 <img src="{{ asset('images/starter.png') }}" alt="" class="mx-auto">
-                                <span class="text-xl">Starter</span>
+                                <span class="text-xl">{{ __('Starter') }}</span>
                             </th>
                             <th>
                                 <img src="{{ asset('images/pro.png') }}" alt="" class="mx-auto">
-                                <span class="text-xl">Pro</span>
+                                <span class="text-xl">{{ __('Pro') }}</span>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         {{-- Pubs --}}
                         <tr>
-                            <td class="font-semibold">Pubs</td>
+                            <td class="font-semibold">{{ __('Pubs') }}</td>
                             <td><i class="fa-solid fa-circle-check text-2xl me-2" style="color: #0cbf02;"></i></td>
                             <td><i class="fa-solid fa-circle-xmark text-2xl me-2" style="color: #ff0d0d;"></i></td>
                             <td><i class="fa-solid fa-circle-xmark text-2xl me-2" style="color: #ff0d0d;"></i></td>
@@ -224,13 +224,13 @@
                                 <a href="{{ route('subscription.show', ['plan' => 'starter']) }}"
                                     class="btn btn-primary"
                                     @if (Auth::user()->subscribed('starter') || Auth::user()->subscribed('starter_annual')) disabled="disabled" @endif>
-                                    {{ __('Subscribe to') }} Starter
+                                    {{ __('Subscribe to') }} {{ __('Starter') }}
                                 </a>
                             </td>
                             <td>
                                 <a href="{{ route('subscription.show', ['plan' => 'pro']) }}" class="btn btn-primary"
                                     @if (Auth::user()->subscribed('pro') || Auth::user()->subscribed('pro_annual')) disabled="disabled" @endif>
-                                    {{ __('Subscribe to') }} Pro
+                                    {{ __('Subscribe to') }} {{ __('Pro') }}
                                 </a>
                             </td>
                         </tr>

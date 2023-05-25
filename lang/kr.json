@@ -261,5 +261,10 @@
     "List of available events": "사용 가능한 이벤트 목록",
     "Title": "제목",
     "Room": "방",
-    "Created by": "생성자"
+    "Created by": "생성자",
+    "Pubs": "광고",
+    "Starter": "스타터",
+    "Pro": "프로",
+    "by month": "월별",
+    "by year": "연도별"
 }

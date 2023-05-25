@@ -18,8 +18,10 @@
                     </h2>
                     <select class="select select-bordered w-full mt-5" name="recurring">
                         <option disabled selected>{{ __('Choose the recurring period') }}</option>
-                        <option value="month">{{ __('Monthly') }} - {{ $subscriptions['month'] }}€ par mois</option>
-                        <option value="year">{{ __('Yearly') }} - {{ $subscriptions['year'] }}€ par an</option>
+                        <option value="month">{{ __('Monthly') }} - {{ $subscriptions['month'] }}€
+                            {{ __('by month') }}</option>
+                        <option value="year">{{ __('Yearly') }} - {{ $subscriptions['year'] }}€
+                            {{ __('by year') }}</option>
                     </select>
                     <small class="text-center text-gray-400 mb-10">
                         {{ __('You can always change when the subscription period ends.') }}
@@ -29,7 +31,7 @@
                     <x-shop.advantages text="Comment / Leave a review" />
                     <x-shop.advantages text="Tchat with a Chef" />
                     <x-shop.advantages text="5% off on all products" />
-                    <x-shop.advantages text="Invitations to exclusive events" />
+                    <x-shop.advantages text="Invitation to exclusive events" />
 
                     @if ($plan == 'starter')
                         <x-shop.advantages text="Access to 5 courses per day" />
@@ -48,7 +50,7 @@
                     </p>
 
                     {{-- Payment form --}}
-                    <h2 class="font-bold justify-center flex text-2xl py-4">Paiement</h2>
+                    <h2 class="font-bold justify-center flex text-2xl py-4">{{ __('Payment') }}</h2>
                     <div class="grid grild-cols-1 lg:grid-cols-2 my-2 gap-2">
                         <x-utils.input type="text" name="address" hint="Address" error=0 />
                         <x-utils.input type="text" name="zipcode" hint="Postal code" error=0 />

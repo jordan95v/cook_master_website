@@ -273,5 +273,10 @@
     "You have deleted a room": "Vous avez supprimé une salle",
     "List of available rooms": "Liste des salles disponibles",
     "List of available events": "Liste des événements disponibles",
-    "Title": "Titre"
+    "Title": "Titre",
+    "Pubs": "Pubs",
+    "Starter": "Starter",
+    "Pro": "Pro",
+    "by month": "par mois",
+    "by year": "par an"
 }
