@@ -1,4 +1,4 @@
-<x-layout title="{{ $brand->name }}">
+<x-layout title="{!! $brand->name !!}">
     <div class="grid grid-cols-1 lg:grid-cols-2 justify-center align-center gap-10 p-5 lg:px-24 lg:p-12">
         {{-- Brand image hidden on large --}}
         <div class="flex justify-center w-full lg:hidden">
@@ -8,7 +8,12 @@
         <div class="lg:py-10">
             {{-- Brand info --}}
             <p class="font-bold font-mono text-5xl">{{ $brand->name }}</p>
-            <div class="py-5 text-gray-600">{!! Str::limit($brand->description, $limit = 800) !!}</div>
+            <div class="rating pt-7 pb-2">
+                <p class="font-mono text-2xl">
+                    {{ __('Number of products: :count', ['count' => count($brand->products)]) }}
+                </p>
+            </div>
+            <x-utils.description-trunked :target="$brand" />
             <a href="#full-description" class="link hover:link-primary">{{ __('Show more') }}</a>
 
             {{-- Buttons --}}
@@ -23,14 +28,16 @@
         </div>
 
         {{-- Brand image show on large --}}
-        <div class="justify-center w-full hidden lg:flex">
-            <img src="{{ asset('storage/' . $brand->image) }}" class="object-cover" />
+        <div class="mx-auto hidden lg:flex">
+            <img src="{{ asset('storage/' . $brand->image) }}" class="object-cover h-full" />
         </div>
     </div>
 
     {{-- Brand's products --}}
     @if (count($brand->products))
-        <x-shop.grid :products="$brand->products" name="Brand's products" />
+        <div class="mt-10 lg:mt-0">
+            <x-shop.grid :products="$brand->products" name="Brand's products" />
+        </div>
     @endif
 
     {{-- Brand's full description --}}

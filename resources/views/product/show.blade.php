@@ -1,4 +1,4 @@
-<x-layout title="{{ $product->name }}">
+<x-layout title="{!! $product->name !!}">
     <div class="grid grid-cols-1 lg:grid-cols-2 justify-center align-center gap-10 p-5 lg:px-24 lg:p-12">
         <div class="mx-auto">
             <img src="{{ asset('storage/' . $product->image) }}" class="object-cover h-full" />
@@ -19,7 +19,7 @@
                 <input type="radio" disabled name="rating-2" class="mask mask-star-2 bg-orange-400" />
             </div>
             <p class="italic text-2xl pt-5 text-primary">{{ $product->price }} €</p>
-            <div class="py-5 text-gray-600">{!! Str::limit($product->description, $limit = 800) !!}</div>
+            <x-utils.description-trunked :target="$product" />
             <a href="#full-description" class="link hover:link-primary">{{ __('Show more') }}</a>
 
             <form action="{{ route('order.store', ['product' => $product->id]) }}" method="post" class="mt-10">
@@ -32,7 +32,9 @@
     </div>
 
     @if (count($seeblings) > 0)
-        <x-shop.grid :products="$seeblings" name="Same brand products" />
+        <div class="mt-10 lg:mt-0">
+            <x-shop.grid :products="$seeblings" name="Same brand products" />
+        </div>
     @endif
 
     {{-- Product's full description --}}

@@ -31,6 +31,9 @@
                         name="description" placeholder="{{ __('Brand description') }}"></textarea>
                     <x-utils.form-error name="description" />
 
+                    <textarea id="editor" class="textarea textarea-bordered" rows=4 name="description" placeholder="Brand description">{{ old('description') }}</textarea>
+                    <x-utils.form-error name="description" />
+
                     <div class="card-actions justify-center">
                         <button class="btn btn-primary w-full">{{ __('Add a brand') }}</button>
                     </div>
