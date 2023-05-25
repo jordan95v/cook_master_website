@@ -19,7 +19,7 @@
                 <input type="radio" disabled name="rating-2" class="mask mask-star-2 bg-orange-400" />
             </div>
             <p class="italic text-2xl pt-5 text-primary">{{ $product->price }} €</p>
-            <x-utils.description-trunked :target="$product" />
+            <x-utils.description-trunked :target="$product" limit="800" />
             <a href="#full-description" class="link hover:link-primary">{{ __('Show more') }}</a>
 
             <form action="{{ route('order.store', ['product' => $product->id]) }}" method="post" class="mt-10">

@@ -8,12 +8,10 @@
         <div class="lg:py-10">
             {{-- Brand info --}}
             <p class="font-bold font-mono text-5xl">{{ $brand->name }}</p>
-            <div class="rating pt-7 pb-2">
-                <p class="font-mono text-2xl">
-                    {{ __('Number of products: :count', ['count' => count($brand->products)]) }}
-                </p>
-            </div>
-            <x-utils.description-trunked :target="$brand" />
+            <p class="font-mono pt-10 pb-5 text-2xl">
+                {{ __('Number of products: :count', ['count' => count($brand->products)]) }}
+            </p>
+            <x-utils.description-trunked :target="$brand" limit="1000" />
             <a href="#full-description" class="link hover:link-primary">{{ __('Show more') }}</a>
 
             {{-- Buttons --}}
