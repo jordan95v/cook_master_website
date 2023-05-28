@@ -22,7 +22,7 @@
                                 {{-- Time --}}
                                 <div class="flex items-center text-gray-500 text-sm mb-2">
                                     <i class="w-4 h-4 mr-2 fa-regular fa-clock"></i>
-                                    {{ $event['start_time'] }} - {{ $event->end_time }}
+                                    {{ $event->start_time }} - {{ $event->end_time }}
                                 </div>
 
                                 {{-- Location --}}
