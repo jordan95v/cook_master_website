@@ -41,7 +41,7 @@
         </div>
     </div>
 
-    @if (count($products) > 15)
+    @if (count($products) == 15)
         <div class="px-20">
             {{ $products->links() }}
         </div>
