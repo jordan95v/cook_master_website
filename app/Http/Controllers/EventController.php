@@ -25,7 +25,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        return view('event.index', ['events' => Event::all()]);
+        return view('event.index', ['events' => Event::simplePaginate(9)]);
     }
 
     /**

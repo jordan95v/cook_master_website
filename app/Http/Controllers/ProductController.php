@@ -24,7 +24,7 @@ class ProductController extends Controller
 
     public function storeIndex(Request $request)
     {
-        $products = Product::all();
+        $products = Product::simplePaginate(15);
         if ($request->get("brand")) {
             $products = $products->where("brand_id", "=", $request->brand);
         }
@@ -43,6 +43,7 @@ class ProductController extends Controller
                     break;
             }
         }
+
         return view("shop.store", ["products" => $products, "brands" => Brand::all(), "requestBrand" => $request->get("brand"), "filter" => $request->get("filter")]);
     }
 
