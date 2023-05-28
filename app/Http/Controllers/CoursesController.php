@@ -24,7 +24,8 @@ class CoursesController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize("create", Courses::class);
+        return view('courses.create');
     }
 
     /**
@@ -32,7 +33,12 @@ class CoursesController extends Controller
      */
     public function store(StoreCoursesRequest $request)
     {
-        //
+        $this->authorize("create", Courses::class);
+        $form = $request->validated();
+        $form["image"] = $request->file("image")->store("courses", "public");
+        $form["user_id"] = Auth::id();
+        Courses::create($form);
+        return back()->with("success", __("Course created successfully"));
     }
 
     /**

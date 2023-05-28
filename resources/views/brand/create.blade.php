@@ -28,10 +28,7 @@
 
                     {{-- Description --}}
                     <textarea id="editor" class="textarea textarea-bordered border-2 @error('description') border-error @enderror" rows=4
-                        name="description" placeholder="{{ __('Brand description') }}"></textarea>
-                    <x-utils.form-error name="description" />
-
-                    <textarea id="editor" class="textarea textarea-bordered" rows=4 name="description" placeholder="Brand description">{{ old('description') }}</textarea>
+                        name="description" placeholder="{{ __('Brand description') }}">{{ old('description') }}</textarea>
                     <x-utils.form-error name="description" />
 
                     <div class="card-actions justify-center">

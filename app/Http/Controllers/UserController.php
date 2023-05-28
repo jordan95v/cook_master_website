@@ -58,7 +58,7 @@ class UserController extends Controller
             if (Auth::user()->image && file_exists("storage/" . Auth::user()->image)) {
                 unlink("storage/" . Auth::user()->image);
             }
-            $form["image"] = $request->file("image")->store("user_avatar", "public");
+            $form["image"] = $request->file("image")->store("avatar", "public");
         }
         User::find(Auth::id())->update($form);
         return back()->with("success", "You successfully edited your profile.");

@@ -44,8 +44,9 @@ class DatabaseSeeder extends Seeder
             'is_service_provider' => 1,
         ]);
 
-        // $this->call(BrandSeeder::class);
-        // $this->call(ProductSeeder::class);
-        $this->call(CoursesSeeder::class);
+        \App\Models\Brand::factory(10)->create();
+        \App\Models\Courses::factory(10)->create();
+        \App\Models\Product::factory(10)->create();
+        \App\Models\Event::factory(10)->create();
     }
 }

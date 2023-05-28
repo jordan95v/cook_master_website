@@ -3,8 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\File;
 
 class StoreProductRequest extends FormRequest
 {
@@ -25,10 +23,7 @@ class StoreProductRequest extends FormRequest
     {
         return [
             "name" => "required|min:6",
-            "image" => [
-                "required",
-                File::image()->dimensions(Rule::dimensions()->minWidth(1280)->minHeight(720)),
-            ],
+            "image" => "required|image|dimensions:min_width=1280,min_height=720",
             "brand_id" => "required",
             "price" => "required",
             "description" => "required",

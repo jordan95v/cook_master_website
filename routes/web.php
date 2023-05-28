@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Session;
 
 // No controller route
 Route::view("/", "home");
+
+// ROute to change the language
 Route::get("/lang/{lang}", function (string $lang) {
     Session::put("locale", $lang);
     return redirect()->back();

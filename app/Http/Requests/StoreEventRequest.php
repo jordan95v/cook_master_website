@@ -3,8 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\File;
 
 class StoreEventRequest extends FormRequest
 {
@@ -26,10 +24,7 @@ class StoreEventRequest extends FormRequest
         return [
             "title" => "required",
             "description" => "required",
-            "image" => [
-                "required",
-                File::image()->dimensions(Rule::dimensions()->minWidth(1280)->minHeight(720)),
-            ],
+            "image" => "required|image|dimensions:min_width=1280,min_height=720",
             "room_id" => "required",
             "capacity" => "required",
             "date" => "required|date_format:Y-m-d",

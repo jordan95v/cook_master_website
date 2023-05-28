@@ -32,7 +32,7 @@
                     </td>
                     <td>
                         <a href="{{ $brand->website }}" class="link hover:link-primary">
-                            <i class="fa-solid fa-globe me-2"></i>{{ $brand->website }}
+                            <i class="fa-solid fa-globe me-2"></i>{{ Str::limit($brand->website, 30) }}
                         </a>
                     </td>
                     <td>

@@ -19,7 +19,8 @@ class RoomFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'address' => $this->faker->address(),
-
+            'image' => $this->faker->image("public/storage/", 1280, 720, null, false),
+            "user_id" => \App\Models\User::orderByRaw("RAND()")->first()->id,
         ];
     }
 }

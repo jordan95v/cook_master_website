@@ -12,7 +12,7 @@
                             {{-- Title --}}
                             <h2 class="card-title text-2xl font-bold hover:link mb-6">{{ $event->title }}</h2>
 
-                            <div class="flex justify-between">
+                            <div class="flex flex-col">
                                 {{-- Date --}}
                                 <div class="flex items-center text-gray-500 text-sm mb-2">
                                     <i class="w-4 h-4 mr-2 fa-solid fa-calendar-days"></i>

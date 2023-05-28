@@ -29,7 +29,7 @@
                         </a>
                     </td>
                     <td>{{ $course->duration }}</td>
-                    <td>{{ $course->difficulty }}</td>
+                    <td>{{ $course->difficulty }} {{ str_repeat('⭐', $course->difficulty) }}</td>
                     @if (Auth::user()->isAdmin())
                         <x-admin.user-avatar :target="$course->user" />
                     @endif

@@ -47,7 +47,7 @@ class EventController extends Controller
         $form = $request->validated();
         $form["user_id"] = ($user->isAdmin()) ? $request->user_id : $user->id;
         if ($request->hasFile('image')) {
-            $form['image'] = $request->file('image')->store('images', 'public');
+            $form['image'] = $request->file('image')->store('events', 'public');
         }
         $form["created_by"] = $user->id;
         Event::create($form);

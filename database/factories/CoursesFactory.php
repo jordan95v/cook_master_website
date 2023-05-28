@@ -18,11 +18,11 @@ class CoursesFactory extends Factory
     {
         return [
             "name" => $this->faker->name(),
-            "video_url" => $this->faker->url(),
+            "image" => $this->faker->image("public/storage/", 1280, 720, null, false),
             "duration" => $this->faker->numberBetween(1, 100),
             "difficulty" => $this->faker->numberBetween(1, 5),
             "content" => $this->faker->text(),
-            "user_id" => \App\Models\User::factory(),
+            "user_id" => \App\Models\User::orderByRaw("RAND()")->first()->id,
         ];
     }
 }

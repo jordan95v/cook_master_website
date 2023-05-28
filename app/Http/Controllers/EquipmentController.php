@@ -36,7 +36,7 @@ class EquipmentController extends Controller
         $this->authorize("create", Equipment::class);
         $form = $request->validated();
         if ($request->hasFile("image")) {
-            $form["image"] = $request->file("image")->store("images", "public");
+            $form["image"] = $request->file("image")->store("equipments", "public");
         }
         $form["user_id"] = Auth::id();
         Equipment::create($form);

@@ -28,7 +28,7 @@ class CoursesPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->isAdmin();
     }
 
     /**

@@ -17,11 +17,13 @@ class BrandFactory extends Factory
     public function definition(): array
     {
         return [
-            "name" => fake()->company(),
-            "slug" => fake()->slug(3),
-            "description" => fake()->paragraph(5),
-            "website" => fake()->url(),
-            "contact_email" => fake()->companyEmail(),
+            "name" => $this->faker->name(),
+            "slug" => $this->faker->slug(),
+            "image" => $this->faker->image("public/storage/", 1280, 720, null, false),
+            "website" => $this->faker->url(),
+            "contact_email" => $this->faker->email(),
+            "description" => $this->faker->text(2000),
+            "user_id" => \App\Models\User::orderByRaw("RAND()")->first()->id,
         ];
     }
 }

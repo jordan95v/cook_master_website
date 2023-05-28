@@ -37,9 +37,7 @@ class BrandController extends Controller
         $this->authorize("create", Brand::class);
         $form = $request->validated();
         $form["slug"] = strtolower(str_replace(" ", ",", $form["name"]));
-        if ($request->hasFile("image")) {
-            $form["image"] = $request->file("image")->store("brand_logo", "public");
-        }
+        $form["image"] = $request->file("image")->store("brands", "public");
         $form["user_id"] = Auth::id();
         Brand::create($form);
         return back()->with("success", "Brand successfully created.");

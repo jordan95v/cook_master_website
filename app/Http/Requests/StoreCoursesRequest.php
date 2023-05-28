@@ -11,7 +11,7 @@ class StoreCoursesRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->isAdmin();
     }
 
     /**
@@ -22,7 +22,11 @@ class StoreCoursesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "name" => "required|min:10|unique:courses,name",
+            "image" => "required|image|dimensions:min_width=1280,min_height=720",
+            "difficulty" => "required|in:1,2,3,4,5",
+            "duration" => "required|integer",
+            "content" => "required|min:10",
         ];
     }
 }

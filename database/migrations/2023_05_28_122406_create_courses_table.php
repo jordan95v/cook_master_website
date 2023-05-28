@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create("courses", function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->string("video_url");
+            $table->string("image");
             $table->integer("duration");
             $table->integer("difficulty");
             $table->string("content");

@@ -38,7 +38,7 @@ class RoomController extends Controller
         $this->authorize("create", Room::class);
         $form = $request->validated();
         if ($request->hasFile("image")) {
-            $form["image"] = $request->file("image")->store("images", "public");
+            $form["image"] = $request->file("image")->store("rooms", "public");
         }
         $form["user_id"] = Auth::user()->id;
         $room = Room::create($form);

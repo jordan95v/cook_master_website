@@ -62,7 +62,7 @@ class ProductController extends Controller
     {
         $this->authorize("create", Product::class);
         $form = $request->validated();
-        $form["image"] = $request->file("image")->store("product_image", "public");
+        $form["image"] = $request->file("image")->store("products", "public");
         $form["user_id"] = Auth::id();
         Product::create($form);
         return back()->with("success", "Product successfully created.");
