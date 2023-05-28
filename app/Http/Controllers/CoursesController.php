@@ -46,7 +46,7 @@ class CoursesController extends Controller
      */
     public function show(Courses $courses)
     {
-        //
+        // TODO: UPDATE + SHOW + DELETE + LIMITATIONS
     }
 
     /**
