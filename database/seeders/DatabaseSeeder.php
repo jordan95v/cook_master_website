@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        \App\Models\User::factory(30)->create();
 
         // Super admin
         User::create([
@@ -46,5 +46,6 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(BrandSeeder::class);
         // $this->call(ProductSeeder::class);
+        $this->call(CoursesSeeder::class);
     }
 }
