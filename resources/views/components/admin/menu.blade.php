@@ -47,6 +47,6 @@
         <i class="fa-solid fa-chevron-{{ $direction }}"></i></a>
     <ul class="p-2 z-10 bg-base-100 border-2 hover:border-primary">
         <li><a>{{ __('Add a course') }}</a></li>
-        <li><a>{{ __('Courses list') }}</a></li>
+        <li><a href="{{ route('courses.index') }}">{{ __('Courses list') }}</a></li>
     </ul>
 </li>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCoursesRequest;
 use App\Http\Requests\UpdateCoursesRequest;
 use App\Models\Courses;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class CoursesController extends Controller
 {
@@ -13,7 +15,8 @@ class CoursesController extends Controller
      */
     public function index()
     {
-        //
+        $courses = (User::find(Auth::id())->isAdmin() ? Courses::all() : Auth::user()->courses);
+        return view('courses.index', ["courses" => $courses]);
     }
 
     /**

@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Courses;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class CoursesPolicy
 {
@@ -13,7 +12,7 @@ class CoursesPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
