@@ -80,6 +80,8 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        //
+        $this->authorize("delete", $course);
+        $course->delete();
+        return back()->with("success", "Course deleted successfully");
     }
 }
