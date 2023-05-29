@@ -24,23 +24,19 @@ class ProductController extends Controller
 
     public function storeIndex(Request $request)
     {
-        $products = Product::simplePaginate(15);
-        if ($request->get("brand")) {
-            $products = $products->where("brand_id", "=", $request->brand);
+        $paginate = 15;
+        $products = Product::simplePaginate($paginate);
+        $brand_id = $request->get("brand");
+        $filter = $request->get("filter");
+
+        if ($brand_id) {
+            $products = Product::where("brand_id", "=", $brand_id)->simplePaginate($paginate);
         }
-        if ($request->get("filter")) {
-            switch ($request->filter) {
-                case 'up':
-                    $products = $products->sortBy("price");
-                    break;
-
-                case 'down':
-                    $products = $products->sortByDesc("price");
-                    break;
-
-                case 'new':
-                    $products = $products->sortByDesc("id");
-                    break;
+        if ($filter) {
+            if ($filter == "up") {
+                $products = Product::orderBy("price", "asc")->simplePaginate($paginate);
+            } else if ($filter == "down") {
+                $products = Product::orderBy("price", "desc")->simplePaginate($paginate);
             }
         }
 
@@ -74,7 +70,10 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $seeblings = Product::where("brand_id", "=", $product->brand->id)->where("id", "!=", $product->id)->get();
+        $seeblings = Product::where("brand_id", "=", $product->brand->id)
+            ->where("id", "!=", $product->id)
+            ->take(5)
+            ->get();
         return view("product.show", ["product" => $product, "seeblings" => $seeblings]);
     }
 

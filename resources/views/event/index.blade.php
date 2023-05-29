@@ -38,7 +38,7 @@
         @endforeach
     </div>
 
-    <div class="px-24">
+    <div class="px-24 pt-5">
         {{ $events->links() }}
     </div>
 </x-layout>

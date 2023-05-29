@@ -41,9 +41,7 @@
         </div>
     </div>
 
-    @if (count($products) == 15)
-        <div class="px-20">
-            {{ $products->links() }}
-        </div>
-    @endif
+    <div class="px-20 pt-10">
+        {{ $products->links() }}
+    </div>
 </x-layout>

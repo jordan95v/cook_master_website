@@ -34,7 +34,7 @@
     {{-- Brand's products --}}
     @if (count($brand->products))
         <div class="mt-10 lg:mt-0">
-            <x-shop.grid :products="$brand->products" name="Brand's products" />
+            <x-shop.grid :products="$brand_products" name="Brand's products" />
         </div>
     @endif
 

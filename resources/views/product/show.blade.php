@@ -1,7 +1,7 @@
 <x-layout title="{!! $product->name !!}">
     <div class="grid grid-cols-1 lg:grid-cols-2 justify-center align-center gap-10 p-5 lg:px-24 lg:p-12">
         <div class="mx-auto">
-            <img src="{{ asset('storage/' . $product->image) }}" class="object-cover h-full" />
+            <img src="{{ asset('storage/' . $product->image) }}" class="object-cover h-full rounded-xl" />
         </div>
         <div class="lg:py-20">
             <p class="font-bold font-mono text-2xl lg:text-5xl">

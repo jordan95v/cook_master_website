@@ -48,7 +48,8 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
-        return view("brand.show", ["brand" => $brand]);
+        $brand_products = $brand->products->take(5);
+        return view("brand.show", ["brand" => $brand, "brand_products" => $brand_products]);
     }
 
     /**
