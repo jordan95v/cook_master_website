@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\File;
 
 class UpdateEventRequest extends FormRequest
 {
@@ -33,10 +32,7 @@ class UpdateEventRequest extends FormRequest
             "end_time" => "required|date_format:H:i",
         ];
         if ($this->hasFile("image")) {
-            $rules["image"] = [
-                "required",
-                File::image()->dimensions(Rule::dimensions()->minWidth(1280)->minHeight(720)),
-            ];
+            $rules["image"] = "required|image|dimensions:min_width=1280,min_height=720";
         }
         return $rules;
     }

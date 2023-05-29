@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrandController;
-use App\Http\Controllers\CoursesController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\EquipedController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\EventController;
@@ -114,7 +114,7 @@ Route::group(["middleware" => ["auth"]], function () {
     Route::resource("product", ProductController::class);
 
     // Courses
-    Route::resource('courses', CoursesController::class);
+    Route::resource('courses', CourseController::class);
 
     // Room
     Route::resource('room', RoomController::class);

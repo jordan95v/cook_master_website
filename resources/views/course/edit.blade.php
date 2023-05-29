@@ -5,6 +5,7 @@
                 <form action="{{ route('courses.update', ['course' => $course->id]) }}" method="post"
                     enctype="multipart/form-data" class="card-body">
                     @csrf
+                    @method('PUT')
                     <h2 class="card-title justify-center flex text-2xl pb-2">{{ __('Edit a course') }}</h2>
 
                     {{-- Name --}}

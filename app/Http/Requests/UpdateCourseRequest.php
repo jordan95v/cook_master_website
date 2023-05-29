@@ -3,31 +3,30 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateBrandRequest extends FormRequest
+class UpdateCourseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return $this->user()->isAdmin() || $this->user()->is_service_provider;
+        return $this->user()->isAdmin();
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
     public function rules(): array
     {
-        $id = $this->route()->brand->id;
+        $id = $this->route()->course->id;
         $rules = [
-            "name" => "required|unique:brands,name,$id",
-            "description" => "required",
-            "website" => "required|url",
-            "contact_email" => "required|email|unique:brands,contact_email,$id",
+            "name" => "required|min:10|unique:courses,name,$id",
+            "difficulty" => "required|in:1,2,3,4,5",
+            "duration" => "required|integer",
+            "content" => "required|min:10",
         ];
         if ($this->hasFile("image")) {
             $rules["image"] = "required|image|dimensions:min_width=1280,min_height=720";
