@@ -36,7 +36,7 @@ class CoursesPolicy
      */
     public function update(User $user, Courses $courses): bool
     {
-        //
+        return $user->isAdmin();
     }
 
     /**

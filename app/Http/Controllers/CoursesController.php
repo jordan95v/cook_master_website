@@ -52,15 +52,16 @@ class CoursesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Courses $courses)
+    public function edit(Courses $course)
     {
-        //
+        $this->authorize("update", $course);
+        return view('courses.edit', ["course" => $course]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCoursesRequest $request, Courses $courses)
+    public function update(UpdateCoursesRequest $request, Courses $course)
     {
         //
     }
