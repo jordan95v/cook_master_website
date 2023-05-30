@@ -49,6 +49,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    // Custom method after that comment.
+
     public function isAdmin(): bool
     {
         return ($this->role != 0) ? true : false;

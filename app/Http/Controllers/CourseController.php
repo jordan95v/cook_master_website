@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Course;
 use App\Models\User;
+use App\Models\UserCourse;
 use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
@@ -46,6 +47,9 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
+        if (!UserCourse::where("user_id", Auth::id())->where("course_id", $course->id)->count()) {
+            UserCourse::create(["user_id" => Auth::id(), "course_id" => $course->id]);
+        }
         $random_courses = Course::where("id", "!=", $course->id)->inRandomOrder()->limit(5)->get();
         return view('course.show', ["course" => $course, "random_courses" => $random_courses]);
     }

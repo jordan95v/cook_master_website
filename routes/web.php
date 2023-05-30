@@ -114,7 +114,8 @@ Route::group(["middleware" => ["auth"]], function () {
     Route::resource("product", ProductController::class);
 
     // Courses
-    Route::resource('courses', CourseController::class);
+    Route::resource('courses', CourseController::class, ["except" => ["show"]]);
+    Route::get('/courses/{course}/', [CourseController::class, 'show'])->name('courses.show')->middleware('courses');
 
     // Room
     Route::resource('room', RoomController::class);
