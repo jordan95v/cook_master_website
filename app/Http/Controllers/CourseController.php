@@ -46,7 +46,8 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        //
+        $random_courses = Course::where("id", "!=", $course->id)->inRandomOrder()->limit(5)->get();
+        return view('course.show', ["course" => $course, "random_courses" => $random_courses]);
     }
 
     /**

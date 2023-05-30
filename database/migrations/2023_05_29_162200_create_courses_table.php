@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string("image");
             $table->integer("duration");
             $table->integer("difficulty");
-            $table->string("content");
+            $table->text("content");
             $table->foreignIdFor(User::class, "user_id")->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

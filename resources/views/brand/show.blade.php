@@ -27,7 +27,7 @@
 
         {{-- Brand image show on large --}}
         <div class="mx-auto hidden lg:flex">
-            <img src="{{ asset('storage/' . $brand->image) }}" class="object-cover h-full" />
+            <img src="{{ asset('storage/' . $brand->image) }}" class="object-cover rounded-xl h-full" />
         </div>
     </div>
 
