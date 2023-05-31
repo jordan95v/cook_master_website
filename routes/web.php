@@ -7,6 +7,7 @@ use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
@@ -117,6 +118,9 @@ Route::resource('events', EventController::class);
 
 // Room
 Route::resource('room', RoomController::class);
+
+//Reservation   
+Route::resource('reservation', ReservationController::class);
 
 // Auth route
 Route::group(["middleware" => ["auth"]], function () {

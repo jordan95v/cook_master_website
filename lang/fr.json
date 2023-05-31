@@ -289,5 +289,12 @@
     "Remove provider": "Supprimer fournisseur",
     "Provider": "Fournisseur",
     "Are you sure you wanna remove this account from service providers ?": "Êtes-vous sûr de vouloir supprimer ce compte des prestataires ?",
-    "Are you sure you wanna make this account a service provider ?": "Êtes-vous sûr de vouloir rendre ce compte prestataire ?"
+    "Are you sure you wanna make this account a service provider ?": "Êtes-vous sûr de vouloir rendre ce compte prestataire ?",
+    "Reserve home courses": "Réserver des cours à domicile",
+    "Reserve a home course": "Réserver un cours à domicile",
+    "Give us details about the course": "Donnez-nous des détails sur le cours",
+    "Desired course": "Cours souhaité",
+    "Where ? When ?": "Où ? Quand ?",
+    "Enter your address": "Entrez votre adresse",
+    "Send the request": "Envoyer la demande"
 }
