@@ -40,7 +40,7 @@ class LimitCourse
         // Then, check if the user has reached the limit of courses he can take today
         $limit = ($subscription_name == "free" ? 1 : 5);
         if (UserCourse::whereDate('created_at', '=', Carbon::today()->toDateString())->count() >= $limit) {
-            return redirect()->route('courses.index')->with('error', 'You have reached the limit of courses you can take today');
+            return redirect()->route('courses.all')->with('error', 'You have reached the limit of courses you can take today');
         }
         return $next($request);
     }

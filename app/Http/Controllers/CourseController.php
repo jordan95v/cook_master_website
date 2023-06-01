@@ -13,7 +13,8 @@ class CourseController extends Controller
 {
     public function all()
     {
-        return view('course.all', ["courses" => Course::all()]);
+        $courses = Course::simplePaginate(10);
+        return view('course.all', ["courses" => $courses]);
     }
 
     /**

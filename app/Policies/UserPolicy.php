@@ -43,7 +43,7 @@ class UserPolicy
     // User can promote the model.
     public function manage(User $user, User $model): bool
     {
-        return ($user->role == 2 && $model->role != 2);
+        return ($user->role == 2 && $model->role != 2 && !$model->is($user));
     }
 
     public function add_service_provider(User $user, User $model): bool

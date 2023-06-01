@@ -8,10 +8,8 @@
                 <h2 class="card-title text-2xl font-bold mx-auto">{{ __('My subscription') }}</h2>
                 <div class="grid grid-cols-1 lg:grid-cols-5 mt-4">
                     {{-- Subscription image --}}
-                    <div class="flex flex-col my-auto col">
-                        <img
-                            src="{{ asset('images/' . str_replace('_annual', '', $subscription->name) . '.png') }}"alt="">
-                        <p class="font-bold text-xl text-center">{{ strtoupper($subscription->name) }}</p>
+                    <div class="my-auto mx-auto">
+                        <img src="{{ asset('images/' . str_replace('_annual', '', $subscription->name) . '.png') }}">
                     </div>
 
                     {{-- Subscription infos --}}
