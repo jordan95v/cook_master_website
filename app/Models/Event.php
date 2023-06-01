@@ -27,10 +27,8 @@ class Event extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    //méthode pour récupérer les utilisateurs d'un événement
     public function participants()
     {
-        //méthode pour récupérer les participants d'un événement(table cible, table qui contient les clés étrangères)
         return $this->belongsToMany(User::class, 'participeds');
     }
 }

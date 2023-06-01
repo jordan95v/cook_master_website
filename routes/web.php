@@ -105,6 +105,9 @@ Route::group(
 // Store
 Route::get("/store", [ProductController::class, "storeIndex"])->name("store");
 
+// Courses index
+Route::get("/courses/all", [CourseController::class, "all"])->name("courses.all");
+
 // Auth route
 Route::group(["middleware" => ["auth"]], function () {
     // Brand

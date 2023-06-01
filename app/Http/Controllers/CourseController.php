@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
+    public function all()
+    {
+        return view('course.all', ["courses" => Course::all()]);
+    }
+
     /**
      * Display a listing of the resource.
      */
