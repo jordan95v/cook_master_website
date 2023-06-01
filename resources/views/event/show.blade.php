@@ -42,7 +42,7 @@
     </div>
 
     {{-- Information about the event --}}
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 bg-gray-200  lg:px-24 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 bg-gray-200 lg:px-24 px-5 rounded-xl py-10">
         <div>
             <h3 class="text-4xl font-bold pb-10">{{ __('Informations about the event') }}</h3>
             {!! $event->description !!}
@@ -70,12 +70,11 @@
         <div>
             <h3 class="text-2xl font-bold my-3">{{ __('Participants') }} : {{ count($participants) }} /
                 {{ $event->capacity }}</h3>
-            <div class="overflow-auto ">
+            <div class="overflow-auto">
                 <ul>
                     @foreach ($participant as $member)
                         <div class="flex items-center gap-4 p-4">
                             <img src="{{ Auth::user()->image ?? false ? asset('storage/' . Auth::user()->image) : asset('images/user.png') }}"
-                                alt="Photo de profil de l'organisateur"
                                 class="w-12 h-12 rounded-full object-cover object-center">
                             <p class="text-lg">{{ $member->name }}</p>
                         </div>
