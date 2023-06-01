@@ -277,5 +277,20 @@
     "Remove provider": "Eliminar proveedor",
     "Provider": "Proveedor",
     "Are you sure you wanna remove this account from service providers ?": "¿Estás seguro/a de que deseas eliminar esta cuenta de los proveedores de servicios?",
-    "Are you sure you wanna make this account a service provider ?": "¿Estás seguro/a de que deseas hacer de esta cuenta un proveedor de servicios?"
+    "Are you sure you wanna make this account a service provider ?": "¿Estás seguro/a de que deseas hacer de esta cuenta un proveedor de servicios?",
+    "Duration": "Duración",
+    "Difficulty": "Dificultad",
+    "Access this course": "Acceder a este curso",
+    "You have reached the limit of courses you can take today": "Has alcanzado el límite de cursos que puedes tomar hoy",
+    "Creator": "Creador",
+    "I like this recepy !": "¡Me gusta esta receta!",
+    "Some courses that might interest you": "Algunos cursos que podrían interesarte",
+    "Course's content": "Contenido del curso",
+    "Recepy uploaded on :date": "Receta subida el :date",
+    "Course name": "Nombre del curso",
+    "Course duration": "Duración del curso",
+    "Choose the course's difficulty": "Elige la dificultad del curso",
+    "Edit a course": "Editar un curso",
+    "Are you sure you wanna delete this course ?": "¿Estás seguro/a de que quieres eliminar este curso?",
+    "Delete the course": "Eliminar el curso"
 }

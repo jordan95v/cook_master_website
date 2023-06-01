@@ -277,5 +277,20 @@
     "Remove provider": "제공자 제거",
     "Provider": "제공자",
     "Are you sure you wanna remove this account from service providers ?": "이 계정을 서비스 제공자에서 제거하시겠습니까?",
-    "Are you sure you wanna make this account a service provider ?": "이 계정을 서비스 제공자로 만드시겠습니까?"
+    "Are you sure you wanna make this account a service provider ?": "이 계정을 서비스 제공자로 만드시겠습니까?",
+    "Duration": "기간",
+    "Difficulty": "난이도",
+    "Access this course": "이 강좌에 접근하기",
+    "You have reached the limit of courses you can take today": "오늘 수강 가능한 강좌 한도에 도달했습니다",
+    "Creator": "제작자",
+    "I like this recepy !": "이 레시피가 좋아요!",
+    "Some courses that might interest you": "당신에게 흥미로울 수 있는 몇 가지 강좌",
+    "Course's content": "강좌 내용",
+    "Recepy uploaded on :date": "레시피 업로드 날짜 :date",
+    "Course name": "강좌 이름",
+    "Course duration": "강좌 기간",
+    "Choose the course's difficulty": "강좌의 난이도 선택",
+    "Edit a course": "강좌 수정",
+    "Are you sure you wanna delete this course ?": "이 강좌를 삭제하시겠습니까?",
+    "Delete the course": "강좌 삭제"
 }

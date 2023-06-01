@@ -289,5 +289,21 @@
     "Remove provider": "Supprimer fournisseur",
     "Provider": "Fournisseur",
     "Are you sure you wanna remove this account from service providers ?": "Êtes-vous sûr de vouloir supprimer ce compte des prestataires ?",
-    "Are you sure you wanna make this account a service provider ?": "Êtes-vous sûr de vouloir rendre ce compte prestataire ?"
+    "Are you sure you wanna make this account a service provider ?": "Êtes-vous sûr de vouloir rendre ce compte prestataire ?",
+    "Duration": "Durée",
+    "Difficulty": "Difficulté",
+    "Access this course": "Accéder à ce cours",
+    "You have reached the limit of courses you can take today": "Vous avez atteint la limite de cours que vous pouvez prendre aujourd'hui",
+    "Creator": "Créateur",
+    "I like this recepy !": "J'aime cette recette !",
+    "Some courses that might interest you": "Quelques cours qui pourraient vous intéresser",
+    "Course's content": "Contenu du cours",
+    "Recepy uploaded on :date": "Recette uploadée le :date",
+    "Course name": "Nom du cours",
+    "Course duration": "Durée du cours",
+    "Choose the course's difficulty": "Choisissez la difficulté du cours",
+    "Edit a course": "Modifier un cours",
+    "Are you sure you wanna delete this course ?": "Êtes-vous sûr de vouloir supprimer ce cours ?",
+    "Delete the course": "Supprimer le cours",
+    "Created by": "Créé par"
 }

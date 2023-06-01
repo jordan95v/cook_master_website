@@ -5,7 +5,7 @@
             <tr>
                 <th>id</th>
                 <th>{{ __('Name') }}</th>
-                <th>{{ __('Video url') }}</th>
+                <th>{{ __('Image') }}</th>
                 <th>{{ __('Duration') }}</th>
                 <th>{{ __('Difficulty') }}</th>
                 @if (Auth::user()->isAdmin())
@@ -24,9 +24,11 @@
                         </a>
                     </td>
                     <td>
-                        <a href="{{ $course->video_url }}" class="">
-                            {{ $course->video_url }}<i class="fa-solid fa-arrow-up-right-from-square ms-2"></i>
-                        </a>
+                        @if ($course->image)
+                            <a href="{{ 'storage/' . $course->image }}" class="">
+                                {{ $course->image }}<i class="fa-solid fa-arrow-up-right-from-square ms-2"></i>
+                            </a>
+                        @endif
                     </td>
                     <td>{{ $course->duration }}</td>
                     <td>{{ $course->difficulty }} {{ str_repeat('⭐', $course->difficulty) }}</td>

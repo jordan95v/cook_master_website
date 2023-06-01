@@ -12,6 +12,10 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        // Leaving that here just in case.
+        // if ($this->get("role") || $this->get("is_banned") || $this->get("is_service_provider")) {
+        //     return redirect()->route("users.create")->with("error", "You cannot edit that field.");
+        // }
         return true;
     }
 

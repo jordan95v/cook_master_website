@@ -23,7 +23,7 @@
                     <div class="grid lg:grid-cols-2 grid-cols-1 gap-2 pb-2">
                         <x-utils.input name="duration" type="text" hint="Course duration" error="0" />
                         <select class="select select-bordered w-full" name="difficulty">
-                            <option disabled selected>{{ __('Choose the difficulty level') }}</option>
+                            <option disabled selected>{{ __('Choose the course\'s difficulty') }}</option>
                             @foreach (range(1, 5) as $difficulty)
                                 <option value="{{ $difficulty }}" @if (old('difficulty') == $difficulty) selected @endif>
                                     {{ $difficulty }} {{ str_repeat('⭐', $difficulty) }}
@@ -36,7 +36,7 @@
 
                     {{-- Description --}}
                     <textarea id="editor" class="textarea textarea-bordered border-2 @error('content') border-error @enderror" rows=4
-                        name="content" placeholder="{{ __('Course content') }}">{{ old('content') }}</textarea>
+                        name="content" placeholder="{{ __('Course\'s content') }}">{{ old('content') }}</textarea>
                     <x-utils.form-error name="content" />
 
                     <div class="card-actions justify-center">

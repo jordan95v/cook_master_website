@@ -40,7 +40,7 @@
                     </p>
                     <a href="{{ route('courses.show', ['course' => $course->id]) }}"
                         class="btn btn-primary mt-5 lg:w-96">
-                        Access this course
+                        {{ __('Access this course') }}
                     </a>
                 </div>
             </div>
