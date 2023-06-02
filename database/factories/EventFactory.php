@@ -21,7 +21,7 @@ class EventFactory extends Factory
             "description" => $this->faker->text(1000),
             "capacity" => $this->faker->numberBetween(1, 100),
             "image" => $this->faker->image("public/storage/", 1280, 720, null, false),
-            "date" => $this->faker->date(),
+            "date" => $this->faker->dateTimeBetween("+0 week", "+2 week")->format("Y-m-d"),
             "start_time" => $this->faker->time(),
             "end_time" => $this->faker->time(),
             "room_id" => \App\Models\Room::factory(),

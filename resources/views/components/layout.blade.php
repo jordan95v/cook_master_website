@@ -1,4 +1,4 @@
-@props(['admin', 'title', 'datatables'])
+@props(['admin', 'title', 'datatables', 'calendar'])
 
 <!DOCTYPE html>
 <html lang="fr" data-theme="light">
@@ -20,6 +20,10 @@
             crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
         <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+    @endisset
+
+    @isset($calendar)
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
     @endisset
 </head>
 

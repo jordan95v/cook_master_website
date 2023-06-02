@@ -15,4 +15,9 @@ class Room extends Model
     {
         return $this->belongsTo(User::class, "user_id");
     }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 }

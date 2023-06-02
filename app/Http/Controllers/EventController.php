@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
+    public function planning()
+    {
+        return view("event.planning", ["events" => Event::all()]);
+    }
+
     public function admin_index()
     {
         $this->authorize("viewAny", Event::class);

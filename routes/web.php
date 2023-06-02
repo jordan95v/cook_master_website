@@ -99,6 +99,7 @@ Route::group(
                 Route::put("/{user}/manage-provider", "manage_service_provider")->name("user.manage-service-provider");
             }
         );
+        Route::get("/planning", [EventController::class, "planning"])->name("events.planning");
     }
 );
 
