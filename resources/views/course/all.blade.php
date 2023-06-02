@@ -18,7 +18,7 @@
             <select class="select select-bordered w-full max-w-xs" name="filter">
                 <option disabled selected>{{ __('Sort by') }} </option>
                 @foreach ($sorts as $key => $sort)
-                    <option value="{{ $key }}">
+                    <option value="{{ $key }}" @if ($filter == $key) selected @endif>
                         {{ $sort }}</option>
                 @endforeach
             </select>

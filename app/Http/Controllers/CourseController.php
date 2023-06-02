@@ -7,14 +7,32 @@ use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Course;
 use App\Models\User;
 use App\Models\UserCourse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
-    public function all()
+    public function all(Request $request)
     {
-        $courses = Course::simplePaginate(10);
-        return view('course.all', ["courses" => $courses]);
+        $value = $request->get("filter");
+        switch ($value) {
+            case "down_difficulty":
+                $courses = Course::orderBy("difficulty", "desc")->simplePaginate(10);
+                break;
+            case "up_difficulty":
+                $courses = Course::orderBy("difficulty", "asc")->simplePaginate(10);
+                break;
+            case "down_duration":
+                $courses = Course::orderBy("duration", "desc")->simplePaginate(10);
+                break;
+            case "up_duration":
+                $courses = Course::orderBy("duration", "asc")->simplePaginate(10);
+                break;
+            default:
+                $courses = Course::simplePaginate(10);
+                break;
+        }
+        return view('course.all', ["courses" => $courses, "filter" => $value]);
     }
 
     /**
