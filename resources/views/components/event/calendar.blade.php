@@ -36,7 +36,9 @@
                 <a href="{{ route('events.show', ['event' => $event->id]) }}"
                     class="btn btn-primary">{{ __('Go to event') }}
                 </a>
-                <label for="modal-{{ $event->id }}" class="btn">Close</label>
+                <label for="modal-{{ $event->id }}" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                    ✕
+                </label>
             </div>
         </div>
     </div>
@@ -56,7 +58,7 @@
 
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: window.innerWidth < 640 ? 'timeGridDay' : 'timeGridWeek',
+            initialView: 'timeGridDay',
             events: allEvents,
             eventClick: function(info) {
                 document.querySelector(`#modal-${info.event.id}`).checked = true;
@@ -64,8 +66,7 @@
             headerToolbar: {
                 left: 'prev,next',
                 center: 'title',
-                right: window.innerWidth < 640 ? 'timeGridDay' :
-                    'timeGridDay,timeGridWeek,dayGridMonth,listWeek'
+                right: window.innerWidth < 640 ? 'timeGridDay' : 'timeGridDay,timeGridWeek,dayGridMonth'
             }
         });
         calendar.setOption('locale', '{{ App::getLocale() }}');
@@ -73,4 +74,4 @@
     });
 </script>
 
-<div id='calendar' class="lg:px-32 pt-10"></div>
+<div id='calendar' {{ $attributes->merge(['class' => 'pt-10']) }}></div>

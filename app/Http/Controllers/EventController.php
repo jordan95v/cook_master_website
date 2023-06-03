@@ -39,7 +39,7 @@ class EventController extends Controller
     public function create()
     {
         $this->authorize("create", Event::class);
-        return view("event.create", ['rooms' => Room::all(), 'users' => User::all()]);
+        return view("event.create", ['rooms' => Room::all(), 'users' => User::all(), "events" => Event::all()]);
     }
 
     /**

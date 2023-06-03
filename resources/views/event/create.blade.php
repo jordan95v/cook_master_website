@@ -1,4 +1,4 @@
-<x-layout title="{{ __('Add an event') }}">
+<x-layout title="{{ __('Add an event') }}" calendar=1>
     <div class="grid grid-cols-1 md:grid-cols-2">
         <div class="my-auto mx-auto">
             <img src="{{ asset('images/event_create.png') }}" alt="">
@@ -43,6 +43,9 @@
                     <textarea id="editor" class="textarea textarea-bordered border-2 @error('description') border-error @enderror" rows=4
                         name="description" placeholder="{{ __('Product description') }}">{{ old('description') }}</textarea>
                     <x-utils.form-error name="description" />
+
+                    {{-- Calendar open button --}}
+                    <label for="calendar-modal" class="mt-2 btn">{{ __('Open event calendar') }}</label>
 
                     <div class="divider"></div>
 
@@ -93,6 +96,19 @@
             </x-utils.card-grid>
         </div>
     </div>
+
+    {{-- Calendar modal --}}
+    <input type="checkbox" id="calendar-modal" class="modal-toggle" />
+    <div class="modal lg:px-24 px-2">
+        <div class="modal-box max-w-3xl h-full lg:h-auto w-full">
+            <h3 class="font-bold text-lg">{{ __('Event planning') }}</h3>
+            <x-event.calendar :events=$events class="h-full lg:h-auto" />
+            <div class="modal-action">
+                <label for="calendar-modal" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
+            </div>
+        </div>
+    </div>
+
     <x-event.time />
     <x-utils.editor />
 </x-layout>
