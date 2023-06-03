@@ -56,10 +56,16 @@
 
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'timeGridWeek',
+            initialView: window.innerWidth < 640 ? 'timeGridDay' : 'timeGridWeek',
             events: allEvents,
             eventClick: function(info) {
                 document.querySelector(`#modal-${info.event.id}`).checked = true;
+            },
+            headerToolbar: {
+                left: 'prev,next',
+                center: 'title',
+                right: window.innerWidth < 640 ? 'timeGridDay' :
+                    'timeGridDay,timeGridWeek,dayGridMonth,listWeek'
             }
         });
         calendar.setOption('locale', '{{ App::getLocale() }}');
@@ -67,4 +73,4 @@
     });
 </script>
 
-<div id='calendar' class="px-32 pt-10"></div>
+<div id='calendar' class="lg:px-32 pt-10"></div>

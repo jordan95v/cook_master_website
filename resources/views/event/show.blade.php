@@ -56,10 +56,6 @@
                     {{ __('Schedule') }} : {{ $event->start_time }}-{{ $event->end_time }}
                 </p>
                 <p class="text-gray-500">
-                    <i class="text-purple-500 fa-sharp fa-solid fa-location-dot me-2"></i>
-                    {{ __('Place') }} : {{ $event->room->address }}
-                </p>
-                <p class="text-gray-500">
                     <i class="text-purple-500 fa-sharp fa-solid fa-person me-2"></i>
                     {{ __('Organizer') }} : {{ $event->user->name }}
                 </p>
