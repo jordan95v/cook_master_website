@@ -25,7 +25,7 @@
                     <td>
                         @if ($event->image)
                             <a href="{{ 'storage/' . $event->image }}" class="">
-                                {{ $event->image }}<i class="fa-solid fa-arrow-up-right-from-square ms-2"></i>
+                                <i class="fa-solid fa-arrow-up-right-from-square ms-2"></i>
                             </a>
                         @endif
                     </td>
@@ -33,7 +33,7 @@
                     <td>{{ $event->date }}</td>
                     <td>
                         <a href="{{ route('room.show', ['room' => $event->room->id]) }}" class="link font-bold">
-                            {{ $event->room->name }}
+                            {{ Str::limit($event->room->name, 15) }}
                         </a>
                     </td>
                     <x-admin.user-avatar :target="$event->created_by_user" />

@@ -27,7 +27,7 @@
                     <td>
                         @if ($product->image)
                             <a href="{{ 'storage/' . $product->image }}" class="">
-                                {{ $product->image }}<i class="fa-solid fa-arrow-up-right-from-square ms-2"></i>
+                                <i class="fa-solid fa-arrow-up-right-from-square ms-2"></i>
                             </a>
                         @endif
                     </td>

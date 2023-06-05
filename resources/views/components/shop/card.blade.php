@@ -4,7 +4,7 @@
     <a href="{{ route('product.show', ['product' => $product->id]) }}">
         {{-- Product image --}}
         <img src="{{ asset('storage/' . $product->image) }}"
-            class="h-72 w-full object-cover transform transition hover:scale-110" alt="" />
+            class="lg:h-64 h-52 w-full object-cover transform transition hover:scale-110" alt="" />
 
         {{-- Product content --}}
         <div class="pt-3 flex items-center justify-between">

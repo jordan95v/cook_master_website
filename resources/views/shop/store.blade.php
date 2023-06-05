@@ -10,7 +10,7 @@
 
 
 <x-layout title="Magasin">
-    <div class="p-5 mb-5">
+    <div class="lg:p-5 mb-5">
         <img src="{{ asset('images/food-banner.jpg') }}" alt="" class="rounded-xl max-h-56 object-cover w-full">
     </div>
     <form action="{{ route('store') }}" method="get" class="flex justify-center">
@@ -34,7 +34,7 @@
         </div>
     </form>
     <div class="text-center p-5">
-        <div class="pt-5 grid 2xl:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-16 lg:px-16 lg:mt-10">
+        <div class="pt-5 grid 2xl:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-10 lg:px-16 lg:mt-10">
             @foreach ($products as $product)
                 <x-shop.card :product="$product" />
             @endforeach

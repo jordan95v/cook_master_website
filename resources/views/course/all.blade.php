@@ -9,7 +9,7 @@
 @endphp
 
 <x-layout title="All courses">
-    <div class="p-5 mb-5">
+    <div class="lg:p-5 mb-5">
         <img src="{{ asset('images/courses_banner.jpeg') }}" alt=""
             class="rounded-xl max-h-56 object-cover w-full">
     </div>
@@ -26,7 +26,7 @@
         </div>
     </form>
 
-    <div class="grid 2xl:grid-cols-2 grid-cols-1 gap-6 pt-10 px-24">
+    <div class="grid 2xl:grid-cols-2 grid-cols-1 gap-6 pt-10 lg:px-24">
         @foreach ($courses as $course)
             <div class="card lg:card-side border-2">
                 <img src="{{ asset('storage/' . $course->image) }}" class="rounded-s w-96">

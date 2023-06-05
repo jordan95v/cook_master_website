@@ -23,11 +23,11 @@
                     <td>
                         @if ($room->image)
                             <a href="{{ 'storage/' . $room->image }}" class="">
-                                {{ $room->image }}<i class="fa-solid fa-arrow-up-right-from-square ms-2"></i>
+                                <i class="fa-solid fa-arrow-up-right-from-square ms-2"></i>
                             </a>
                         @endif
                     </td>
-                    <td>{{ $room->address }}</td>
+                    <td>{{ Str::limit($room->address, 30) }}</td>
                     <x-admin.user-avatar :target="$room->user" />
                     <td class="w-1/6">
                         <div class="dropdown dropdown-bottom dropdown-end">
