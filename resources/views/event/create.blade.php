@@ -44,9 +44,6 @@
                         name="description" placeholder="{{ __('Product description') }}">{{ old('description') }}</textarea>
                     <x-utils.form-error name="description" />
 
-                    {{-- Calendar open button --}}
-                    <label for="calendar-modal" class="mt-2 btn">{{ __('Open event calendar') }}</label>
-
                     <div class="divider"></div>
 
                     {{-- Room  --}}
@@ -58,12 +55,17 @@
                             </a>
                         </i>
                     </label>
-                    <select class="select select-bordered w-full" name="room_id">
+                    <select class="select select-bordered w-full" name="room_id" id="room_select">
                         <option disabled selected>{{ __('Choose the room') }}</option>
                         @foreach ($rooms as $room)
                             <option value="{{ $room->id }}">{{ $room->name }}</option>
                         @endforeach
                     </select>
+
+                    {{-- Calendar open button --}}
+                    <label for="calendar-modal" class="btn btn-disabled" id="calendar_btn">
+                        {{ __('Open event calendar') }}
+                    </label>
 
                     {{-- Date --}}
                     <x-utils.input type="date" name="date" hint="{{ __('Date') }}" error="1" />
@@ -102,7 +104,9 @@
     <div class="modal lg:px-24 px-2">
         <div class="modal-box max-w-3xl h-full lg:h-auto w-full">
             <h3 class="font-bold text-lg">{{ __('Event planning') }}</h3>
-            <x-event.calendar :events=$events class="h-full lg:h-auto" />
+
+            <div id='calendar'></div>
+
             <div class="modal-action">
                 <label for="calendar-modal" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
             </div>
@@ -111,4 +115,45 @@
 
     <x-event.time />
     <x-utils.editor />
+
+    @foreach ($events as $event)
+        <x-event.modal :event="$event" />
+    @endforeach
+
+    <script>
+        let calendarButton = document.querySelector('#calendar_btn');
+
+        let select = document.querySelector('#room_select');
+        select.addEventListener("change", function() {
+            calendarButton.classList.remove('btn-disabled');
+            let allEvents = [];
+            @foreach ($events as $event)
+
+                if ('{{ $event->room->id }}' == select.value) {
+                    allEvents.push({
+                        id: '{{ $event->id }}',
+                        title: '{{ $event->title }}',
+                        start: '{{ $event->start() }}',
+                        end: '{{ $event->end() }}',
+                    });
+                }
+            @endforeach
+
+            var calendarElement = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarElement, {
+                initialView: 'timeGridDay',
+                events: allEvents,
+                eventClick: function(info) {
+                    document.querySelector(`#modal-${info.event.id}`).checked = true;
+                },
+                headerToolbar: {
+                    left: 'prev,next',
+                    center: 'title',
+                    right: window.innerWidth < 640 ? 'timeGridDay' : 'timeGridDay,timeGridWeek,dayGridMonth'
+                }
+            });
+            calendar.setOption('locale', '{{ App::getLocale() }}');
+            calendar.render();
+        })
+    </script>
 </x-layout>
