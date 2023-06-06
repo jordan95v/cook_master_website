@@ -25,19 +25,22 @@
                     {{-- Room --}}
                     <div class="grid grid-cols-1 @if (Auth::user()->isAdmin()) lg:grid-cols-2 @endif gap-2">
                         {{-- Capacity --}}
-                        <x-utils.input type="number" name="capacity" hint="{{ __('Capacity') }}" error="1" />
+                        <x-utils.input type="text" name="capacity" hint="{{ __('Capacity') }}" error="1" />
 
                         {{-- Organizer --}}
                         @if (Auth::user()->isAdmin())
                             <select class="select select-bordered w-full" name="user_id">
                                 <option disabled selected>{{ __('Choose the organizer') }}</option>
                                 @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    <option value="{{ $user->id }}"
+                                        @if (old('user_id') == $user->id) selected @endif>
+                                        {{ $user->name }}
+                                    </option>
                                 @endforeach
                             </select>
-                            <x-utils.form-error name="user_id" />
                         @endif
                     </div>
+                    <x-utils.form-error name="user_id" />
 
                     {{-- Description --}}
                     <textarea id="editor" class="textarea textarea-bordered border-2 @error('description') border-error @enderror" rows=4
@@ -58,9 +61,12 @@
                     <select class="select select-bordered w-full" name="room_id" id="room_select">
                         <option disabled selected>{{ __('Choose the room') }}</option>
                         @foreach ($rooms as $room)
-                            <option value="{{ $room->id }}">{{ $room->name }}</option>
+                            <option value="{{ $room->id }}" @if (old('room_id') == $room->id) selected @endif>
+                                {{ $room->name }}
+                            </option>
                         @endforeach
                     </select>
+                    <x-utils.form-error name="room_select" />
 
                     {{-- Calendar open button --}}
                     <label for="calendar-modal" class="btn btn-disabled" id="calendar_btn">
@@ -69,18 +75,18 @@
 
                     {{-- Date --}}
                     <x-utils.input type="date" name="date" hint="{{ __('Date') }}" error="1" />
+                    <x-utils.form-error name="date" />
 
                     {{-- Range time --}}
                     <div class="grid lg:grid-cols-2 grid-cols-1 gap-2 pb-2">
                         {{-- Start time --}}
                         <select class="select select-bordered w-full max-w-xs" name="start_time" id="start-time">
                             <option disabled selected>{{ __('Choose the start time') }}</option>
-                            @php
-                                for ($i = 0; $i <= 23; $i++) {
-                                    $hour = str_pad($i, 2, '0', STR_PAD_LEFT);
-                                    echo "<option value=\"$hour:00\">$hour:00</option>";
-                                }
-                            @endphp
+                            @foreach (range(0, 23) as $item)
+                                <option value="{{ str_pad($item, 2, '0', STR_PAD_LEFT) }}:00">
+                                    {{ $item }}:00
+                                </option>
+                            @endforeach
                         </select>
 
                         {{-- End time --}}
@@ -88,7 +94,6 @@
                             <option disabled selected>{{ __('Choose the end time') }}</option>
                         </select>
                     </div>
-
 
                     {{-- Submit --}}
                     <div class="card-actions justify-center">
@@ -102,11 +107,9 @@
     {{-- Calendar modal --}}
     <input type="checkbox" id="calendar-modal" class="modal-toggle" />
     <div class="modal lg:px-24 px-2">
-        <div class="modal-box max-w-3xl h-full lg:h-auto w-full">
-            <h3 class="font-bold text-lg">{{ __('Event planning') }}</h3>
-
+        <div class="modal-box max-w-5xl h-full lg:h-auto w-full">
+            <h3 class="font-bold text-lg pb-2">{{ __('Event planning') }}</h3>
             <div id='calendar'></div>
-
             <div class="modal-action">
                 <label for="calendar-modal" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
             </div>

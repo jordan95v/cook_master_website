@@ -48,15 +48,27 @@ class EventController extends Controller
     public function store(StoreEventRequest $request)
     {
         $this->authorize("create", Event::class);
-        $user = User::find(Auth::id());
         $form = $request->validated();
+        $events = Event::where("date", $request->date)->where("room_id", $request->room_id)->get();
+
+        // Check if the room is already booked
+        foreach ($events as $event) {
+            if ($request->start_time < $event->end_time && $request->start_time > $event->start_time) {
+                return back()->with("error", "This room is already booked at this time")->withInput();
+            }
+            if ($request->end_time > $event->start_time && $request->end_time < $event->end_time) {
+                return back()->with("error", "This room is already booked at this time")->withInput();
+            }
+        }
+
+        $user = User::find(Auth::id());
         $form["user_id"] = ($user->isAdmin()) ? $request->user_id : $user->id;
+        $form["created_by"] = $user->id;
         if ($request->hasFile('image')) {
             $form['image'] = $request->file('image')->store('events', 'public');
         }
-        $form["created_by"] = $user->id;
         Event::create($form);
-        return redirect("/")->with("success", "You have created an event");
+        return back()->with("success", "You have created an event");
     }
 
     /**

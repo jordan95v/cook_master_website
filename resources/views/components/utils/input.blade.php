@@ -5,6 +5,9 @@
         $value = $target[$name];
     } else {
         $value = old($name);
+        if ($type == 'date') {
+            $value = old('date', date('Y-m-d'));
+        }
     }
 @endphp
 

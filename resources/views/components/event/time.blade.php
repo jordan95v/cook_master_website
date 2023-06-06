@@ -19,7 +19,7 @@
 
         if (startTime >= endTime) {
             event.preventDefault();
-            alert("L'heure de début doit être inférieure à l'heure de fin");
+            alert("L'heure de début doit être inférieure à l'heure de fin.");
         }
     });
 </script>
