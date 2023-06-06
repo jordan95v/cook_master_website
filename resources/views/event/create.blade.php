@@ -126,9 +126,9 @@
         let select = document.querySelector('#room_select');
         select.addEventListener("change", function() {
             calendarButton.classList.remove('btn-disabled');
+
             let allEvents = [];
             @foreach ($events as $event)
-
                 if ('{{ $event->room->id }}' == select.value) {
                     allEvents.push({
                         id: '{{ $event->id }}',
