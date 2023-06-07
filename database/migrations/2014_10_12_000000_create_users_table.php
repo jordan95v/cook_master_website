@@ -12,19 +12,27 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
+            // Basic info
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->string("image")->nullable();
+
+            // Manage roles
             $table->boolean("is_banned")->default(0);
             $table->boolean("is_service_provider")->default(0);
             $table->integer("role")->default(0);
-            $table->string("image")->nullable();
+
+            // Godfather management
             $table->string("key")->nullable();
             $table->integer("key_used")->default(0);
+            $table->string("godfather_key")->nullable();
             $table->boolean("had_discount")->default(0);
+
+            // Timestamps
             $table->timestamps();
         });
     }

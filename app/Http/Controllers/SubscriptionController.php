@@ -40,6 +40,11 @@ class SubscriptionController extends Controller
         } catch (CardException $th) {
             return back()->with("error", $th->getMessage());
         }
+
+        if ($user->godfather_key != null) {
+            User::where('key', $user->godfather_key)->first()->increment('key_used');
+        }
+
         return redirect("/")->with("success", "Congrats, you subscribed.");
     }
 

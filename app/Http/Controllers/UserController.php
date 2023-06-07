@@ -28,11 +28,7 @@ class UserController extends Controller
     public function store(CreateUserRequest $request)
     {
         $form = $request->validated();
-
-        if ($form["key"] ?? false) {
-            User::where("key", $form["key"])->increment("key_used");
-        }
-
+        $form["godfather_key"] = $form["key"];
         $form["key"] = Str::random(32);
         $form["password"] = bcrypt($form["password"]);
 
