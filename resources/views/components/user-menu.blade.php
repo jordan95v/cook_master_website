@@ -92,6 +92,13 @@
 
                     </a>
                 </li>
+                <li>
+                    <!-- The button to open modal -->
+                    <label for="godfather-modal">
+                        <i class="fa-solid fa-key"></i>
+                        {{ __("Godfather's key") }}
+                    </label>
+                </li>
             @endif
             <li>
                 <a href="{{ route('logout') }}">
@@ -111,4 +118,21 @@
             </li>
         @endauth
     </ul>
+</div>
+
+<!-- Put this part before </body> tag -->
+<input type="checkbox" id="godfather-modal" class="modal-toggle" />
+<div class="modal">
+    <div class="modal-box">
+        <h3 class="font-bold text-lg">{{ __("Godfather's key") }}</h3>
+        <p class="py-4">{{ __('Share this key in order to get some discount on the shop !') }}</p>
+        <p class="p-4 bg-gray-300 rounded-xl text-gray-500">
+            {{ Auth::user()->key }}
+        </p>
+        <div class="modal-action">
+            <label for="godfather-modal" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                ✕
+            </label>
+        </div>
+    </div>
 </div>
