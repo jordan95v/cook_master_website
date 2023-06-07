@@ -19,6 +19,8 @@
                     </div>
                     <x-utils.form-error name="password" />
 
+                    <x-utils.input name="key" type="text" hint="Godfather's key" error="1" />
+
                     {{-- CGU --}}
                     <p class="text-xs mb-2">{{ __("By continuing, i aknowledge that i've read and agree to the") }}
                         <a class="link hover:text-primary" href="#">{{ __('Privacy Policy') }}</a>

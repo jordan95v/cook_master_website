@@ -21,10 +21,14 @@ class CreateUserRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             "name" => "required|min:6|unique:users,name",
             "email" => "required|email|unique:users,email",
             "password" => "required|min:6|confirmed",
         ];
+        if ($this->has('key')) {
+            $rules['key'] = 'required';
+        }
+        return $rules;
     }
 }

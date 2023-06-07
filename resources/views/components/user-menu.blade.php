@@ -89,7 +89,6 @@
                         @else
                             {{ __('Subscribe') }}
                         @endif
-
                     </a>
                 </li>
                 <li>
@@ -120,19 +119,29 @@
     </ul>
 </div>
 
-<!-- Put this part before </body> tag -->
-<input type="checkbox" id="godfather-modal" class="modal-toggle" />
-<div class="modal">
-    <div class="modal-box">
-        <h3 class="font-bold text-lg">{{ __("Godfather's key") }}</h3>
-        <p class="py-4">{{ __('Share this key in order to get some discount on the shop !') }}</p>
-        <p class="p-4 bg-gray-300 rounded-xl text-gray-500">
-            {{ Auth::user()->key }}
-        </p>
-        <div class="modal-action">
-            <label for="godfather-modal" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                ✕
-            </label>
+@auth
+    <!-- Put this part before </body> tag -->
+    <input type="checkbox" id="godfather-modal" class="modal-toggle" />
+    <div class="modal">
+        <div class="modal-box">
+            <h3 class="font-bold text-lg">{{ __("Godfather's key") }}</h3>
+            <p class="py-4">{{ __('Share this key in order to get some discount on the shop !') }}</p>
+            <p class="p-4 bg-gray-300 rounded-xl text-gray-500">
+                {{ Auth::user()->key }}
+            </p>
+            <div class="lg:flex pt-2 items-center">
+                <p class="me-2">
+                    {{ __('How many times your key have been used:') }}
+                </p>
+                <p class="bg-gray-300 rounded-lg p-2 text-gray-500 mt-2 lg:mt-0">
+                    {{ Auth::user()->key_used }} {{ __('times') }}
+                </p>
+            </div>
+            <div class="modal-action">
+                <label for="godfather-modal" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                    ✕
+                </label>
+            </div>
         </div>
     </div>
-</div>
+@endauth

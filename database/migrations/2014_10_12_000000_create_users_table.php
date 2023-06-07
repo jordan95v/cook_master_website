@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Str;
 
 return new class extends Migration
 {
@@ -23,7 +22,8 @@ return new class extends Migration
             $table->boolean("is_service_provider")->default(0);
             $table->integer("role")->default(0);
             $table->string("image")->nullable();
-            $table->string("key")->default(Str::random(32));
+            $table->string("key")->nullable();
+            $table->integer("key_used")->default(0);
             $table->boolean("had_discount")->default(0);
             $table->timestamps();
         });

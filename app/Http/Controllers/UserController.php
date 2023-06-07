@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -27,12 +28,19 @@ class UserController extends Controller
     public function store(CreateUserRequest $request)
     {
         $form = $request->validated();
+
+        if ($form["key"] ?? false) {
+            User::where("key", $form["key"])->increment("key_used");
+        }
+
+        $form["key"] = Str::random(32);
         $form["password"] = bcrypt($form["password"]);
+
         $user = User::create($form);
         event(new Registered($user));
         $user->createAsStripeCustomer();
         Auth::login($user);
-        return redirect("/")->with("success", "You are now registered. Check your email to verify your account.");
+        return redirect("/")->with("success", "Check your email to verify your account.");
     }
 
     // Display the specified resource.
