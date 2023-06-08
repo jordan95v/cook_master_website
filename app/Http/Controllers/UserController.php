@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -29,11 +28,16 @@ class UserController extends Controller
     {
         $form = $request->validated();
         $form["godfather_key"] = $form["key"];
+
+        $godfather = User::where("key", $form["key"])->first();
+        if (!$godfather) {
+            return back()->with("error", "Invalid godfather key.")->withInput();
+        }
         $form["key"] = Str::random(32);
         $form["password"] = bcrypt($form["password"]);
 
         $user = User::create($form);
-        event(new Registered($user));
+        // event(new Registered($user));
         $user->createAsStripeCustomer();
         Auth::login($user);
         return redirect("/")->with("success", "Check your email to verify your account.");

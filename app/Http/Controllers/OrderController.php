@@ -97,16 +97,34 @@ class OrderController extends Controller
         $invoice = $this->makeInvoice($user, $shippingPrice, $request);
 
         // Payment
-        $price = $shippingPrice + $invoice->total_amount * 100;
-        try {
-            $user->charge($price, $request->get("payment-method-id"));
-        } catch (CardException $th) {
-            return back()->with("error", $th->getMessage());
+        $price = $shippingPrice + $invoice->total_amount;
+        $price_with_discount = ($price - $user->total_discount >= 0) ? $price - $user->total_discount : 0;
+
+        if ($price != $price_with_discount) {
+            $user->update(["total_discount" => $user->total_discount - ($price - $price_with_discount)]);
+        }
+
+        $pourcentage = $price_with_discount * 0.03;
+        if ($price_with_discount) {
+            try {
+                $user->charge($price_with_discount * 100, $request->get("payment-method-id"));
+            } catch (CardException $th) {
+                return back()->with("error", $th->getMessage());
+            }
+        }
+
+        // First order discount
+        if (!$user->first_order_discount) {
+            $user->update(["first_order_discount" => $pourcentage]);
+            $godfather = User::where("key", $user->godfather_key)->first();
+            if ($godfather) {
+                $godfather->update(["total_discount" => $godfather->total_discount + $pourcentage]);
+            }
         }
 
         // Order deletion
-        foreach ($user->orders as $value) {
-            $value->delete();
+        foreach ($user->orders as $order) {
+            $order->delete();
         }
 
         // Invoice creation

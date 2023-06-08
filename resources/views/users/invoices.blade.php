@@ -20,7 +20,7 @@
                             @foreach ($invoices as $item)
                                 <tr>
                                     <td>
-                                        <a href="{{ $item->url() }}" class="link hover:link-primary">
+                                        <a href="{{ $item->url() }}" target="_blank" class="link hover:link-primary">
                                             {{ $item->serial }}
                                         </a>
                                     </td>

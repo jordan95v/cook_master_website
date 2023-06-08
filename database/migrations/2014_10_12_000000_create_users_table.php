@@ -32,6 +32,11 @@ return new class extends Migration
             $table->string("godfather_key")->nullable();
             $table->boolean("had_discount")->default(0);
 
+            // In order to give discount to the godfather
+            $table->float("first_order_discount")->default(0);
+            $table->boolean("godfather_had_discount")->default(0);
+            $table->float("total_discount")->default(0);
+
             // Timestamps
             $table->timestamps();
         });

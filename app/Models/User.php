@@ -30,6 +30,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'image',
         'key',
         'godfather_key',
+        'first_order_discount',
+        'godfather_had_discount',
+        'total_discount',
     ];
 
     /**

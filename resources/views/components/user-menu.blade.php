@@ -126,17 +126,29 @@
         <div class="modal-box">
             <h3 class="font-bold text-lg">{{ __("Godfather's key") }}</h3>
             <p class="py-4">{{ __('Share this key in order to get some discount on the shop !') }}</p>
-            <p class="p-4 bg-gray-300 rounded-xl text-gray-500">
+            <p class="py-4 mb-4 text-center bg-gray-300 rounded-xl text-gray-500">
                 {{ Auth::user()->key }}
             </p>
             <div class="lg:flex pt-2 items-center">
                 <p class="me-2">
-                    {{ __('How many times your key have been used:') }}
+                    {{ __('Thanks to you') }},
+                </p>
+                <p class="bg-gray-300 rounded-lg p-2 text-gray-500 mt-2 lg:mt-0 me-2">
+                    {{ Auth::user()->key_used }}
+                </p>
+                {{ __('people subscribed') }} !
+            </div>
+
+            <div class="lg:flex pt-2 items-center">
+                <p class="me-2">
+                    {{ __('Thanks to your godchildrens, you earned a bonus of:') }}
                 </p>
                 <p class="bg-gray-300 rounded-lg p-2 text-gray-500 mt-2 lg:mt-0">
-                    {{ Auth::user()->key_used }} {{ __('times') }}
+                    {{ Auth::user()->total_discount }} €
                 </p>
             </div>
+
+
             <div class="modal-action">
                 <label for="godfather-modal" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
                     ✕
