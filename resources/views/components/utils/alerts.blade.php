@@ -1,7 +1,7 @@
 @if (session('success'))
     <div class="flex justify-center">
         <div class="alert alert-success shadow-lg max-w-lg">
-            <div class="mx-auto">
+            <div class="mx-auto text-center">
                 <i class="fa-solid fa-circle-check"></i>
                 {{ __(session('success')) }}
             </div>

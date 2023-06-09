@@ -66,13 +66,24 @@ class OrderController extends Controller
         // Invoice creation
         $invoice_id = uniqid($user->id . "-invoice-");
         $items = [];
+        $price = 0;
         foreach ($user->orders as $value) {
             $items[] = (new InvoiceItem())
                 ->title($value->product->name)
                 ->pricePerUnit($value->product->price)
-                ->discountByPercent(($user->isSubscribed()) ? 5 : 0)
                 ->quantity($value->quantity);
+            $price += $value->product->price * $value->quantity;
         }
+
+        $discount_price = $price - $user->total_discount;
+
+        if ($discount_price < 0) {
+            $discount_price = 0;
+            $user->update(["total_discount" => $user->total_discount - $price]);
+        } else {
+            $user->update(["total_discount" => 0]);
+        }
+
         $invoice = Invoice::make()
             ->buyer($user->customer($request->all()))
             ->series($invoice_id)
@@ -81,9 +92,9 @@ class OrderController extends Controller
             ->filename("invoices/$invoice_id")
             ->logo("images/logo2.png")
             ->addItems($items)
+            ->totalAmount($discount_price)
+            ->discountByPercent(($user->isSubscribed()) ? 5 : 0)
             ->save("public");
-
-        $invoice->stream(); // In order to compute the price etc ...
         return $invoice;
     }
 
@@ -94,31 +105,30 @@ class OrderController extends Controller
 
         // Invoice configuration
         $shippingPrice = 3;
-        $invoice = $this->makeInvoice($user, $shippingPrice, $request);
 
         // Payment
-        $price = $shippingPrice + $invoice->total_amount;
-        $price_with_discount = ($price - $user->total_discount >= 0) ? $price - $user->total_discount : 0;
+        $invoice = $this->makeInvoice($user, $shippingPrice, $request);
 
-        if ($price != $price_with_discount) {
-            $user->update(["total_discount" => $user->total_discount - ($price - $price_with_discount)]);
-        }
-
-        $pourcentage = $price_with_discount * 0.03;
-        if ($price_with_discount) {
+        if ($invoice->total_amount != 0) {
             try {
-                $user->charge($price_with_discount * 100, $request->get("payment-method-id"));
+                $user->charge($invoice->total_amount * 100, $request->get("payment-method-id"));
             } catch (CardException $th) {
                 return back()->with("error", $th->getMessage());
             }
         }
 
         // First order discount
+        $pourcentage = $invoice->total_amount * 0.03;
         if (!$user->first_order_discount) {
             $user->update(["first_order_discount" => $pourcentage]);
             $godfather = User::where("key", $user->godfather_key)->first();
             if ($godfather) {
-                $godfather->update(["total_discount" => $godfather->total_discount + $pourcentage]);
+                $subscriptions = $godfather->getSubscription();
+                if ($subscriptions != null) {
+                    if (str_starts_with($subscriptions[0]->name, "pro")) {
+                        $godfather->update(["total_discount" => $godfather->total_discount + $pourcentage]);
+                    }
+                }
             }
         }
 
@@ -127,7 +137,7 @@ class OrderController extends Controller
             $order->delete();
         }
 
-        // Invoice creation
+        // OrderInvoice creation
         OrderInvoice::create([
             "user_id" => Auth::id(),
             "price" => $invoice->total_amount,
