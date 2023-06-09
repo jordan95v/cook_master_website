@@ -43,6 +43,10 @@ class SubscriptionController extends Controller
 
         if ($user->godfather_key != null) {
             User::where('key', $user->godfather_key)->first()->increment('key_used');
+            $godfather = User::where('key', $user->godfather_key)->first();
+            if ($godfather->key_used % 3 == 0) {
+                $godfather->update(["total_discount" => $godfather->total_discount + 5]);
+            }
         }
 
         return redirect("/")->with("success", "Congrats, you subscribed.");
