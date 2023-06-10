@@ -28,11 +28,17 @@ use Illuminate\Support\Facades\Session;
 // No controller route
 Route::view("/", "home");
 
-// ROute to change the language
+// Route to change the language
 Route::get("/lang/{lang}", function (string $lang) {
     Session::put("locale", $lang);
     return redirect()->back();
 })->whereIn("lang", ["fr", "en", "es", "kr"])->name("lang.update");
+
+// Store
+Route::get("/store", [ProductController::class, "storeIndex"])->name("store");
+
+// Courses index
+Route::get("/courses/all", [CourseController::class, "all"])->name("courses.all");
 
 // Users Route
 Route::prefix("users")->group(
@@ -102,12 +108,6 @@ Route::group(
         Route::get("/planning", [EventController::class, "planning"])->name("events.planning");
     }
 );
-
-// Store
-Route::get("/store", [ProductController::class, "storeIndex"])->name("store");
-
-// Courses index
-Route::get("/courses/all", [CourseController::class, "all"])->name("courses.all");
 
 // Auth route
 Route::group(["middleware" => ["auth"]], function () {
