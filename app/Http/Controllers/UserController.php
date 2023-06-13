@@ -35,6 +35,7 @@ class UserController extends Controller
         }
         $form["key"] = Str::random(32);
         $form["password"] = bcrypt($form["password"]);
+        $form["api_key"] = Str::random(32);
 
         $user = User::create($form);
         // event(new Registered($user));

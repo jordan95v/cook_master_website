@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             "email_verified_at" => "2021-03-25 00:00:00",
             'password' => bcrypt('Test1234'),
             'key' => Str::random(32),
+            'api_key' => Str::random(32),
         ]);
 
         // Admin
@@ -35,6 +36,7 @@ class DatabaseSeeder extends Seeder
             "email_verified_at" => "2021-03-25 00:00:00",
             'password' => bcrypt('Test1234'),
             'key' => Str::random(32),
+            'api_key' => Str::random(32),
         ]);
 
         // Basic user
@@ -46,6 +48,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('Test1234'),
             'is_service_provider' => 1,
             'key' => Str::random(32),
+            'api_key' => Str::random(32),
         ]);
 
         \App\Models\Brand::factory(5)->create();

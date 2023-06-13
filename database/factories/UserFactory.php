@@ -26,6 +26,7 @@ class UserFactory extends Factory
             'key' => Str::random(32),
             'is_banned' => rand(0, 1),
             'is_service_provider' => rand(0, 1),
+            'api_key' => Str::random(32),
         ];
     }
 

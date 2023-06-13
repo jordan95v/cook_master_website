@@ -37,6 +37,9 @@ return new class extends Migration
             $table->boolean("godfather_had_discount")->default(0);
             $table->float("total_discount")->default(0);
 
+            // In order to use the API
+            $table->string("api_key")->nullable();
+
             // Timestamps
             $table->timestamps();
         });

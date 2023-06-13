@@ -33,6 +33,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'first_order_discount',
         'godfather_had_discount',
         'total_discount',
+        'api_key'
     ];
 
     /**
