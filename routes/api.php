@@ -34,15 +34,17 @@ Route::prefix("v1")->group(function () {
     });
 
 
-    Route::get("/events", function () {
-        return Event::all()->jsonSerialize();
-    });
+    Route::middleware('check_api_key')->group(function () {
+        Route::get("/events", function () {
+            return Event::all()->jsonSerialize();
+        });
 
-    Route::get("/users", function () {
-        return User::all()->jsonSerialize();
-    });
+        Route::get("/users", function () {
+            return User::all()->jsonSerialize();
+        });
 
-    Route::get("/courses", function () {
-        return Course::simplePaginate(10)->jsonSerialize();
+        Route::get("/courses", function () {
+            return Course::simplePaginate(10)->jsonSerialize();
+        });
     });
 });
