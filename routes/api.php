@@ -36,15 +36,43 @@ Route::prefix("v1")->group(function () {
 
     Route::middleware('check_api_key')->group(function () {
         Route::get("/events", function () {
-            return Event::all()->jsonSerialize();
+            $events = Event::all()->jsonSerialize();
+
+            // Gather information about the event.
+            foreach ($events as $key => $event) {
+                $orm_event = Event::where("id", $event["id"])->first();
+                $events[$key]["participants"] = $orm_event->participants->jsonSerialize();
+                $events[$key]["room"] = $orm_event->room->jsonSerialize();
+            }
+
+            return $events;
         });
 
         Route::get("/users", function () {
-            return User::all()->jsonSerialize();
+            $users = User::all()->jsonSerialize();
+
+            // Gather information about the user.
+            foreach ($users as $key => $user) {
+                $orm_user = User::where("id", $user["id"])->first();
+                $users[$key]["events"] = $orm_user->events->jsonSerialize();
+                $users[$key]["invoices"] = $orm_user->orderInvoices->jsonSerialize();
+                $users[$key]["subscription"] = $orm_user->getSubscription()[0]->name ?? "free";
+                $users[$key]["is_admin"] = $orm_user->isAdmin();
+            }
+
+            return $users;
         });
 
         Route::get("/courses", function () {
             return Course::simplePaginate(10)->jsonSerialize();
+        });
+
+        Route::get("courses/{id}", function ($id) {
+            try {
+                return Course::findOrFail($id)->jsonSerialize();
+            } catch (Exception $e) {
+                return response()->json(["error" => "Course not found."], 404);
+            }
         });
     });
 });

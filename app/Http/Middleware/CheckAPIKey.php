@@ -16,7 +16,7 @@ class CheckAPIKey
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $key = $request->get("api_key");
+        $key = $request->header("API_KEY");
         if (!$key) {
             return response()->json(["error" => "Missing API key."], 401);
         }
