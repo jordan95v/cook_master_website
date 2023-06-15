@@ -316,5 +316,8 @@
     "subscription": "abonnement",
     "Price with discount": "Prix avec réduction",
     "Events planning": "Planning des événements",
-    "Open event calendar": "Ouvrir le calendrier des événements"
+    "Open event calendar": "Ouvrir le calendrier des événements",
+    "Comment added successfully.": "Commentaire ajouté avec succès.",
+    "Comment deleted successfully.": "Commentaire supprimé avec succès.",
+    "You are not authorized to delete this comment.": "Vous n'êtes pas autorisé à supprimer ce commentaire."
 }

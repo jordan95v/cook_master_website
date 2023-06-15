@@ -303,5 +303,8 @@
     "subscription": "suscripción",
     "Price with discount": "Precio con descuento",
     "Events planning": "Planificación de eventos",
-    "Open event calendar": "Abrir calendario de eventos"
+    "Open event calendar": "Abrir calendario de eventos",
+    "Comment added successfully.": "Comentario agregado exitosamente.",
+    "Comment deleted successfully.": "Comentario eliminado exitosamente.",
+    "You are not authorized to delete this comment.": "No tienes autorización para eliminar este comentario."
 }

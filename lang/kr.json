@@ -303,5 +303,8 @@
     "subscription": "구독",
     "Price with discount": "할인 가격",
     "Events planning": "이벤트 계획",
-    "Open event calendar": "이벤트 달력 열기"
+    "Open event calendar": "이벤트 달력 열기",
+    "Comment added successfully.": "댓글이 성공적으로 추가되었습니다.",
+    "Comment deleted successfully.": "댓글이 성공적으로 삭제되었습니다.",
+    "You are not authorized to delete this comment.": "이 댓글을 삭제할 권한이 없습니다."
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductCommentRequest;
 use App\Models\ProductComment;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class ProductCommentController extends Controller
@@ -25,7 +26,8 @@ class ProductCommentController extends Controller
      */
     public function destroy(ProductComment $comment)
     {
-        if ($comment->user_id != Auth::id()) {
+        $user = User::find(Auth::id());
+        if ($comment->user_id != $user->id && !$user->isAdmin()) {
             return back()->with('error', 'You are not authorized to delete this comment.');
         }
         $comment->delete();

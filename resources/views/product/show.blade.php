@@ -45,7 +45,7 @@
             <x-utils.card class="w-full">
                 <form action="{{ route('comment.store') }}" method="post" class="card-body">
                     @csrf
-                    <h2 class="card-title">{{ __('Ajouter un commentaire') }}</h2>
+                    <h2 class="card-title mb-4">{{ __('Ajouter un commentaire') }}</h2>
 
                     {{-- Product id --}}
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -84,7 +84,7 @@
                     </div>
                     <p class="my-4 font-mono">{{ Str::limit($comment->comment, 255) }}</p>
                     @auth
-                        @if (Auth::user()->is($comment->user))
+                        @if (Auth::user()->is($comment->user) || Auth::user()->isAdmin())
                             <form action="{{ route('comment.destroy', ['comment' => $comment->id]) }}" method="post">
                                 @csrf
                                 @method('DELETE')
