@@ -14,10 +14,10 @@
     <p class="text-end font-mono mb-2">
         {{ __('Total discount') }}:
         @if (Auth::user()->total_discount)
-            {{ Auth::user()->total_discount }}€ {{ __('(your wallet)') }}
+            {{ Auth::user()->total_discount }}€ ({{ __('wallet') }}) +
         @endif
         @if (Auth::user()->isSubscribed())
-            {{ $discount }}€ {{ __('(subscription)') }}
+            {{ $discount }}€ ({{ __('subscription') }})
         @endif
     </p>
 

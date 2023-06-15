@@ -108,8 +108,8 @@
     <input type="checkbox" id="calendar-modal" class="modal-toggle" />
     <div class="modal lg:px-24 px-2">
         <div class="modal-box max-w-5xl h-full lg:h-auto w-full">
-            <h3 class="font-bold text-lg pb-2">{{ __('Event planning') }}</h3>
-            <div id='calendar'></div>
+            <h3 class="font-bold text-lg pb-2">{{ __('Events planning') }}</h3>
+            <div id='calendar' class="h-screen"></div>
             <div class="modal-action">
                 <label for="calendar-modal" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
             </div>
