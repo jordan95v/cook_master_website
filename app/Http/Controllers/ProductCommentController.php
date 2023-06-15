@@ -23,8 +23,12 @@ class ProductCommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductComment $productComment)
+    public function destroy(ProductComment $comment)
     {
-        //
+        if ($comment->user_id != Auth::id()) {
+            return back()->with('error', 'You are not authorized to delete this comment.');
+        }
+        $comment->delete();
+        return back()->with('success', 'Comment deleted successfully.');
     }
 }

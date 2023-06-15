@@ -73,4 +73,27 @@
             </x-utils.card>
         </div>
     </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-5 lg:px-24">
+        @foreach ($product->comments as $comment)
+            <x-utils.card class="w-full">
+                <div class="card-body">
+                    <div class="flex items-center">
+                        <x-admin.user-avatar :target="$comment->user" />
+                        <p class="text-end">{{ str_repeat('⭐', $comment->rating) }}</p>
+                    </div>
+                    <p class="my-4 font-mono">{{ Str::limit($comment->comment, 255) }}</p>
+                    @auth
+                        @if (Auth::user()->is($comment->user))
+                            <form action="{{ route('comment.destroy', ['comment' => $comment->id]) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-error w-full">{{ __('Delete') }}</button>
+                            </form>
+                        @endif
+                    @endauth
+                </div>
+            </x-utils.card>
+        @endforeach
+    </div>
 </x-layout>
