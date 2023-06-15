@@ -19,8 +19,8 @@ class EquipmentFactory extends Factory
         return [
             "title" => $this->faker->words(2, true),
             "image" => $this->faker->image("public/storage/", 1280, 720, null, false),
-            "brand_id" => \App\Models\Brand::orderByRaw("RAND()")->first()->id,
-            "user_id" => \App\Models\User::orderByRaw("RAND()")->first()->id,
+            "brand_id" => \App\Models\Brand::all()->random()->id,
+            "user_id" => \App\Models\User::all()->random()->id,
             "is_available" => $this->faker->boolean(),
         ];
     }

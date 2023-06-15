@@ -17,8 +17,8 @@ class EquipedFactory extends Factory
     public function definition(): array
     {
         return [
-            "room_id" => \App\Models\Room::orderByRaw("RAND()")->first()->id,
-            "equipment_id" => \App\Models\Equipment::orderByRaw("RAND()")->first()->id,
+            "room_id" => \App\Models\Room::all()->random()->id,
+            "equipment_id" => \App\Models\Equipment::all()->random()->id,
         ];
     }
 }

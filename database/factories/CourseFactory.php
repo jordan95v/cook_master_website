@@ -22,7 +22,7 @@ class CourseFactory extends Factory
             "duration" => $this->faker->numberBetween(1, 100),
             "difficulty" => $this->faker->numberBetween(1, 5),
             "content" => $this->faker->text(),
-            "user_id" => \App\Models\User::orderByRaw("RAND()")->first()->id,
+            "user_id" => \App\Models\User::all()->random()->id,
         ];
     }
 }

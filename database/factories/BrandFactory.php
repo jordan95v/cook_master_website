@@ -23,7 +23,7 @@ class BrandFactory extends Factory
             "website" => $this->faker->url(),
             "contact_email" => $this->faker->email(),
             "description" => $this->faker->text(2000),
-            "user_id" => \App\Models\User::orderByRaw("RAND()")->first()->id,
+            "user_id" => \App\Models\User::all()->random()->id,
         ];
     }
 }
