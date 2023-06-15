@@ -7,6 +7,7 @@ use App\Http\Controllers\EquipedController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductCommentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SubscriptionController;
@@ -116,6 +117,7 @@ Route::group(["middleware" => ["auth"]], function () {
 
     // Product
     Route::resource("product", ProductController::class);
+    Route::resource("product/comment", ProductCommentController::class, ["except" => ["index", "show", "update", "edit", "create"]]);
 
     // Courses
     Route::resource('courses', CourseController::class, ["except" => ["show"]]);

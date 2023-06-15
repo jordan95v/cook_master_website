@@ -22,10 +22,9 @@ class StoreProductCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', 'integer', 'exists:users,id'],
-            'product_id' => ['required', 'integer', 'exists:products,id'],
-            'rating' => ['required', 'integer', 'min:1', 'max:5'],
-            'comment' => ['required', 'string', 'min:10'],
+            'product_id' => 'required|integer|exists:products,id',
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'required|string|min:1',
         ];
     }
 }

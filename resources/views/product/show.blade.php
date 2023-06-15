@@ -38,5 +38,39 @@
     @endif
 
     {{-- Product's full description --}}
-    <x-shop.description :content="$product->description" title="Product description" />
+    <div class="grid grid-cols-1 lg:grid-cols-2">
+        <x-shop.description :content="$product->description" title="Product description" />
+
+        <div class="lg:pe-20">
+            <x-utils.card class="w-full">
+                <form action="{{ route('comment.store') }}" method="post" class="card-body">
+                    @csrf
+                    <h2 class="card-title">{{ __('Ajouter un commentaire') }}</h2>
+
+                    {{-- Product id --}}
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+
+                    {{-- Rating select --}}
+                    <select class="select select-bordered w-full" name="rating">
+                        <option disabled selected>{{ __('⭐ Rating') }}</option>
+                        @foreach (array_reverse(range(1, 5)) as $rating)
+                            <option value="{{ $rating }}" @if (old('rating') == $rating) selected @endif>
+                                {{ $rating }} {{ str_repeat('⭐', $rating) }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <x-utils.form-error name="rating" />
+
+                    {{-- Comment text area --}}
+                    <textarea name="comment" cols="30" rows="10" class="p-5 border-2 mt-2 rounded-xl"
+                        placeholder="{{ __("Enter the comment's content") }}">
+                        {{ old('comment') }}
+                    </textarea>
+                    <x-utils.form-error name="comment" />
+
+                    <button class="btn btn-primary w-full">{{ __('Envoyer') }}</button>
+                </form>
+            </x-utils.card>
+        </div>
+    </div>
 </x-layout>
