@@ -58,6 +58,9 @@ Route::prefix("users")->group(
 
                 // User invoices
                 Route::get("/invoices", "invoices")->middleware("auth")->name("user.invoices");
+
+                // User planning
+                Route::get("/planning", "planning")->middleware("auth")->name("user.planning");
             }
         );
 

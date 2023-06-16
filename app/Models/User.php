@@ -33,7 +33,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'first_order_discount',
         'godfather_had_discount',
         'total_discount',
-        'api_key'
+        'api_key',
     ];
 
     /**
@@ -130,5 +130,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function courses()
     {
         return $this->hasMany(Course::class);
+    }
+
+    public function participations()
+    {
+        return $this->hasMany(Participed::class);
     }
 }

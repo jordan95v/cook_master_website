@@ -50,6 +50,11 @@ class UserController extends Controller
         //
     }
 
+    public function planning()
+    {
+        return view("users.planning");
+    }
+
     // Show the form for editing the specified resource.
     public function edit()
     {

@@ -98,6 +98,11 @@
                         {{ __("Godfather's key") }}
                     </label>
                 </li>
+                <li>
+                    <a href="{{ route('user.planning') }}">
+                        <i class="fa-sharp fa-solid fa-calendar"></i>{{ __('My planning') }}
+                    </a>
+                </li>
             @endif
             <li>
                 <a href="{{ route('logout') }}">
