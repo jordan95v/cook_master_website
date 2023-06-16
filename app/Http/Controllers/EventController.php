@@ -9,6 +9,7 @@ use App\Models\Event;
 use App\Models\Participed;
 use App\Models\Room;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
@@ -28,9 +29,14 @@ class EventController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('event.index', ['events' => Event::simplePaginate(9)]);
+        $events = Event::simplePaginate(9);
+        if ($request->get("only_course")) {
+            $events = Event::where("is_course", true)->simplePaginate(9);
+        }
+        return view('event.index', ['events' => $events, "only_course" => $request->get("only_course")]);
+
     }
 
     /**

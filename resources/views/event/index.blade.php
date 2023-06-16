@@ -1,5 +1,17 @@
 <x-layout title="{{ __('Events') }}">
-    <div class="grid grid-cols-1 pt-10 p-10 lg:px-24 lg:grid-cols-3 md:grid-cols-2 gap-10">
+
+    {{-- Filter --}}
+    <div class="form-control lg:px-24 mt-10 px-10" id="search">
+        <label class="cursor-pointer">
+            <form action="{{ route('events.index') }}" id="search_form" class="flex items-center">
+                <input type="checkbox" name="only_course" @if ($only_course) checked @endif
+                    class="checkbox checkbox-primary" />
+                <span class="label-text ms-2">{{ __('Only show courses or workshops') }}</span>
+            </form>
+        </label>
+    </div>
+
+    <div class="grid grid-cols-1 pt-10 p-5 lg:px-24 lg:grid-cols-3 md:grid-cols-2 gap-10">
         @foreach ($events as $event)
             <x-utils.card class="w-full">
                 <div class="card-body p-0">
@@ -41,4 +53,13 @@
     <div class="px-24 pt-5">
         {{ $events->links() }}
     </div>
+
+    <script>
+        let search = document.querySelector('#search');
+        let search_form = document.querySelector('#search_form');
+
+        search.addEventListener('click', () => {
+            search_form.submit();
+        });
+    </script>
 </x-layout>
