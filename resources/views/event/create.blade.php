@@ -25,11 +25,11 @@
                     {{-- Room --}}
                     <div class="grid grid-cols-1 @if (Auth::user()->isAdmin()) lg:grid-cols-2 @endif gap-2">
                         {{-- Capacity --}}
-                        <x-utils.input type="text" name="capacity" hint="{{ __('Capacity') }}" error="1" />
+                        <x-utils.input type="text" name="capacity" hint="{{ __('Capacity') }}" error="0" />
 
                         {{-- Organizer --}}
                         @if (Auth::user()->isAdmin())
-                            <select class="select select-bordered w-full" name="user_id">
+                            <x-utils.select name="user_id">
                                 <option disabled selected>{{ __('Choose the organizer') }}</option>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}"
@@ -37,10 +37,15 @@
                                         {{ $user->name }}
                                     </option>
                                 @endforeach
-                            </select>
+                            </x-utils.select>
                         @endif
+                        <x-utils.form-error name="capacity" />
+                        <x-utils.form-error name="user_id" />
                     </div>
-                    <x-utils.form-error name="user_id" />
+
+                    {{-- Tags --}}
+                    <x-utils.input type="text" name="tags" hint="{{ __('Tags (Space separated list)') }}"
+                        error="1" />
 
                     {{-- Description --}}
                     <textarea id="editor" class="textarea textarea-bordered border-2 @error('description') border-error @enderror" rows=4
@@ -58,15 +63,15 @@
                             </a>
                         </i>
                     </label>
-                    <select class="select select-bordered w-full" name="room_id" id="room_select">
+                    <x-utils.select name="room_id">
                         <option disabled selected>{{ __('Choose the room') }}</option>
                         @foreach ($rooms as $room)
                             <option value="{{ $room->id }}" @if (old('room_id') == $room->id) selected @endif>
                                 {{ $room->name }}
                             </option>
                         @endforeach
-                    </select>
-                    <x-utils.form-error name="room_select" />
+                    </x-utils.select>
+                    <x-utils.form-error name="room_id" />
 
                     {{-- Calendar open button --}}
                     <label for="calendar-modal" class="btn btn-disabled" id="calendar_btn">
@@ -75,12 +80,13 @@
 
                     {{-- Date --}}
                     <x-utils.input type="date" name="date" hint="{{ __('Date') }}" error="1" />
-                    <x-utils.form-error name="date" />
 
                     {{-- Range time --}}
                     <div class="grid lg:grid-cols-2 grid-cols-1 gap-2 pb-2">
                         {{-- Start time --}}
-                        <select class="select select-bordered w-full max-w-xs" name="start_time" id="start-time">
+                        <select
+                            class="select select-bordered w-full @error('start_time') border-2 border-error @enderror"
+                            name="start_time" id="start-time">
                             <option disabled selected>{{ __('Choose the start time') }}</option>
                             @foreach (range(0, 23) as $item)
                                 <option value="{{ str_pad($item, 2, '0', STR_PAD_LEFT) }}:00">
@@ -90,9 +96,13 @@
                         </select>
 
                         {{-- End time --}}
-                        <select class="select select-bordered w-full max-w-xs" name="end_time" id="end-time">
+                        <select class="select select-bordered w-full @error('end_time') border-2 border-error @enderror"
+                            name="end_time" id="end-time">
                             <option disabled selected>{{ __('Choose the end time') }}</option>
                         </select>
+
+                        <x-utils.form-error name="start_time" />
+                        <x-utils.form-error name="end_time" />
                     </div>
 
                     {{-- Submit --}}

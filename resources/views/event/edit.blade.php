@@ -49,6 +49,10 @@
                         @endif
                     </div>
 
+                    {{-- Tags --}}
+                    <x-utils.input type="text" name="tags" hint="{{ __('Tags (Space separated list)') }}"
+                        :target="$event" error="1" />
+
                     {{-- Room  --}}
                     <label class="label">
                         <span class="label-text-alt">{{ __('See all rooms') }}</span>

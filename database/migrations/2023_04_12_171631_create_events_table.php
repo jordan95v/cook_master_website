@@ -20,6 +20,7 @@ return new class extends Migration
             $table->longText('description');
             $table->integer('capacity')->default(0);
             $table->string('image')->nullable();
+            $table->string('tags')->nullable();
             $table->date('date')->nullable();
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();

@@ -49,9 +49,9 @@ class EventController extends Controller
     {
         $this->authorize("create", Event::class);
         $form = $request->validated();
-        $events = Event::where("date", $request->date)->where("room_id", $request->room_id)->get();
 
         // Check if the room is already booked
+        $events = Event::where("date", $request->date)->where("room_id", $request->room_id)->get();
         foreach ($events as $event) {
             if ($request->start_time < $event->end_time && $request->start_time > $event->start_time) {
                 return back()->with("error", "This room is already booked at this time")->withInput();

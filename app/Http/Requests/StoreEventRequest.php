@@ -23,8 +23,10 @@ class StoreEventRequest extends FormRequest
     {
         return [
             "title" => "required",
+            "tags" => "required|regex:@[^ ]+@",
             "description" => "required",
             "image" => "required|image|dimensions:min_width=1280,min_height=720",
+            "user_id" => "required",
             "room_id" => "required",
             "capacity" => "required",
             "date" => "required|date_format:Y-m-d",
