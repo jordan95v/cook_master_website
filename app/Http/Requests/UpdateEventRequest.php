@@ -24,7 +24,7 @@ class UpdateEventRequest extends FormRequest
     {
         $rules = [
             "title" => "required",
-            "tags" => "required|regex:@[^ ]+@",
+            "is_course" => "required",
             "description" => "required",
             "room_id" => "required",
             "capacity" => "required",

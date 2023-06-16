@@ -49,9 +49,12 @@
                         @endif
                     </div>
 
-                    {{-- Tags --}}
-                    <x-utils.input type="text" name="tags" hint="{{ __('Tags (Space separated list)') }}"
-                        :target="$event" error="1" />
+                    {{-- Is course --}}
+                    <div class="flex items-center my-4">
+                        <input type="checkbox" @if ($event->is_course) checked @endif
+                            class="checkbox checkbox-primary" name="is_course" />
+                        <p class="label-text ms-2 text-md">{{ __('This event is a course') }}</p>
+                    </div>
 
                     {{-- Room  --}}
                     <label class="label">

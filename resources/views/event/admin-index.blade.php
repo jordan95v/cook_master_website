@@ -9,6 +9,7 @@
                 <th>{{ __('Capacity') }}</th>
                 <th>{{ __('Date') }}</th>
                 <th>{{ __('Room') }}</th>
+                <th>{{ __('Is course') }}</th>
                 <th>{{ __('Created by') }}</th>
                 <th>{{ __('Actions') }}</th>
             </tr>
@@ -35,6 +36,13 @@
                         <a href="{{ route('room.show', ['room' => $event->room->id]) }}" class="link font-bold">
                             {{ Str::limit($event->room->name, 15) }}
                         </a>
+                    </td>
+                    <td>
+                        @if ($event->is_course)
+                            <i class="fa-solid fa-check text-success"></i>
+                        @else
+                            <i class="fa-solid fa-times text-error"></i>
+                        @endif
                     </td>
                     <x-admin.user-avatar :target="$event->created_by_user" />
                     <td class="w-1/6">

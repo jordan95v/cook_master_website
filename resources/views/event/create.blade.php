@@ -43,9 +43,11 @@
                         <x-utils.form-error name="user_id" />
                     </div>
 
-                    {{-- Tags --}}
-                    <x-utils.input type="text" name="tags" hint="{{ __('Tags (Space separated list)') }}"
-                        error="1" />
+                    {{-- Is course --}}
+                    <div class="flex items-center my-4">
+                        <input type="checkbox" class="checkbox checkbox-primary" name="is_course" />
+                        <p class="label-text ms-2 text-md">{{ __('This event is a course') }}</p>
+                    </div>
 
                     {{-- Description --}}
                     <textarea id="editor" class="textarea textarea-bordered border-2 @error('description') border-error @enderror" rows=4

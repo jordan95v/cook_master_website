@@ -23,7 +23,7 @@ class StoreEventRequest extends FormRequest
     {
         return [
             "title" => "required",
-            "tags" => "required|regex:@[^ ]+@",
+            "is_course" => "required",
             "description" => "required",
             "image" => "required|image|dimensions:min_width=1280,min_height=720",
             "user_id" => "required",

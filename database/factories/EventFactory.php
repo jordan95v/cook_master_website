@@ -18,7 +18,7 @@ class EventFactory extends Factory
     {
         return [
             "title" => $this->faker->words(3, true),
-            "tags" => $this->faker->words(3, true),
+            "is_course" => $this->faker->boolean(),
             "description" => $this->faker->text(1000),
             "capacity" => $this->faker->numberBetween(1, 100),
             "image" => $this->faker->image("public/storage/", 1280, 720, null, false),

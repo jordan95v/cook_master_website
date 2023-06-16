@@ -32,14 +32,27 @@
                     <x-admin.user-avatar :target="$user" />
                     <td>{{ $user->email }}</td>
                     <td>{{ $value }}</td>
-                    <td>{{ $user->is_banned ? '✔️' : '❌' }}</td>
-                    <td>{{ $user->is_service_provider ? '✔️' : '❌' }}</td>
+                    <td>
+                        @if ($user->is_banned)
+                            <i class="fa-solid fa-check text-success"></i>
+                        @else
+                            <i class="fa-solid fa-times text-error"></i>
+                        @endif
+                    </td>
+                    <td>
+                        @if ($user->is_service_provider)
+                            <i class="fa-solid fa-check text-success"></i>
+                        @else
+                            <i class="fa-solid fa-times text-error"></i>
+                        @endif
+                    </td>
                     <td class="w-1/6">
                         @if (Auth::user()->isAdmin() && $user->role != 2)
                             <div class="dropdown dropdown-bottom dropdown-end">
                                 <label tabindex="0" class="btn btn-circle btn-ghost"><i
                                         class="fa-solid fa-gear"></i></label>
-                                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-56">
+                                <ul tabindex="0"
+                                    class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-56">
                                     @if (!$user->is_banned)
                                         <!-- Open ban modal -->
                                         <label for="ban-modal-{{ $user->id }}" class="btn btn-warning">
