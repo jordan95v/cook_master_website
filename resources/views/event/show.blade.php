@@ -21,7 +21,7 @@
                         <form action="{{ route('event.subscribe', ['event' => $event->id]) }}" method="POST">
                             @csrf
                             <button type="submit"
-                                class="text-white py-2 px-4 rounded-md inline-block font-medium text-md btn">{{ __('Subscribe') }}</button>
+                                class="text-white py-2 px-4 rounded-md inline-block font-medium text-md btn">{{ __('Register') }}</button>
                         </form>
                     @endif
                 @endif
@@ -82,19 +82,18 @@
 
     {{-- Room information --}}
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 p-5 lg:px-24 pb-10">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.4753698334275!2d2.3870841771139757!3d48.849144971330794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6727347e25d67%3A0xc73e22c1131584f7!2s242%20Rue%20du%20Faubourg%20Saint-Antoine%2C%2075012%20Paris!5e0!3m2!1sfr!2sfr!4v1683577263610!5m2!1sfr!2sfr"
+            class="w-full h-full my-auto" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
         <div>
-            <h3 class="text-3xl lg:text-5xl font-bold my-3">{{ $event->room->name }}</h3>
+            <a href="{{ route('room.show', ['room' => $event->room->id]) }}"
+                class="text-3xl lg:text-5xl hover:link-primary font-bold my-3">{{ $event->room->name }}</a>
             <p class="text-lg font-medium my-3">
                 <i class="fa-solid fa-location-dot me-2"></i>{{ $event->room->address }}
             </p>
             <img src="{{ asset('storage/' . $event->room->image) }}" alt="Photo de la salle"
                 class="w-full object-cover object-center rounded-md">
-        </div>
-        <div>
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.4753698334275!2d2.3870841771139757!3d48.849144971330794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6727347e25d67%3A0xc73e22c1131584f7!2s242%20Rue%20du%20Faubourg%20Saint-Antoine%2C%2075012%20Paris!5e0!3m2!1sfr!2sfr!4v1683577263610!5m2!1sfr!2sfr"
-                class="w-full h-full my-auto" style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
 </x-layout>

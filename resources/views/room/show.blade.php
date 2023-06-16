@@ -1,4 +1,4 @@
-<x-layout title="{{ __('Room') }} : {{ $room->name }}">
+<x-layout title="{{ $room->name }}">
     {{-- Room --}}
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 py-10 lg:px-24">
         {{-- Room image --}}
