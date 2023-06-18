@@ -59,5 +59,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Equiped::factory(5)->create();
         \App\Models\Event::factory(5)->create();
         \App\Models\ProductComment::factory(50)->create();
+        \App\Models\FinishedCourse::factory(5)->create();
     }
 }
