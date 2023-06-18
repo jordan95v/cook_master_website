@@ -23,7 +23,7 @@ class UpdateFormationRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = $this->route("formation");
+        $id = $this->route("formation")->id;
         $rules = [
             "name" => "required|min:7|unique:formations,name,{$id}",
             "description" => "required|min:10",

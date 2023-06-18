@@ -71,7 +71,15 @@ class FormationController extends Controller
      */
     public function update(UpdateFormationRequest $request, Formation $formation)
     {
-        //
+        $form = $request->validated();
+        if ($request->hasFile("image")) {
+            if (file_exists("storage/" . $formation->image)) {
+                unlink("storage/" . $formation->image);
+            }
+            $form["image"] = $request->file("image")->store("formations", "public");
+        }
+        $formation->update($form);
+        return back()->with("success", "Formation updated.");
     }
 
     /**

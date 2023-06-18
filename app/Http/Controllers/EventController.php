@@ -108,7 +108,6 @@ class EventController extends Controller
         if ($request->hasFile('image')) {
             $form['image'] = $request->file('image')->store('images', 'public');
         }
-
         $event->update($form);
         return back()->with("success", "You have edited an event");
     }

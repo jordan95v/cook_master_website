@@ -1,4 +1,4 @@
-<x-layout title="Liste des cours" datatables=1>
+<x-layout title="Courses list" datatables=1>
     <x-admin.listing>
         <!-- head -->
         <thead>

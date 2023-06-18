@@ -23,8 +23,7 @@
                     <td>
                         @if ($formation->image)
                             <a href="{{ 'storage/' . $formation->image }}" class="">
-                                <i
-                                    class="fa-solid fa-arrow-up-right-from-square ms-2"></i>{{ Str::limit($formation->image, 40) }}
+                                <i class="fa-solid fa-arrow-up-right-from-square ms-2"></i>
                             </a>
                         @endif
                     </td>
