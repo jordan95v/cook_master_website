@@ -26,8 +26,20 @@
                     <h2 class="card-title">{{ __('Courses list') }}</h2>
 
                     {{-- Add courses list here --}}
+                    @foreach ($formation->courses as $item)
+                        <div class="collapse collapse-arrow bg-base-200 rounded-xl">
+                            <input type="checkbox" />
+                            <div class="collapse-title text-xl font-medium">
+                                {{ str_repeat('⭐', $item->course->difficulty) }} {{ $item->course->name }}
+                            </div>
+                            <div class="collapse-content">
+                                <p>{!! Str::limit($item->course->content, 120) !!}</p>
+                            </div>
+                        </div>
+                    @endforeach
 
-                    <a href="{{ route('formation.add_courses', $formation) }}" class="items-center btn btn-primary">
+                    <a href="{{ route('formation.add_courses', $formation) }}"
+                        class="items-center btn btn-primary mt-4">
                         {{ __('Add courses') }}<i class="ms-2 fa-solid fa-plus text-success"></i>
                     </a>
                 </div>

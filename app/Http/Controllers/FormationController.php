@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreFormationRequest;
 use App\Http\Requests\UpdateFormationRequest;
 use App\Models\Formation;
+use App\Models\FormationCourse;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class FormationController extends Controller
@@ -43,7 +45,7 @@ class FormationController extends Controller
         $form["user_id"] = Auth::id();
         $form["image"] = $request->file("image")->store("formations", "public");
         $formation = Formation::create($form);
-        return redirect()->route("formation.show", $formation);
+        return redirect()->route("formation.show", $formation)->with("success", "Formation created.");
     }
 
     /**
@@ -83,6 +85,30 @@ class FormationController extends Controller
     public function add_courses(Formation $formation)
     {
         $this->authorize("delete", $formation);
-        return view("formations.add_courses", ["formation" => $formation]);
+        $formation_courses_ids = [];
+        foreach ($formation->courses as $item) {
+            $formation_courses_ids[] = $item->course->id;
+        }
+        return view("formations.add_courses", ["formation" => $formation, "formation_courses_ids" => $formation_courses_ids]);
+    }
+
+    public function store_courses(Formation $formation, Request $request)
+    {
+        $this->authorize("delete", $formation);
+        $form = $request->validate([
+            "courses" => "required|array",
+            "courses.*" => "required|exists:courses,id",
+        ]);
+
+        // So it reset correctly
+        FormationCourse::where("formation_id", $formation->id)->delete();
+        foreach ($form["courses"] as $course_id) {
+            FormationCourse::create([
+                "formation_id" => $formation->id,
+                "course_id" => $course_id,
+            ]);
+        }
+
+        return redirect()->route("formation.show", $formation)->with("success", "Courses added.");
     }
 }

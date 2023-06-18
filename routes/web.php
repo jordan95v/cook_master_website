@@ -142,6 +142,7 @@ Route::group(["middleware" => ["auth"]], function () {
     Route::get("/formation/list", [FormationController::class, "list_index"])->name("formation.list");
     Route::resource('formation', FormationController::class);
     Route::get("/formation/{formation}/add-courses", [FormationController::class, "add_courses"])->name("formation.add_courses");
+    Route::post("/formation/{formation}/add-courses", [FormationController::class, "store_courses"])->name("formation.store_courses");
 
     // Room
     Route::resource('room', RoomController::class);
