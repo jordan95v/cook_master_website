@@ -24,6 +24,14 @@ class FormationPolicy
     }
 
     /**
+     * Determine whether the user can update the model.
+     */
+    public function update(User $user, Formation $formation): bool
+    {
+        return $user->isAdmin() || $formation->user->is($user);
+    }
+
+    /**
      * Determine whether the user can delete the model.
      */
     public function delete(User $user, Formation $formation): bool

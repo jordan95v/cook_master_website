@@ -62,7 +62,8 @@ class FormationController extends Controller
      */
     public function edit(Formation $formation)
     {
-        //
+        $this->authorize("update", $formation);
+        return view("formations.edit", ["formation" => $formation]);
     }
 
     /**
