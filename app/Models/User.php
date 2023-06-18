@@ -28,6 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'is_banned',
         'is_service_provider',
         'image',
+        'is_active',
         'key',
         'godfather_key',
         'first_order_discount',
@@ -45,6 +46,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'remember_token',
         'api_key',
+        'role',
     ];
 
     /**

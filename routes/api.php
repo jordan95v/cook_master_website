@@ -33,7 +33,6 @@ Route::prefix("v1")->group(function () {
         }
     });
 
-
     Route::middleware('check_api_key')->group(function () {
         Route::get("/events", function () {
             $events = Event::all()->jsonSerialize();
@@ -54,13 +53,16 @@ Route::prefix("v1")->group(function () {
             // Gather information about the user.
             foreach ($users as $key => $user) {
                 $orm_user = User::where("id", $user["id"])->first();
-                $users[$key]["events"] = $orm_user->events->jsonSerialize();
-                $users[$key]["invoices"] = $orm_user->orderInvoices->jsonSerialize();
                 $users[$key]["subscription"] = $orm_user->getSubscription()[0]->name ?? "free";
                 $users[$key]["is_admin"] = $orm_user->isAdmin();
             }
 
-            return $users;
+            return [
+                "total_users" => count($users),
+                "total_active_users" => User::where("is_active", true)->count(),
+                "total_service_provider" => User::where("is_service_provider", true)->count(),
+                "users" => $users,
+            ];
         });
 
         Route::get("/courses", function () {

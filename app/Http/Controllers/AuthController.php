@@ -24,7 +24,9 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($form)) {
-            // Refresh Cashier user.
+            // Set user as active.
+            $user = User::find(Auth::id());
+            $user->update(["is_active" => true]);
             $request->session()->regenerate();
             return redirect("/")->with("success", "You are now logged in !");
         }
@@ -34,6 +36,11 @@ class AuthController extends Controller
     // Logout the user.
     public function logout(Request $request)
     {
+        // Set user as inactive.
+        $user = User::find(Auth::id());
+        $user->update(["is_active" => false]);
+
+        // Logout the user.
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
