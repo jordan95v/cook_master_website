@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Formation;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class FormationPolicy
 {
@@ -13,15 +12,7 @@ class FormationPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Formation $formation): bool
-    {
-        //
+        return $user->isAdmin();
     }
 
     /**
@@ -29,15 +20,7 @@ class FormationPolicy
      */
     public function create(User $user): bool
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can update the model.
-     */
-    public function update(User $user, Formation $formation): bool
-    {
-        //
+        return $user->isAdmin() || $user->is_service_provider;
     }
 
     /**
@@ -45,22 +28,6 @@ class FormationPolicy
      */
     public function delete(User $user, Formation $formation): bool
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Formation $formation): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Formation $formation): bool
-    {
-        //
+        return $user->isAdmin() || $formation->user->is($user);
     }
 }

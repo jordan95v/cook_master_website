@@ -7,6 +7,7 @@ use App\Http\Controllers\EquipedController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FinishedCourseController;
+use App\Http\Controllers\FormationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCommentController;
 use App\Http\Controllers\ProductController;
@@ -136,6 +137,9 @@ Route::group(["middleware" => ["auth"]], function () {
     Route::resource('courses', CourseController::class, ["except" => ["show"]]);
     Route::get('/courses/{course}/', [CourseController::class, 'show'])->name('courses.show')->middleware('courses');
     Route::post("/courses/{course}/finish", [FinishedCourseController::class, "store"])->name("courses.finish");
+
+    // Formation
+    Route::resource('formation', FormationController::class);
 
     // Room
     Route::resource('room', RoomController::class);

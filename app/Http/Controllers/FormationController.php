@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreFormationRequest;
 use App\Http\Requests\UpdateFormationRequest;
 use App\Models\Formation;
+use Illuminate\Support\Facades\Auth;
 
 class FormationController extends Controller
 {
@@ -21,7 +22,8 @@ class FormationController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize("create", Formation::class);
+        return view("formations.create");
     }
 
     /**
@@ -29,7 +31,11 @@ class FormationController extends Controller
      */
     public function store(StoreFormationRequest $request)
     {
-        //
+        $form = $request->validated();
+        $form["user_id"] = Auth::id();
+        $form["image"] = $request->file("image")->store("formations", "public");
+        $formation = Formation::create($form);
+        return redirect()->route("formation.show", $formation);
     }
 
     /**
@@ -37,7 +43,7 @@ class FormationController extends Controller
      */
     public function show(Formation $formation)
     {
-        //
+        return view("formations.show", ["formation" => $formation]);
     }
 
     /**
@@ -62,5 +68,11 @@ class FormationController extends Controller
     public function destroy(Formation $formation)
     {
         //
+    }
+
+    public function add_courses(Formation $formation)
+    {
+        $this->authorize("delete", $formation);
+        return view("formations.add_courses", ["formation" => $formation]);
     }
 }
