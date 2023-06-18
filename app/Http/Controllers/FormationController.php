@@ -9,6 +9,7 @@ use App\Models\FormationCourse;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class FormationController extends Controller
 {
@@ -113,6 +114,31 @@ class FormationController extends Controller
         return redirect()->route("formation.show", $formation)->with("success", "Courses added.");
     }
 
+    private function download_certification(User $user, Formation $formation)
+    {
+        $response = new StreamedResponse(function () use ($user, $formation) {
+            $image = imagecreatefrompng(public_path("images/certification.png"));
+            $color = imagecolorallocate($image, 0, 0, 0);
+            $text = "$user->name";
+            imagestring($image, 20, 520, 300, $text, $color);
+
+            $text = "Certified on " . date("d/m/Y");
+            imagestring($image, 5, 455, 350, $text, $color);
+
+            $text = "For completing all the course of: ";
+            imagestring($image, 5, 400, 450, $text, $color);
+
+            $text = "$formation->name";
+            imagestring($image, 5, 485, 490, $text, $color);
+
+            imagepng($image);
+            imagedestroy($image);
+        });
+        $response->headers->set('Content-Type', 'image/png');
+        $response->headers->set('Content-Disposition', 'attachment; filename="download.jpg"');
+        return $response;
+    }
+
     public function get_certification(Formation $formation, Request $request)
     {
         $user = User::find(Auth::id());
@@ -127,7 +153,7 @@ class FormationController extends Controller
         }
 
         if ($match == count($formation->courses)) {
-            return;
+            return $this->download_certification($user, $formation);
         } else {
             return back()->with("error", "You don't have complteted all the courses required for this certification.");
         }
