@@ -89,7 +89,10 @@ class FormationController extends Controller
         foreach ($formation->courses as $item) {
             $formation_courses_ids[] = $item->course->id;
         }
-        return view("formations.add_courses", ["formation" => $formation, "formation_courses_ids" => $formation_courses_ids]);
+        return view("formations.add_courses", [
+            "formation" => $formation,
+            "formation_courses_ids" => $formation_courses_ids,
+        ]);
     }
 
     public function store_courses(Formation $formation, Request $request)
@@ -99,7 +102,6 @@ class FormationController extends Controller
             "courses" => "required|array",
             "courses.*" => "required|exists:courses,id",
         ]);
-
         // So it reset correctly
         FormationCourse::where("formation_id", $formation->id)->delete();
         foreach ($form["courses"] as $course_id) {
@@ -108,7 +110,26 @@ class FormationController extends Controller
                 "course_id" => $course_id,
             ]);
         }
-
         return redirect()->route("formation.show", $formation)->with("success", "Courses added.");
+    }
+
+    public function get_certification(Formation $formation, Request $request)
+    {
+        $user = User::find(Auth::id());
+        $match = 0;
+
+        foreach ($formation->courses as $formation_course) {
+            foreach ($user->finished_courses as $user_course) {
+                if ($formation_course->course->id == $user_course->course->id) {
+                    $match++;
+                }
+            }
+        }
+
+        if ($match == count($formation->courses)) {
+            return;
+        } else {
+            return back()->with("error", "You don't have complteted all the courses required for this certification.");
+        }
     }
 }

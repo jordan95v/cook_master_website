@@ -143,6 +143,7 @@ Route::group(["middleware" => ["auth"]], function () {
     Route::resource('formation', FormationController::class);
     Route::get("/formation/{formation}/add-courses", [FormationController::class, "add_courses"])->name("formation.add_courses");
     Route::post("/formation/{formation}/add-courses", [FormationController::class, "store_courses"])->name("formation.store_courses");
+    Route::post("/formation/{formation}/get-certification", [FormationController::class, "get_certification"])->name("formation.get_certification");
 
     // Room
     Route::resource('room', RoomController::class);
