@@ -50,10 +50,23 @@ Route::prefix("v1")->group(function () {
         Route::get("/users", function () {
             $users = User::all()->jsonSerialize();
 
+            $total_free = 0;
+            $total_starter = 0;
+            $total_pro = 0;
             // Gather information about the user.
             foreach ($users as $key => $user) {
                 $orm_user = User::where("id", $user["id"])->first();
-                $users[$key]["subscription"] = $orm_user->getSubscription()[0]->name ?? "free";
+                switch ($orm_user->getSubscription()[0]->name ?? "free") {
+                    case "free":
+                        $total_free++;
+                        break;
+                    case "starter":
+                        $total_starter++;
+                        break;
+                    case "pro":
+                        $total_pro++;
+                        break;
+                }
                 $users[$key]["is_admin"] = $orm_user->isAdmin();
             }
 
@@ -61,7 +74,9 @@ Route::prefix("v1")->group(function () {
                 "total_users" => count($users),
                 "total_active_users" => User::where("is_active", true)->count(),
                 "total_service_provider" => User::where("is_service_provider", true)->count(),
-                "users" => $users,
+                "total_free" => $total_free,
+                "total_starter" => $total_starter,
+                "total_pro" => $total_pro,
             ];
         });
 
