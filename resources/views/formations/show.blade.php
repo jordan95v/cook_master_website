@@ -27,7 +27,7 @@
 
                     {{-- Add courses list here --}}
 
-                    <a href="" class="items-center btn btn-primary">
+                    <a href="{{ route('formation.add_courses', $formation) }}" class="items-center btn btn-primary">
                         {{ __('Add courses') }}<i class="ms-2 fa-solid fa-plus text-success"></i>
                     </a>
                 </div>

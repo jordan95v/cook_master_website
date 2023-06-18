@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreFormationRequest;
 use App\Http\Requests\UpdateFormationRequest;
 use App\Models\Formation;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class FormationController extends Controller
@@ -15,6 +16,13 @@ class FormationController extends Controller
     public function index()
     {
         //
+    }
+
+    public function list_index()
+    {
+        $user = User::find(Auth::id());
+        $formations = ($user->isAdmin()) ? Formation::all() : $user->formations;
+        return view("formations.list_index", ["formations" => $formations]);
     }
 
     /**
@@ -67,7 +75,9 @@ class FormationController extends Controller
      */
     public function destroy(Formation $formation)
     {
-        //
+        $this->authorize("delete", $formation);
+        $formation->delete();
+        return back()->with("success", "Formation deleted.");
     }
 
     public function add_courses(Formation $formation)

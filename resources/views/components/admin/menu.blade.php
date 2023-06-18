@@ -50,6 +50,6 @@
         <li><a href="{{ route('courses.create') }}">{{ __('Add a course') }}</a></li>
         <li><a href="{{ route('courses.index') }}">{{ __('Courses list') }}</a></li>
         <li><a href="{{ route('formation.create') }}">{{ __('Add a formation') }}</a></li>
-        <li><a href="{{ route('formation.index') }}">{{ __('Formations list') }}</a></li>
+        <li><a href="{{ route('formation.list') }}">{{ __('Formations list') }}</a></li>
     </ul>
 </li>
