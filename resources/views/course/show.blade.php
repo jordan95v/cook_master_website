@@ -26,9 +26,14 @@
                 <x-admin.user-avatar :target="$course->user" />
             </div>
 
-            <div class="pt-10">
-                <button class="btn btn-primary w-full lg:w-96">{{ __('I like this recepy !') }}</button>
-            </div>
+            @if ($finished)
+                <x-utils.card class="mt-4">
+                    <div class="card-body">
+                        <p class="text-2xl font-bold">{{ __('You have finished this course') }}</p>
+                        <p class="text-xl">{{ __('You can see your finished courses in your profile') }}</p>
+                    </div>
+                </x-utils.card>
+            @endif
         </div>
     </div>
     @if (count($random_courses) > 0)
@@ -38,4 +43,11 @@
     @endif
 
     <x-shop.description :content="$course->content" title="Course's content" />
+
+    @if (!$finished)
+        <form action="{{ route('courses.finish', $course->id) }}" class="text-center" method="post">
+            @csrf
+            <button class="w-full lg:w-96 btn btn-primary">{{ __('Finish this course') }}</button>
+        </form>
+    @endif
 </x-layout>

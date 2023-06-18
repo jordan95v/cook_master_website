@@ -54,14 +54,23 @@ Route::prefix("users")->group(
 
                 // User modification
                 Route::get('/edit', "edit")->middleware(["auth", "verified"])->name("user.edit");
-                Route::put('/', "update")->middleware("auth")->name("user.update");
-                Route::delete('/{user}', "destroy")->middleware("auth")->name("user.destroy");
 
-                // User invoices
-                Route::get("/invoices", "invoices")->middleware("auth")->name("user.invoices");
+                Route::middleware("auth")->group(
+                    function () {
+                        Route::put('/', "update")->name("user.update");
+                        Route::delete('/{user}', "destroy")->name("user.destroy");
 
-                // User planning
-                Route::get("/planning", "planning")->middleware("auth")->name("user.planning");
+                        // User invoices
+                        Route::get("/invoices", "invoices")->name("user.invoices");
+
+                        // User planning
+                        Route::get("/planning", "planning")->name("user.planning");
+
+                        // User finished courses
+                        Route::get("/finished-courses", "finished_course")->name("user.finished-courses");
+
+                    }
+                );
             }
         );
 

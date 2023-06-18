@@ -103,6 +103,11 @@
                         <i class="fa-sharp fa-solid fa-calendar"></i>{{ __('My planning') }}
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('user.finished-courses') }}">
+                        <i class="fa-solid fa-person-chalkboard"></i>{{ __('My finished courses') }}
+                    </a>
+                </li>
             @endif
             <li>
                 <a href="{{ route('logout') }}">

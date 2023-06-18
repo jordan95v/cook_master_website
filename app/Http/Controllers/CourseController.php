@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Course;
+use App\Models\FinishedCourse;
 use App\Models\User;
 use App\Models\UserCourse;
 use Illuminate\Http\Request;
@@ -75,7 +76,8 @@ class CourseController extends Controller
             UserCourse::create(["user_id" => Auth::id(), "course_id" => $course->id]);
         }
         $random_courses = Course::where("id", "!=", $course->id)->inRandomOrder()->limit(5)->get();
-        return view('course.show', ["course" => $course, "random_courses" => $random_courses]);
+        $finished = FinishedCourse::where("user_id", Auth::id())->where("course_id", $course->id)->exists();
+        return view('course.show', ["course" => $course, "random_courses" => $random_courses, "finished" => $finished]);
     }
 
     /**

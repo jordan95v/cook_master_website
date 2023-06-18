@@ -45,9 +45,9 @@ class UserController extends Controller
     }
 
     // Display the specified resource.
-    public function show(User $user)
+    public function finished_course()
     {
-        //
+        return view("users.finished_courses");
     }
 
     public function planning()
