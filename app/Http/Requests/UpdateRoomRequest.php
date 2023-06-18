@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Room;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
@@ -13,7 +14,8 @@ class UpdateRoomRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->isAdmin();
+        $room = Room::find($this->route()->room->id);
+        return $this->user()->isAdmin() || $room->user->is($this->user());
     }
 
     /**

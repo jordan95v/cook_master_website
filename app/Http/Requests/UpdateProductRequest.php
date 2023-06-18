@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Product;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -12,7 +13,8 @@ class UpdateProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->isAdmin() || $this->user()->is_service_provider;
+        $product = Product::find($this->route()->product->id);
+        return $this->user()->isAdmin() || $product->user->is($this->user());
     }
 
     /**

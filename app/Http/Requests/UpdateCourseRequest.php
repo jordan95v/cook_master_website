@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Course;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateCourseRequest extends FormRequest
@@ -11,7 +12,8 @@ class UpdateCourseRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->isAdmin();
+        $course = Course::find($this->route()->course->id);
+        return $this->user()->isAdmin() || $course->user->is($this->user());
     }
 
     /**

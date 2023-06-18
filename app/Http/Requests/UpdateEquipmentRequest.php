@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Equipment;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
@@ -13,7 +14,8 @@ class UpdateEquipmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->isAdmin();
+        $equipment = Equipment::find($this->route()->equipment->id);
+        return $this->user()->isAdmin() || $equipment->user->is($this->user());
     }
 
     /**

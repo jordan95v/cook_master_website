@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Brand;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -12,7 +13,8 @@ class UpdateBrandRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->isAdmin() || $this->user()->is_service_provider;
+        $brand = Brand::find($this->route()->brand->id);
+        return $this->user()->isAdmin() || $brand->user->is($this->user());
     }
 
     /**
