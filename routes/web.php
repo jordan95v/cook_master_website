@@ -69,7 +69,6 @@ Route::prefix("users")->group(
 
                         // User finished courses
                         Route::get("/finished-courses", "finished_course")->name("user.finished-courses");
-
                     }
                 );
             }
@@ -140,6 +139,7 @@ Route::group(["middleware" => ["auth"]], function () {
 
     // Formation
     Route::get("/formation/list", [FormationController::class, "list_index"])->name("formation.list");
+    Route::post("formation/{formation}/take", [FormationController::class, "take"])->name("formation.take");
     Route::resource('formation', FormationController::class);
     Route::get("/formation/{formation}/add-courses", [FormationController::class, "add_courses"])->name("formation.add_courses");
     Route::post("/formation/{formation}/add-courses", [FormationController::class, "store_courses"])->name("formation.store_courses");

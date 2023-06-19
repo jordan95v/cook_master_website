@@ -148,4 +148,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Formation::class);
     }
+
+    public function taken_formations()
+    {
+        return $this->hasMany(FormationUser::class);
+    }
 }

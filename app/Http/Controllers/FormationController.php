@@ -6,6 +6,7 @@ use App\Http\Requests\StoreFormationRequest;
 use App\Http\Requests\UpdateFormationRequest;
 use App\Models\Formation;
 use App\Models\FormationCourse;
+use App\Models\FormationUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -166,5 +167,17 @@ class FormationController extends Controller
         } else {
             return back()->with("error", "You don't have complteted all the courses required for this certification.");
         }
+    }
+
+    public function take(Formation $formation)
+    {
+        if (FormationUser::where("formation_id", $formation->id)->where("user_id", Auth::id())->count() > 0) {
+            return back()->with("error", "You already have this formation.");
+        }
+        FormationUser::create([
+            "formation_id" => $formation->id,
+            "user_id" => Auth::id(),
+        ]);
+        return redirect()->route("formation.show", $formation)->with("success", "Formation taken.");
     }
 }

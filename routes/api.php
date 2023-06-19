@@ -2,7 +2,9 @@
 
 use App\Models\Course;
 use App\Models\Event;
+use App\Models\FinishedCourse;
 use App\Models\Formation;
+use App\Models\FormationUser;
 use App\Models\OrderInvoice;
 use App\Models\Product;
 use App\Models\User;
@@ -69,6 +71,9 @@ Route::prefix("v1")->group(function () {
                 "total_products" => Product::count(),
                 "total_formations" => Formation::count(),
                 "total_courses" => Course::count(),
+                "total_finished_formation" => FormationUser::where("is_finished", true)->count(),
+                "total_ongoing_formation" => FormationUser::where("is_finished", false)->count(),
+                "total_finished_courses" => FinishedCourse::count(),
             ];
         });
 
