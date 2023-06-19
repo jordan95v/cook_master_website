@@ -7,6 +7,12 @@
         <li><a href="{{ route('courses.all') }}"><i class="fa-solid fa-school"></i>{{ __('Courses') }}</a></li>
         <li><a href="{{ route('events.index') }}"><i class="fa-solid fa-calendar-days"></i>{{ __('Events') }}</a></li>
         <li><a href="{{ route('store') }}"><i class="fa-solid fa-store"></i>{{ __('Store') }}</a></li>
+        <li>
+            <a href="{{ route('formation.index') }}">
+                <i class="fa-solid fa-chalkboard-user"></i>{{ __('Formation') }}
+            </a>
+        </li>
+
         @if (Auth::user()->is_service_provider ?? false)
             <li tabindex="0">
                 <a>
@@ -18,9 +24,13 @@
                     <li><a href="{{ route('product.create') }}">{{ __('Add a product') }}</a></li>
                     <li><a href="{{ route('brand.create') }}">{{ __('Add a brand') }}</a></li>
                     <li><a href="{{ route('events.create') }}">{{ __('Add an event') }}</a></li>
+                    <li><a href="{{ route('courses.create') }}">{{ __('Add a course') }}</a></li>
+                    <li><a href="{{ route('formation.create') }}">{{ __('Add a formation') }}</a></li>
                     <li><a href="{{ route('product.index') }}">{{ __('Products list') }}</a></li>
                     <li><a href="{{ route('brand.index') }}">{{ __('Brands list') }}</a></li>
                     <li><a href="{{ route('events.listing') }}">{{ __('Events list') }}</a></li>
+                    <li><a href="{{ route('courses.index') }}">{{ __('Courses list') }}</a></li>
+                    <li><a href="{{ route('formation.list') }}">{{ __('Formations list') }}</a></li>
                 </ul>
             </li>
         @endif

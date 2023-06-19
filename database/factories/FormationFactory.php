@@ -19,6 +19,7 @@ class FormationFactory extends Factory
     {
         return [
             "name" => $this->faker->name(),
+            "image" => $this->faker->image("public/storage/", 1280, 720, null, false),
             "description" => $this->faker->text(),
             "user_id" => User::all()->random()->id,
         ];

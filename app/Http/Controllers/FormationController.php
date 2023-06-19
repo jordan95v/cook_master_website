@@ -18,7 +18,7 @@ class FormationController extends Controller
      */
     public function index()
     {
-        //
+        return view("formations.index", ["formations" => Formation::simplePaginate(10)]);
     }
 
     public function list_index()
