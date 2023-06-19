@@ -120,7 +120,11 @@ Route::resource('events', EventController::class);
 Route::resource('room', RoomController::class);
 
 //Reservation   
+Route::post('/reservation/{reservation}/reject', [ReservationController::class, 'RejectReservation'])->name('reservation.reject');
+Route::post('/reservation/{reservation}/assign', [ReservationController::class, 'assignChef'])->name('reservation.assign');
 Route::resource('reservation', ReservationController::class);
+
+
 
 // Auth route
 Route::group(["middleware" => ["auth"]], function () {

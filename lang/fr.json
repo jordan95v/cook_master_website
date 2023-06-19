@@ -296,5 +296,18 @@
     "Desired course": "Cours souhaité",
     "Where ? When ?": "Où ? Quand ?",
     "Enter your address": "Entrez votre adresse",
-    "Send the request": "Envoyer la demande"
+    "Send the request": "Envoyer la demande",
+    "Request pending": "Demandes en attente",
+    "Request assigned": "Demandes assignées",
+    "Request rejected": "Demandes refusées",
+    "Created by": "Créé par",
+    "Assigned to": "Assigné à",
+    "Assign the request": "Assigner la demande",
+    "Close": "Fermer",
+    "Assign": "Assigner",
+    "See More": "Voir plus",
+    "Select a provider": "Sélectionner un prestataire",
+    "Not assigned": "Non assigné",
+    "Start Time": "Heure de début",
+    "End Time": "Heure de fin"
 }

@@ -14,7 +14,7 @@ class ReservationController extends Controller
 {
     public function index()
     {
-        //
+        return view('reservation.index', ['reservations' => Reservation::all(), 'users' => User::all()]);
     }
 
     /**
@@ -30,7 +30,7 @@ class ReservationController extends Controller
      */
     public function store(CreateReservationRequest $request)
     {
-        // $this->authorize("create", Reservation::class); // Vérifie que l'utilisateur a le droit de créer une réservation (voir app/Providers/AuthServiceProvider.php)
+        //revoir la partie authentification
         $user = User::find(Auth::id()); // Récupère l'utilisateur connecté
         $form = $request->validated(); // Récupère les données du formulaire validées
         $form["created_by"] = $user->id; // Ajoute l'id de l'utilisateur connecté
@@ -50,7 +50,34 @@ class ReservationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy()
+    public function destroy(Reservation $reservation)
     {
+        $reservation->delete();
+
+        return redirect()->route('reservation.index')->with('success', 'Reservation deleted successfully');
+    }
+
+
+    public function assignChef(Request $request, Reservation $reservation)
+    {
+        $validatedData = $request->validate([
+            'user_id' => 'required',
+        ]);
+
+        // Mettez à jour le statut de la réservation avec l'ID du chef attribué dans la base de données
+        $reservation->user_id = $validatedData['user_id'];
+        $reservation->status = 'accepted';
+        $reservation->save();
+
+        // Redirigez ou retournez une réponse appropriée
+        return redirect()->route('reservation.index')->with('success', 'Chef assigned successfully');
+    }
+
+    public function RejectReservation(Reservation $reservation)
+    {
+        $reservation->status = 'rejected';
+        $reservation->save();
+
+        return redirect()->route('reservation.index')->with('success', 'Reservation rejected successfully');
     }
 }

@@ -16,4 +16,9 @@ class Reservation extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    public function assigned_to_user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
