@@ -2,6 +2,9 @@
 
 use App\Models\Course;
 use App\Models\Event;
+use App\Models\Formation;
+use App\Models\OrderInvoice;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -60,16 +63,24 @@ Route::prefix("v1")->group(function () {
             ];
         });
 
+        Route::get("/services", function () {
+            return [
+                "total_commands" => OrderInvoice::count(),
+                "total_products" => Product::count(),
+                "total_formations" => Formation::count(),
+                "total_courses" => Course::count(),
+            ];
+        });
+
         Route::get("/users", function () {
-            $users = User::all()->jsonSerialize();
 
             $total_free = 0;
             $total_starter = 0;
             $total_pro = 0;
+
             // Gather information about the user.
-            foreach ($users as $key => $user) {
-                $orm_user = User::where("id", $user["id"])->first();
-                switch ($orm_user->getSubscription()[0]->name ?? "free") {
+            foreach (User::all() as $user) {
+                switch ($user->getSubscription()[0]->name ?? "free") {
                     case "free":
                         $total_free++;
                         break;
@@ -80,12 +91,14 @@ Route::prefix("v1")->group(function () {
                         $total_pro++;
                         break;
                 }
-                $users[$key]["is_admin"] = $orm_user->isAdmin();
             }
 
             return [
-                "total_users" => count($users),
+                "total_users" => User::count(),
                 "total_active_users" => User::where("is_active", true)->count(),
+                "total_service_provider" => User::where("is_service_provider", true)->count(),
+                "total_admin" => User::where("role", 1)->count(),
+                "total_super_admin" => User::where("role", 2)->count(),
                 "total_service_provider" => User::where("is_service_provider", true)->count(),
                 "total_free" => $total_free,
                 "total_starter" => $total_starter,
