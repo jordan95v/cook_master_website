@@ -62,5 +62,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Formation::factory(5)->create();
         \App\Models\FinishedCourse::factory(5)->create();
         \App\Models\FormationCourse::factory(5)->create();
+
     }
 }

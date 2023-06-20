@@ -143,6 +143,8 @@ class OrderController extends Controller
             "price" => $invoice->total_amount,
             "serial" => $invoice->series,
         ]);
+
+        $user->increment("total_command");
         return redirect("store")->with("success", "Payment successful. Invoice available in your profile.");
     }
 

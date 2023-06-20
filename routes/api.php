@@ -108,6 +108,7 @@ Route::prefix("v1")->group(function () {
                 "total_free" => $total_free,
                 "total_starter" => $total_starter,
                 "total_pro" => $total_pro,
+                "top_five_user" => User::orderBy("total_command", "desc")->take(5)->get(),
             ];
         });
 

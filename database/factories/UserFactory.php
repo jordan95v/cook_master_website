@@ -27,6 +27,7 @@ class UserFactory extends Factory
             'is_banned' => rand(0, 1),
             'is_service_provider' => rand(0, 1),
             'api_key' => Str::random(32),
+            "total_command" => rand(0, 100),
         ];
     }
 
@@ -35,7 +36,7 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
     }
