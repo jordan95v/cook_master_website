@@ -40,10 +40,6 @@ Route::prefix("v1")->group(function () {
 
     Route::middleware('check_api_key')->group(function () {
         Route::get("/events", function () {
-            $total_event = Event::count();
-            $past_event = Event::where("date", "<", date("Y-m-d"))->count();
-            $upcoming_event = Event::where("date", ">=", date("Y-m-d"))->count();
-            $workshop_number = Event::where("is_course", true)->count();
             $total_event_created_by_admin = 0;
             $total_event_created_by_service_provider = 0;
             foreach (Event::all() as $event) {
@@ -53,15 +49,14 @@ Route::prefix("v1")->group(function () {
                     $total_event_created_by_service_provider++;
                 }
             }
-            $top_five_event = Event::orderBy("capacity", "desc")->take(5)->get();
             return [
-                "total_event" => $total_event,
-                "past_event" => $past_event,
-                "upcoming_event" => $upcoming_event,
-                "workshop_number" => $workshop_number,
+                "total_event" => Event::count(),
+                "past_event" => Event::where("date", "<", date("Y-m-d"))->count(),
+                "upcoming_event" => Event::where("date", ">=", date("Y-m-d"))->count(),
+                "workshop_number" => Event::where("is_course", true)->count(),
                 "total_event_created_by_admin" => $total_event_created_by_admin,
                 "total_event_created_by_service_provider" => $total_event_created_by_service_provider,
-                "top_five_event" => $top_five_event,
+                "top_five_event" => Event::orderBy("capacity", "desc")->take(5)->get(),
             ];
         });
 
@@ -78,14 +73,14 @@ Route::prefix("v1")->group(function () {
         });
 
         Route::get("/users", function () {
-
             $total_free = 0;
             $total_starter = 0;
             $total_pro = 0;
 
             // Gather information about the user.
             foreach (User::all() as $user) {
-                switch ($user->getSubscription()[0]->name ?? "free") {
+                $subscription_name = strstr($user->getSubscription()[0]->name ?? "free", "_annual", true);
+                switch ($subscription_name) {
                     case "free":
                         $total_free++;
                         break;
