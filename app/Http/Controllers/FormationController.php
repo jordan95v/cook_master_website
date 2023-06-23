@@ -19,7 +19,8 @@ class FormationController extends Controller
      */
     public function index()
     {
-        return view("formations.index", ["formations" => Formation::simplePaginate(10)]);
+        $res = Formation::withcount("courses")->where("courses_count", ">", 0)->simplePaginate(10);
+        return view("formations.index", ["formations" => $res]);
     }
 
     public function list_index()
@@ -55,6 +56,9 @@ class FormationController extends Controller
      */
     public function show(Formation $formation)
     {
+        if (count($formation->courses) == 0) {
+            return back()->with("error", "This formation doesn't have any courses.");
+        }
         return view("formations.show", ["formation" => $formation]);
     }
 

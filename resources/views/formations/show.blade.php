@@ -14,23 +14,23 @@
             <x-utils.description-trunked :target="$formation" limit="800" />
             <a href="#full-description" class="link hover:link-primary">{{ __('Show more') }}</a>
 
-
-
-            @if ($formation_taken)
-                <form action="{{ route('formation.get_certification', $formation) }}" method="post" class="mt-10">
-                    @csrf
-                    <button class="btn btn-primary w-full lg:w-96">
-                        <i class="fa-solid fa-bag-shopping me-2"></i>{{ __('Get the certification') }}
-                    </button>
-                </form>
-            @else
-                <form action="{{ route('formation.take', $formation) }}" method="post" class="mt-10">
-                    @csrf
-                    <button class="btn btn-primary w-full lg:w-96">
-                        <i class="fa-solid fa-bag-shopping me-2"></i>{{ __('Take this course') }}
-                    </button>
-                </form>
-            @endif
+            <div class="text-end py-20">
+                @if ($formation_taken)
+                    <form action="{{ route('formation.get_certification', $formation) }}" method="post" class="mt-10">
+                        @csrf
+                        <button class="btn btn-primary w-full lg:w-96">
+                            <i class="fa-solid fa-bag-shopping me-2"></i>{{ __('Get the certification') }}
+                        </button>
+                    </form>
+                @else
+                    <form action="{{ route('formation.take', $formation) }}" method="post" class="mt-10">
+                        @csrf
+                        <button class="btn btn-primary w-full lg:w-96">
+                            <i class="fa-solid fa-bag-shopping me-2"></i>{{ __('Take this formation') }}
+                        </button>
+                    </form>
+                @endif
+            </div>
 
         </div>
         <div class="mx-auto">

@@ -131,4 +131,9 @@ class UserController extends Controller
     {
         return view("users.invoices");
     }
+
+    public function formations()
+    {
+        return view("users.taken_formations");
+    }
 }

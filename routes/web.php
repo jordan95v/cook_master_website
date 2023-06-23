@@ -69,6 +69,9 @@ Route::prefix("users")->group(
 
                         // User finished courses
                         Route::get("/finished-courses", "finished_course")->name("user.finished-courses");
+
+                        // Taken formation
+                        Route::get("/formations", "formations")->name("user.formations");
                     }
                 );
             }

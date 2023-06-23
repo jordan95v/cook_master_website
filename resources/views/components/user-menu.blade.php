@@ -108,6 +108,11 @@
                         <i class="fa-solid fa-person-chalkboard"></i>{{ __('My finished courses') }}
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('user.formations') }}">
+                        <i class="fa-solid fa-book-open"></i>{{ __('My formations') }}
+                    </a>
+                </li>
             @endif
             <li>
                 <a href="{{ route('logout') }}">
