@@ -79,7 +79,7 @@ Route::prefix("v1")->group(function () {
 
             // Gather information about the user.
             foreach (User::all() as $user) {
-                $subscription_name = strstr($user->getSubscription()[0]->name ?? "free", "_annual", true);
+                $subscription_name = str_replace('_annual', '', $user->getSubscription()[0]->name ?? "free");
                 switch ($subscription_name) {
                     case "free":
                         $total_free++;
