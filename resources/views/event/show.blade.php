@@ -85,8 +85,8 @@
     </x-utils.card>
 
     {{-- Streaming --}}
-    <h3 class="text-4xl font-bold pb-10 lg:px-24">{{ __('The event is online right now !') }}</h3>
-    <div id="video_container" class="my-7 px-24 rounded-xl"></div>
+    <h3 class="text-4xl font-bold pb-4 lg:px-24">{{ __('The event is online right now !') }}</h3>
+    <div id="video_container" class="mx-auto" style="width: 90vw; height: 75vh;"></div>
     <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
     <script>
         window.onload = function() {
