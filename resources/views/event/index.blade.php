@@ -13,16 +13,14 @@
 
     <div class="grid grid-cols-1 pt-10 p-5 lg:px-24 lg:grid-cols-3 md:grid-cols-2 gap-10">
         @foreach ($events as $event)
-            <x-utils.card class="w-full">
-                <div class="card-body p-0">
-                    <a href="{{ route('events.show', ['event' => $event->id]) }}">
-                        {{-- Image --}}
-                        <img src="{{ asset('storage/' . $event->image) }}" alt="Photo de l'événement"
-                            class="w-full h-full object-cover rounded-t">
-
+            <a href="{{ route('events.show', $event) }}">
+                <x-utils.card class="w-full">
+                    {{-- Image --}}
+                    <img src="{{ asset('storage/' . $event->image) }}" class="w-full h-full object-cover rounded-t">
+                    <div class="card-body p-0">
                         <div class="p-4">
                             {{-- Title --}}
-                            <h2 class="card-title text-2xl font-bold hover:link mb-6">{{ $event->title }}</h2>
+                            <h2 class="card-title hover:link mb-6">{{ $event->title }}</h2>
 
                             <div class="flex flex-col">
                                 {{-- Date --}}
@@ -44,9 +42,9 @@
                                 </div>
                             </div>
                         </div>
-                    </a>
-                </div>
-            </x-utils.card>
+                    </div>
+                </x-utils.card>
+            </a>
         @endforeach
     </div>
 

@@ -19,7 +19,7 @@ class FormationController extends Controller
      */
     public function index()
     {
-        $res = Formation::withcount("courses")->where("courses_count", ">", 0)->simplePaginate(10);
+        $res = Formation::withCount("courses")->where("courses_count", ">", 0)->simplePaginate(10);
         return view("formations.index", ["formations" => $res]);
     }
 
