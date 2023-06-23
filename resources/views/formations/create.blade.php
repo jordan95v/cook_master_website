@@ -8,7 +8,7 @@
                 <form action="{{ route('formation.store') }}" method="POST" enctype="multipart/form-data"
                     class="card-body">
                     @csrf
-                    <h2 class="card-title text-2xl flex justify-center pb-2">{{ __('Add formation') }}</h2>
+                    <h2 class="card-title text-2xl flex justify-center pb-2">{{ __('Add a formation') }}</h2>
 
                     {{-- Name --}}
                     <x-utils.input type="text" name="name" hint="{{ __('Enter the name of the formation') }}"
@@ -26,7 +26,7 @@
 
                     {{-- Description --}}
                     <textarea id="editor" class="textarea textarea-bordered border-2 @error('description') border-error @enderror" rows=4
-                        name="description" placeholder="{{ __('Product description') }}">{{ old('description') }}</textarea>
+                        name="description" placeholder="{{ __('Formation description') }}">{{ old('description') }}</textarea>
                     <x-utils.form-error name="description" />
 
 

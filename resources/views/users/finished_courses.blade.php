@@ -12,7 +12,7 @@
             @foreach (Auth::user()->finished_courses as $item)
                 <tr>
                     <td>
-                        <a class="font-bold"
+                        <a class="font-bold link"
                             href="{{ route('courses.show', $item->course->id) }}">{{ $item->course->name }}</a>
                     </td>
                     <td>{{ $item->course->difficulty }} {{ str_repeat('⭐', $item->course->difficulty) }}</td>

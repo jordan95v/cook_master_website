@@ -12,7 +12,7 @@
             @foreach (Auth::user()->taken_formations as $item)
                 <tr>
                     <td>
-                        <a class="font-bold"
+                        <a class="font-bold link"
                             href="{{ route('formation.show', $item->formation->id) }}">{{ $item->formation->name }}</a>
                     </td>
                     <td>📚 {{ count($item->formation->courses) }}</td>

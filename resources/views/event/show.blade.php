@@ -4,15 +4,14 @@
         <div class="mx-auto my-auto text-center">
             <h2 class="text-4xl font-bold my-4">{{ $event->title }}</h2>
 
-            {{-- Button to subscribe to the event --}}
+            {{-- Check if the user is already subscribed to the event --}}
             @if (Auth::check())
-                {{-- Check if the user is already subscribed to the event --}}
                 @if (in_array(Auth::user()->id, $participants))
                     <form action="{{ route('event.unsubscribe', ['event' => $event->id]) }}" method="POST">
                         @csrf
-                        <button type="submit"
-                            class=" text-white py-2 px-4 rounded-md inline-block font-medium text-md btn">
-                            {{ __('Unsubscribe') }}</button>
+                        <button type="submit" class="text-white py-2 px-4 btn">
+                            {{ __('Unsubscribe') }}
+                        </button>
                     </form>
                 @else
                     @if (count($participants) >= $event->capacity)
@@ -26,18 +25,6 @@
                     @endif
                 @endif
             @endif
-            <div class="pt-10 space-y-2">
-                <a href="{{ route('events.edit', ['event' => $event->id]) }}" class="btn btn-primary max-w-sm w-full">
-                    <i class="fa-solid fa-edit me-2"></i>{{ __('Modify') }}
-                </a>
-                <form method="POST" action="{{ route('events.destroy', ['event' => $event->id]) }}">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-error max-w-sm w-full">
-                        <i class="fa-solid fa-trash me-2"></i>{{ __('Delete') }}
-                    </button>
-                </form>
-            </div>
         </div>
     </div>
 
@@ -95,5 +82,57 @@
             <img src="{{ asset('storage/' . $event->room->image) }}" alt="Photo de la salle"
                 class="w-full object-cover object-center rounded-md">
         </div>
+    </div>
+
+    {{-- Streaming --}}
+    <div>
+        <h3 class="text-4xl font-bold pb-10 lg:px-24">{{ __('The event is online right now !') }}</h3>
+        @if ($event->is_course)
+            <div id="video_container" class="my-7 px-24 rounded-xl"></div>
+            <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
+            <script>
+                window.onload = function() {
+                    function getUrlParams(url) {
+                        let urlStr = url.split('?')[1];
+                        const urlSearchParams = new URLSearchParams(urlStr);
+                        const result = Object.fromEntries(urlSearchParams.entries());
+                        return result;
+                    }
+
+                    const roomID = '{{ $event->room->id }}';
+                    const userID = '{{ Auth::user()->id }}';
+                    const userName = '{{ Auth::user()->name }}';
+                    const appID = {{ env('ZEGO_APP_ID') }};
+                    const serverSecret = '{{ env('ZEGO_SERVER_SECRET') }}';
+                    const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
+
+
+                    const zp = ZegoUIKitPrebuilt.create(kitToken);
+                    zp.joinRoom({
+                        container: document.querySelector("#video_container"),
+                        sharedLinks: [{
+                            name: 'Personal link',
+                            url: window.location.protocol + '//' + window.location.host + window.location
+                                .pathname + '?roomID=' + roomID,
+                        }],
+                        scenario: {
+                            mode: ZegoUIKitPrebuilt.VideoConference,
+                        },
+
+                        turnOnMicrophoneWhenJoining: false,
+                        turnOnCameraWhenJoining: false,
+                        showMyCameraToggleButton: true,
+                        showMyMicrophoneToggleButton: true,
+                        showAudioVideoSettingsButton: true,
+                        showScreenSharingButton: true,
+                        showTextChat: true,
+                        showUserList: true,
+                        maxUsers: {{ $event->capacity }},
+                        layout: "Sidebar",
+                        showLayoutButton: true,
+                    });
+                }
+            </script>
+        @endif
     </div>
 </x-layout>

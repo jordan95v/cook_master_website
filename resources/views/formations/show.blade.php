@@ -72,7 +72,7 @@
                     @if (Auth::user()->is($formation->user) || Auth::user()->isAdmin())
                         <a href="{{ route('formation.add_courses', $formation) }}"
                             class="items-center btn btn-primary mt-4">
-                            {{ __('Add courses') }}<i class="ms-2 fa-solid fa-plus text-success"></i>
+                            {{ __('Add a course') }}<i class="ms-2 fa-solid fa-plus text-success"></i>
                         </a>
                     @endif
                 </div>
