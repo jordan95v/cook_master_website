@@ -19,7 +19,14 @@ class FormationController extends Controller
      */
     public function index()
     {
-        $res = Formation::withCount("courses")->where("courses_count", ">", 0)->simplePaginate(10);
+        $formations = Formation::all();
+        $no_courses_formations_id = [];
+        foreach ($formations as $formation) {
+            if (count($formation->courses) == 0) {
+                $no_courses_formations_id[] = $formation->id;
+            }
+        }
+        $res = Formation::whereNotIn("id", $no_courses_formations_id)->simplePaginate(10);
         return view("formations.index", ["formations" => $res]);
     }
 
