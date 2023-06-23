@@ -68,7 +68,7 @@
     </div>
 
     {{-- Room information --}}
-    <x-utils.card class="w-full mx-24">
+    <x-utils.card class="w-full lg:mx-24">
         <div class="card-body">
             <a href="{{ route('room.show', $event->room) }}" class="card-title link hover:link-primary font-bold my-3">
                 {{ $event->room->name }}
@@ -86,51 +86,49 @@
 
     {{-- Streaming --}}
     <h3 class="text-4xl font-bold pb-10 lg:px-24">{{ __('The event is online right now !') }}</h3>
-    @if ($event->is_course)
-        <div id="video_container" class="my-7 px-24 rounded-xl"></div>
-        <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
-        <script>
-            window.onload = function() {
-                function getUrlParams(url) {
-                    let urlStr = url.split('?')[1];
-                    const urlSearchParams = new URLSearchParams(urlStr);
-                    const result = Object.fromEntries(urlSearchParams.entries());
-                    return result;
-                }
-
-                const roomID = '{{ $event->room->id }}';
-                const userID = '{{ Auth::user()->id }}';
-                const userName = '{{ Auth::user()->name }}';
-                const appID = {{ env('ZEGO_APP_ID') }};
-                const serverSecret = '{{ env('ZEGO_SERVER_SECRET') }}';
-                const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
-
-
-                const zp = ZegoUIKitPrebuilt.create(kitToken);
-                zp.joinRoom({
-                    container: document.querySelector("#video_container"),
-                    sharedLinks: [{
-                        name: 'Personal link',
-                        url: window.location.protocol + '//' + window.location.host + window.location
-                            .pathname + '?roomID=' + roomID,
-                    }],
-                    scenario: {
-                        mode: ZegoUIKitPrebuilt.VideoConference,
-                    },
-
-                    turnOnMicrophoneWhenJoining: false,
-                    turnOnCameraWhenJoining: false,
-                    showMyCameraToggleButton: true,
-                    showMyMicrophoneToggleButton: true,
-                    showAudioVideoSettingsButton: true,
-                    showScreenSharingButton: true,
-                    showTextChat: true,
-                    showUserList: true,
-                    maxUsers: {{ $event->capacity }},
-                    layout: "Sidebar",
-                    showLayoutButton: true,
-                });
+    <div id="video_container" class="my-7 px-24 rounded-xl"></div>
+    <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
+    <script>
+        window.onload = function() {
+            function getUrlParams(url) {
+                let urlStr = url.split('?')[1];
+                const urlSearchParams = new URLSearchParams(urlStr);
+                const result = Object.fromEntries(urlSearchParams.entries());
+                return result;
             }
-        </script>
-    @endif
+
+            const roomID = '{{ $event->room->id }}';
+            const userID = '{{ Auth::user()->id }}';
+            const userName = '{{ Auth::user()->name }}';
+            const appID = {{ env('ZEGO_APP_ID') }};
+            const serverSecret = '{{ env('ZEGO_SERVER_SECRET') }}';
+            const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
+
+
+            const zp = ZegoUIKitPrebuilt.create(kitToken);
+            zp.joinRoom({
+                container: document.querySelector("#video_container"),
+                sharedLinks: [{
+                    name: 'Personal link',
+                    url: window.location.protocol + '//' + window.location.host + window.location
+                        .pathname + '?roomID=' + roomID,
+                }],
+                scenario: {
+                    mode: ZegoUIKitPrebuilt.VideoConference,
+                },
+
+                turnOnMicrophoneWhenJoining: false,
+                turnOnCameraWhenJoining: false,
+                showMyCameraToggleButton: true,
+                showMyMicrophoneToggleButton: true,
+                showAudioVideoSettingsButton: true,
+                showScreenSharingButton: true,
+                showTextChat: true,
+                showUserList: true,
+                maxUsers: {{ $event->capacity }},
+                layout: "Sidebar",
+                showLayoutButton: true,
+            });
+        }
+    </script>
 </x-layout>
