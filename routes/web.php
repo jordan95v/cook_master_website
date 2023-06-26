@@ -5,6 +5,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\EquipedController;
 use App\Http\Controllers\EquipmentController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FinishedCourseController;
 use App\Http\Controllers\FormationController;
@@ -168,6 +169,19 @@ Route::group(["middleware" => ["auth"]], function () {
         Route::post("/order/{order}/delete", "destroy")->name("order.destroy");
         Route::get("/basket", "show")->name("order.show");
     });
+
+    Route::resource('tchat', MessageController::class);
+    Route::post('/tchat/{receiver_id}', 'MessageController@store')->name('tchat.store');
+
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+    Route::get('/messages/{user}', [MessageController::class, 'show'])->name('messages.show');
+    Route::post('/messages/{user}',[MessageController::class, 'store'])->name('messages.store');
+
+
+
+
+
+
 
     // Event subscription
     Route::post('/events/{event}/subscribe', [EventController::class, 'subscribe'])->name('event.subscribe');
