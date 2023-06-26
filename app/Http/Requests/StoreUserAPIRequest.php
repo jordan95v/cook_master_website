@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\App;
 
 class StoreUserAPIRequest extends FormRequest
 {
@@ -36,9 +37,27 @@ class StoreUserAPIRequest extends FormRequest
     public function failedValidation(Validator $validator)
     {
         $response = response()->json([
-            'errors' => $validator->errors(),
+            'errors' => $validator->errors()->all(),
         ], 422);
-
         throw new \Illuminate\Validation\ValidationException($validator, $response);
+    }
+
+    public function messages()
+    {
+        App::setLocale($this->lang ?? 'en');
+        return [
+            'name.required' => __('validation.required'),
+            'name.min' => __('validation.min.string'),
+            'name.unique' => __('validation.unique'),
+            'email.required' => __('validation.required'),
+            'email.email' => __('validation.email'),
+            'email.unique' => __('validation.unique'),
+            'password.required' => __('validation.required'),
+            'password.min' => __('validation.min.string'),
+            'key.required' => __('validation.required'),
+            'key.min' => __('validation.min.string'),
+            'key.max' => __('validation.max.string'),
+            'key.exists' => __('validation.exists'),
+        ];
     }
 }
