@@ -162,9 +162,5 @@ Route::prefix("v1")->group(function () {
             $formation->formation_courses = $courses;
             return $formation->jsonSerialize();
         });
-
-        Route::post("/courses/{course}/end", function (Course $course) {
-
-        })
     });
 });
