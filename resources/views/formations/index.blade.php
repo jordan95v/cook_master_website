@@ -20,12 +20,11 @@
                 <img src="{{ asset('storage/' . $formation->image) }}" class="rounded-s w-96">
                 <div class="card-body">
                     <h4 class="font-bold text-2xl card-title">{{ $formation->name }}</h4>
-                    <p>🧮 {{ __('Number of courses') }} 👉 {{ count($formation->courses) }}</p>
+                    <p>🧮 {{ count($formation->courses) }} {{ __('courses') }}</p>
                     <p>
-                        🙋 {{ __('This formation have been taken') }} 👉 {{ count($formation->formation_users) }}
-                        {{ __('times') }}
+                        🙋 {{ count($formation->formation_users) }} {{ __('students') }}
                     </p>
-                    <a href="{{ route('formation.show', $formation) }}" class="btn btn-primary mt-5 lg:w-96">
+                    <a href="{{ route('formation.show', $formation) }}" class="btn btn-primary mt-5">
                         {{ __('Access this formation') }}
                     </a>
                 </div>

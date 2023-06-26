@@ -66,7 +66,21 @@ class FormationController extends Controller
         if (count($formation->courses) == 0) {
             return back()->with("error", "This formation doesn't have any courses.");
         }
-        return view("formations.show", ["formation" => $formation]);
+        $can_get_certification = false;
+        $user = User::find(Auth::id());
+
+        $user_finished_courses = 0;
+        foreach ($formation->courses as $formation_course) {
+            foreach ($user->finished_courses as $user_course) {
+                if ($formation_course->course->is($user_course->course) && $user_course->is_finished) {
+                    $user_finished_courses++;
+                }
+            }
+        }
+        if ($user_finished_courses == count($formation->courses)) {
+            $can_get_certification = true;
+        }
+        return view("formations.show", ["formation" => $formation, "can_get_certification" => $can_get_certification]);
     }
 
     /**

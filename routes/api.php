@@ -1,10 +1,8 @@
 <?php
 
-use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\StoreUserAPIRequest;
 use App\Models\Course;
 use App\Models\Event;
-use App\Models\FinishedCourse;
 use App\Models\Formation;
 use App\Models\FormationUser;
 use App\Models\OrderInvoice;
@@ -12,10 +10,8 @@ use App\Models\Product;
 use App\Models\User;
 use App\Models\UserCourse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 /*
@@ -89,7 +85,7 @@ Route::prefix("v1")->group(function () {
                 "total_courses" => Course::count(),
                 "total_finished_formation" => FormationUser::where("is_finished", true)->count(),
                 "total_ongoing_formation" => FormationUser::where("is_finished", false)->count(),
-                "total_finished_courses" => FinishedCourse::count(),
+                "total_finished_courses" => UserCourse::where("is_finished", true)->count(),
             ];
         });
 
@@ -157,6 +153,7 @@ Route::prefix("v1")->group(function () {
                 $courses[$key] = $user_course->course;
                 $courses[$key]->is_finished = UserCourse::where("user_id", $user->id)
                     ->where("course_id", $user_course->course->id)
+                    ->where("is_finished", true)
                     ->first() ?? false;
             }
             $formation->formation_courses = $courses;

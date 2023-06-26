@@ -10,14 +10,16 @@
         </thead>
         <tbody>
             @foreach (Auth::user()->finished_courses as $item)
-                <tr>
-                    <td>
-                        <a class="font-bold link"
-                            href="{{ route('courses.show', $item->course->id) }}">{{ $item->course->name }}</a>
-                    </td>
-                    <td>{{ $item->course->difficulty }} {{ str_repeat('⭐', $item->course->difficulty) }}</td>
-                    <td>{{ $item->created_at->format('d/m/Y') }}</td>
-                </tr>
+                @if ($item->is_finished)
+                    <tr>
+                        <td>
+                            <a class="font-bold link"
+                                href="{{ route('courses.show', $item->course->id) }}">{{ $item->course->name }}</a>
+                        </td>
+                        <td>{{ $item->course->difficulty }} {{ str_repeat('⭐', $item->course->difficulty) }}</td>
+                        <td>{{ $item->created_at->format('d/m/Y') }}</td>
+                    </tr>
+                @endif
             @endforeach
         </tbody>
     </x-admin.listing>

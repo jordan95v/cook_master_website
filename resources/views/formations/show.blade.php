@@ -13,25 +13,6 @@
             <p class="font-bold font-mono text-2xl lg:text-5xl">{{ $formation->name }}</p>
             <x-utils.description-trunked :target="$formation" limit="800" />
             <a href="#full-description" class="link hover:link-primary">{{ __('Show more') }}</a>
-
-            <div class="text-end py-20">
-                @if ($formation_taken)
-                    <form action="{{ route('formation.get_certification', $formation) }}" method="post" class="mt-10">
-                        @csrf
-                        <button class="btn btn-primary w-full lg:w-96">
-                            <i class="fa-solid fa-bag-shopping me-2"></i>{{ __('Get the certification') }}
-                        </button>
-                    </form>
-                @else
-                    <form action="{{ route('formation.take', $formation) }}" method="post" class="mt-10">
-                        @csrf
-                        <button class="btn btn-primary w-full lg:w-96">
-                            <i class="fa-solid fa-bag-shopping me-2"></i>{{ __('Take this formation') }}
-                        </button>
-                    </form>
-                @endif
-            </div>
-
         </div>
         <div class="mx-auto">
             <img src="{{ asset('storage/' . $formation->image) }}" class="object-cover h-full rounded-xl" />
@@ -53,7 +34,7 @@
                             <div class="collapse-title text-xl font-medium">
                                 {{ str_repeat('⭐', $item->course->difficulty) }} {{ $item->course->name }}
                                 @foreach (Auth::user()->finished_courses as $finished_course)
-                                    @if ($finished_course->course->id == $item->course->id)
+                                    @if ($finished_course->course->is($item->course) && $finished_course->is_finished)
                                         <i class="ms-2 fa-solid fa-check text-success"></i>
                                     @endif
                                 @endforeach
@@ -74,6 +55,23 @@
                             class="items-center btn btn-primary mt-4">
                             {{ __('Add a course') }}<i class="ms-2 fa-solid fa-plus text-success"></i>
                         </a>
+                    @endif
+                    @if ($formation_taken)
+                        <form action="{{ route('formation.get_certification', $formation) }}" method="post"
+                            class="mt-10">
+                            @csrf
+                            <button class="btn btn-primary w-full"
+                                @if (!$can_get_certification) disabled="disabled" @endif">
+                                <i class="fa-solid fa-bag-shopping me-2"></i>{{ __('Get the certification') }}
+                            </button>
+                        </form>
+                    @else
+                        <form action="{{ route('formation.take', $formation) }}" method="post" class="mt-10">
+                            @csrf
+                            <button class="btn btn-primary w-full">
+                                <i class="fa-solid fa-bag-shopping me-2"></i>{{ __('Take this formation') }}
+                            </button>
+                        </form>
                     @endif
                 </div>
             </x-utils.card>
