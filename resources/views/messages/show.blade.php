@@ -28,24 +28,24 @@
       </div>
       <div class="flex flex-col flex-auto h-full p-6">
     <div class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4">
-        <div class="flex flex-col h-full overflow-x-auto mb-4">
-            <div class="flex flex-col h-full">
-                <div class="grid grid-cols-12 gap-y-2">
-                    @foreach ($messages as $message)
-                        <div class="col-start-{{ $message->sender_id == auth()->id() ? '1' : '7' }} col-end-{{ $message->sender_id == auth()->id() ? '8' : '13' }} p-3 rounded-lg">
-                            <div class="flex flex-row items-center justify-{{ $message->sender_id == auth()->id() ? 'start ' : 'end flex-row-reverse' }}">
-                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                                    A
-                                </div>
-                                <div class="{{ $message->sender_id == auth()->id() ? 'relative ml-3' : 'relative mr-3' }} text-sm bg-{{ $message->sender_id == auth()->id() ? 'white' : 'indigo' }} py-2 px-4 shadow rounded-xl">
-                                    <div>{{ $message->message }}</div>
-                                </div>
-                            </div>
+       <div class="flex flex-col h-full overflow-x-auto mb-4">
+    <div class="flex flex-col h-full">
+        <div class="grid grid-cols-12 gap-y-2">
+            @foreach ($messages as $message)
+                <div class="col-start-{{ $message->sender_id == auth()->id() ? '7' : '1' }} col-end-{{ $message->sender_id == auth()->id() ? '13' : '8' }} p-3 rounded-lg">
+                    <div class="flex items-center justify-{{ $message->sender_id == auth()->id() ? ' flex-row-reverse' : 'start' }} flex-row">
+                        <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
+                            A
                         </div>
-                    @endforeach
+                        <div class="{{ $message->sender_id == auth()->id() ? 'relative ml-3' : 'relative mr-3' }} text-sm bg-{{ $message->sender_id == auth()->id() ? 'white' : 'indigo' }} py-2 px-4 shadow rounded-xl">
+                            <div>{{ $message->message }}</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            @endforeach
         </div>
+    </div>
+</div>
         <div class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
             <div class="flex-grow ml-4">
                 <div class="relative w-full">
