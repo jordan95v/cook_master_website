@@ -7,9 +7,9 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\FinishedCourse>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\UserCourse>
  */
-class FinishedCourseFactory extends Factory
+class UserCourseFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,8 +19,9 @@ class FinishedCourseFactory extends Factory
     public function definition(): array
     {
         return [
-            'course_id' => Course::all()->random()->id,
-            'user_id' => User::all()->random()->id,
+            "course_id" => Course::all()->random()->id,
+            "user_id" => User::all()->random()->id,
+            "is_finished" => $this->faker->boolean,
         ];
     }
 }

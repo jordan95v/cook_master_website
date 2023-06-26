@@ -51,16 +51,16 @@ class DatabaseSeeder extends Seeder
             'api_key' => Str::random(32),
         ]);
 
-        \App\Models\Brand::factory(5)->create();
-        \App\Models\Course::factory(5)->create();
-        \App\Models\Product::factory(5)->create();
-        \App\Models\Equipment::factory(5)->create();
-        \App\Models\Room::factory(5)->create();
-        \App\Models\Equiped::factory(5)->create();
+        \App\Models\Brand::factory(3)->create();
+        \App\Models\Course::factory(10)->create();
+        \App\Models\Product::factory(10)->create();
+        \App\Models\Equipment::factory(10)->create();
+        \App\Models\Room::factory(10)->create();
+        \App\Models\Equiped::factory(10)->create();
         \App\Models\Event::factory(5)->create();
         \App\Models\ProductComment::factory(50)->create();
         \App\Models\Formation::factory(5)->create();
-        \App\Models\FinishedCourse::factory(5)->create();
+        \App\Models\UserCourse::factory(10)->create();
         \App\Models\FormationCourse::factory(5)->create();
 
     }
