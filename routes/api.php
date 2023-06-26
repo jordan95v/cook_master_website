@@ -10,6 +10,7 @@ use App\Models\FormationUser;
 use App\Models\OrderInvoice;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\UserCourse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -138,5 +139,32 @@ Route::prefix("v1")->group(function () {
                 return response()->json(["error" => "Course not found."], 404);
             }
         });
+
+        Route::get("/formations", function () {
+            // Get formations, number of courses and number of perso doing the formation.
+            $formations = Formation::all();
+            foreach ($formations as $formation) {
+                $formation->courses_count = $formation->courses->count();
+                $formation->user_count = $formation->formation_users->count();
+            }
+            return $formations->jsonSerialize();
+        });
+
+        Route::get("/formations/{formation}", function (Formation $formation) {
+            $user = User::where("api_key", request()->header("API_KEY"))->first();
+            $courses = [];
+            foreach ($formation->courses as $key => $user_course) {
+                $courses[$key] = $user_course->course;
+                $courses[$key]->is_finished = UserCourse::where("user_id", $user->id)
+                    ->where("course_id", $user_course->course->id)
+                    ->first() ?? false;
+            }
+            $formation->formation_courses = $courses;
+            return $formation->jsonSerialize();
+        });
+
+        Route::post("/courses/{course}/end", function (Course $course) {
+
+        })
     });
 });

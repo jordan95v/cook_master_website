@@ -9,6 +9,8 @@ class Formation extends Model
 {
     use HasFactory;
 
+    protected $hidden = ['courses', 'formation_users'];
+
     protected $guarded = [];
 
     public function courses()
