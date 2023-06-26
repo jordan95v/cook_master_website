@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\StoreUserAPIRequest;
 use App\Models\Course;
 use App\Models\Event;
 use App\Models\FinishedCourse;
@@ -11,6 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +31,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix("v1")->group(function () {
-
     Route::post("/login", function (Request $request) {
         if (Auth::once($request->only("email", "password"))) {
             $key = User::where("email", $request->email)->first()->api_key;
@@ -36,6 +38,22 @@ Route::prefix("v1")->group(function () {
         } else {
             return response()->json(["error" => "Invalid credentials."], 401);
         }
+    });
+
+    Route::post("/register", function (StoreUserAPIRequest $request) {
+        $form = $request->validated();
+        if ($form["key"] ?? false) {
+            $form["godfather_key"] = $form["key"];
+        }
+        $form["key"] = Str::random(32);
+        $form["password"] = bcrypt($form["password"]);
+        $form["api_key"] = Str::random(32);
+
+        // Create the user
+        $user = User::create($form);
+        $user->createAsStripeCustomer();
+        // event(new Registered($user));
+        return response()->json(["key" => $user->api_key], 200);
     });
 
     Route::middleware('check_api_key')->group(function () {
