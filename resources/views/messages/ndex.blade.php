@@ -8,14 +8,28 @@
         >
         </div>
         <div class="flex flex-col space-y-1 mt-4 -mx-2 h-96 overflow-y-auto">
-        @foreach ($users as $user)
-            <form action="{{ route('messages.show', $user->id) }}" method="GET">
-                <button type="submit" class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2">
-                    <div class="flex items-center justify-center h-8 w-8 bg-indigo-200 rounded-full">A</div>
-                    <div class="ml-2 text-sm font-semibold">{{ $user->name }}</div>
-                </button>
-            </form>
-        @endforeach
+        @foreach ($sortedUsers as $user)
+    <li class="py-3 sm:py-4">
+        <div class="flex items-center space-x-4">
+            <div class="flex-shrink-0">
+                <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-1.jpg" alt="User image">
+            </div>
+            <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                    {{ $user->name }}
+                </p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                    @if ($user->messages->isNotEmpty())
+                        {{ $user->messages->first()->message }}
+                    @else
+                        Aucun message disponible.
+                    @endif
+                </p>
+            </div>
+        </div>
+    </li>
+@endforeach
+
         </div>
     </div>
 </div>

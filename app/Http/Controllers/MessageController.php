@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Message;
+use Illuminate\Support\Collection;
+
 
 use Illuminate\Http\Request;
 
@@ -12,10 +14,28 @@ class MessageController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $users = User::where('id', '!=', auth()->user()->id)->get();
-        return view('messages.index', compact('users'));
-    }
+{
+    $users = User::where('id', '!=', auth()->user()->id)
+        ->with(['messages' => function ($query) {
+            $query->latest()->take(1);
+        }])
+        ->get();
+
+    $members = User::join('messages', function ($join) {
+                $join->on('users.id', '=', 'messages.sender_id')
+                     ->orWhere('users.id', '=', 'messages.receiver_id');
+            })
+            ->where('users.id', '!=', auth()->user()->id)
+            ->select('users.*')
+            ->distinct()
+            ->get();
+
+    $sortedUsers = $members->sortByDesc(function ($user) {
+        return $user->messages->first()->created_at;
+    });
+
+    return view('messages.index', compact('sortedUsers', 'users'));
+}
 
     /**
      * Show the form for creating a new resource.
@@ -51,9 +71,17 @@ public function store(Request $request, int $userId)
         ->get();
 
     $users = User::where('id', '!=', auth()->user()->id)->get();
+    $members = User::join('messages', function ($join) {
+                $join->on('users.id', '=', 'messages.sender_id')
+                     ->orWhere('users.id', '=', 'messages.receiver_id');
+            })
+            ->where('users.id', '!=', auth()->user()->id)
+            ->select('users.*')
+            ->distinct()
+            ->get();
     $receiver = User::find($user->id);
 
-    return view('messages.show', compact('user', 'users','receiver','messages'));
+    return view('messages.show', compact('user', 'users','receiver','messages','members'));
 
 }
 

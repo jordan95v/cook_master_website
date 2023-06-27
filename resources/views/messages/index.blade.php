@@ -1,88 +1,52 @@
-<x-layout title="Messages">
+<x-layout title="{{ __('Create a room') }}">
+    <div class="flex justify-center">
+        <div class="w-3/4 max-w-4xl mx-auto p-4 bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700 h-screen overflow-y-auto">
+            <h3 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Mes Messages</h3>
+            <div class="flex justify-end">
+                <label for="my_modal_6" class="btn ">Nouveau message</label>
+            </div>
+            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                @foreach ($sortedUsers as $user)
+                    <li class="py-3 sm:py-4">
+                        <div class="flex items-center space-x-4">
+                            <a href="{{ route('messages.show', $user->id) }}" class="flex-1 min-w-0">
+                                <div class="flex-shrink-0">
+                                    <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-1.jpg" alt="User image">
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                        {{ $user->name }}
+                                    </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                                        @if ($user->messages()->exists())
+                                            {{ $user->messages()->latest()->first()->message }}
+                                        @else
+                                            Aucun message disponible.
+                                        @endif
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
 
-<!-- component -->
-<div class="flex h-screen antialiased text-gray-800">
-    <div class="flex flex-row h-full w-full overflow-x-hidden">
-      <div class="flex flex-col py-8 pl-6 pr-2 w-64 bg-white flex-shrink-0">
-        <div class="flex flex-col mt-8">
-          <div class="flex flex-row items-center justify-between text-xs">
-            <span class="font-bold">Active Conversations</span>
-            <span
-              class="flex items-center justify-center bg-gray-300 h-4 w-4 rounded-full"
-              >4</span
-            >
-          </div>
-          <div class="flex flex-col space-y-1 mt-4 -mx-2 h-96 overflow-y-auto">
-            @foreach ($users as $user)
-              <form action="{{ route('messages.show', $user->id) }}" method="GET">
-                  <button type="submit" class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2">
-                      <div class="flex items-center justify-center h-8 w-8 bg-indigo-200 rounded-full">A</div>
-                      <div class="ml-2 text-sm font-semibold">{{ $user->name }}</div>
-                  </button>
-              </form>
-            @endforeach
-          </div>
-        </div>
-      </div>
-      <div class="flex flex-col flex-auto h-full p-6">
-        <div class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4">
-          <div class="flex flex-col h-full overflow-x-auto mb-4">
-            <div class="flex flex-col h-full">
-              <div class="grid grid-cols-12 gap-y-2">
-                <div class="col-start-1 col-end-8 p-3 rounded-lg">
-                  <div class="flex flex-row items-center">
-                    <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                      A
-                    </div>
-                    <div
-                      class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
-                      <div>Hey How are you today?</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-start-6 col-end-13 p-3 rounded-lg">
-                  <div class="flex items-center justify-start flex-row-reverse">
-                    <div
-                      class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                    >
-                      A
-                    </div>
-                    <div
-                      class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
-                    >
-                      <div>I'm ok what about you?</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
-            <div class="flex-grow ml-4">
-              <div class="relative w-full">
-              <form method="post" action="{{ route('messages.store', $user) }}">
-                  @csrf
-                  
-              
-                <input
-                  type="text" name="content" class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
-                />
-              </div>
-            </div>
-            <div class="ml-4">
-              <button type ="submit"
-                class="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0">
-                <span>Send</span>
-              </button>
-            </div>
-            </form>
-            
-          </div>
-        </div>
-      </div>
+<!-- The modal -->
+<input type="checkbox" id="my_modal_6" class="modal-toggle hidden" />
+<div class="modal">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Envoyer un nouveau message</h3>
+    <select onchange="location = this.value;" class="w-full p-2 border rounded mt-3">
+                    <option value="">Sélectionner un utilisateur</option>
+                    @foreach($users as $user)
+                        <option value="{{ route('messages.show', $user) }}">{{ $user->name }}</option>
+                    @endforeach
+                </select>
+    <div class="modal-action">
+      <label for="my_modal_6" class="btn">Close!</label>
     </div>
   </div>
-
-  
-
+</div>
 </x-layout>
