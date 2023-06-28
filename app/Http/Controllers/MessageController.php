@@ -21,20 +21,35 @@ class MessageController extends Controller
         }])
         ->get();
 
-    $members = User::join('messages', function ($join) {
-                $join->on('users.id', '=', 'messages.sender_id')
-                     ->orWhere('users.id', '=', 'messages.receiver_id');
-            })
-            ->where('users.id', '!=', auth()->user()->id)
-            ->select('users.*')
-            ->distinct()
-            ->get();
+    $sortedUsers = User::where(function ($query) {
+        $query->whereHas('sentMessages')->orWhereHas('receivedMessages');
+    })
+    ->where('id', '!=', auth()->user()->id)
+    ->with(['sentMessages' => function ($query) {
+        $query->latest()->take(1);
+    }])
+    ->with(['receivedMessages' => function ($query) {
+        $query->latest()->take(1);
+    }])
+    ->get();
 
-    $sortedUsers = $members->sortByDesc(function ($user) {
-        return $user->messages->first()->created_at;
-    });
+    $sortedUser = $sortedUsers->sortByDesc(function ($user) {
+    if ($user->sentMessages->isNotEmpty() && $user->receivedMessages->isNotEmpty()) {
+        $latestSent = $user->sentMessages->max('created_at');
+        $latestReceived = $user->receivedMessages->max('created_at');
+        return max($latestSent, $latestReceived);
+    } elseif ($user->sentMessages->isNotEmpty()) {
+        return $user->sentMessages->max('created_at');
+    } elseif ($user->receivedMessages->isNotEmpty()) {
+        return $user->receivedMessages->max('created_at');
+    } else {
+        return null;
+    }
+});
 
-    return view('messages.index', compact('sortedUsers', 'users'));
+
+
+    return view('messages.index', compact('sortedUsers', 'users', 'sortedUser'));
 }
 
     /**
