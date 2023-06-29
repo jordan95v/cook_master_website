@@ -14,8 +14,8 @@
                     <x-utils.input type="text" name="title" hint="{!! __('Desired course') !!}" error=1 />
 
                     {{-- Comment --}}
-                    <textarea id="editor" class="textarea textarea-bordered border-2 @error('comment') border-error @enderror" rows=4
-                        name="comment" placeholder="{{ __('Give us details about the course') }}">{{ old('comment') }}</textarea>
+                    <textarea class="textarea textarea-bordered border-2 @error('comment') border-error @enderror" rows=4 name="comment"
+                        placeholder="{{ __('Give us details about the course') }}">{{ old('comment') }}</textarea>
                     <x-utils.form-error name="comment" />
 
                     {{-- Image --}}
@@ -58,5 +58,4 @@
         </div>
     </div>
     <x-event.time />
-    <x-utils.editor />
 </x-layout>
