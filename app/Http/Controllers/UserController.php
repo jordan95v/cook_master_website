@@ -135,4 +135,9 @@ class UserController extends Controller
     {
         return view("users.taken_formations");
     }
+
+    public function home_courses()
+    {
+        return view("users.home_courses");
+    }
 }

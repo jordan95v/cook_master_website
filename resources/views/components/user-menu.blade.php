@@ -82,6 +82,11 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('user.home-courses') }}">
+                        <i class="fa-solid fa-face-smile"></i>{{ __('My course at home') }}
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('subscription.show') }}">
                         <i class="fa-sharp fa-solid fa-bolt-lightning"></i>
                         @if (Auth::user()->isSubscribed())

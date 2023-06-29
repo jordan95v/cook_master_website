@@ -153,4 +153,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(FormationUser::class);
     }
+
+    public function home_courses()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

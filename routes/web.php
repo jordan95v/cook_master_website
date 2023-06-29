@@ -10,6 +10,7 @@ use App\Http\Controllers\FormationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCommentController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
@@ -71,6 +72,9 @@ Route::prefix("users")->group(
 
                         // Taken formation
                         Route::get("/formations", "formations")->name("user.formations");
+                        
+                        // User home courses request
+                        Route::get("/home-courses", "home_courses")->name("user.home-courses");
                     }
                 );
             }
@@ -159,6 +163,10 @@ Route::group(["middleware" => ["auth"]], function () {
     Route::get('/equiped/{room}/edit', [EquipedController::class, 'edit'])->name('equiped.edit');
     Route::post('/equiped/select', [EquipedController::class, 'select'])->name('equiped.select');
     Route::resource('equiped', EquipedController::class, ["except" => ["edit"]]);
+    
+    // Reservation for user
+    Route::resource('reservation', ReservationController::class, ["except" => ["edit", "update", "show"]]);
+    
 
     // Order
     Route::group(["controller" => OrderController::class], function () {
@@ -171,4 +179,8 @@ Route::group(["middleware" => ["auth"]], function () {
     // Event subscription
     Route::post('/events/{event}/subscribe', [EventController::class, 'subscribe'])->name('event.subscribe');
     Route::post('/events/{event}/unsubscribe', [EventController::class, 'unsubscribe'])->name('event.unsubscribe');
+
+    //Reservation
+    Route::post('/reservation/{reservation}/reject', [ReservationController::class, 'reject_reservation'])->name('reservation.reject');
+    Route::post('/reservation/{reservation}/assign', [ReservationController::class, 'assign_chef'])->name('reservation.assign');
 });
