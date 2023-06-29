@@ -49,6 +49,9 @@ Route::prefix("users")->group(
 
                 // User invoices
                 Route::get("/invoices", "invoices")->middleware("auth")->name("user.invoices");
+
+                // User home courses request
+                Route::get("/home-courses", "home_courses")->name("user.home-courses");
             }
         );
 
@@ -119,12 +122,8 @@ Route::resource('events', EventController::class);
 // Room
 Route::resource('room', RoomController::class);
 
-//Reservation   
-Route::post('/reservation/{reservation}/reject', [ReservationController::class, 'RejectReservation'])->name('reservation.reject');
-Route::post('/reservation/{reservation}/assign', [ReservationController::class, 'assignChef'])->name('reservation.assign');
-Route::resource('reservation', ReservationController::class);
-
-
+// Reservation for user
+Route::resource('reservation', ReservationController::class, ["except" => ["edit", "update", "show"]]);
 
 // Auth route
 Route::group(["middleware" => ["auth"]], function () {
@@ -140,4 +139,8 @@ Route::group(["middleware" => ["auth"]], function () {
     // Event subscription
     Route::post('/events/{event}/subscribe', [EventController::class, 'subscribe'])->name('event.subscribe');
     Route::post('/events/{event}/unsubscribe', [EventController::class, 'unsubscribe'])->name('event.unsubscribe');
+
+    //Reservation
+    Route::post('/reservation/{reservation}/reject', [ReservationController::class, 'reject_reservation'])->name('reservation.reject');
+    Route::post('/reservation/{reservation}/assign', [ReservationController::class, 'assign_chef'])->name('reservation.assign');
 });

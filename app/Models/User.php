@@ -54,7 +54,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return ($this->role != 0) ? true : false;
     }
 
-
     public function customer(array $fields): Party
     {
         return new Party([
@@ -117,5 +116,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function events()
     {
         return $this->hasMany(Event::class);
+    }
+
+    public function home_courses()
+    {
+        return $this->hasMany(Reservation::class);
     }
 }

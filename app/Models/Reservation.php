@@ -12,13 +12,13 @@ class Reservation extends Model
 
     protected $guarded = [];
 
-    public function created_by_user(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'created_by');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function assigned_to_user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'assigned_to');
     }
 }

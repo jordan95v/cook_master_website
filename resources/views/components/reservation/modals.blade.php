@@ -47,7 +47,7 @@
                 </div>
                 <div>
                     <p class="font-bold">{{ __('Created by') }}:</p>
-                    <p>{{ $reservation->created_by_user->name }}</p>
+                    <p>{{ $reservation->user->name }}</p>
                 </div>
                 <div>
                     <p class="font-bold">{{ __('Start Time') }}:</p>
@@ -60,7 +60,7 @@
             </div>
             <div class="mt-4">
                 <p class="font-bold">{{ __('Assigned to') }}:</p>
-                @if ($reservation->user_id != null)
+                @if ($reservation->assigned_to != null)
                     <p>{{ $reservation->assigned_to_user->name }}</p>
                 @else
                     <p>{{ __('Not assigned') }}</p>
