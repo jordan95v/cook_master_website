@@ -66,12 +66,14 @@
                             </button>
                         </form>
                     @else
-                        <form action="{{ route('formation.take', $formation) }}" method="post" class="mt-10">
-                            @csrf
-                            <button class="btn btn-primary w-full">
-                                <i class="fa-solid fa-bag-shopping me-2"></i>{{ __('Take this formation') }}
-                            </button>
-                        </form>
+                        @if (!Auth::user()->is($formation->user) || !Auth::user()->isAdmin())
+                            <form action="{{ route('formation.take', $formation) }}" method="post" class="mt-10">
+                                @csrf
+                                <button class="btn btn-primary w-full">
+                                    <i class="fa-solid fa-bag-shopping me-2"></i>{{ __('Take this formation') }}
+                                </button>
+                            </form>
+                        @endif
                     @endif
                 </div>
             </x-utils.card>

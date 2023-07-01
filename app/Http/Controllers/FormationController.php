@@ -63,11 +63,11 @@ class FormationController extends Controller
      */
     public function show(Formation $formation)
     {
-        if (count($formation->courses) == 0) {
+        $user = User::find(Auth::id());
+        if (count($formation->courses) == 0 && (!$user->isAdmin() || !$formation->user->is($user))) {
             return back()->with("error", "This formation doesn't have any courses.");
         }
         $can_get_certification = false;
-        $user = User::find(Auth::id());
 
         $user_finished_courses = 0;
         foreach ($formation->courses as $formation_course) {

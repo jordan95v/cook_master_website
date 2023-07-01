@@ -22,7 +22,7 @@
                     </td>
                     <td>
                         @if ($formation->image)
-                            <a href="{{ 'storage/' . $formation->image }}" class="">
+                            <a href="{{ asset('storage/' . $formation->image) }}" class="">
                                 <i class="fa-solid fa-arrow-up-right-from-square ms-2"></i>
                             </a>
                         @endif
