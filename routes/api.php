@@ -62,6 +62,9 @@ Route::prefix("v1")->group(function () {
             if (!$user->image) {
                 $user->image = "images/user.png";
             }
+            if (($a = 2) == 2) {
+                echo $a;
+            }
             return $user->jsonSerialize();
         });
 
@@ -151,6 +154,29 @@ Route::prefix("v1")->group(function () {
             } catch (Exception $e) {
                 return response()->json(["error" => "Course not found."], 404);
             }
+        });
+
+        Route::post("courses/{course}/finished", function (Course $course) {
+            $user = User::where("api_key", request()->header("API_KEY"))->first();
+            if (UserCourse::where("user_id", $user->id)
+                ->where("course_id", $course->id)
+                ->where("is_finished", true)
+                ->first() ?? false) {
+                return response()->json(["error" => "Course already finished."], 400);
+            } else if ($user_course = UserCourse::where("user_id", $user->id)
+                ->where("course_id", $course->id)
+                ->where("is_finished", false)
+                ->first() ?? false) {
+                $user_course->is_finished = true;
+                $user_course->save();
+                return response()->json(["message" => "Course finished."], 200);
+            }
+            UserCourse::create([
+                "user_id" => $user->id,
+                "course_id" => $course->id,
+                "is_finished" => true,
+            ]);
+            return response()->json(["message" => "Course finished."], 200);
         });
 
         Route::get("/formations", function () {
