@@ -35,7 +35,7 @@
                         </a>
                     </td>
                     <x-admin.user-avatar :target="$equipment->user" />
-                    <td class="w-1/6">
+                    <td>
                         <div class="dropdown dropdown-bottom dropdown-end">
                             <label tabindex="0" class="btn btn-circle btn-ghost">
                                 <i class="fa-solid fa-gear"></i>

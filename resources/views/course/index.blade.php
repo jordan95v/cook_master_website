@@ -35,7 +35,7 @@
                     @if (Auth::user()->isAdmin())
                         <x-admin.user-avatar :target="$course->user" />
                     @endif
-                    <td class="w-1/6">
+                    <td>
                         <div class="dropdown dropdown-bottom dropdown-end">
                             <label tabindex="0" class="btn btn-circle btn-ghost">
                                 <i class="fa-solid fa-gear"></i>

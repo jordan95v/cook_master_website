@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Event;
 use App\Models\User;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -15,7 +15,7 @@ class UserController extends Controller
     // Display a listing of the resource.
     public function index()
     {
-        return view("users.index", ["users" => User::where("id", "!=", Auth::id())->get()]);
+        return view("users.index", ["users" => User::where("id", "!=", Auth::id())->get(), "events" => Event::all()]);
     }
 
     // Show the form for creating a new resource.
