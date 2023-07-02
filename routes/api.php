@@ -56,6 +56,15 @@ Route::prefix("v1")->group(function () {
     });
 
     Route::middleware('check_api_key')->group(function () {
+        Route::get("/user", function () {
+            $token = request()->header("API_KEY");
+            $user = User::where("api_key", $token)->first();
+            if (!$user->image) {
+                $user->image = "images/user.png";
+            }
+            return $user->jsonSerialize();
+        });
+
         Route::get("/events", function () {
             $total_event_created_by_admin = 0;
             $total_event_created_by_service_provider = 0;
