@@ -134,7 +134,15 @@ Route::prefix("v1")->group(function () {
         });
 
         Route::get("/courses", function () {
-            return Course::simplePaginate(10)->jsonSerialize();
+            $user = User::where("api_key", request()->header("API_KEY"))->first();
+            $courses = Course::all();
+            foreach ($courses as $course) {
+                $course->is_finished = (UserCourse::where("user_id", $user->id)
+                        ->where("course_id", $course->id)
+                        ->where("is_finished", true)
+                        ->first() ?? false) ? true : false;
+            }
+            return $courses->jsonSerialize();
         });
 
         Route::get("courses/{id}", function ($id) {
@@ -160,10 +168,10 @@ Route::prefix("v1")->group(function () {
             $courses = [];
             foreach ($formation->courses as $key => $user_course) {
                 $courses[$key] = $user_course->course;
-                $courses[$key]->is_finished = UserCourse::where("user_id", $user->id)
-                    ->where("course_id", $user_course->course->id)
-                    ->where("is_finished", true)
-                    ->first() ?? false;
+                $courses[$key]->is_finished = (UserCourse::where("user_id", $user->id)
+                        ->where("course_id", $user_course->course->id)
+                        ->where("is_finished", true)
+                        ->first() ?? false) ? true : false;
             }
             $formation->formation_courses = $courses;
             return $formation->jsonSerialize();
