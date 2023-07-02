@@ -62,9 +62,6 @@ Route::prefix("v1")->group(function () {
             if (!$user->image) {
                 $user->image = "images/user.png";
             }
-            if (($a = 2) == 2) {
-                echo $a;
-            }
             return $user->jsonSerialize();
         });
 
