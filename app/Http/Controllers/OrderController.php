@@ -25,6 +25,14 @@ class OrderController extends Controller
         return view("shop.orders", ["orders" => OrderInvoice::all()]);
     }
 
+    public function send_order(OrderInvoice $invoice)
+    {
+        $user = $invoice->user;
+        $invoice->update(["status" => "sent"]);
+        // Mail::to($user)->queue(new OrderConfirmed($user, $invoice));
+        return back()->with("success", "Invoice sent.");
+    }
+
     /**
      * Store a newly created resource in storage.
      */

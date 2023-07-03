@@ -26,21 +26,24 @@
                     <td>
                         @if ($order->status == 'pending')
                             <i class="fa-solid fa-clock"></i>
-                        @elseif ($order->status == 'sending')
-                            <i class="fa-solid fa-truck-fast text-success"></i>
+                        @elseif ($order->status == 'sent')
+                            <i class="fa-solid fa-truck-fast text-primary"></i>
                         @else
-                            <i class="fa-solid fa-check text-error"></i>
+                            <i class="fa-solid fa-check text-success"></i>
                         @endif
                     </td>
                     <td>
-                        <div class="dropdown dropdown-bottom dropdown-end">
-                            <label tabindex="0" class="btn btn-circle btn-ghost">
-                                <i class="fa-solid fa-gear"></i>
-                            </label>
-                            <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                                {{-- Add link to change status --}}
-                            </ul>
-                        </div>
+                        @if ($order->status == 'pending')
+                            <form action="{{ route('orders.send', $order) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-success w-full">
+                                    {{ __('Mark send') }}
+                                </button>
+                            </form>
+                        @else
+                            {{ __('No actions available') }}
+                        @endif
+
                     </td>
                 </tr>
             @endforeach

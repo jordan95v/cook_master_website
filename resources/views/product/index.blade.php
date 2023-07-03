@@ -50,8 +50,7 @@
                             </label>
                             <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                                 <!--Modify -->
-                                <a href="{{ route('product.edit', ['product' => $product->id]) }}"
-                                    class="btn btn-primary">
+                                <a href="{{ route('product.edit', $product) }}" class="btn btn-primary">
                                     <i class="fa-solid fa-pen me-2"></i>{{ __('Modify') }}
                                 </a>
 
@@ -67,7 +66,7 @@
                     <input type="checkbox" id="delete-modal-{{ $product->id }}" class="modal-toggle" />
                     <div class="modal modal-bottom sm:modal-middle">
                         <div class="modal-box">
-                            <form action="{{ route('product.destroy', ['product' => $product]) }}" method="post">
+                            <form action="{{ route('product.destroy', $product) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <label for="delete-modal-{{ $product->id }}"

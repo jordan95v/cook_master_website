@@ -11,9 +11,10 @@
                         <!-- head -->
                         <thead>
                             <tr>
-                                <th>id</th>
-                                <th>Date</th>
+                                <th>{{ __('ID') }}</th>
+                                <th>{{ __('Date') }}</th>
                                 <th>{{ __('Price') }}</th>
+                                <th>{{ __('Status') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -26,6 +27,15 @@
                                     </td>
                                     <td>{{ $item->created_at }}</td>
                                     <td>{{ $item->price }}€</td>
+                                    <td>
+                                        @if ($item->status == 'pending')
+                                            <i class="fa-solid fa-clock"></i>
+                                        @elseif ($item->status == 'sent')
+                                            <i class="fa-solid fa-truck-fast text-primary"></i>
+                                        @else
+                                            <i class="fa-solid fa-check text-success"></i>
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

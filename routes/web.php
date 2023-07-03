@@ -129,6 +129,7 @@ Route::group(
         Route::get("/planning", [EventController::class, "planning"])->name("events.planning");
 
         Route::get("/orders", [OrderController::class, "index"])->name("orders.index");
+        Route::post("/orders/{invoice}/send", [OrderController::class, "send_order"])->name("orders.send");
     }
 );
 
