@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PayRequest;
+use App\Mail\OrderConfirmed;
 use App\Models\Order;
 use App\Models\OrderInvoice;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Invoice;
 use Stripe\Exception\CardException;
@@ -112,6 +114,7 @@ class OrderController extends Controller
         if ($invoice->total_amount != 0) {
             try {
                 $user->charge($invoice->total_amount * 100, $request->get("payment-method-id"));
+                $user->increment("total_command");
             } catch (CardException $th) {
                 return back()->with("error", $th->getMessage());
             }
@@ -138,13 +141,15 @@ class OrderController extends Controller
         }
 
         // OrderInvoice creation
-        OrderInvoice::create([
+        $invoice = OrderInvoice::create([
             "user_id" => Auth::id(),
             "price" => $invoice->total_amount,
             "serial" => $invoice->series,
         ]);
 
-        $user->increment("total_command");
+        // Mail sending
+        Mail::to($user)->queue(new OrderConfirmed($user, $invoice));
+
         return redirect("store")->with("success", "Payment successful. Invoice available in your profile.");
     }
 

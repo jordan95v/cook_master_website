@@ -1,7 +1,7 @@
 @props(['admin', 'title', 'datatables', 'calendar'])
 
 <!DOCTYPE html>
-<html lang="fr" data-theme="light">
+<html lang="{{ App::getLocale('lang') }}" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
