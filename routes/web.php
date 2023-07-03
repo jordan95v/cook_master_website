@@ -127,6 +127,8 @@ Route::group(
             }
         );
         Route::get("/planning", [EventController::class, "planning"])->name("events.planning");
+
+        Route::get("/orders", [OrderController::class, "index"])->name("orders.index");
     }
 );
 

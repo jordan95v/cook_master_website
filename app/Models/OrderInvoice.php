@@ -14,5 +14,10 @@ class OrderInvoice extends Model
         return asset("storage/invoices/" . $this->serial . ".pdf");
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     use HasFactory;
 }

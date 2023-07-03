@@ -15,6 +15,7 @@
         <li><a href="{{ route('brand.create') }}">{{ __('Add a brand') }}</a></li>
         <li><a href="{{ route('product.index') }}">{{ __('Products list') }}</a></li>
         <li><a href="{{ route('brand.index') }}">{{ __('Brands list') }}</a></li>
+        <li><a href="{{ route('orders.index') }}">{{ __('Commands list') }}</a></li>
     </ul>
 </li>
 
