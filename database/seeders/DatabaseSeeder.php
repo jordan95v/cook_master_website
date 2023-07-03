@@ -60,8 +60,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\Event::factory(5)->create();
         \App\Models\ProductComment::factory(50)->create();
         \App\Models\Formation::factory(5)->create();
-        \App\Models\UserCourse::factory(10)->create();
+        \App\Models\UserCourse::factory(20)->create();
         \App\Models\FormationCourse::factory(5)->create();
-
+        \App\Models\Participed::factory(20)->create();
     }
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class);
             $table->float("price");
             $table->string("serial");
+            $table->enum("status", ["pending", "sending", "done"])->default("pending");
             $table->timestamps();
         });
     }
