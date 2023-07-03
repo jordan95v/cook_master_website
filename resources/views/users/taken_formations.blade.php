@@ -1,4 +1,4 @@
-<x-layout title="Taken formation" datatables=1>
+<x-layout title="Taken formations" datatables=1>
     <x-admin.listing>
         <!-- head -->
         <thead>

@@ -26,7 +26,7 @@
         </div>
     </form>
 
-    <div class="grid grid-cols-1 gap-6 pt-10 lg:px-24">
+    <div class="grid lg:grid-cols-2 grid-cols-1 gap-6 pt-10 lg:px-24">
         @foreach ($courses as $course)
             <div class="card lg:card-side border-2">
                 <img src="{{ asset('storage/' . $course->image) }}" class="rounded-s w-96">
@@ -39,7 +39,7 @@
                         {{ $course->difficulty }} {{ str_repeat('⭐', $course->difficulty) }}
                     </p>
                     <div class="text-end">
-                        <a href="{{ route('courses.show', $course) }}" class="btn btn-primary mt-5">
+                        <a href="{{ route('courses.show', $course) }}" class="btn btn-primary mt-5 w-full">
                             {{ __('Access this course') }}
                         </a>
                     </div>

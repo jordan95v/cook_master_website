@@ -83,7 +83,7 @@
                 </li>
                 <li>
                     <a href="{{ route('user.home-courses') }}">
-                        <i class="fa-solid fa-face-smile"></i>{{ __('My course at home') }}
+                        <i class="fa-solid fa-face-smile"></i>{{ __('My courses at home') }}
                     </a>
                 </li>
                 <li>

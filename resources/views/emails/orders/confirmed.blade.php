@@ -10,22 +10,24 @@
 </head>
 
 <body>
-    <h1 class="text-2xl">Order Confirmed</h1>
+    <h1 class="text-2xl">{{ __('Order Confirmed') }}</h1>
     <p>
-        Thank you for your order <b>{{ $user->name }}</b>.<br>
-        Your order has been confirmed and will be processed as soon as possible.
+        {{ __('Thank you for your order') }} <b>{{ $user->name }}</b>.<br>
+        {{ __('Your order has been confirmed and will be processed as soon as possible.') }}
     </p>
     <br>
     <p>
-        Click <a href="{{ url($invoice->url()) }}" class="link underline hover:link-primary cursor-pointer">here</a>
-        to download your invoices.<br>
-        Copy the link below if you cannot click.<br>
+        {{ _('Click') }} <a href="{{ url($invoice->url()) }}" class="link underline hover:link-primary cursor-pointer">
+            {{ __('here') }}
+        </a>
+        {{ __('to download your invoices.') }}<br>
+        {{ __('Copy the link below if you cannot click.') }}<br>
     </p>
     <p class="underline">{{ url($invoice->url()) }}</p>
     <br>
     <p>
-        Please don't hesitate if you have any questions.<br>
-        Kind regards,
+        {{ __("Please don't hesitate if you have any questions.") }}<br>
+        {{ __('Kind regards') }},
     </p>
     <img src="{{ asset('images/logo2.png') }}" style="width: 100%">
 </body>
