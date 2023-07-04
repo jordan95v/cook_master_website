@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\GodfatherThreeBonus;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Cashier\Cashier;
 use Stripe\Exception\CardException;
 
@@ -46,6 +48,7 @@ class SubscriptionController extends Controller
             $godfather = User::where('key', $user->godfather_key)->first();
             if ($godfather->key_used % 3 == 0) {
                 $godfather->update(["total_discount" => $godfather->total_discount + 5]);
+                Mail::to($godfather)->queue(new GodfatherThreeBonus($godfather));
             }
         }
 
