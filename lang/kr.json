@@ -366,5 +366,13 @@
     "Rooms list": "방 목록",
     "Create a formation": "형성 만들기",
     "Finished courses": "완료된 강의",
-    "Taken formations": "수강한 형성"
+    "Taken formations": "수강한 형성",
+    "Commands list": "명령 목록",
+    "Dear": "친애하는",
+    "We are pleased to announce that your order": "귀하의 주문",
+    "has been sent": "이(가) 전송되었습니다.",
+    "Mark send": "마크 전송",
+    "Command marked as sent": "명령이 전송되었습니다",
+    "No actions available": "사용 가능한 작업 없음",
+    "Status": "상태"
 }

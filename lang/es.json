@@ -366,5 +366,13 @@
     "Rooms list": "Lista de salas",
     "Create a formation": "Crear una formación",
     "Finished courses": "Cursos terminados",
-    "Taken formations": "Formaciones realizadas"
+    "Taken formations": "Formaciones realizadas",
+    "Commands list": "Lista de comandos",
+    "Dear": "Estimado",
+    "We are please to announce that your order": "Nos complace anunciar que tu pedido",
+    "has been sent": "ha sido enviado.",
+    "Mark send": "Marcar como enviado",
+    "Command marked as sent": "Comando marcado como enviado",
+    "No actions available": "No hay acciones disponibles",
+    "Status": "Estado"
 }

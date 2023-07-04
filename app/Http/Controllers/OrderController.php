@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PayRequest;
 use App\Mail\OrderConfirmed;
+use App\Mail\OrderShipped;
 use App\Models\Order;
 use App\Models\OrderInvoice;
 use App\Models\Product;
@@ -29,8 +30,8 @@ class OrderController extends Controller
     {
         $user = $invoice->user;
         $invoice->update(["status" => "sent"]);
-        // Mail::to($user)->queue(new OrderConfirmed($user, $invoice));
-        return back()->with("success", "Invoice sent.");
+        Mail::to($user)->queue(new OrderShipped($user, $invoice));
+        return back()->with("success", "Command marked as sent");
     }
 
     /**
