@@ -62,6 +62,7 @@ Route::prefix("v1")->group(function () {
             if (!$user->image) {
                 $user->image = "images/user.png";
             }
+            $user->subscription_name = str_replace('_annual', '', $user->getSubscription()[0]->name ?? "free");
             return $user->jsonSerialize();
         });
 
