@@ -201,6 +201,15 @@ Route::prefix("v1")->group(function () {
             return $formation->jsonSerialize();
         });
 
+        Route::post("/formations/{formation}/take", function (Formation $formation) {
+            $user = User::where("api_key", request()->header("API_KEY"))->first();
+            FormationUser::create([
+                "user_id" => $user->id,
+                "formation_id" => $formation->id,
+            ]);
+            return response()->json(["message" => "Formation taken."], 200);
+        });
+
         Route::post("/formations/{formation}", function (Formation $formation) {
             $user = User::where("api_key", request()->header("API_KEY"))->first();
             $formation_user = FormationUser::where("user_id", $user->id)
