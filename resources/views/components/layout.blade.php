@@ -25,6 +25,12 @@
     @isset($calendar)
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
     @endisset
+
+    {{-- Google Adsense --}}
+    @if (!Auth::user()->isSubscribed())
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5629070617397142"
+            crossorigin="anonymous"></script>
+    @endif
 </head>
 
 <body>
