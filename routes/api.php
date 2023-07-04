@@ -203,6 +203,11 @@ Route::prefix("v1")->group(function () {
 
         Route::post("/formations/{formation}/take", function (Formation $formation) {
             $user = User::where("api_key", request()->header("API_KEY"))->first();
+            if (FormationUser::where("user_id", $user->id)
+                ->where("formation_id", $formation->id)
+                ->exists()) {
+                return response()->json(["error" => "Formation already taken."], 400);
+            };
             FormationUser::create([
                 "user_id" => $user->id,
                 "formation_id" => $formation->id,
