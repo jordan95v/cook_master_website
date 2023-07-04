@@ -22,6 +22,7 @@ class UserCourseFactory extends Factory
             "course_id" => Course::all()->random()->id,
             "user_id" => User::all()->random()->id,
             "is_finished" => $this->faker->boolean,
+            "created_at" => $this->faker->dateTime,
         ];
     }
 }

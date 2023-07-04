@@ -9,10 +9,20 @@
 
 <x-layout title="{!! $formation->name !!}">
     <div class="grid grid-cols-1 lg:grid-cols-2 justify-center align-center gap-10 p-5 lg:px-24 lg:p-12">
-        <div class="lg:py-20">
+        <div class="lg:py-20 flex flex-col">
             <p class="font-bold font-mono text-2xl lg:text-5xl">{{ $formation->name }}</p>
             <x-utils.description-trunked :target="$formation" limit="800" />
-            <a href="#full-description" class="link hover:link-primary">{{ __('Show more') }}</a>
+            <a href="#full-description" class="link hover:link-primary lg:mb-auto mb-10">{{ __('Show more') }}</a>
+            @if (!$formation_taken)
+                @if (!Auth::user()->is($formation->user) || !Auth::user()->isAdmin())
+                    <form action="{{ route('formation.take', $formation) }}" method="post" class="">
+                        @csrf
+                        <button class="btn btn-primary w-full">
+                            <i class="fa-solid fa-bag-shopping me-2"></i>{{ __('Take this formation') }}
+                        </button>
+                    </form>
+                @endif
+            @endif
         </div>
         <div class="mx-auto">
             <img src="{{ asset('storage/' . $formation->image) }}" class="object-cover h-full rounded-xl" />
@@ -65,15 +75,6 @@
                                 <i class="fa-solid fa-bag-shopping me-2"></i>{{ __('Get the certification') }}
                             </button>
                         </form>
-                    @else
-                        @if (!Auth::user()->is($formation->user) || !Auth::user()->isAdmin())
-                            <form action="{{ route('formation.take', $formation) }}" method="post" class="mt-10">
-                                @csrf
-                                <button class="btn btn-primary w-full">
-                                    <i class="fa-solid fa-bag-shopping me-2"></i>{{ __('Take this formation') }}
-                                </button>
-                            </form>
-                        @endif
                     @endif
                 </div>
             </x-utils.card>

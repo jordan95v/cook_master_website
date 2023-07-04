@@ -10,7 +10,8 @@ use App\Models\FormationUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\StreamedResponse;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 class FormationController extends Controller
 {
@@ -151,7 +152,11 @@ class FormationController extends Controller
 
     private function download_certification(User $user, Formation $formation)
     {
-        $response = new StreamedResponse(function () use ($user, $formation) {
+        $taken_formation = FormationUser::where("formation_id", $formation->id)
+            ->where("user_id", $user->id)
+            ->first();
+
+        if (!$taken_formation->image) {
             $image = imagecreatefrompng(public_path("images/certification.png"));
             $color = imagecolorallocate($image, 0, 0, 0);
             $text = "$user->name";
@@ -166,12 +171,18 @@ class FormationController extends Controller
             $text = "$formation->name";
             imagestring($image, 5, 485, 490, $text, $color);
 
+            ob_start();
             imagepng($image);
+            $path = "certifications/certification-" . $user->id . "-" . $formation->id . ".png";
+            Storage::disk("public")->put($path, ob_get_contents());
+            ob_end_clean();
             imagedestroy($image);
-        });
-        $response->headers->set('Content-Type', 'image/png');
-        $response->headers->set('Content-Disposition', 'attachment; filename="download.jpg"');
-        return $response;
+
+            $taken_formation->image = $path;
+            $taken_formation->is_finished = true;
+            $taken_formation->save();
+        }
+        return Response::download(public_path("storage/" . $taken_formation->image));
     }
 
     public function get_certification(Formation $formation, Request $request)

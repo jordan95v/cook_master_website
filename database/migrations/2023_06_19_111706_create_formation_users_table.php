@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Formation::class)->constrained()->cascadeOnDelete();
             $table->boolean("is_finished")->default(false);
+            $table->string("image")->nullable();
             $table->timestamps();
         });
     }
