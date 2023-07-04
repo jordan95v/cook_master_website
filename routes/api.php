@@ -199,5 +199,16 @@ Route::prefix("v1")->group(function () {
             $formation->formation_courses = $courses;
             return $formation->jsonSerialize();
         });
+
+        Route::post("/formations/{formation}", function (Formation $formation) {
+            $user = User::where("api_key", request()->header("API_KEY"))->first();
+            $formation_user = FormationUser::where("user_id", $user->id)
+                ->where("formation_id", $formation->id)
+                ->first();
+            if (!$formation_user) {
+                return response()->json(["error" => "Formation not started by user."], 400);
+            }
+            return $formation_user;
+        });
     });
 });
