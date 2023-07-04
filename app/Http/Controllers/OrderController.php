@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PayRequest;
+use App\Mail\GodfatherBonus;
 use App\Mail\OrderConfirmed;
 use App\Mail\OrderShipped;
 use App\Models\Order;
@@ -139,6 +140,7 @@ class OrderController extends Controller
                 if ($subscriptions != null) {
                     if (str_starts_with($subscriptions[0]->name, "pro")) {
                         $godfather->update(["total_discount" => $godfather->total_discount + $pourcentage]);
+                        Mail::to($godfather)->queue(new GodfatherBonus($user, $godfather, $pourcentage));
                     }
                 }
             }
