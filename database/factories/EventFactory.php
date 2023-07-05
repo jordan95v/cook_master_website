@@ -17,9 +17,9 @@ class EventFactory extends Factory
     public function definition(): array
     {
         return [
-            "title" => $this->faker->words(3, true),
+            "title" => $this->faker->words(2, true),
             "is_course" => $this->faker->boolean(),
-            "description" => $this->faker->text(1000),
+            "description" => $this->faker->text(3000),
             "capacity" => $this->faker->numberBetween(1, 100),
             "image" => $this->faker->image("public/storage/", 1280, 720, null, false),
             "date" => $this->faker->dateTimeBetween("+0 week", "+2 week")->format("Y-m-d"),

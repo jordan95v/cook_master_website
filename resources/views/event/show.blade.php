@@ -25,11 +25,32 @@
                     @endif
                 @endif
             @endif
+            <div class="text-start mt-10">
+                <x-utils.description-trunked :target="$event" limit="800" />
+                <a href="#full-description" class="link hover:link-primary lg:mb-auto mb-10">{{ __('Show more') }}</a>
+            </div>
         </div>
     </div>
 
+    {{-- Room information --}}
+    <x-utils.card class="w-full lg:mx-24">
+        <div class="card-body">
+            <a href="{{ route('room.show', $event->room) }}" class="card-title link hover:link-primary font-bold my-3">
+                {{ $event->room->name }}
+            </a>
+            <p class="text-lg font-medium my-3">
+                <i class="fa-solid fa-location-dot me-2"></i>{{ $event->room->address }}
+            </p>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.4753698334275!2d2.3870841771139757!3d48.849144971330794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6727347e25d67%3A0xc73e22c1131584f7!2s242%20Rue%20du%20Faubourg%20Saint-Antoine%2C%2075012%20Paris!5e0!3m2!1sfr!2sfr!4v1683577263610!5m2!1sfr!2sfr"
+                class="w-full h-96" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </x-utils.card>
+
     {{-- Information about the event --}}
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 bg-gray-200 lg:px-24 px-5 rounded-xl py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 bg-gray-200 lg:px-24 px-5 rounded-xl py-10" id="full-description">
         <div>
             <h3 class="text-4xl font-bold pb-10">{{ __('Informations about the event') }}</h3>
             {!! $event->description !!}
@@ -57,9 +78,7 @@
                 <ul>
                     @foreach ($participant as $member)
                         <div class="flex items-center gap-4 p-4">
-                            <img src="{{ Auth::user()->image ?? false ? asset('storage/' . Auth::user()->image) : asset('images/user.png') }}"
-                                class="w-12 h-12 rounded-full object-cover object-center">
-                            <p class="text-lg">{{ $member->name }}</p>
+                            <x-admin.user-avatar :target="$member" class="w-10 h-10 rounded-full" />
                         </div>
                     @endforeach
                 </ul>
@@ -67,36 +86,12 @@
         </div>
     </div>
 
-    {{-- Room information --}}
-    <x-utils.card class="w-full lg:mx-24">
-        <div class="card-body">
-            <a href="{{ route('room.show', $event->room) }}" class="card-title link hover:link-primary font-bold my-3">
-                {{ $event->room->name }}
-            </a>
-            <p class="text-lg font-medium my-3">
-                <i class="fa-solid fa-location-dot me-2"></i>{{ $event->room->address }}
-            </p>
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.4753698334275!2d2.3870841771139757!3d48.849144971330794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6727347e25d67%3A0xc73e22c1131584f7!2s242%20Rue%20du%20Faubourg%20Saint-Antoine%2C%2075012%20Paris!5e0!3m2!1sfr!2sfr!4v1683577263610!5m2!1sfr!2sfr"
-                class="w-full h-96" style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-        </div>
-    </x-utils.card>
-
     {{-- Streaming --}}
-    <h3 class="text-4xl font-bold pb-4 lg:px-24">{{ __('The event is online right now !') }}</h3>
+    <h3 class="text-4xl mt-10 font-bold pb-4 lg:px-24">{{ __('The event is online right now !') }}</h3>
     <div id="video_container" class="mx-auto" style="width: 90vw; height: 75vh;"></div>
     <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
     <script>
         window.onload = function() {
-            function getUrlParams(url) {
-                let urlStr = url.split('?')[1];
-                const urlSearchParams = new URLSearchParams(urlStr);
-                const result = Object.fromEntries(urlSearchParams.entries());
-                return result;
-            }
-
             const roomID = '{{ $event->room->id }}';
             const userID = '{{ Auth::user()->id }}';
             const userName = '{{ Auth::user()->name }}';

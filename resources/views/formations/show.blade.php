@@ -6,7 +6,7 @@
             <a href="#full-description" class="link hover:link-primary lg:mb-auto mb-10">{{ __('Show more') }}</a>
             @if (!$formation_user)
                 @if (!Auth::user()->is($formation->user) || !Auth::user()->isAdmin())
-                    <form action="{{ route('formation.take', $formation) }}" method="post" class="">
+                    <form action="{{ route('formation.take', $formation) }}" method="post" class="mt-5">
                         @csrf
                         <button class="btn btn-primary w-full">
                             <i class="fa-solid fa-bag-shopping me-2"></i>{{ __('Take this formation') }}

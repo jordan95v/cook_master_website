@@ -25,6 +25,13 @@
                 </p>
                 <x-admin.user-avatar :target="$course->user" />
             </div>
+            <div class="text-start">
+                @php
+                    $description = preg_replace('/<figure.*<\/figure>(?:(<p>&nbsp;<\/p>)*)(.)/i', '$2', $course->content);
+                @endphp
+                <div class="py-5 text-gray-600">{!! Str::limit($description, 400) !!}</div>
+                <a href="#full-description" class="link hover:link-primary lg:mb-auto mb-10">{{ __('Show more') }}</a>
+            </div>
         </div>
     </div>
     @if (count($random_courses) > 0)
