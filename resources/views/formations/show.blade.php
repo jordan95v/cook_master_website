@@ -1,19 +1,10 @@
-@php
-    $formation_taken = false;
-    foreach (Auth::user()->taken_formations as $taken_formation) {
-        if ($taken_formation->formation->id == $formation->id) {
-            $formation_taken = true;
-        }
-    }
-@endphp
-
 <x-layout title="{!! $formation->name !!}">
     <div class="grid grid-cols-1 lg:grid-cols-2 justify-center align-center gap-10 p-5 lg:px-24 lg:p-12">
         <div class="lg:py-20 flex flex-col">
             <p class="font-bold font-mono text-2xl lg:text-5xl">{{ $formation->name }}</p>
             <x-utils.description-trunked :target="$formation" limit="800" />
             <a href="#full-description" class="link hover:link-primary lg:mb-auto mb-10">{{ __('Show more') }}</a>
-            @if (!$formation_taken)
+            @if (!$formation_user)
                 @if (!Auth::user()->is($formation->user) || !Auth::user()->isAdmin())
                     <form action="{{ route('formation.take', $formation) }}" method="post" class="">
                         @csrf
@@ -66,12 +57,11 @@
                             {{ __('Add a course') }}<i class="ms-2 fa-solid fa-plus text-success"></i>
                         </a>
                     @endif
-                    @if ($formation_taken)
-                        <form action="{{ route('formation.get_certification', $formation) }}" method="post"
-                            class="mt-10">
+                    @if ($formation_user)
+                        <form action="{{ route('formation.get_certification', $formation) }}" method="post">
                             @csrf
                             <button class="btn btn-primary w-full"
-                                @if (!$can_get_certification) disabled="disabled" @endif">
+                                @if (!$formation_user->can_get_certification()) disabled="disabled" @endif">
                                 <i class="fa-solid fa-bag-shopping me-2"></i>{{ __('Get the certification') }}
                             </button>
                         </form>

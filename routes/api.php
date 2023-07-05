@@ -156,18 +156,17 @@ Route::prefix("v1")->group(function () {
 
         Route::post("courses/{course}/finished", function (Course $course) {
             $user = User::where("api_key", request()->header("API_KEY"))->first();
-            if (UserCourse::where("user_id", $user->id)
+            $user_course = UserCourse::where("user_id", $user->id)
                 ->where("course_id", $course->id)
-                ->where("is_finished", true)
-                ->first() ?? false) {
-                return response()->json(["error" => "Course already finished."], 400);
-            } else if ($user_course = UserCourse::where("user_id", $user->id)
-                ->where("course_id", $course->id)
-                ->where("is_finished", false)
-                ->first() ?? false) {
-                $user_course->is_finished = true;
-                $user_course->save();
-                return response()->json(["message" => "Course finished."], 200);
+                ->first();
+            if ($user_course) {
+                if ($user_course->is_finished) {
+                    return response()->json(["error" => "Course already finished."], 400);
+                } else {
+                    $user_course->is_finished = true;
+                    $user_course->save();
+                    return response()->json(["message" => "Course finished."], 200);
+                }
             }
             UserCourse::create([
                 "user_id" => $user->id,
@@ -222,8 +221,10 @@ Route::prefix("v1")->group(function () {
                 ->first();
             if (!$formation_user) {
                 return response()->json(["error" => "Formation not started by user."], 400);
+            } else if (!$formation_user->image && $formation_user->can_get_certification()) {
+                $formation_user->create_certification_image();
             }
-            return $formation_user;
+            return $formation_user->jsonSerialize();
         });
     });
 });

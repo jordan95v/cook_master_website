@@ -68,20 +68,9 @@ class FormationController extends Controller
         if (count($formation->courses) == 0 && (!$user->isAdmin() || !$formation->user->is($user))) {
             return back()->with("error", "This formation doesn't have any courses.");
         }
-        $can_get_certification = false;
-
-        $user_finished_courses = 0;
-        foreach ($formation->courses as $formation_course) {
-            foreach ($user->finished_courses as $user_course) {
-                if ($formation_course->course->is($user_course->course) && $user_course->is_finished) {
-                    $user_finished_courses++;
-                }
-            }
-        }
-        if ($user_finished_courses == count($formation->courses)) {
-            $can_get_certification = true;
-        }
-        return view("formations.show", ["formation" => $formation, "can_get_certification" => $can_get_certification]);
+        $formation_user = FormationUser::where("formation_id", $formation->id)
+            ->where("user_id", $user->id)->first();
+        return view("formations.show", ["formation" => $formation, "formation_user" => $formation_user]);
     }
 
     /**
@@ -157,48 +146,19 @@ class FormationController extends Controller
             ->first();
 
         if (!$taken_formation->image) {
-            $image = imagecreatefrompng(public_path("images/certification.png"));
-            $color = imagecolorallocate($image, 0, 0, 0);
-            $text = "$user->name";
-            imagestring($image, 20, 520, 300, $text, $color);
-
-            $text = "Certified on " . date("d/m/Y");
-            imagestring($image, 5, 455, 350, $text, $color);
-
-            $text = "For completing all the course of: ";
-            imagestring($image, 5, 400, 450, $text, $color);
-
-            $text = "$formation->name";
-            imagestring($image, 5, 485, 490, $text, $color);
-
-            ob_start();
-            imagepng($image);
-            $path = "certifications/certification-" . $user->id . "-" . $formation->id . ".png";
-            Storage::disk("public")->put($path, ob_get_contents());
-            ob_end_clean();
-            imagedestroy($image);
-
-            $taken_formation->image = $path;
-            $taken_formation->is_finished = true;
-            $taken_formation->save();
+            $taken_formation->create_certification_image();
         }
         return Response::download(public_path("storage/" . $taken_formation->image));
     }
 
-    public function get_certification(Formation $formation, Request $request)
+    public function get_certification(Formation $formation)
     {
         $user = User::find(Auth::id());
-        $match = 0;
+        $formation_user = FormationUser::where("formation_id", $formation->id)
+            ->where("user_id", $user->id)
+            ->first();
 
-        foreach ($formation->courses as $formation_course) {
-            foreach ($user->finished_courses as $user_course) {
-                if ($formation_course->course->id == $user_course->course->id) {
-                    $match++;
-                }
-            }
-        }
-
-        if ($match == count($formation->courses)) {
+        if ($formation_user->can_get_certification()) {
             return $this->download_certification($user, $formation);
         } else {
             return back()->with("error", "You don't have complteted all the courses required for this certification.");
