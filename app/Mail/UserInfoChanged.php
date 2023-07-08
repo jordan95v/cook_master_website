@@ -27,7 +27,7 @@ class UserInfoChanged extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Account modified',
+            subject: __('Account modified'),
         );
     }
 

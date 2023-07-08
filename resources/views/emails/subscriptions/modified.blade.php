@@ -3,6 +3,11 @@
     <p>
         {{ __('Dear') }} <b>{{ $user->name }}</b>.<br>
         {{ __('Your subscription has been') }} {{ __($status) }}<br>.
+        @if ($status == 'canceled')
+            {{ __('We hope you enjoyed our services.') }}<br>
+        @else
+            {{ __('We hope you\'ll enjoy our services.') }}<br>
+        @endif
     </p>
     <br>
     <p>

@@ -403,8 +403,14 @@
     "Subscription modified": "Abonnement modifié",
     "Thanks you for your subscription.": "Merci pour votre abonnement.",
     "We hope you'll enjoy our services.": "Nous espérons que vous apprécierez nos services.",
+    "We hope you enjoyed our services.": "Nous espérons que vous avez apprécié nos services.",
     "Your subscription has been": "Votre abonnement a été",
     "canceled": "annulé",
     "resumed": "relancé",
-    "Subscription thank": "Merci pour votre abonnement"
+    "Subscription thank": "Merci pour votre abonnement",
+    "Godfather bonus": "Bonus de parrainage",
+    "Account modified": "Compte modifié",
+    "Order confirmed": "Commande confirmée",
+    "Order shipped": "Commande expédiée",
+    "Home course request": "Demande de cours à domicile"
 }

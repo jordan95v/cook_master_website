@@ -31,7 +31,7 @@ class HomeCourse extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Home Course Request',
+            subject: __('Home course request'),
         );
     }
 

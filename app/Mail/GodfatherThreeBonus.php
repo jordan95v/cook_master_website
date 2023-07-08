@@ -27,7 +27,7 @@ class GodfatherThreeBonus extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Godfather Bonus',
+            subject: __('Godfather bonus'),
         );
     }
 

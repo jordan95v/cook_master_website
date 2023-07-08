@@ -29,7 +29,7 @@ class OrderConfirmed extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Order Confirmed',
+            subject: __('Order confirmed'),
         );
     }
 
