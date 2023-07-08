@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Mail\UserBanned;
 use App\Mail\UserInfoChanged;
 use App\Models\Event;
 use App\Models\User;
@@ -102,9 +103,11 @@ class UserController extends Controller
         $this->authorize("ban", $user);
         if ($user->is_banned) {
             $user->update(["is_banned" => 0]);
+            Mail::to($user)->queue(new UserBanned($user, "unbanned"));
             return back()->with("success", "You successfully unbanned the user.");
         }
         $user->update(["is_banned" => 1]);
+        Mail::to($user)->queue(new UserBanned($user, "banned"));
         return back()->with("success", "You successfully banned the user.");
     }
 

@@ -412,5 +412,10 @@
     "Account modified": "Compte modifié",
     "Order confirmed": "Commande confirmée",
     "Order shipped": "Commande expédiée",
-    "Home course request": "Demande de cours à domicile"
+    "Home course request": "Demande de cours à domicile",
+    "Your account have been": "Votre compte a été",
+    "If you think this is a mistake, please contact us.": "Si vous pensez qu'il s'agit d'une erreur, veuillez nous contacter.",
+    "Account restriction": "Restriction de compte",
+    "banned": "banni",
+    "unbanned": "débanni"
 }
