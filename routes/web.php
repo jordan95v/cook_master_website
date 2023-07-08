@@ -170,9 +170,9 @@ Route::group(["middleware" => ["auth"]], function () {
         Route::get("/basket", "show")->name("order.show");
     });
 
+    // Message
     Route::resource('tchat', MessageController::class);
     Route::post('/tchat/{receiver_id}', 'MessageController@store')->name('tchat.store');
-
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
     Route::get('/messages/{user}', [MessageController::class, 'show'])->name('messages.show');
     Route::post('/messages/{user}',[MessageController::class, 'store'])->name('messages.store');

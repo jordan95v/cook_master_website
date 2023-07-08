@@ -25,7 +25,7 @@
                                             A
                                         </div>
                                         <div class="relative mr-3 text-sm {{ $message->sender_id == auth()->id() ? 'bg-indigo-100' : 'bg-white' }} py-2 px-4 shadow rounded-xl">
-                                            <div>
+                                            <div id="messages">
                                                 {{ $message->message }}
                                             </div>
                                         </div>
@@ -37,13 +37,13 @@
                     <div class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
                         <div class="flex-grow ml-4">
                             <div class="relative w-full">
-                                <form method="post" action="{{ route('messages.store', $receiver) }}">
+                                <form id="form" method="post" action="{{ route('messages.store', $receiver) }}">
                                     @csrf
                                     <input type="text" name="content" class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10" />
                             </div>
                         </div>
                         <div class="ml-4">
-                            <button type="submit" class="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0">
+                            <button id="input" type="submit" class="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0">
                                 <span>Send</span>
                             </button>
                         </div>
@@ -52,4 +52,6 @@
             </div>
         </div>
     </div>
+
 </x-layout>
+

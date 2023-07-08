@@ -39,14 +39,13 @@ class DatabaseSeeder extends Seeder
             'api_key' => Str::random(32),
         ]);
 
-        // Basic user
+        // Provider
         User::create([
             'name' => 'quentin95v',
             'email' => 'quentin@gmail.com',
-            'role' => 0,
+            'role' => 3,
             "email_verified_at" => "2021-03-25 00:00:00",
             'password' => bcrypt('Test1234'),
-            'is_service_provider' => 1,
             'key' => Str::random(32),
             'api_key' => Str::random(32),
         ]);

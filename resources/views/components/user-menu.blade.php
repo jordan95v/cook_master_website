@@ -113,6 +113,11 @@
                         <i class="fa-solid fa-book-open"></i>{{ __('My formations') }}
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('messages.index') }}">
+                        <i class="fa-solid fa-envelope"></i>{{ __('My messages') }}
+                    </a>
+                </li>
             @endif
             <li>
                 <a href="{{ route('logout') }}">
