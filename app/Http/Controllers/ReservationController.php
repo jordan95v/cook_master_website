@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateReservationRequest;
+use App\Mail\HomeCourse;
 use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller
 {
@@ -55,12 +57,14 @@ class ReservationController extends Controller
             'assigned_to' => $form['user_id'],
             'status' => 'accepted',
         ]);
+        Mail::to($reservation->user)->queue(new HomeCourse($reservation->user, $reservation, 'accepted'));
         return redirect()->route('reservation.index')->with('success', 'Chef assigned successfully');
     }
 
     public function reject_reservation(Reservation $reservation)
     {
         $reservation->update(["status" => "rejected"]);
+        Mail::to($reservation->user)->queue(new HomeCourse($reservation->user, $reservation, 'rejected'));
         return redirect()->route('reservation.index')->with('success', 'Reservation rejected successfully');
     }
 }
