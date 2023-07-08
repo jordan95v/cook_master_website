@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Mail\UserInfoChanged;
 use App\Models\Event;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class UserController extends Controller
@@ -63,17 +65,19 @@ class UserController extends Controller
     // Update the specified resource in storage.
     public function update(UpdateUserRequest $request)
     {
+        $user = User::find(Auth::id());
         $form = $request->validated();
         if ($form["password"] ?? false) {
             $form["password"] = bcrypt($form["password"]);
         }
         if ($request->hasFile("image")) {
-            if (Auth::user()->image && file_exists("storage/" . Auth::user()->image)) {
-                unlink("storage/" . Auth::user()->image);
+            if ($user->image && file_exists("storage/" . $user->image)) {
+                unlink("storage/" . $user->image);
             }
             $form["image"] = $request->file("image")->store("avatar", "public");
         }
-        User::find(Auth::id())->update($form);
+        $user->update($form);
+        Mail::to($user)->queue(new UserInfoChanged($user));
         return back()->with("success", "You successfully edited your profile.");
     }
 

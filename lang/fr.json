@@ -395,5 +395,9 @@
     "for the": "pour le",
     "has been": "a été",
     "accepted": "acceptée",
-    "rejected": "refusée"
+    "rejected": "refusée",
+    "Your account have been changed.": "Votre compte a été modifié.",
+    "If you did not change your account, please contact us.": "Si vous n'avez pas modifié votre compte, veuillez nous contacter.",
+    "Otherwise, you can ignore this message.": "Sinon, vous pouvez ignorer ce message.",
+    "Account modified. Check your email to verify your account.": "Compte modifié. Vérifiez votre email pour vérifier votre compte."
 }
