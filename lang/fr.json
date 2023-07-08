@@ -399,5 +399,12 @@
     "Your account have been changed.": "Votre compte a été modifié.",
     "If you did not change your account, please contact us.": "Si vous n'avez pas modifié votre compte, veuillez nous contacter.",
     "Otherwise, you can ignore this message.": "Sinon, vous pouvez ignorer ce message.",
-    "Account modified. Check your email to verify your account.": "Compte modifié. Vérifiez votre email pour vérifier votre compte."
+    "Account modified. Check your email to verify your account.": "Compte modifié. Vérifiez votre email pour vérifier votre compte.",
+    "Subscription modified": "Abonnement modifié",
+    "Thanks you for your subscription.": "Merci pour votre abonnement.",
+    "We hope you'll enjoy our services.": "Nous espérons que vous apprécierez nos services.",
+    "Your subscription has been": "Votre abonnement a été",
+    "canceled": "annulé",
+    "resumed": "relancé",
+    "Subscription thank": "Merci pour votre abonnement"
 }

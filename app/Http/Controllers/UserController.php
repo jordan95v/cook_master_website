@@ -76,8 +76,8 @@ class UserController extends Controller
             }
             $form["image"] = $request->file("image")->store("avatar", "public");
         }
-        $user->update($form);
         Mail::to($user)->queue(new UserInfoChanged($user));
+        $user->update($form);
         return back()->with("success", "You successfully edited your profile.");
     }
 

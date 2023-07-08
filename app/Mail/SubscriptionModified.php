@@ -9,18 +9,16 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class GodfatherBonus extends Mailable
+class SubscriptionModified extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(
-        public User $user,
-        public User $godfather,
-        public float $amount
-    ) {
+    public function __construct(public User $user, public string $status)
+    {
+        //
     }
 
     /**
@@ -29,7 +27,7 @@ class GodfatherBonus extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: __('Godfather Bonus'),
+            subject: __('Subscription modified'),
         );
     }
 
@@ -39,7 +37,7 @@ class GodfatherBonus extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.shop.godfather-bonus',
+            view: 'emails.subscriptions.modified',
         );
     }
 

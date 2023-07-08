@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Mail\GodfatherThreeBonus;
+use App\Mail\SubscriptionModified;
+use App\Mail\SubscriptionThank;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,6 +54,7 @@ class SubscriptionController extends Controller
             }
         }
 
+        Mail::to($user)->queue(new SubscriptionThank($user));
         return redirect("/")->with("success", "Congrats, you subscribed.");
     }
 
@@ -59,6 +62,7 @@ class SubscriptionController extends Controller
     {
         $user = User::find(Auth::id());
         $user->subscriptions()->first()->cancel();
+        Mail::to($user)->queue(new SubscriptionModified($user, "canceled"));
         return back()->with("success", "You unsubscribed :(.");
     }
 
@@ -66,6 +70,7 @@ class SubscriptionController extends Controller
     {
         $user = User::find(Auth::id());
         $user->subscriptions()->first()->resume();
+        Mail::to($user)->queue(new SubscriptionModified($user, "resumed"));
         return back()->with("success", "Very good, you are back. You resumed your subscription.");
     }
 }
