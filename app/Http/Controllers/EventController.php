@@ -73,6 +73,7 @@ class EventController extends Controller
         if ($request->hasFile('image')) {
             $form['image'] = $request->file('image')->store('events', 'public');
         }
+        $form["is_course"] = $form["is_course"] == "on";
         Event::create($form);
         return back()->with("success", "You have created an event");
     }
@@ -108,6 +109,7 @@ class EventController extends Controller
         if ($request->hasFile('image')) {
             $form['image'] = $request->file('image')->store('images', 'public');
         }
+        $form["is_course"] = $form["is_course"] == "on";
         $event->update($form);
         return back()->with("success", "You have edited an event");
     }
