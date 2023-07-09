@@ -14,24 +14,29 @@ class CourseController extends Controller
 {
     public function all(Request $request)
     {
+        $search = $request->get("search");
         $value = $request->get("filter");
-        switch ($value) {
-            case "down_difficulty":
-                $courses = Course::orderBy("difficulty", "desc")->simplePaginate(10);
-                break;
-            case "up_difficulty":
-                $courses = Course::orderBy("difficulty", "asc")->simplePaginate(10);
-                break;
-            case "down_duration":
-                $courses = Course::orderBy("duration", "desc")->simplePaginate(10);
-                break;
-            case "up_duration":
-                $courses = Course::orderBy("duration", "asc")->simplePaginate(10);
-                break;
-            default:
-                $courses = Course::simplePaginate(10);
-                break;
-        }
+        $courses = Course::when($search, function ($query, $search) {
+            return $query->where("name", "like", "%$search%");
+        })
+            ->when($value, function ($query, $value) {
+                if ($value == "down_difficulty") {
+                    return $query->orderBy("difficulty", "desc");
+                } else if ($value == "up_difficulty") {
+                    return $query->orderBy("difficulty", "asc");
+                } else if ($value == "down_duration") {
+                    return $query->orderBy("duration", "desc");
+                } else if ($value == "up_duration") {
+                    return $query->orderBy("duration", "asc");
+                } else if ($value == "new") {
+                    return $query->orderBy("created_at", "desc");
+                } else if ($value == "old") {
+                    return $query->orderBy("created_at", "asc");
+                } else {
+                    return $query;
+                }
+            })
+            ->simplePaginate(10);
         return view('course.all', ["courses" => $courses, "filter" => $value]);
     }
 

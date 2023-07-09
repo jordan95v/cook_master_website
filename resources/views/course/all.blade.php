@@ -14,7 +14,9 @@
             class="rounded-xl max-h-56 object-cover w-full">
     </div>
     <form action="{{ route('courses.all') }}" method="get" class="flex justify-center">
-        <div class="grid md:grid-cols-2 grid-cols-1 gap-4">
+        <div class="grid md:grid-cols-3 grid-cols-1 gap-4">
+            <input type="text" name="search" placeholder="{{ __('Search ...') }}"
+                class="input input-bordered w-full max-w-xs" value="{{ old('search') }}">
             <select class="select select-bordered w-full max-w-xs" name="filter">
                 <option disabled selected>{{ __('Sort by') }} </option>
                 @foreach ($sorts as $key => $sort)
