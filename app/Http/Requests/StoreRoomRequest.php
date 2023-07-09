@@ -24,7 +24,7 @@ class StoreRoomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => "required",
+            "name" => "required|unique:rooms,name",
             "address" => "required",
             "image" => ["required",
                 File::image()->dimensions(Rule::dimensions()->minWidth(1280)->minHeight(720)),

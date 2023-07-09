@@ -25,8 +25,9 @@ class UpdateRoomRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route()->room->id;
         $rules = [
-            "name" => "required",
+            "name" => "required|unique:rooms,name,$id",
             "address" => "required",
         ];
         if ($this->hasFile("image")) {

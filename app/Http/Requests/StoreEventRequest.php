@@ -21,9 +21,8 @@ class StoreEventRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             "title" => "required",
-            "is_course" => "required",
             "description" => "required",
             "image" => "required|image|dimensions:min_width=1280,min_height=720",
             "user_id" => "required",
@@ -33,5 +32,9 @@ class StoreEventRequest extends FormRequest
             "start_time" => "required|date_format:H:i:s",
             "end_time" => "required|date_format:H:i:s",
         ];
+        if ($this->has("is_course")) {
+            $rules["is_course"] = "required";
+        }
+        return $rules;
     }
 }

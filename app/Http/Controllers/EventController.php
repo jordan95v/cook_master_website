@@ -70,10 +70,10 @@ class EventController extends Controller
         $user = User::find(Auth::id());
         $form["user_id"] = ($user->isAdmin()) ? $request->user_id : $user->id;
         $form["created_by"] = $user->id;
-        if ($request->hasFile('image')) {
-            $form['image'] = $request->file('image')->store('events', 'public');
+        $form['image'] = $request->file('image')->store('events', 'public');
+        if ($request->has("is_course")) {
+            $form["is_course"] = $form["is_course"] == "on";
         }
-        $form["is_course"] = $form["is_course"] == "on";
         Event::create($form);
         return back()->with("success", "You have created an event");
     }
@@ -109,7 +109,9 @@ class EventController extends Controller
         if ($request->hasFile('image')) {
             $form['image'] = $request->file('image')->store('images', 'public');
         }
-        $form["is_course"] = $form["is_course"] == "on";
+        if ($request->has("is_course")) {
+            $form["is_course"] = $form["is_course"] == "on";
+        }
         $event->update($form);
         return back()->with("success", "You have edited an event");
     }

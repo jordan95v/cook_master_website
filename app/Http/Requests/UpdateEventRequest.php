@@ -26,7 +26,6 @@ class UpdateEventRequest extends FormRequest
     {
         $rules = [
             "title" => "required",
-            "is_course" => "required",
             "description" => "required",
             "room_id" => "required",
             "capacity" => "required",
@@ -36,6 +35,9 @@ class UpdateEventRequest extends FormRequest
         ];
         if ($this->hasFile("image")) {
             $rules["image"] = "required|image|dimensions:min_width=1280,min_height=720";
+        }
+        if ($this->has("is_course")) {
+            $rules["is_course"] = "required";
         }
         return $rules;
     }
