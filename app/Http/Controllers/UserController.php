@@ -75,7 +75,7 @@ class UserController extends Controller
             if ($user->image && file_exists("storage/" . $user->image)) {
                 unlink("storage/" . $user->image);
             }
-            $form["image"] = $request->file("image")->store("avatar", "public");
+            $form["image"] = $request->file("image")->store("users-avatar", "public");
         }
         Mail::to($user)->queue(new UserInfoChanged($user));
         $user->update($form);
