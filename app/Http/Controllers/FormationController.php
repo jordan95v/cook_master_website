@@ -21,14 +21,24 @@ class FormationController extends Controller
     public function index()
     {
         $formations = Formation::all();
-        $no_courses_formations_id = [];
-        foreach ($formations as $formation) {
-            if (count($formation->courses) == 0) {
-                $no_courses_formations_id[] = $formation->id;
-            }
-        }
-        $res = Formation::whereNotIn("id", $no_courses_formations_id)->simplePaginate(10);
-        return view("formations.index", ["formations" => $res]);
+        $search = request()->get("search");
+        $filter = request()->get("filter");
+        $formations = Formation::when($search, function ($query, $search) {
+            return $query->where("name", "like", "%$search%");
+        })
+            ->when($filter, function ($query, $filter) {
+                // filter are most_student and most_courses, we use relation count to get the number of courses and users
+                if ($filter == "most_student") {
+                    return $query->withCount("formation_users")->orderBy("formation_users_count", "desc");
+                } else if ($filter == "most_courses") {
+                    return $query->withCount("courses")->orderBy("courses_count", "desc");
+                } else {
+                    return $query;
+                }
+            })
+            ->whereHas("courses")
+            ->simplePaginate(10);
+        return view("formations.index", ["formations" => $formations, "filter" => $filter]);
     }
 
     public function list_index()

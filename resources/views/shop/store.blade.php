@@ -29,7 +29,8 @@
                 <option disabled selected>{{ __('Sort by') }} </option>
                 @foreach ($sorts as $key => $sort)
                     <option value="{{ $key }}" @if ($filter == $key) selected @endif>
-                        {{ $sort }}</option>
+                        {{ $sort }}
+                    </option>
                 @endforeach
             </select>
             <button type="submit" class="btn btn-neutral hover:btn-primary">{{ __('Filter') }}</button>
