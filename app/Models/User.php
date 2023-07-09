@@ -159,4 +159,35 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Reservation::class);
     }
+
+    public function can_view_course(Course $course): bool
+    {
+        // First, check if the user has already viewed the course today
+        $user_viewed = UserCourse::where("user_id", $this->id)
+            ->where("course_id", $course->id)
+            ->whereDate('created_at', '=', Carbon::today()->toDateString())->count();
+        if ($user_viewed) {
+            return true;
+        }
+
+        // Then, check if the user has a pro subscription
+        try {
+            $subscription_name = str_replace("_annual", "", $this->getSubscription()[0]->name);
+            if ($subscription_name == "pro") {
+                return true;
+            }
+        } catch (\Exception $e) {
+            $subscription_name = "free";
+        }
+
+        // Then, check if the user has reached the limit of courses he can take today
+        $limit = ($subscription_name == "free" ? 1 : 5);
+        $viewed_courses = UserCourse::whereDate('created_at', '=', Carbon::today()->toDateString())
+            ->where('user_id', '=', $this->id)->count();
+
+        if ($viewed_courses >= $limit) {
+            return false;
+        }
+        return true;
+    }
 }

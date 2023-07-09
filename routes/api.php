@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix("v1")->group(function () {
+    // Auth routes
     Route::post("/login", function (Request $request) {
         if (Auth::once($request->only("email", "password"))) {
             $key = User::where("email", $request->email)->first()->api_key;
@@ -134,6 +135,7 @@ Route::prefix("v1")->group(function () {
             ];
         });
 
+        // Routes about courses
         Route::get("/courses", function () {
             $user = User::where("api_key", request()->header("API_KEY"))->first();
             $courses = Course::all();
@@ -146,12 +148,12 @@ Route::prefix("v1")->group(function () {
             return $courses->jsonSerialize();
         });
 
-        Route::get("courses/{id}", function ($id) {
-            try {
-                return Course::findOrFail($id)->jsonSerialize();
-            } catch (Exception $e) {
-                return response()->json(["error" => "Course not found."], 404);
+        Route::get("courses/{course}", function (Course $course) {
+            $user = User::where("api_key", request()->header("API_KEY"))->first();
+            if ($user->can_view_course($course)) {
+                return response()->json($course->jsonSerialize(), 200);
             }
+            return response()->json(["message" => "Courses limit reached"], 401);
         });
 
         Route::post("courses/{course}/finished", function (Course $course) {
@@ -176,8 +178,8 @@ Route::prefix("v1")->group(function () {
             return response()->json(["message" => "Course finished."], 200);
         });
 
+        // Routes about formations
         Route::get("/formations", function () {
-            // Get formations, number of courses and number of perso doing the formation.
             $formations = Formation::all();
             foreach ($formations as $formation) {
                 $formation->courses_count = $formation->courses->count();
