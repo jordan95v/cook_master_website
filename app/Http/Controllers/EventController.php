@@ -31,11 +31,25 @@ class EventController extends Controller
      */
     public function index(Request $request)
     {
-        $events = Event::simplePaginate(9);
-        if ($request->get("only_course")) {
-            $events = Event::where("is_course", true)->simplePaginate(9);
-        }
-        return view('event.index', ['events' => $events, "only_course" => $request->get("only_course")]);
+        $search = $request->get("search");
+        $filter = $request->get("filter");
+        $only_course = $request->get("only_course");
+        // SImple paginate by 9 at end of filtering
+        $events = Event::when($search, function ($query, $search) {
+            return $query->where("title", "like", "%$search%");
+        })->when($filter, function ($query, $filter) {
+            if ($filter == "new") {
+                return $query->orderBy("created_at", "desc");
+            } else if ($filter == "coming") {
+                return $query->orderBy("date", "asc");
+            }
+        })->when($only_course, function ($query, $only_course) {
+            $only_course = $only_course == "on";
+            return $query->where("is_course", $only_course);
+        })->where("date", ">=", date("Y-m-d"))
+            ->where("start_time", ">=", date("H:i:s"))
+            ->paginate(9);
+        return view('event.index', ['events' => $events, "only_course" => $request->get("only_course"), "filter" => $request->get("filter")]);
 
     }
 
