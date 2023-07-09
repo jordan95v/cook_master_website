@@ -10,13 +10,14 @@
                     {{ $product->brand->name }}
                 </a>
             </p>
-            {{-- Add rating to product + tag for retrieving other product --}}
-            <div class="rating pt-2">
-                <input type="radio" disabled name="rating-2" class="mask mask-star-2 bg-orange-400" />
-                <input type="radio" disabled name="rating-2" class="mask mask-star-2 bg-orange-400" />
-                <input type="radio" disabled name="rating-2" class="mask mask-star-2 bg-orange-400" />
-                <input type="radio" disabled name="rating-2" class="mask mask-star-2 bg-orange-400" />
-                <input type="radio" disabled name="rating-2" class="mask mask-star-2 bg-orange-400" />
+
+            <div class="rating rating-half rating-lg text-2xl pt-2 items-center gap-2">
+                @for ($i = 0; $i < 5; $i++)
+                    <input type="radio" disabled
+                        class="bg-orange-500 mask mask-star-2 mask-half-@if ($i % 2 == 0) 1 @else 2 @endif"
+                        @if ($i > $product->rating()) checked @endif />
+                @endfor
+                - {{ $product->comments->count() }} {{ __('reviews') }} 📚
             </div>
             <p class="italic text-2xl pt-5 text-primary">{{ $product->price }} €</p>
             <x-utils.description-trunked :target="$product" limit="800" />

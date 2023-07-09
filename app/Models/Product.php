@@ -25,4 +25,14 @@ class Product extends Model
     {
         return $this->hasMany(ProductComment::class, "product_id");
     }
+
+    public function rating()
+    {
+        $rating = 0;
+        foreach ($this->comments as $comment) {
+            $rating += $comment->rating;
+        }
+
+        return $rating / $this->comments->count();
+    }
 }

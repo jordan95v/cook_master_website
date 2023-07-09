@@ -35,12 +35,11 @@
                         {{-- Start time --}}
                         <select class="select select-bordered w-full max-w-xs" name="start_time" id="start-time">
                             <option disabled selected>{{ __('Choose the start time') }}</option>
-                            @php
-                                for ($i = 0; $i <= 23; $i++) {
-                                    $hour = str_pad($i, 2, '0', STR_PAD_LEFT);
-                                    echo "<option value=\"$hour:00\">$hour:00</option>";
-                                }
-                            @endphp
+                            @foreach (range(0, 23) as $item)
+                                <option value="{{ str_pad($item, 2, '0', STR_PAD_LEFT) }}:00:00">
+                                    {{ $item }}:00
+                                </option>
+                            @endforeach
                         </select>
 
                         {{-- End time --}}

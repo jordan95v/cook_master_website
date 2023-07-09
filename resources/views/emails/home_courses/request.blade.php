@@ -1,5 +1,5 @@
 <x-email-layout>
-    <h1 class="text-2xl">{{ __('Home course accepted') }}</h1>
+    <h1 class="text-2xl">{{ __('Home course request') }}</h1>
     <p>
         {{ __('Dear') }} <b>{{ $user->name }}</b>.<br>
         {{ __('Your home course request') }} {{ $reservation->title }}

@@ -17,15 +17,15 @@
         <label for="my-modal-{{ $reservation->id }}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></label>
         <label for="modal-{{ $reservation->id }}" class="btn btn-success"><i class="fa-solid fa-person"></i></label>
         @isset($delete)
-            <form action="{{ route('reservation.destroy', $reservation) }}" method="POST">
+            <form action="{{ route('reservation.destroy', $reservation) }}" method="POST" class="btn btn-error">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-error"><i class="fa-solid fa-trash"></i></button>
+                <button type="submit"><i class="fa-solid fa-trash"></i></button>
             </form>
         @else
-            <form action="{{ route('reservation.reject', $reservation) }}" method="POST">
+            <form action="{{ route('reservation.reject', $reservation) }}" method="POST" class="btn btn-error">
                 @csrf
-                <button type="submit" class="btn btn-error"><i class="fa-solid fa-times"></i></button>
+                <button type="submit"><i class="fa-solid fa-times"></i></button>
             </form>
         @endisset
     </div>
