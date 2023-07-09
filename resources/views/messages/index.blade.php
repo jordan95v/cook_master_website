@@ -16,7 +16,7 @@
                         <div class="flex items-center space-x-4">
                             <a href="{{ route('messages.show', $user->id) }}" class="flex-1 min-w-0">
                                 <div class="flex items-center">
-                                    <img class="w-16 h-16 rounded-full" src="{{ $user->image ?? false ? asset('storage/' . $user->image) : asset('images/user.png') }}" alt="User image">
+                                    <img class="w-16 h-16 rounded-full" src="{{ $user->image ?? false ? asset('storage/app/public/' . $user->image) : asset('images/user.png') }}" alt="User image">
                                     <div class="ml-4">
                                         <h3 class="text-xl font-bold text-gray-900 truncate user-name">
                                             {{ $user->name }}

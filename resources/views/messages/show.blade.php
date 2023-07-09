@@ -1,15 +1,16 @@
 <x-layout title="Messages">
     <!-- component -->
-    <div class="flex flex-justify-start">
-        <button>
-            <a href="{{ route('messages.index') }}" class="">Retour à la liste</a>
-        </button>
-    </div>
+    
     <div class="flex h-screen antialiased text-gray-800">
         <div class="flex flex-row h-full w-full overflow-x-hidden">
-            <div class="flex flex-col py-8 pl-6 pr-2 w-64 bg-white flex-shrink-0 items-center justify-center">
+            <div class="flex flex-col py-8 pl-6 pr-2 w-64 bg-white flex-shrink-0 items-start justify-start">
+            <div class="mb-4">
+                <a href="{{ route('messages.index') }}" class="px-4 py-2 text-white bg-indigo-500 rounded-md hover:bg-indigo-600">
+                    Retour à la liste
+                </a>
+            </div>
                 <div class="flex flex-col mt-8 items-center justify-center">
-                    <img class="rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-1.jpg" alt="User image">
+                    <img class="rounded-full mt-5 h-48 w-48" src="{{ $user->image ?? false ? asset('storage/' . $user->image) : asset('images/user.png') }}" alt="User image">
                     <h2 class="text-2xl font-semibold pt-5 mt-5">{{ $user->name }}</h2>
                 </div>
             </div>
@@ -21,9 +22,6 @@
                             @foreach ($messages as $message)
                                 <div class="col-start-6 col-end-13 p-3 rounded-lg">
                                     <div class="flex items-center justify-start {{ $message->sender_id == auth()->id() ? 'flex-row-reverse' : '' }}">
-                                        <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                                            A
-                                        </div>
                                         <div class="relative mr-3 text-sm {{ $message->sender_id == auth()->id() ? 'bg-indigo-100' : 'bg-white' }} py-2 px-4 shadow rounded-xl">
                                             <div id="messages">
                                                 {{ $message->message }}
