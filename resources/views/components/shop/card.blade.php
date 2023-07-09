@@ -16,6 +16,15 @@
                 </button>
             </form>
         </div>
-        <p class="text-start italic">€{{ $product->price }}</p>
+        <div class="flex justify-start">
+            <div class="rating rating-half rating-md">
+                @for ($i = 0; $i < 5; $i++)
+                    <input type="radio" disabled
+                        class="bg-orange-500 mask mask-star-2 mask-half-@if ($i % 2 == 0) 1 @else 2 @endif"
+                        @if ($i > $product->rating()) checked @endif />
+                @endfor
+            </div>
+            <p class="text-start italic ms-3">€{{ $product->price }}</p>
+        </div>
     </a>
 </div>

@@ -25,20 +25,43 @@ class ProductController extends Controller
     public function storeIndex(Request $request)
     {
         $paginate = 15;
-        $products = Product::simplePaginate($paginate);
+        $search = $request->get("search");
         $brand_id = $request->get("brand");
         $filter = $request->get("filter");
 
-        if ($brand_id) {
-            $products = Product::where("brand_id", "=", $brand_id)->simplePaginate($paginate);
-        }
-        if ($filter) {
-            if ($filter == "up") {
-                $products = Product::orderBy("price", "asc")->simplePaginate($paginate);
-            } else if ($filter == "down") {
-                $products = Product::orderBy("price", "desc")->simplePaginate($paginate);
-            }
-        }
+        // $products = Product::simplePaginate($paginate);
+        // if ($search) {
+        //     $products = Product::where("name", "like", "%$search%")->simplePaginate($paginate);
+        // }
+        // if ($brand_id) {
+        //     $products = Product::where("brand_id", "=", $brand_id)->simplePaginate($paginate);
+        // }
+        // if ($filter) {
+        //     if ($filter == "up") {
+        //         $products = Product::orderBy("price", "asc")->simplePaginate($paginate);
+        //     } else if ($filter == "down") {
+        //         $products = Product::orderBy("price", "desc")->simplePaginate($paginate);
+        //     }
+        // }
+
+        $products = Product::when($search, function ($query, $search) {
+            return $query->where("name", "like", "%$search%");
+        })
+            ->when($brand_id, function ($query, $brand_id) {
+                return $query->where("brand_id", "=", $brand_id);
+            })
+            ->when($filter, function ($query, $filter) {
+                if ($filter == "up") {
+                    return $query->orderBy("price", "asc");
+                } else if ($filter == "down") {
+                    return $query->orderBy("price", "desc");
+                } else if ($filter == "new") {
+                    return $query->orderBy("created_at", "desc");
+                } else if ($filter == "old") {
+                    return $query->orderBy("created_at", "asc");
+                }
+            })
+            ->simplePaginate($paginate);
 
         return view("shop.store", ["products" => $products, "brands" => Brand::all(), "requestBrand" => $request->get("brand"), "filter" => $request->get("filter")]);
     }

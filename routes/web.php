@@ -14,7 +14,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
@@ -30,7 +30,13 @@ use Illuminate\Support\Facades\Session;
  */
 
 // No controller route
-Route::view("/", "home");
+Route::get("/", function () {
+    if (Auth::check()) {
+        return redirect()->route("user.planning");
+    }
+    return view("home");
+
+})->name("home");
 
 // Route to change the language
 Route::get("/lang/{lang}", function (string $lang) {
@@ -170,7 +176,6 @@ Route::group(["middleware" => ["auth"]], function () {
 
     // Reservation for user
     Route::resource('reservation', ReservationController::class, ["except" => ["edit", "update", "show"]]);
-
 
     // Order
     Route::group(["controller" => OrderController::class], function () {

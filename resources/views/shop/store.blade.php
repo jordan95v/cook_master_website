@@ -2,7 +2,7 @@
     // Do a dictionnary containing filter and their value in the url
     $sorts = [
         'new' => __('Newest'),
-        'popularity' => __('Popularity'),
+        'old' => __('Oldest'),
         'up' => __('Ascending price'),
         'down' => __('Descending price'),
     ];
@@ -14,7 +14,9 @@
         <img src="{{ asset('images/food-banner.jpg') }}" alt="" class="rounded-xl max-h-56 object-cover w-full">
     </div>
     <form action="{{ route('store') }}" method="get" class="flex justify-center">
-        <div class="grid md:grid-cols-3 grid-cols-1 gap-4">
+        <div class="grid md:grid-cols-4 grid-cols-1 gap-4">
+            <input type="text" name="search" placeholder="{{ __('Search ...') }}"
+                class="input input-bordered w-full max-w-xs" value="{{ old('search') }}">
             <select class="select select-bordered w-full max-w-xs" name="brand">
                 <option disabled selected>{{ __('Select a brand') }}</option>
                 @foreach ($brands as $brand)
