@@ -178,11 +178,6 @@ Route::group(["middleware" => ["auth"]], function () {
     Route::post('/messages/{user}',[MessageController::class, 'store'])->name('messages.store');
 
 
-
-
-
-
-
     // Event subscription
     Route::post('/events/{event}/subscribe', [EventController::class, 'subscribe'])->name('event.subscribe');
     Route::post('/events/{event}/unsubscribe', [EventController::class, 'unsubscribe'])->name('event.unsubscribe');
