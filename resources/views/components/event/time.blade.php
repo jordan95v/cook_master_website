@@ -7,7 +7,7 @@
         endTimeInput.innerHTML = '';
         for (let i = parseInt(startTime) + 1; i <= 23; i++) {
             const hour = String(i).padStart(2, '0');
-            endTimeInput.innerHTML += `<option value="${hour}:00">${hour}:00</option>`;
+            endTimeInput.innerHTML += `<option value="${hour}:00:00">${hour}:00</option>`;
         }
     });
 

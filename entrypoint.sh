@@ -18,4 +18,6 @@ php /app/artisan route:cache
 php /app/artisan view:cache
 php /app/artisan event:cache
 
+cron
+
 php /app/artisan serve --host=0.0.0.0

@@ -31,8 +31,8 @@ class UpdateEventRequest extends FormRequest
             "room_id" => "required",
             "capacity" => "required",
             "date" => "required|date_format:Y-m-d",
-            "start_time" => "required|date_format:H:i",
-            "end_time" => "required|date_format:H:i",
+            "start_time" => "required|date_format:H:i:s",
+            "end_time" => "required|date_format:H:i:s",
         ];
         if ($this->hasFile("image")) {
             $rules["image"] = "required|image|dimensions:min_width=1280,min_height=720";

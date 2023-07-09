@@ -65,14 +65,15 @@
                             </a>
                         </i>
                     </label>
-                    <x-utils.select name="room_id">
+                    <select class="select select-bordered w-full @error('room_id') border-2 border-error @enderror"
+                        name="room_id" id="room_select">
                         <option disabled selected>{{ __('Choose the room') }}</option>
                         @foreach ($rooms as $room)
                             <option value="{{ $room->id }}" @if (old('room_id') == $room->id) selected @endif>
                                 {{ $room->name }}
                             </option>
                         @endforeach
-                    </x-utils.select>
+                    </select>
                     <x-utils.form-error name="room_id" />
 
                     {{-- Calendar open button --}}
@@ -91,7 +92,7 @@
                             name="start_time" id="start-time">
                             <option disabled selected>{{ __('Choose the start time') }}</option>
                             @foreach (range(0, 23) as $item)
-                                <option value="{{ str_pad($item, 2, '0', STR_PAD_LEFT) }}:00">
+                                <option value="{{ str_pad($item, 2, '0', STR_PAD_LEFT) }}:00:00">
                                     {{ $item }}:00
                                 </option>
                             @endforeach
