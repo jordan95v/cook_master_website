@@ -44,45 +44,37 @@
                 </p>
             </div>
         </div>
-        {{-- Become a provider --}}
-        <section class="bg-white" style="background-image: url('{{ asset('images/home_form.jpg') }}'); background-size: cover; background-position: center;"">
-            <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-                <h2 class="mb-4 text-4xl font-extrabold text-center text-white">{{__('Become a Provider')}}</h2>
-                <p class="mb-8 lg:mb-16 font-light text-center text-white sm:text-xl">{{ __('Are you a cook, a teacher, or a professional in the food industry?') }}</p>
-                <div class="card-body bg-white rounded-lg ">
-                    <form action="{{ route('email-provider')}}" method="POST">
-                        @csrf
-                        <div class="form-control">
+
+        <div class="hero min-h-screen" style="background-image: url({{ asset('images/home_form.jpg') }});">
+            <div class="hero-overlay bg-opacity-60"></div>
+            <div class="hero-content text-center text-neutral-content">
+                <div class="max-w-md">
+                    <h2 class="mb-5 text-5xl font-bold">{{ __('Become a Provider') }}</h2>
+                    <p class="mb-5">
+                        {{ __('Are you a cook, a teacher, or a professional in the food industry?') }}</p>
+                    <x-utils.card class="w-full text-black bg-white">
+                        <form action="{{ route('email-provider') }}" method="POST" class="card-body rounded-xl">
+                            @csrf
                             {{-- Email --}}
-                            <label class="label">
-                                <span class="label-text">{{__('Email')}}</span>
-                            </label>
-                            @error('email')
-                                <span class="text-red-500">{{ $message }}</span>
-                            @enderror
-                            <input name="email" type="text" placeholder="email" class="input input-bordered mb-5" />
+                            <x-utils.input type="text" name="email" hint="Email" error=1 />
+
                             {{-- Phone number --}}
-                            <label class="label">
-                                <span class="label-text">{{__('Phone number')}}</span>
-                            </label>
-                            @error('phone_number')
-                                <span class="text-red-500">{{ $message }}</span>
-                            @enderror
-                            <input name="phone_number" type="text" placeholder="06...." class="input input-bordered mb-5" />
+                            <x-utils.input type="text" name="phone_number" hint="06.00.00.00.00" error=1 />
+
                             {{-- Description --}}
-                            <label class="label">
-                                <span class="label-text">{{__('Talk about yourself')}}</span>
-                            </label>
+                            <textarea name="description" type="textarea" rows="5" placeholder="{{ __('Description') }}"
+                                class="textarea textarea-bordered border-2 @error('description') border-error @enderror">
+                                {{ old('description') }}
+                            </textarea>
                             @error('description')
                                 <span class="text-red-500">{{ $message }}</span>
                             @enderror
-                            <textarea name="description" type="textarea" placeholder="blablabla" class="input input-bordered mb-5" >
-                            </textarea>
-                            <button class="btn btn-primary">{{__('Send')}}</button>
-                        </div>
-                    </form>
+
+                            <button class="btn btn-primary">{{ __('Send') }}</button>
+                        </form>
+                    </x-utils.card>
                 </div>
             </div>
-        </section>
+        </div>
     @endauth
 </x-layout>
