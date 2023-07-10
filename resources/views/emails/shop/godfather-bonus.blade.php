@@ -1,5 +1,5 @@
 <x-email-layout>
-    <h1 class="text-2xl">{{ __('Godfather Bonus') }}</h1>
+    <h1 class="text-2xl">{{ __('Godfather bonus') }}</h1>
     <p>
         {{ __('Dear') }} <b>{{ $godfather->name }}</b>.<br>
         {{ __('Thanks to your godchildren') }}: <b>{{ $user->name }}</b>,

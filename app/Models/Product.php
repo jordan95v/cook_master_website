@@ -33,6 +33,9 @@ class Product extends Model
             $rating += $comment->rating;
         }
 
+        if ($this->comments->count() == 0) {
+            return 0;
+        }
         return $rating / $this->comments->count();
     }
 }

@@ -1,4 +1,7 @@
 <x-layout title="My planning" calendar=1>
+    <div class="text-center">
+        <x-user-stats />
+    </div>
     @php
         $events = [];
         foreach (Auth::user()->participations as $participation) {

@@ -52,8 +52,9 @@ class FormationUser extends Model
         $text = "For completing all the course of: ";
         imagestring($image, 5, 400, 450, $text, $color);
 
-        $text = "$this->name";
-        imagestring($image, 5, 485, 490, $text, $color);
+        $name = $this->formation->name;
+        $text = "$name";
+        imagestring($image, 5, 450, 490, $text, $color);
 
         ob_start();
         imagepng($image);

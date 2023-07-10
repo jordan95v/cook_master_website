@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreFormationRequest;
 use App\Http\Requests\UpdateFormationRequest;
+use App\Models\Course;
 use App\Models\Formation;
 use App\Models\FormationCourse;
 use App\Models\FormationUser;
@@ -121,13 +122,16 @@ class FormationController extends Controller
     public function add_courses(Formation $formation)
     {
         $this->authorize("delete", $formation);
+        $user = User::find(Auth::id());
         $formation_courses_ids = [];
         foreach ($formation->courses as $item) {
             $formation_courses_ids[] = $item->course->id;
         }
+        $courses = ($user->isAdmin()) ? Course::all() : $user->courses;
         return view("formations.add_courses", [
             "formation" => $formation,
             "formation_courses_ids" => $formation_courses_ids,
+            "courses" => $courses,
         ]);
     }
 

@@ -1,5 +1,5 @@
 <x-email-layout>
-    <h1 class="text-2xl">{{ __('Order Shipped') }}</h1>
+    <h1 class="text-2xl">{{ __('Order shipped') }}</h1>
     <p>
         {{ __('Dear') }} <b>{{ $user->name }}</b>.<br>
         {{ __('We are pleased to announce that your order') }}: {{ $invoice->serial }} {{ __('has been sent') }} !

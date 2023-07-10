@@ -1,5 +1,5 @@
 <x-email-layout>
-    <h1 class="text-2xl">{{ __('Order Confirmed') }}</h1>
+    <h1 class="text-2xl">{{ __('Order confirmed') }}</h1>
     <p>
         {{ __('Thank you for your order') }} <b>{{ $user->name }}</b>.<br>
         {{ __('Your order has been confirmed and will be processed as soon as possible.') }}

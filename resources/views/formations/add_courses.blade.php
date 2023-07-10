@@ -12,7 +12,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (Auth::user()->courses as $course)
+                @foreach ($courses as $course)
                     <tr class="hover">
                         <th>
                             @php
