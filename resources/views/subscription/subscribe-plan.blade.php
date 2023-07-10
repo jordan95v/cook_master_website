@@ -50,15 +50,7 @@
                     </p>
 
                     {{-- Payment form --}}
-                    <h2 class="font-bold justify-center flex text-2xl py-4">{{ __('Payment') }}</h2>
-                    <div class="grid grild-cols-1 lg:grid-cols-2 my-2 gap-2">
-                        <x-utils.input type="text" name="address" hint="Address" error=0 />
-                        <x-utils.input type="text" name="zipcode" hint="Postal code" error=0 />
-                    </div>
-                    <x-utils.form-error name="address" />
-                    <x-utils.form-error name="zipcode" />
-
-                    <x-utils.input type="text" name="city" hint="City" error=1 />
+                    <h2 class="font-bold justify-center flex text-2xl pt-4">{{ __('Payment') }}</h2>
                     <x-shop.stripe />
                 </form>
             </x-utils.card-grid>

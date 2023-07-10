@@ -1,7 +1,7 @@
 <x-layout title="Home">
     @auth
     @else
-        <div class="hero min-h-screen" style="background-image: url({{ asset('images/main_banner.png') }});">
+        <div class="hero min-h-screen mt-4" style="background-image: url({{ asset('images/main_banner.png') }});">
             <div class="hero-overlay bg-opacity-60"></div>
             <div class="hero-content text-center text-neutral-content">
                 <div class="max-w-md">

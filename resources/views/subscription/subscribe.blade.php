@@ -78,6 +78,20 @@
                                 </div>
                             </div>
                         @endif
+
+                        @if (strstr($subscription->name, 'starter'))
+                            <form action="{{ route('subscription.upgrade') }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-primary max-w-lg w-full mt-2">
+                                    {{ __('Upgrade to pro for ') }}
+                                    @if (strstr($subscription->name, 'annual'))
+                                        {{ $plans->data[0]->unit_amount / 100 - $plans->data[2]->unit_amount / 100 }}€
+                                    @else
+                                        {{ $plans->data[1]->unit_amount / 100 - $plans->data[3]->unit_amount / 100 }}€
+                                    @endif
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -215,20 +229,19 @@
                         </tr>
 
                         {{-- Action --}}
-                        {{-- TODO: Now really do the subscription (add form) --}}
                         <tr>
                             <td></td>
                             <td></td>
                             <td>
                                 <a href="{{ route('subscription.show', ['plan' => 'starter']) }}"
                                     class="btn btn-primary"
-                                    @if (Auth::user()->subscribed('starter') || Auth::user()->subscribed('starter_annual')) disabled="disabled" @endif>
+                                    @if (Auth::user()->isSubscribed()) disabled="disabled" @endif>
                                     {{ __('Subscribe to') }} {{ __('Starter') }}
                                 </a>
                             </td>
                             <td>
                                 <a href="{{ route('subscription.show', ['plan' => 'pro']) }}" class="btn btn-primary"
-                                    @if (Auth::user()->subscribed('pro') || Auth::user()->subscribed('pro_annual')) disabled="disabled" @endif>
+                                    @if (Auth::user()->isSubscribed()) disabled="disabled" @endif>
                                     {{ __('Subscribe to') }} {{ __('Pro') }}
                                 </a>
                             </td>

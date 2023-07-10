@@ -43,7 +43,7 @@ class UserController extends Controller
         $user->createAsStripeCustomer();
         // event(new Registered($user));
         Auth::login($user);
-        return redirect("/")->with("success", "Check your email to verify your account.");
+        return redirect()->route("user.planning")->with("success", "Check your email to verify your account.");
     }
 
     // Display the specified resource.

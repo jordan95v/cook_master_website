@@ -35,7 +35,6 @@ Route::get("/", function () {
         return redirect()->route("user.planning");
     }
     return view("home");
-
 })->name("home");
 
 // Route to change the language
@@ -108,6 +107,7 @@ Route::prefix("users")->group(
             Route::post("/subscription", "subscribe")->name("subscription.subscribe");
             Route::post("/subscription/resume", "resume")->middleware("sub")->name("subscription.resume");
             Route::delete("/subscription/cancel", "cancel")->middleware("sub")->name("subscription.cancel");
+            Route::post("/subscription/upgrade", "upgrade")->middleware("sub")->name("subscription.upgrade");
         });
     }
 );
@@ -140,7 +140,7 @@ Route::group(
 );
 
 // Auth route
-Route::group(["middleware" => ["auth"]], function () {
+Route::group(["middleware" => ["auth", "verified"]], function () {
     // Brand
     Route::resource("brand", BrandController::class);
 

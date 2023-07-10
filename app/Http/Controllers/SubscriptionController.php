@@ -16,8 +16,8 @@ class SubscriptionController extends Controller
 {
     public function showSubscription(string $plan = null)
     {
+        $stripe = Cashier::stripe();
         if ($plan != null) {
-            $stripe = Cashier::stripe();
             foreach ($stripe->prices->all() as $price) {
                 $recurring = ($price->recurring->interval == "year") ? "_ANNUAL_PLAN_ID" : "_PLAN_ID";
                 if ($price->id == env(strtoupper($plan) . $recurring)) {
@@ -25,7 +25,9 @@ class SubscriptionController extends Controller
                 }
             }
         }
-        return ($plan != null) ? view("subscription.subscribe-plan", ["plan" => $plan, "subscriptions" => $items]) : view("subscription.subscribe");
+        return ($plan != null) ?
+        view("subscription.subscribe-plan", ["plan" => $plan, "subscriptions" => $items]) :
+        view("subscription.subscribe", ["plans" => $stripe->prices->all()]);
     }
 
     public function subscribe(Request $request)
@@ -55,7 +57,8 @@ class SubscriptionController extends Controller
         }
 
         Mail::to($user)->queue(new SubscriptionThank($user));
-        return redirect("/")->with("success", "Congrats, you subscribed.");
+        // return to the planning
+        return redirect()->route("subscription.show")->with("success", "You are now subscribed !");
     }
 
     public function cancel()
@@ -72,5 +75,26 @@ class SubscriptionController extends Controller
         $user->subscriptions()->first()->resume();
         Mail::to($user)->queue(new SubscriptionModified($user, "resumed"));
         return back()->with("success", "Very good, you are back. You resumed your subscription.");
+    }
+
+    public function upgrade()
+    {
+        $user = User::find(Auth::id());
+        $price_id = "";
+        $name = "";
+        if (strstr($user->getSubscription()[0]->name, "annual")) {
+            $price_id = env("PRO_ANNUAL_PLAN_ID");
+            $name = "pro_annual";
+        } else {
+            $price_id = env("PRO_PLAN_ID");
+            $name = "pro";
+        }
+        try {
+            $user->subscriptions()->first()->swapAndInvoice($price_id);
+            $user->subscriptions()->first()->update(["name" => $name]);
+        } catch (CardException $th) {
+            return back()->with("error", $th->getMessage());
+        }
+        return back()->with("success", "You upgraded your subscription.");
     }
 }

@@ -28,7 +28,7 @@ class AuthController extends Controller
             $user = User::find(Auth::id());
             $user->update(["is_active" => true]);
             $request->session()->regenerate();
-            return redirect("/")->with("success", "You are now logged in !");
+            return redirect()->route("user.planning")->with("success", "You are now logged in !");
         }
         return back()->with("error", "These credentials do not match our records.")->onlyInput("email");
     }
@@ -50,14 +50,14 @@ class AuthController extends Controller
     // Notice the the user to verify his email.
     public function notice()
     {
-        return redirect("/")->with("error", "Check your email first.");
+        return redirect()->route("user.planning")->with("error", "Check your email first.");
     }
 
     // Verify the email.
     public function verify(EmailVerificationRequest $request)
     {
         $request->fulfill();
-        return redirect("/")->with("success", "You have verified your email.");
+        return redirect()->route("user.planning")->with("success", "You have verified your email.");
     }
 
     // Resend the email.

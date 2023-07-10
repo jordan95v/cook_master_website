@@ -26,7 +26,7 @@ class CreateUserRequest extends FormRequest
             "email" => "required|email|unique:users,email",
             "password" => "required|min:6|confirmed",
         ];
-        if ($this->has('key')) {
+        if ($this->has('key') && $this->get('key') !== null) {
             $rules['key'] = 'required|min:32|max:32|exists:users,key';
         }
         return $rules;

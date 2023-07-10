@@ -40,7 +40,7 @@ class EquipmentController extends Controller
         }
         $form["user_id"] = Auth::id();
         Equipment::create($form);
-        return redirect("/")->with("success", "You have created an equipment");
+        return back()->with("success", "You have created an equipment");
     }
 
     /**

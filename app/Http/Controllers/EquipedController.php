@@ -41,7 +41,7 @@ class EquipedController extends Controller
             $form["room_id"] = Session::get("room.id");
             Equiped::create($form);
             Session::remove("room_id");
-            return redirect("/")->with("success", "You have connect an equipment to this room");
+            return back()->with("success", "You have connect an equipment to this room");
         }
         return back()->with("error", "Error with the room creation");
     }

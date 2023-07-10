@@ -35,7 +35,7 @@ class ReservationController extends Controller
         $form = $request->validated(); // Récupère les données du formulaire validées
         $form["user_id"] = $user->id; // Ajoute l'id de l'utilisateur connecté
         Reservation::create($form);
-        return redirect("/")->with("success", "You have sent your request");
+        return back()->with("success", "You have sent your request");
     }
 
     /**

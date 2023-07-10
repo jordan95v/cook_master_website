@@ -1,5 +1,5 @@
 <x-layout title="My planning" calendar=1>
-    <div class="text-center">
+    <div class="text-center mt-5">
         <x-user-stats />
     </div>
     @php

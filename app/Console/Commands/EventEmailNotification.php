@@ -34,9 +34,7 @@ class EventEmailNotification extends Command
             $event_start = Carbon::createFromFormat('Y-m-d H:i:s', $event->date . ' ' . $event->start_time);
             $time_limit = Carbon::createFromFormat('Y-m-d H:i:s', $event->date . ' ' . $event->start_time)->subMinutes(30);
             if (Carbon::now()->between($event_start, $time_limit)) {
-                echo "send email";
                 Mail::to($event->participants)->queue(new RemindEvent($event));
-                echo $event->title;
             };
         }
     }
