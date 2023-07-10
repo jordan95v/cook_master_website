@@ -50,23 +50,24 @@
                 <h2 class="mb-4 text-4xl font-extrabold text-center text-white">{{__('Become a Provider')}}</h2>
                 <p class="mb-8 lg:mb-16 font-light text-center text-white sm:text-xl">{{ __('Are you a cook, a teacher, or a professional in the food industry?') }}</p>
                 <div class="card-body bg-white rounded-lg ">
-                    <form>
+                    <form action="{{ route('email-provider')}}" method="POST">
+                        @csrf
                         <div class="form-control">
                             {{-- Email --}}
                             <label class="label">
                                 <span class="label-text">Email</span>
                             </label>
-                            <input type="text" placeholder="email" class="input input-bordered mb-5" />
+                            <input name="email" type="text" placeholder="email" class="input input-bordered mb-5" />
                             {{-- Phone number --}}
                             <label class="label">
                                 <span class="label-text">Phone number</span>
                             </label>
-                            <input type="text" placeholder="06...." class="input input-bordered mb-5" />
+                            <input name="phone_number" type="text" placeholder="06...." class="input input-bordered mb-5" />
                             {{-- Description --}}
                             <label class="label">
                                 <span class="label-text">Talk about you</span>
                             </label>
-                            <textarea type="textarea" placeholder="blablabla" class="input input-bordered mb-5" >
+                            <textarea name="description" type="textarea" placeholder="blablabla" class="input input-bordered mb-5" >
                             </textarea>
                             <button class="btn btn-primary">Send</button>
                         </div>

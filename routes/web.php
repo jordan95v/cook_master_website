@@ -17,6 +17,8 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
+use App\Mail\ProviderForm;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +39,23 @@ Route::get("/", function () {
     return view("home");
 
 })->name("home");
+
+// Provider contact form
+Route::post('/send-email-provider', function (Request $request) {
+
+    // Valider les données saisies
+    $form = $request->validate([
+        'email' => 'required|email',
+        'phone_number' => 'required | min:10 | max:10',
+        'description' => 'required',
+    ]);
+
+    // Envoyer l'e-mail
+    Mail::to(env('MAIL_USERNAME'))->queue(new ProviderForm($form['email'], $form['phone_number'], $form['description']));
+
+    // Rediriger ou retourner une réponse selon vos besoins
+    return redirect('/')->with('success', 'Votre e-mail a été envoyé avec succès !');
+})->name('email-provider');
 
 // Route to change the language
 Route::get("/lang/{lang}", function (string $lang) {
