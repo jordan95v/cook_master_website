@@ -45,7 +45,7 @@
             </div>
         </div>
         {{-- Become a provider --}}
-        <section class="bg-white" style="background-image: url('{{ asset('images/home_for.jpg') }}'); background-size: cover; background-position: center;"">
+        <section class="bg-white" style="background-image: url('{{ asset('images/home_form.jpg') }}'); background-size: cover; background-position: center;"">
             <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
                 <h2 class="mb-4 text-4xl font-extrabold text-center text-white">{{__('Become a Provider')}}</h2>
                 <p class="mb-8 lg:mb-16 font-light text-center text-white sm:text-xl">{{ __('Are you a cook, a teacher, or a professional in the food industry?') }}</p>
