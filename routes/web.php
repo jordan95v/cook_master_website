@@ -14,7 +14,10 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
+use App\Mail\ProviderForm;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
@@ -36,6 +39,17 @@ Route::get("/", function () {
     }
     return view("home");
 })->name("home");
+
+// Provider contact form
+Route::post('/send-email-provider', function (Request $request) {
+    $form = $request->validate([
+        'email' => 'required|email',
+        'phone_number' => 'required|min:10|max:10|numeric',
+        'description' => 'required|min:50',
+    ]);
+    Mail::to(env('MAIL_USERNAME'))->queue(new ProviderForm($form['email'], $form['phone_number'], $form['description']));
+    return redirect('/')->with('success', 'Email sent successfully !');
+})->name('email-provider');
 
 // Route to change the language
 Route::get("/lang/{lang}", function (string $lang) {
