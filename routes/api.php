@@ -151,6 +151,10 @@ Route::prefix("v1")->group(function () {
         Route::get("courses/{course}", function (Course $course) {
             $user = User::where("api_key", request()->header("API_KEY"))->first();
             if ($user->can_view_course($course)) {
+                UserCourse::firstOrCreate([
+                    "user_id" => $user->id,
+                    "course_id" => $course->id,
+                ]);
                 return response()->json($course->jsonSerialize(), 200);
             }
             return response()->json(["message" => "Courses limit reached"], 401);
