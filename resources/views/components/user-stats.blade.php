@@ -7,7 +7,7 @@
         <div class="stat-figure text-secondary text-2xl">
             📚
         </div>
-        <div class="stat-title">{{ __('Courses finished ') }}</div>
+        <div class="stat-title">{{ __('Courses finished') }}</div>
         <div class="stat-value">{{ $user->finished_courses->where('is_finished', true)->count() }}</div>
         <div class="stat-desc">{{ $user->created_at->format('d M y') }} - {{ now()->format('d M y') }}</div>
     </div>
@@ -16,7 +16,7 @@
         <div class="stat-figure text-secondary text-2xl">
             💰
         </div>
-        <div class="stat-title">{{ __('Total order') }}</div>
+        <div class="stat-title">{{ __('Total orders') }}</div>
         <div class="stat-value">{{ $user->orderInvoices->count() }}</div>
         <div class="stat-desc">
             ~
