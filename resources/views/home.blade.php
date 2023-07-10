@@ -55,21 +55,30 @@
                         <div class="form-control">
                             {{-- Email --}}
                             <label class="label">
-                                <span class="label-text">Email</span>
+                                <span class="label-text">{{__('Email')}}</span>
                             </label>
+                            @error('email')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                             <input name="email" type="text" placeholder="email" class="input input-bordered mb-5" />
                             {{-- Phone number --}}
                             <label class="label">
-                                <span class="label-text">Phone number</span>
+                                <span class="label-text">{{__('Phone number')}}</span>
                             </label>
+                            @error('phone_number')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                             <input name="phone_number" type="text" placeholder="06...." class="input input-bordered mb-5" />
                             {{-- Description --}}
                             <label class="label">
-                                <span class="label-text">Talk about you</span>
+                                <span class="label-text">{{__('Talk about yourself')}}</span>
                             </label>
+                            @error('description')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
                             <textarea name="description" type="textarea" placeholder="blablabla" class="input input-bordered mb-5" >
                             </textarea>
-                            <button class="btn btn-primary">Send</button>
+                            <button class="btn btn-primary">{{__('Send')}}</button>
                         </div>
                     </form>
                 </div>
