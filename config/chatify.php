@@ -6,7 +6,7 @@ return [
     | Messenger display name
     |-------------------------------------
     */
-    'name' => env('CHATIFY_NAME', 'Chatify Messenger'),
+    'name' => env('CHATIFY_NAME', 'Select a chef'),
 
     /*
     |-------------------------------------
@@ -24,10 +24,10 @@ return [
     'routes' => [
         'prefix' => env('CHATIFY_ROUTES_PREFIX', 'chat'),
         'middleware' => env('CHATIFY_ROUTES_MIDDLEWARE', ['web','auth']),
-        'namespace' => env('CHATIFY_ROUTES_NAMESPACE', 'App\Http\Controllers\vendor\Chatify'),
+        'namespace' => env('CHATIFY_ROUTES_NAMESPACE', 'Chatify\Http\Controllers'),
     ],
     // 'api_routes' => [
-    //     'prefix' => env('CHATIFY_API_ROUTES_PREFIX', 'chat/api'),
+    //     'prefix' => env('CHATIFY_API_ROUTES_PREFIX', 'chatify/api'),
     //     'middleware' => env('CHATIFY_API_ROUTES_MIDDLEWARE', ['api']),
     //     'namespace' => env('CHATIFY_API_ROUTES_NAMESPACE', 'Chatify\Http\Controllers\Api'),
     // ],
@@ -66,11 +66,11 @@ return [
     | [ 404 | mp | identicon (default) | monsterid | wavatar ]
     |-------------------------------------
     */
-    'gravatar' => [
-        'enabled' => true,
-        'image_size' => 200,
-        'imageset' => 'identicon'
-    ],
+    // 'gravatar' => [
+    //     'enabled' => true,
+    //     'image_size' => 200,
+    //     'imageset' => 'identicon'
+    // ],
 
     /*
     |-------------------------------------

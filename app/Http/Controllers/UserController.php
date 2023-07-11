@@ -72,10 +72,13 @@ class UserController extends Controller
             $form["password"] = bcrypt($form["password"]);
         }
         if ($request->hasFile("image")) {
-            if ($user->image && file_exists("storage/" . $user->image)) {
-                unlink("storage/" . $user->image);
+            if ($user->avatar && file_exists("storage/" . $user->avatar)) {
+                if ($user->avatar != "users-avatar/avatar.png"){
+                    unlink("storage/" . $user->avatar);
+                }
             }
-            $form["image"] = $request->file("image")->store("users-avatar", "public");
+            $file_name = $request->file("image")->store("users-avatar", "public");
+            $form['avatar'] = explode("/", $file_name)[1];
         }
         Mail::to($user)->queue(new UserInfoChanged($user));
         $user->update($form);
@@ -86,9 +89,9 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $this->authorize("delete", $user);
-        if (Auth::user()->image) {
-            if (file_exists("storage/" . Auth::user()->image)) {
-                unlink("storage/" . Auth::user()->image);
+        if (Auth::user()->avatar && Auth::user()->avatar != "users-avatar/avatar.png") {
+            if (file_exists("storage/" . Auth::user()->avatar)) {
+                unlink("storage/" . Auth::user()->avatar);
             }
         }
         $user->delete();

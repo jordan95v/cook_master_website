@@ -58,7 +58,7 @@
         @auth
             <div class="w-24 rounded-full ring ring-primary">
                 <img
-                    src="{{ Auth::user()->image ?? false ? asset('storage/' . Auth::user()->image) : asset('images/user.png') }}" />
+                    src="{{ asset('storage/users-avatar/' . Auth::user()->avatar) }}" />
             </div>
         @else
             <i class="fa-solid fa-user text-xl"></i>
@@ -116,6 +116,11 @@
                 <li>
                     <a href="{{ route('user.formations') }}">
                         <i class="fa-solid fa-book-open"></i>{{ __('My formations') }}
+                    </a>
+                </li>
+                <li>
+                    <a href="/chat">
+                        <i class="fa-solid fa-comment-dots"></i>{{ __('My messages') }}
                     </a>
                 </li>
             @endif
