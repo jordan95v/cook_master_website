@@ -5,7 +5,7 @@ return [
     |-------------------------------------
     | Messenger display name
     |-------------------------------------
-    */
+     */
     'name' => env('CHATIFY_NAME', 'Select a chef'),
 
     /*
@@ -13,17 +13,17 @@ return [
     | The disk on which to store added
     | files and derived images by default.
     |-------------------------------------
-    */
+     */
     'storage_disk_name' => env('CHATIFY_STORAGE_DISK', 'public'),
 
     /*
     |-------------------------------------
     | Routes configurations
     |-------------------------------------
-    */
+     */
     'routes' => [
         'prefix' => env('CHATIFY_ROUTES_PREFIX', 'chat'),
-        'middleware' => env('CHATIFY_ROUTES_MIDDLEWARE', ['web','auth']),
+        'middleware' => env('CHATIFY_ROUTES_MIDDLEWARE', ['web', 'auth']),
         'namespace' => env('CHATIFY_ROUTES_NAMESPACE', 'App\Http\Controllers\vendor\Chatify'),
     ],
     // 'api_routes' => [
@@ -36,7 +36,7 @@ return [
     |-------------------------------------
     | Pusher API credentials
     |-------------------------------------
-    */
+     */
     'pusher' => [
         'debug' => env('APP_DEBUG', false),
         'key' => env('PUSHER_APP_KEY'),
@@ -52,7 +52,7 @@ return [
     |-------------------------------------
     | User Avatar
     |-------------------------------------
-    */
+     */
     'user_avatar' => [
         'folder' => 'users-avatar',
         'default' => 'avatar.png',
@@ -65,7 +65,7 @@ return [
     | imageset property options:
     | [ 404 | mp | identicon (default) | monsterid | wavatar ]
     |-------------------------------------
-    */
+     */
     // 'gravatar' => [
     //     'enabled' => true,
     //     'image_size' => 200,
@@ -76,12 +76,12 @@ return [
     |-------------------------------------
     | Attachments
     |-------------------------------------
-    */
+     */
     'attachments' => [
         'folder' => 'attachments',
         'download_route_name' => 'attachments.download',
-        'allowed_images' => (array) ['png','jpg','jpeg','gif'],
-        'allowed_files' => (array) ['zip','rar','txt'],
+        'allowed_images' => (array) ['png', 'jpg', 'jpeg', 'gif'],
+        'allowed_files' => (array) ['zip', 'rar', 'txt'],
         'max_upload_size' => env('CHATIFY_MAX_FILE_SIZE', 150), // MB
     ],
 
@@ -89,7 +89,7 @@ return [
     |-------------------------------------
     | Messenger's colors
     |-------------------------------------
-    */
+     */
     'colors' => (array) [
         '#2180f3',
         '#2196F3',
@@ -110,10 +110,10 @@ return [
     | `public/` directory of your app.
     |
     |-------------------------------------
-    */
+     */
     'sounds' => [
         'enabled' => true,
         'public_path' => 'sounds/chatify',
         'new_message' => 'new-message-sound.mp3',
-    ]
+    ],
 ];

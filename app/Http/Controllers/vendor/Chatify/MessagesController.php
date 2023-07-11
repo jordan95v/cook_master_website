@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\vendor\Chatify;
 
+use App\Models\ChFavorite as Favorite;
+use App\Models\ChMessage as Message;
+use App\Models\User;
+use Chatify\Facades\ChatifyMessenger as Chatify;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Response;
-use App\Models\User;
-use App\Models\ChMessage as Message;
-use App\Models\ChFavorite as Favorite;
-use Chatify\Facades\ChatifyMessenger as Chatify;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Request as FacadesRequest;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
 
 class MessagesController extends Controller
@@ -41,8 +40,12 @@ class MessagesController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index( $id = null)
+    public function index($id = null)
     {
+        $user = User::find(Auth::id());
+        if (!$user->isAdmin() && !$user->isSubscribed()) {
+            return redirect()->route("subscription.show")->with("error", "You must be subscribed to chat with chef.");
+        }
         $messenger_color = Auth::user()->messenger_color;
         return view('Chatify::pages.app', [
             'id' => $id ?? 0,
@@ -50,7 +53,6 @@ class MessagesController extends Controller
             'dark_mode' => Auth::user()->dark_mode < 1 ? 'light' : 'dark',
         ]);
     }
-
 
     /**
      * Fetch data (user, favorite.. etc).
@@ -62,7 +64,7 @@ class MessagesController extends Controller
     {
         $favorite = Chatify::inFavorite($request['id']);
         $fetch = User::where('id', $request['id'])->first();
-        if($fetch){
+        if ($fetch) {
             $userAvatar = Chatify::getUserWithAvatar($fetch)->avatar;
         }
         return Response::json([
@@ -97,9 +99,9 @@ class MessagesController extends Controller
     public function send(Request $request)
     {
         // default variables
-        $error = (object)[
+        $error = (object) [
             'status' => 0,
-            'message' => null
+            'message' => null,
         ];
         $attachment = null;
         $attachment_title = null;
@@ -108,8 +110,8 @@ class MessagesController extends Controller
         if ($request->hasFile('file')) {
             // allowed extensions
             $allowed_images = Chatify::getAllowedImages();
-            $allowed_files  = Chatify::getAllowedFiles();
-            $allowed        = array_merge($allowed_images, $allowed_files);
+            $allowed_files = Chatify::getAllowedFiles();
+            $allowed = array_merge($allowed_images, $allowed_files);
 
             $file = $request->file('file');
             // check file size
@@ -135,17 +137,17 @@ class MessagesController extends Controller
                 'from_id' => Auth::user()->id,
                 'to_id' => $request['id'],
                 'body' => htmlentities(trim($request['message']), ENT_QUOTES, 'UTF-8'),
-                'attachment' => ($attachment) ? json_encode((object)[
+                'attachment' => ($attachment) ? json_encode((object) [
                     'new_name' => $attachment,
                     'old_name' => htmlentities(trim($attachment_title), ENT_QUOTES, 'UTF-8'),
                 ]) : null,
             ]);
             $messageData = Chatify::parseMessage($message);
             if (Auth::user()->id != $request['id']) {
-                Chatify::push("private-chatify.".$request['id'], 'messaging', [
+                Chatify::push("private-chatify." . $request['id'], 'messaging', [
                     'from_id' => Auth::user()->id,
                     'to_id' => $request['id'],
-                    'message' => Chatify::messageCard($messageData, true)
+                    'message' => Chatify::messageCard($messageData, true),
                 ]);
             }
         }
@@ -180,7 +182,7 @@ class MessagesController extends Controller
 
         // if there is no messages yet.
         if ($totalMessages < 1) {
-            $response['messages'] ='<p class="message-hint center-el"><span>Say \'hi\' and start messaging</span></p>';
+            $response['messages'] = '<p class="message-hint center-el"><span>Say \'hi\' and start messaging</span></p>';
             return Response::json($response);
         }
         if (count($messages->items()) < 1) {
@@ -222,37 +224,36 @@ class MessagesController extends Controller
     public function getContacts(Request $request)
     {
         // get all users that received/sent message from/to [Auth user]
-        if(Auth::user()->is_service_provider == 1){
-            $users = Message::join('users',  function ($join) {
-            $join->on('ch_messages.from_id', '=', 'users.id')
-                ->orOn('ch_messages.to_id', '=', 'users.id');
-        })
-        ->where(function ($q) {
-            $q->where('ch_messages.from_id', Auth::user()->id)
-            ->orWhere('ch_messages.to_id', Auth::user()->id);
-        })
-        ->where('users.id','!=',Auth::user()->id)
-        ->select('users.*',DB::raw('MAX(ch_messages.created_at) max_created_at'))
-        ->orderBy('max_created_at', 'desc')
-        ->groupBy('users.id')
-        ->paginate($request->per_page ?? $this->perPage);
-        }else{
-            $users = Message::join('users',  function ($join) {
-            $join->on('ch_messages.from_id', '=', 'users.id')
-                ->orOn('ch_messages.to_id', '=', 'users.id');
-        })
-        ->where(function ($q) {
-            $q->where('ch_messages.from_id', Auth::user()->id)
-            ->orWhere('ch_messages.to_id', Auth::user()->id);
-        })
-        ->where('users.id','!=',Auth::user()->id)
-        ->where('users.is_service_provider',1)
-        ->select('users.*',DB::raw('MAX(ch_messages.created_at) max_created_at'))
-        ->orderBy('max_created_at', 'desc')
-        ->groupBy('users.id')
-        ->paginate($request->per_page ?? $this->perPage);
+        if (Auth::user()->is_service_provider == 1) {
+            $users = Message::join('users', function ($join) {
+                $join->on('ch_messages.from_id', '=', 'users.id')
+                    ->orOn('ch_messages.to_id', '=', 'users.id');
+            })
+                ->where(function ($q) {
+                    $q->where('ch_messages.from_id', Auth::user()->id)
+                        ->orWhere('ch_messages.to_id', Auth::user()->id);
+                })
+                ->where('users.id', '!=', Auth::user()->id)
+                ->select('users.*', DB::raw('MAX(ch_messages.created_at) max_created_at'))
+                ->orderBy('max_created_at', 'desc')
+                ->groupBy('users.id')
+                ->paginate($request->per_page ?? $this->perPage);
+        } else {
+            $users = Message::join('users', function ($join) {
+                $join->on('ch_messages.from_id', '=', 'users.id')
+                    ->orOn('ch_messages.to_id', '=', 'users.id');
+            })
+                ->where(function ($q) {
+                    $q->where('ch_messages.from_id', Auth::user()->id)
+                        ->orWhere('ch_messages.to_id', Auth::user()->id);
+                })
+                ->where('users.id', '!=', Auth::user()->id)
+                ->where('users.is_service_provider', 1)
+                ->select('users.*', DB::raw('MAX(ch_messages.created_at) max_created_at'))
+                ->orderBy('max_created_at', 'desc')
+                ->groupBy('users.id')
+                ->paginate($request->per_page ?? $this->perPage);
         }
-        
 
         $usersList = $users->items();
 
@@ -282,7 +283,7 @@ class MessagesController extends Controller
     {
         // Get user data
         $user = User::where('id', $request['user_id'])->first();
-        if(!$user){
+        if (!$user) {
             return Response::json([
                 'message' => 'User not found!',
             ], 401);
@@ -335,8 +336,8 @@ class MessagesController extends Controller
         return Response::json([
             'count' => $favorites->count(),
             'favorites' => $favorites->count() > 0
-                ? $favoritesList
-                : 0,
+            ? $favoritesList
+            : 0,
         ], 200);
     }
 
@@ -350,31 +351,31 @@ class MessagesController extends Controller
     {
         $getRecords = null;
         $input = trim(filter_var($request['input']));
-        if(Auth::user()->is_service_provider == 0){
-            $records = User::where('id','!=',Auth::user()->id)
-            ->where('name', 'LIKE', "%{$input}%")
-            ->where('is_service_provider',1)
-            ->paginate($request->per_page ?? $this->perPage);
-        }else{
-            $records = User::where('id','!=',Auth::user()->id)
-            ->where('name', 'LIKE', "%{$input}%")
-            ->paginate($request->per_page ?? $this->perPage);
+        if (Auth::user()->is_service_provider == 0) {
+            $records = User::where('id', '!=', Auth::user()->id)
+                ->where('name', 'LIKE', "%{$input}%")
+                ->where('is_service_provider', 1)
+                ->paginate($request->per_page ?? $this->perPage);
+        } else {
+            $records = User::where('id', '!=', Auth::user()->id)
+                ->where('name', 'LIKE', "%{$input}%")
+                ->paginate($request->per_page ?? $this->perPage);
         }
-                    
+
         foreach ($records->items() as $record) {
             $getRecords .= view('Chatify::layouts.listItem', [
                 'get' => 'search_item',
                 'user' => Chatify::getUserWithAvatar($record),
             ])->render();
         }
-        if($records->total() < 1){
+        if ($records->total() < 1) {
             $getRecords = '<p class="message-hint center-el"><span>Nothing to show.</span></p>';
         }
         // send the response
         return Response::json([
             'records' => $getRecords,
             'total' => $records->total(),
-            'last_page' => $records->lastPage()
+            'last_page' => $records->lastPage(),
         ], 200);
     }
 
@@ -444,8 +445,8 @@ class MessagesController extends Controller
         // dark mode
         if ($request['dark_mode']) {
             $request['dark_mode'] == "dark"
-                ? User::where('id', Auth::user()->id)->update(['dark_mode' => 1])  // Make Dark
-                : User::where('id', Auth::user()->id)->update(['dark_mode' => 0]); // Make Light
+            ? User::where('id', Auth::user()->id)->update(['dark_mode' => 1]) // Make Dark
+            : User::where('id', Auth::user()->id)->update(['dark_mode' => 0]); // Make Light
         }
 
         // If messenger color selected

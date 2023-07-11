@@ -19,7 +19,7 @@ class Subscribed
     {
         $user = User::find(Auth::id());
         if (!$user->isSubscribed()) {
-            return redirect()->route("subscription.subscribe")->with("error", "Vous devez être abonné pour accéder à cette page.");
+            return redirect()->route("subscription.subscribe")->with("error", "You must be subscribed to see this.");
         }
         return $next($request);
     }
