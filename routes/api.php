@@ -60,9 +60,6 @@ Route::prefix("v1")->group(function () {
         Route::get("/user", function () {
             $token = request()->header("API_KEY");
             $user = User::where("api_key", $token)->first();
-            if (!$user->image) {
-                $user->image = "images/user.png";
-            }
             $user->subscription_name = str_replace('_annual', '', $user->getSubscription()[0]->name ?? "free");
             return $user->jsonSerialize();
         });

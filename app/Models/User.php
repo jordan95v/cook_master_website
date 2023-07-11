@@ -27,7 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'role',
         'is_banned',
         'is_service_provider',
-        'image',
+        'avatar',
         'is_active',
         'key',
         'godfather_key',
