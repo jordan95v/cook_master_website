@@ -47,7 +47,6 @@ class EventController extends Controller
             $only_course = $only_course == "on";
             return $query->where("is_course", $only_course);
         })->where("date", ">=", date("Y-m-d"))
-            ->where("start_time", ">=", date("H:i:s"))
             ->paginate(9);
         return view('event.index', ['events' => $events, "only_course" => $request->get("only_course"), "filter" => $request->get("filter")]);
 
