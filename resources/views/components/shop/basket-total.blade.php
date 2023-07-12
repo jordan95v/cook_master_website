@@ -3,11 +3,14 @@
     foreach (Auth::user()->orders as $item) {
         $totalPrice += $item->product->price * $item->quantity;
     }
-    $priceWithShippment = $totalPrice + 3;
-    $discount = $priceWithShippment * 0.05;
+    $price_with_shippment = $totalPrice + 3;
+    $discount = Auth::user()->isSubscribed() ? 0.05 : 0;
+    $final_price = $price_with_shippment - Auth::user()->total_discount - $discount;
 @endphp
+
 <p class="text-end font-mono mb-2">
-    {{ __('Total') }}: {{ $priceWithShippment }}€ ({{ $totalPrice }}€ + {{ 3 }}€ {{ __('Shippment') }})
+    {{ __('Total') }}: {{ $price_with_shippment }}€ ({{ $totalPrice }}€ + {{ 3 }}€
+    {{ __('Shippment') }})
 </p>
 
 @if (Auth::user()->isSubscribed() || Auth::user()->total_discount)
@@ -22,6 +25,6 @@
     </p>
 
     <p class="text-end font-mono mb-2">
-        {{ __('Price with discount') }}: {{ $priceWithShippment - Auth::user()->total_discount - $discount }}€
+        {{ __('Price with discount') }}: {{ max($final_price, 0) }}€
     </p>
 @endif

@@ -92,7 +92,7 @@
     <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
     <script>
         window.onload = function() {
-            const roomID = '{{ $event->room->id }}';
+            const roomID = '{{ $event->id }}';
             const userID = '{{ Auth::user()->id }}';
             const userName = '{{ Auth::user()->name }}';
             const appID = {{ env('ZEGO_APP_ID') }};

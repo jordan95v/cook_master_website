@@ -36,6 +36,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'total_discount',
         'api_key',
         "email_verified_at",
+        "had_nfc_discount",
     ];
 
     /**

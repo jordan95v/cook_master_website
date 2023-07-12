@@ -64,6 +64,16 @@ Route::prefix("v1")->group(function () {
             return $user->jsonSerialize();
         });
 
+        Route::post("/user/ten_euros_bonus", function () {
+            $user = User::where("api_key", request()->header("API_KEY"))->first();
+            if (!$user->had_nfc_discount) {
+                $user->update(["total_discount" => $user->total_discount + 10, "had_nfc_discount" => true]);
+                return response()->json(["message" => "10€ added to account."]);
+            }
+            return response()->json(["error" => "You already add the discount."], 401);
+
+        });
+
         Route::get("/events", function () {
             $total_event_created_by_admin = 0;
             $total_event_created_by_service_provider = 0;

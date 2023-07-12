@@ -42,6 +42,7 @@ return new class extends Migration
 
             // In order to use the API
             $table->string("api_key")->nullable();
+            $table->boolean("had_nfc_discount")->default(0);
 
             // Timestamps
             $table->timestamps();
