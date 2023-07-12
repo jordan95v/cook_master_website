@@ -101,7 +101,7 @@
     <x-utils.card class="w-full lg:w-2/3">
         <div class="card-body">
             <h2 class="font-bold text-2xl text-center">{{ __('Subscribe now !') }}</h2>
-            <small class="text-center text-gray-400">{{ __('And get a lot of advantages :') }}</small>
+            <small class="text-center text-gray-400">{{ __('And get a lot of advantages') }}</small>
 
             {{-- Subscription table --}}
             <div class="overflow-x-auto mt-10">
