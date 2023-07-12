@@ -435,5 +435,6 @@
     "Only show courses or workshops": "Afficher uniquement les cours ou les ateliers",
     "Forgot password ?": "Mot de passe oublié ?",
     "Send password reset link": "Envoyer le lien de réinitialisation du mot de passe",
-    "Reset password": "Réinitialiser le mot de passe"
+    "Reset password": "Réinitialiser le mot de passe",
+    "Email sent successfully !": "Email envoyé avec succès !"
 }
