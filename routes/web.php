@@ -112,6 +112,12 @@ Route::prefix("users")->group(
                 Route::get('/email/verify', "notice")->middleware('auth')->name('verification.notice');
                 Route::get('/email/verify/{id}/{hash}', "verify")->middleware(['auth', 'signed'])->name('verification.verify');
                 Route::get("/email/resend", "resendEmail")->middleware(["auth", "throttle:6,1"])->name("verification.send");
+
+                // Password reset
+                Route::get('/forgot-password', "show_password_request")->middleware("guest")->name('password.request');
+                Route::post('/forgot-password', "send_password_request")->middleware("guest")->name('password.email');
+                Route::get('/reset-password/{token}', "show_password_reset")->middleware("guest")->name('password.reset');
+                Route::post('/reset-password', "password_reset")->middleware("guest")->name('password.update');
             }
         );
 

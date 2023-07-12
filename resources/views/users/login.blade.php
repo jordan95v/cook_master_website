@@ -9,7 +9,8 @@
 
                     <x-utils.input name="email" type="email" hint="Email" error="1" />
                     <x-utils.input name="password" type="password" hint="Password" error="1" />
-                    <a href="#" class="text-sm link hover:text-primary">{{ __('Forgot your password ?') }}</a>
+                    <a href="{{ route('password.request') }}"
+                        class="text-sm link hover:text-primary">{{ __('Forgot your password ?') }}</a>
 
                     <button class="btn btn-primary mt-4">{{ __('Log in') }}</button>
                     <div class="divider"></div>
