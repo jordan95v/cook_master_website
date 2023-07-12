@@ -13,6 +13,8 @@ sudo apt install docker.io
 sudo apt install docker-compose
 ```
 
+⚠️ Be sure the create a proper .env file in the root of the project. You can use the .env.example file as a template. ⚠️
+
 In order to launch the project, you need to run the following command:
 
 ```bash
@@ -22,6 +24,18 @@ docker-compose up -d --build
 Then you go to your browser and type the following url: `aterlierdesgourmets.localhost`
 
 And there you go, the website is live and running.
+
+### Database
+
+If you want to have a fresh database without any data, you can replace the line 14 in the `entrypoint.sh` file:
+
+```bash
+# Remove this line
+php /app/artisan migrate --force --seed
+
+# By this line
+php /app/artisan migrate --force
+```
 
 ## Stack
 
