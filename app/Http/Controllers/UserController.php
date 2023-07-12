@@ -73,7 +73,7 @@ class UserController extends Controller
         }
         if ($request->hasFile("image")) {
             if ($user->avatar && file_exists("storage/" . $user->avatar)) {
-                if ($user->avatar != "users-avatar/avatar.png"){
+                if ($user->avatar != "users-avatar/avatar.png") {
                     unlink("storage/" . $user->avatar);
                 }
             }
