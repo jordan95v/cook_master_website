@@ -76,7 +76,7 @@ class FormationController extends Controller
     public function show(Formation $formation)
     {
         $user = User::find(Auth::id());
-        if (count($formation->courses) == 0 && (!$user->isAdmin() || !$formation->user->is($user))) {
+        if (count($formation->courses) == 0 && (!$user->isAdmin() && !$formation->user->is($user))) {
             return back()->with("error", "This formation doesn't have any courses.");
         }
         $formation_user = FormationUser::where("formation_id", $formation->id)
