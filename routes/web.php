@@ -44,7 +44,7 @@ Route::get("/", function () {
 Route::post('/send-email-provider', function (Request $request) {
     $form = $request->validate([
         'email' => 'required|email',
-        'phone_number' => 'required|min:10|max:10|numeric',
+        'phone_number' => 'required|regex:/^0[1-9]([-. ]?[0-9]{2}){4}$/',
         'description' => 'required|min:50',
     ]);
     Mail::to(env('MAIL_USERNAME'))->queue(new ProviderForm($form['email'], $form['phone_number'], $form['description']));

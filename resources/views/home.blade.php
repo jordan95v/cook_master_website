@@ -59,12 +59,11 @@
                             <x-utils.input type="text" name="email" hint="Email" error=1 />
 
                             {{-- Phone number --}}
-                            <x-utils.input type="text" name="phone_number" hint="06.00.00.00.00" error=1 />
+                            <x-utils.input type="text" name="phone_number" hint="Phone number" error=1 />
 
                             {{-- Description --}}
                             <textarea name="description" type="textarea" rows="5" placeholder="{{ __('Description') }}"
-                                class="textarea textarea-bordered border-2 @error('description') border-error @enderror">
-                                {{ old('description') }}
+                                class="textarea textarea-bordered border-2 @error('description') border-error @enderror">{{ old('description') }}
                             </textarea>
                             @error('description')
                                 <span class="text-red-500">{{ $message }}</span>

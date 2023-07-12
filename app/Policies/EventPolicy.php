@@ -9,7 +9,7 @@ class EventPolicy
 {
     public function viewAny(User $user): bool
     {
-        return $user->isAdmin() || $user->is_service_provider;
+        return $user->isAdmin();
     }
 
     /**
@@ -17,7 +17,7 @@ class EventPolicy
      */
     public function create(User $user): bool
     {
-        return $user->isAdmin() || $user->is_service_provider;
+        return $user->isAdmin();
     }
 
     /**

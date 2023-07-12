@@ -26,14 +26,8 @@
                     <i class="fa-solid fa-chevron-right"></i>
                 </a>
                 <ul class="p-2 z-10 bg-base-100 border-2 hover:border-primary">
-                    <li><a href="{{ route('product.create') }}">{{ __('Add a product') }}</a></li>
-                    <li><a href="{{ route('brand.create') }}">{{ __('Add a brand') }}</a></li>
-                    <li><a href="{{ route('events.create') }}">{{ __('Add an event') }}</a></li>
                     <li><a href="{{ route('courses.create') }}">{{ __('Add a course') }}</a></li>
                     <li><a href="{{ route('formation.create') }}">{{ __('Add a formation') }}</a></li>
-                    <li><a href="{{ route('product.index') }}">{{ __('Products list') }}</a></li>
-                    <li><a href="{{ route('brand.index') }}">{{ __('Brands list') }}</a></li>
-                    <li><a href="{{ route('events.listing') }}">{{ __('Events list') }}</a></li>
                     <li><a href="{{ route('courses.index') }}">{{ __('Courses list') }}</a></li>
                     <li><a href="{{ route('formation.list') }}">{{ __('Formations list') }}</a></li>
                 </ul>
