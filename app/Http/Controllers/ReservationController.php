@@ -14,7 +14,7 @@ class ReservationController extends Controller
 {
     public function index()
     {
-        return view('reservation.index', ['reservations' => Reservation::all(), 'users' => User::all()]);
+        return view('reservation.index', ['reservations' => Reservation::all(), 'users' => User::where("is_service_provider", true)->get()]);
     }
 
     /**
@@ -30,10 +30,9 @@ class ReservationController extends Controller
      */
     public function store(CreateReservationRequest $request)
     {
-        //revoir la partie authentification
-        $user = User::find(Auth::id()); // Récupère l'utilisateur connecté
-        $form = $request->validated(); // Récupère les données du formulaire validées
-        $form["user_id"] = $user->id; // Ajoute l'id de l'utilisateur connecté
+        $user = User::find(Auth::id());
+        $form = $request->validated();
+        $form["user_id"] = $user->id;
         Reservation::create($form);
         return back()->with("success", "You have sent your request");
     }
@@ -52,6 +51,11 @@ class ReservationController extends Controller
         $form = $request->validate([
             'user_id' => 'required',
         ]);
+
+        $user = User::find($form['user_id']);
+        if (!$user->is_service_provider) {
+            return back()->with('error', 'This user is not a chef');
+        }
 
         $reservation->update([
             'assigned_to' => $form['user_id'],

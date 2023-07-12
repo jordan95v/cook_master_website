@@ -161,6 +161,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Reservation::class);
     }
 
+    public function assigned_home_courses()
+    {
+        return $this->hasMany(Reservation::class, 'assigned_to');
+    }
+
     public function can_view_course(Course $course): bool
     {
         // First, check if the user has already viewed the course today
