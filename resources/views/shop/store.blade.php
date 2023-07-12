@@ -9,7 +9,7 @@
 @endphp
 
 
-<x-layout title="Magasin">
+<x-layout title="Store">
     <div class="lg:p-5 mb-5">
         <img src="{{ asset('images/food-banner.jpg') }}" alt="" class="rounded-xl max-h-56 object-cover w-full">
     </div>

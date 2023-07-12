@@ -24,7 +24,7 @@
                             {{ __('by year') }}</option>
                     </select>
                     <small class="text-center text-gray-400 mb-10">
-                        {{ __('You can always change when the subscription period ends.') }}
+                        {{ __('You can always change when the subscription ends.') }}
                     </small>
 
                     <x-shop.advantages text="No pubs" />

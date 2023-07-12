@@ -16,19 +16,11 @@ class CoursePolicy
     }
 
     /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Course $course): bool
-    {
-        //
-    }
-
-    /**
      * Determine whether the user can create models.
      */
     public function create(User $user): bool
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $user->is_service_provider;
     }
 
     /**
@@ -36,7 +28,7 @@ class CoursePolicy
      */
     public function update(User $user, Course $course): bool
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $course->user->is($user);
     }
 
     /**
@@ -44,22 +36,6 @@ class CoursePolicy
      */
     public function delete(User $user, Course $course): bool
     {
-        return $user->isAdmin();
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Course $course): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Course $course): bool
-    {
-        //
+        return $user->isAdmin() || $course->user->is($user);
     }
 }

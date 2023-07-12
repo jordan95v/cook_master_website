@@ -428,5 +428,12 @@
     "Phone number": "Numéro de téléphone",
     "Send": "Envoyer",
     "Assigned home courses": "Cours à domicile assigné",
-    "You are now subscribed !": "Vous êtes maintenant abonné !"
+    "You are now subscribed !": "Vous êtes maintenant abonné !",
+    "Formations": "Formations",
+    "Prestations": "Prestations",
+    "Invoices": "Factures",
+    "Only show courses or workshops": "Afficher uniquement les cours ou les ateliers",
+    "Forgot password ?": "Mot de passe oublié ?",
+    "Send password reset link": "Envoyer le lien de réinitialisation du mot de passe",
+    "Reset password": "Réinitialiser le mot de passe"
 }

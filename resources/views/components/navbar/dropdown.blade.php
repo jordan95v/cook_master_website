@@ -14,7 +14,7 @@
         <li><a href="{{ route('store') }}"><i class="fa-solid fa-store"></i>{{ __('Store') }}</a></li>
         <li>
             <a href="{{ route('formation.index') }}">
-                <i class="fa-solid fa-chalkboard-user"></i>{{ __('Formation') }}
+                <i class="fa-solid fa-chalkboard-user"></i>{{ __('Formations') }}
             </a>
         </li>
 

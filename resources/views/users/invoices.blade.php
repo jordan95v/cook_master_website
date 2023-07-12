@@ -1,4 +1,4 @@
-<x-layout title="Factures">
+<x-layout title="Invoices">
     <x-utils.card class="w-2/4">
         <div class="card-body">
             <h2 class="card-title justify-center flex text-2xl pb-4">{{ __('My invoices') }}</h2>

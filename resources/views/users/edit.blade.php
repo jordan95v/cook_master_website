@@ -1,4 +1,4 @@
-<x-layout title="Modifier mon profil">
+<x-layout title="Modify my profile">
     <div class="grid grid-cols-1 md:grid-cols-2">
         <div class="my-auto mx-auto">
             <img src="{{ asset('images/edit_profile.png') }}" alt="">
@@ -12,8 +12,7 @@
 
                     <div class="avatar flex justify-center my-4">
                         <div class="w-20 rounded-full ring ring-primary">
-                            <img
-                                src="{{ asset('storage/users-avatar/' . $user->avatar) }}" />
+                            <img src="{{ asset('storage/users-avatar/' . $user->avatar) }}" />
                         </div>
                     </div>
 
