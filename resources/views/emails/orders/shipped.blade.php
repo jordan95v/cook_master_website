@@ -6,7 +6,7 @@
     </p>
     <br>
     <p>
-        {{ _('Click') }} <a href="{{ url($invoice->url()) }}" class="link underline hover:link-primary cursor-pointer">
+        {{ __('Click') }} <a href="{{ url($invoice->url()) }}" class="link underline hover:link-primary cursor-pointer">
             {{ __('here') }}
         </a>
         {{ __('to download your invoices.') }}<br>
